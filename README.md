@@ -1,11 +1,12 @@
 Tech summary and code snippets
 
 ## Tech Summary
+[Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)  
 [C++11 notes](tech-summary/language/c++/c++11-notes.md)  
 [C++ tools](tech-summary/language/c++/c++tools.md)   
-[Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)  
 
-## Presentation
+
+## Talks
 
 Date | Name | Links | Comments
 ---|:---|:---|:---
@@ -21,8 +22,6 @@ Date | Name | Links | Comments
 02-09-2016|Incremental solution||
 
 
-
-
 ## Book reading
 [\<\<Design data intensive application\>\>](tech-summary/books/designing-data-intensive-applications/README.md) First book about distributed system    
 [\<\<A Programmer's Guide to Data Mining\>\>](mining-massive-datasets/recommendation/)   
@@ -30,7 +29,8 @@ Date | Name | Links | Comments
 [\<\<Hit Refresh\>\>](tech-summary/books/hit_refresh.md) 拯救曾经过气的微软  
 [\<\<Who Says Elephants Cant Dance\>\>]()   
 
-## Code snippets
+
+## Meetup & Tech Conference
 
 
 
