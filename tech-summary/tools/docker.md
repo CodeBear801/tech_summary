@@ -7,9 +7,12 @@
 - Docker containers, wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries etc. anything that can be installed on a server.  
 - This guarantees that the software will always run the same, regardless of its environment.  
 
-<img src="resources/imgs/docker_structure.png" alt="docker_structure.png" width="300"/>
+<img src="resources/docker_structure.png" alt="docker_structure.png" width="200"/>
 <br/>
 
+## Docker benefits
+
+<img src="resources/docker_compare_with_vm.png" alt="docker_compare_with_vm" width="400"/>
 
 ## Docker commands
 
@@ -22,7 +25,7 @@ Restart | docker restart container ID |
 
 ## Docker storage
 
-<img src="resources/imgs/docker_storage_3mode.png" alt="docker_storage_3mode.png" width="300"/>
+<img src="resources/docker_storage_3mode.png" alt="docker_storage_3mode.png" width="300"/>
 <br/>
 
 

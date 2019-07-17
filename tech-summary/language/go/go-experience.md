@@ -21,16 +21,15 @@ main.main()
 _testmain.go:42 +0x151
 
 ```
-Correct: https://play.golang.org/p/tunBvfqxozY
-Error: https://play.golang.org/p/iMI24ihaJAm
-Fixed: https://play.golang.org/p/eUDS0--ecPv
+Correct: https://play.golang.org/p/tunBvfqxozY  
+Error: https://play.golang.org/p/iMI24ihaJAm  
+Fixed: https://play.golang.org/p/eUDS0--ecPv  
 If the channel is unbuffered, the sender blocks until the receiver has received the value. If the channel has a buffer, the sender blocks only until the value has been copied to the buffer
 
 
 ### Dead lock with channel
 
 Another issue about dead lock
-
 	- About buffered channel & un buffered channel, before setting to buffered one, seems it hungs there forever
 	- Pass waitgroup need pass by reference
 
