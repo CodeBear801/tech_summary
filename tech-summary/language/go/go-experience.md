@@ -37,9 +37,9 @@ Another issue about dead lock
 
 
 
-# Go Library
+## Go Library
 
-## Swift compile issue
+### Swift compile issue
 
 ```
 # github.com/Telenav/osrm-backend/traffic_updater/go/gen-go/proxy
