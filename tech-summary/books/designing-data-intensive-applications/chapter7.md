@@ -89,7 +89,7 @@ The strongest possible isolation guarantee is serializable isolation: transacti
 
 <img src="resources/pictures/ddia_c7_read_commited_example.png" alt="ddia_c7_read_commited_example" width="600"/>  
 <br/>
-##### Implemetation
+##### Implementation
 
   **Hold a row-level lock** on the record you are writing to.  You could do the same with a read lock. However, there is a lower-impact way. Hold the old value in memory, and issue that value in response to reads, until the transaction is finalized.  If a user performs a multi-object write transaction that they believe to be atomic (say, transferring money between two accounts), then performs a read in between the transaction, what they see may seem anomalous (say, one account was deducted but the other wasn't credited).
 
