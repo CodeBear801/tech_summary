@@ -1,6 +1,6 @@
 # Scaling Instagram Infra 
 @[Lisa Guo](https://www.linkedin.com/in/lisa-guo-5b56972/)   
-[video](https://www.youtube.com/watch?v=hnpzNAPiC0E)
+[video](https://www.youtube.com/watch?v=hnpzNAPiC0E)  2018.05 notes
 
 ## Take away
 
