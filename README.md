@@ -4,7 +4,7 @@ Tech summary and code snippets
 [Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)  
 [C++11 notes](tech-summary/language/c++/c++11-notes.md)  
 [C++ tools](tech-summary/language/c++/c++tools.md)   
-
+[golang notes](tech-summary/language/go/go-notes.md)
 
 ## Talks
 
