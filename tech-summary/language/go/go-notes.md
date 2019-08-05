@@ -46,6 +46,9 @@ More reference: https://golang.org/pkg/testing/, [how to test with go](https://w
 
 
 ## Go package
+
+My notes about [go package layout](./go-package-layout.md)
+
 Package name should use no under_scores or mixedcaps
 https://blog.golang.org/package-names
 

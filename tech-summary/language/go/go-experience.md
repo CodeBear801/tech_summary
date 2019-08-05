@@ -29,9 +29,9 @@ If the channel is unbuffered, the sender blocks until the receiver has received 
 
 ### Dead lock with channel
 
-Another issue about dead lock
-	- About buffered channel & un buffered channel, before setting to buffered one, seems it hungs there forever
-	- Pass waitgroup need pass by reference
+Another issue about dead lock  
+- About buffered channel & un buffered channel, before setting to buffered one, seems it hungs there forever
+- Pass waitgroup need pass by reference, otherwise, the change didn't affect original wg object
 
 
 
