@@ -1,6 +1,8 @@
 
 # Golang Package layout
 
+[Standard package layout](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1)
+
 ## Recommended
 
 - Root package is for domain types
@@ -9,7 +11,7 @@
 - Main package ties together dependencies
 
 ### Root package is for domain types
-Root package defines the domain of entire project, and not depends on other package in the project
+Root package defines the domain of entire project, and not depends on other packages in the project
 ```go
 package myapp
 
@@ -111,7 +113,7 @@ We see this approach in the standard library too. The io.Reader is a domain ty
 
 <img src="resource/golang-package-layout.png" alt="golang-package-layout" width="400"/>
 
-- The red part is API protocal with external 
+- The red part is API protocol with external 
 - The blue part is domain logic.  They don't contains the implementation of interface, just use them
 - The green part is the implementation of those interfaces
 
