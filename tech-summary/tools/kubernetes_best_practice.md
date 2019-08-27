@@ -83,7 +83,7 @@ Kubectl rollout history deployments my-deployment
    - Whenever you add load balancer to your deployment file on one of the public cloud providers, it spins one up. This is great for high availability and speed, but it costs money. 
     - Use Ingress instead which lets you load balance multiple services through a single end-point. This is not only simpler, but also cheaper. This strategy, of course, will only work if you doing http or web stuff and it won’t work for UDP or TCP based applications.
 
-<img src="resources/k8s_best_practice_healthcheck.png" alt="k8s_best_practice_healthcheck.png" width="400"/>
+<img src="resources/k8s_best_practice_ingress.png" alt="k8s_best_practice_ingress.png" width="400"/>
 
 
 - Type: Nodeport Can Be “Good Enough”
