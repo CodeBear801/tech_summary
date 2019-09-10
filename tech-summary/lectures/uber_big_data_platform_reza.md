@@ -1,4 +1,28 @@
 
+- [Uber's big data platform](#ubers-big-data-platform)
+  - [Problem set](#problem-set)
+  - [Gen0](#gen0)
+  - [Gen1](#gen1)
+    - [Target](#target)
+    - [Details](#details)
+    - [Data scale](#data-scale)
+    - [Limitation](#limitation)
+  - [Gen2](#gen2)
+    - [Target](#target-1)
+    - [Data scale](#data-scale-1)
+    - [Limitation](#limitation-1)
+  - [Gen3](#gen3)
+    - [Target](#target-2)
+    - [Update/Delete challenge](#updatedelete-challenge)
+    - [Details](#details-1)
+      - [HUDI](#hudi)
+      - [Generic data ingestion](#generic-data-ingestion)
+      - [Incremental data modeling](#incremental-data-modeling)
+      - [Standardized data model](#standardized-data-model)
+    - [Data scale](#data-scale-2)
+    - [Ongoing effort](#ongoing-effort)
+  - [Lessons learned](#lessons-learned)
+  - [More info](#more-info)
 
 # Uber's big data platform
 
@@ -27,7 +51,7 @@ data recorded as json
 
 
 
-Gen1: 
+## Gen1
 
 
 <img src="resources/imgs/uber_big_data_platform_reza_gen1.png" alt="uber_big_data_platform_reza_gen1" width="600"/>
