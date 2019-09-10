@@ -222,6 +222,8 @@ Merged snapshot table contains all columns data, plus data from changelog histor
 
 - [4年数据涨万倍，Uber大数据平台四次变迁揭秘](https://mp.weixin.qq.com/s/ac_uaaG25k_zGdDF-LibQw)
 
+- [Hudi: Uber Engineering’s Incremental Processing Framework on Apache Hadoop](https://eng.uber.com/hoodie/), [中文](https://www.jianshu.com/p/1ae2db40f43e)
+
 - Hadoop Infrastructure @Uber Past, Present and Future, [video](https://www.youtube.com/watch?v=37u1fBkp9vE), [slides](https://events.static.linuxfound.org/sites/events/files/slides/Apache-Data-Uber-Mayank-Bansal.pdf)
 
 - How Uber scaled its Real Time Infrastructure to Trillion events per day [video](https://www.youtube.com/watch?v=K-fI2BeTLkk)
