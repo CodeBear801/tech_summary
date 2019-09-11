@@ -80,7 +80,7 @@ data recorded as json
 <img src="resources/imgs/uber_big_data_platform_reza_gen2.png" alt="uber_big_data_platform_reza_gen2" width="600"/>
 
 ### Target 
-- [mark]Hadoop ecosystem[/mark]
+- <mark>Hadoop ecosystem</mark>
 	- Hadoop data lake: all raw data ingested from different online stores only once with no transformation during ingestion
 	- Based on HDFS, introduce Presto(interactive ad hoc), Spark(programmatic access), Hive(extremely large queries)
 - All data modeling and transformation only happened in Hadoop - scalable
