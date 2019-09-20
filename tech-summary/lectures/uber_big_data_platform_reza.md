@@ -57,8 +57,8 @@ data recorded as json
 <img src="resources/imgs/uber_big_data_platform_reza_gen1.png" alt="uber_big_data_platform_reza_gen1" width="600"/>
 
 ### Target 
-- global view of data -> all data in the same place -> EL load to Vertica
-- sql query -> Vertica
+- <span style="color:red">global view of data </span> -> all data in the same place -> EL load to Vertica
+- <span style="color:red"> sql query </span> -> Vertica
 
 ### Details
 - Event into Kafka7(no rep at that time), sharded DB, ad-hoc ETL job to extract data into Vertica
@@ -80,15 +80,13 @@ data recorded as json
 <img src="resources/imgs/uber_big_data_platform_reza_gen2.png" alt="uber_big_data_platform_reza_gen2" width="600"/>
 
 ### Target 
-- <mark>Hadoop ecosystem</mark>
+- <span style="color:red">Hadoop ecosystem</span>
 	- Hadoop data lake: all raw data ingested from different online stores only once with no transformation during ingestion
 	- Based on HDFS, introduce Presto(interactive ad hoc), Spark(programmatic access), Hive(extremely large queries)
 - All data modeling and transformation only happened in Hadoop - scalable
-	- All data services horizontally scalable(due to *parquet*, spark, hive, kafka8)
+	- All data services horizontally scalable(due to <span style="color:red">**parquet**</span>, spark, hive, kafka8)
 - Central schema service
 	- ad hoc data ingestion jobs were replaced with a standard platform to transfer all source data in its original, nested format into the Hadoop data lake
-
-
 
 
 <img src="resources/imgs/uber_big_data_platform_reza_gen2_issue_solved.png" alt="uber_big_data_platform_reza_gen2_issue_solved" width="600"/>

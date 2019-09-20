@@ -1,7 +1,7 @@
 # Logical time
 
 ## Physical time
-Different machine could have different phsical time
+Different machine could have different physical time
 
 ## Lamport clock
 分布式系统没有全局时钟，很难给所有事件定义一个全局顺序。所以，Lamport定义了一种偏序关系  

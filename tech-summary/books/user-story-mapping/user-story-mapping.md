@@ -177,6 +177,7 @@ I had to work out the least I have do to make people feel happy.
 
 ## More links
 - [Essentials of Agile User Story Mapping at Twitter - Atlassian Summit 2016](https://www.youtube.com/watch?v=svquaeyKg5E)
+- [**Agile Product Ownership in a Nutshell**](https://www.youtube.com/watch?v=502ILHjX9EE&feature=youtu.be)
 - [User Story Mapping with Jeff Patton](https://www.youtube.com/watch?v=AorAgSrHjKM)
 - [Slides from Jeff Patton](https://www.slideshare.net/jeffpatton/user-story-mapping-discovery-the-whole-story)
 - [Another PPT](https://www.slideshare.net/danapylayeva/user-story-mapping-workshop)

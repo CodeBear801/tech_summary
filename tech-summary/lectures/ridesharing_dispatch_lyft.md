@@ -6,7 +6,7 @@ Monday, Sep 17, 2019<br/>
 
 
 ## Take away
-
+- Figure out smart strategy is just the first step, how to build system to evaluate the strategy and continuing tuning data is the core.
 
 ## Notes
 
