@@ -99,7 +99,7 @@ def make_matches(all_rides):
   - Helps to avoid matching through mountains and differentiate between highway and local travel
   - Not good for one way and rush-hour/historical speed(geohash grid for different hours)
 
-[![Foo](https://miro.medium.com/max/800/0*Vt-J56-F3EvLx3A7.)](https://miro.medium.com/)
+[![Foo](https://miro.medium.com/max/800/0*Vt-J56-F3EvLx3A7.)](https://miro.medium.com/max/800/0*Vt-J56-F3EvLx3A7.)
 
 - Tiple matching(matching multiple passangers to decrease cost)
   - match up to four passengers
@@ -115,12 +115,12 @@ def make_matches(all_rides):
 
 - Upgrade algorithm
   - a [maximum matching problem](https://en.wikipedia.org/wiki/Matching_(graph_theory)) for a weighted graph combined with elements of a [Secretary Problem](https://en.wikipedia.org/wiki/Secretary_problem)
-[![Foo]( https://miro.medium.com/max/540/1*sICSglgYVz7V-W36QJhfAw.png)](https://miro.medium.com/)
+[![Foo]( https://miro.medium.com/max/540/1*sICSglgYVz7V-W36QJhfAw.png)](https://miro.medium.com/max/540/1*sICSglgYVz7V-W36QJhfAw.png)
 
 
 - Route Swapping
   
-[![Foo](https://miro.medium.com/max/2118/0*xFxV6g6glGL8eFQZ.)](https://miro.medium.com/)
+[![Foo](https://miro.medium.com/max/2118/0*xFxV6g6glGL8eFQZ.)](https://miro.medium.com/max/2118/0*xFxV6g6glGL8eFQZ.)
 
   - reduced the burden of having to predict future demand
   - only swap the passenger if the new route reduced their pickup or detour time, but we had to be cautious about making drastic changes
