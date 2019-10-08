@@ -4,7 +4,7 @@
 
 Chapter 2
 
-** Setting up ENV with docker **
+**Setting up ENV with docker**
 
 - <span style="color:blue">Oracle java authentication issue </span></br>
  Description: When come to java part met following issue
@@ -83,6 +83,7 @@ docker run -v /Users/ngxuser/Desktop/data/agiledata:/data -p 5000:5000 -p 8080:8
 Docker exec -it c4626fff799d /bin/bash
 ```
 - <span style="color:blue">During running python script: NameError: name 'spark' is not defined </span>
+
 Solution1: https://stackoverflow.com/questions/39541204/pyspark-nameerror-name-spark-is-not-defined
 ```python
 from pyspark.context import SparkContext
