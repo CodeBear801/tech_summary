@@ -122,3 +122,36 @@ Solution: **service mongodb restart**
 
 
 
+
+
+
+More information:
+
+Spark
+- [Spark programming-guide](https://spark.apache.org/docs/2.1.1/programming-guide.html)
+- [PySpark SQL](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html)
+
+MongoDB
+- [Mongo db methods](https://docs.mongodb.com/manual/reference/method/)
+
+Elasticsearch
+- [Configuration](https://www.elastic.co/guide/en/elasticsearch/hadoop/current/configuration.html)
+
+Airflow
+- [Airbnb airflow](https://medium.com/airbnb-engineering/airflow-a-workflow-management-platform-46318b977fd8)
+- [Airflow介绍](http://lxwei.github.io/posts/airflow%E4%BB%8B%E7%BB%8D.html)
+
+Frontend
+- [菜鸟网站](https://www.runoob.com/)
+- [W3 school](https://www.w3schools.com/html/default.asp)
+
+BootStrap
+- [Twitter Bootstrap](http://www.runoob.com/bootstrap/bootstrap-tutorial.html)
+
+Jinjia2 
+- [github Jinjia flask example](https://github.com/mjhea0/thinkful-mentor/tree/master/python/jinja/flask_example)
+- [Primer on jinja templating](https://realpython.com/primer-on-jinja-templating/)
+
+
+
+
