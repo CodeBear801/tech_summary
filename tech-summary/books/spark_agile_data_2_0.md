@@ -152,6 +152,10 @@ Jinjia2
 - [github Jinjia flask example](https://github.com/mjhea0/thinkful-mentor/tree/master/python/jinja/flask_example)
 - [Primer on jinja templating](https://realpython.com/primer-on-jinja-templating/)
 
+Others
+- [Zsh shortcuts](http://www.geekmind.net/2011/01/shortcuts-to-improve-your-bash-zsh.html)
+- [Updated data URL for openflights](https://github.com/jpatokal/openflights/tree/master/data)
+- [On time performance file](https://s3.amazonaws.com/agile_data_science/On_Time_On_Time_Performance_2015.csv.bz2)
 
 
 
