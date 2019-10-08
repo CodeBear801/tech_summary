@@ -1,10 +1,15 @@
 
+
+# Agile Data Science 2.0
+
 [Book](https://www.amazon.com/Agile-Data-Science-2-0-Applications/dp/1491960116) [Code](https://github.com/rjurney/Agile_Data_Code_2) [Video](https://www.youtube.com/watch?v=QqXC0k7sxRI) [Slides](https://www.slideshare.net/rjurney/predictive-analytics-with-airflow-and-pyspark?from_action=save)
 
 
-Chapter 2
+## Notes
 
-**Setting up ENV with docker**
+### Chapter 2
+
+#### Setting up ENV with docker
 
 - <span style="color:blue">Oracle java authentication issue </span></br>
  Description: When come to java part met following issue
@@ -74,7 +79,7 @@ Debug: curl -XGET 'localhost:9200/_cluster/allocation/explain' ?
 
 Solution: Kill all elasticsearch process and restart, problem solved
 
-Chapter 4
+### Chapter 4
 - <span style="color:blue">While starting docker container in previous step, I didn't do port mapping, but if we want to test with browser we need open 8080 and 5000.   </span>Here is my solution
 ```
 // Save docker container and then restart another one with port mapping
@@ -120,39 +125,83 @@ exception: connect failed
 ```
 Solution: **service mongodb restart**
 
+- Spark Sql API: [registerTempTable](http://spark.apache.org/docs/2.2.0/api/python/pyspark.sql.html#pyspark.sql.DataFrame.registerTempTable)
+
+
+### Chapter 5
+
+- Code note: drop un-needed fields, only keep elements needed for the following steps 
+```
+# Filter down to the fields we need to identify and link to a flight
+flights = on_time_dataframe.rdd.map(
+    lambda x: 
+  {
+      'Carrier': x.Carrier, 
+      'FlightDate': x.FlightDate, 
+      'FlightNum': x.FlightNum, 
+      'Origin': x.Origin, 
+      'Dest': x.Dest, 
+      'TailNum': x.TailNum
+  }
+)
+```
+
+- Example about spark mr
+```python
+flights_per_airplane = flights\
+  .map(lambda record: (record['TailNum'], [record]))\
+  .reduceByKey(lambda a, b: a + b)\
+  .map(lambda tuple:
+      {
+        'TailNum': tuple[0], 
+        'Flights': sorted(tuple[1], key=lambda x: (x['FlightNum'], x['FlightDate'], x['Origin'], x['Dest']))
+      }
+    )
+```
+1. Take `TailNum` as key and retrieve from list
+2. If Two record has the same key, which is `TailNum`, merge content together
+3. sort elements
+
+- OSError: [Errno 98] Address already in use  
+Kill related process: https://stackoverflow.com/questions/19071512/socket-error-errno-48-address-already-in-use
 
 
 
 
 
-More information:
 
-Spark
+## More information
+
+### Spark
 - [Spark programming-guide](https://spark.apache.org/docs/2.1.1/programming-guide.html)
 - [PySpark SQL](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html)
+- [Apache Spark Examples](https://spark.apache.org/examples.html)
 
-MongoDB
+### MongoDB
 - [Mongo db methods](https://docs.mongodb.com/manual/reference/method/)
 
-Elasticsearch
+### Elasticsearch
 - [Configuration](https://www.elastic.co/guide/en/elasticsearch/hadoop/current/configuration.html)
 
-Airflow
+### Airflow
 - [Airbnb airflow](https://medium.com/airbnb-engineering/airflow-a-workflow-management-platform-46318b977fd8)
 - [Airflow介绍](http://lxwei.github.io/posts/airflow%E4%BB%8B%E7%BB%8D.html)
 
-Frontend
+### D3.js
+- [Mike Bostock’s Blocks](https://bl.ocks.org/mbostock) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+
+### Frontend
 - [菜鸟网站](https://www.runoob.com/)
 - [W3 school](https://www.w3schools.com/html/default.asp)
 
-BootStrap
+### BootStrap
 - [Twitter Bootstrap](http://www.runoob.com/bootstrap/bootstrap-tutorial.html)
 
-Jinjia2 
+### Jinjia2 
 - [github Jinjia flask example](https://github.com/mjhea0/thinkful-mentor/tree/master/python/jinja/flask_example)
 - [Primer on jinja templating](https://realpython.com/primer-on-jinja-templating/)
 
-Others
+### Others
 - [Zsh shortcuts](http://www.geekmind.net/2011/01/shortcuts-to-improve-your-bash-zsh.html)
 - [Updated data URL for openflights](https://github.com/jpatokal/openflights/tree/master/data)
 - [On time performance file](https://s3.amazonaws.com/agile_data_science/On_Time_On_Time_Performance_2015.csv.bz2)
