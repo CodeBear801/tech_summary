@@ -168,6 +168,155 @@ Kill related process: https://stackoverflow.com/questions/19071512/socket-error-
 
 
 
+### Chapter 6
+- When downloading data from openflights, please be aware to download raw data format.  The format I downloaded contains lots of html tags which is incorrect.  https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat
+
+- Collect all data together
+```
+os.system("cp data/our_airlines.json/part* data/our_airlines.jsonl")
+```
+
+- pySpark table join
+```
+tail_num_plus_inquiry = unique_tail_numbers.join(
+  faa_tail_number_inquiry,
+  unique_tail_numbers.TailNum == faa_tail_number_inquiry.TailNum,
+)
+tail_num_plus_inquiry = tail_num_plus_inquiry.drop(unique_tail_numbers.TailNum)
+```
+
+- pySpark data frame drop
+https://spark.apache.org/docs/2.1.0/api/python/pyspark.sql.html#pyspark.sql.DataFrame.drop
+
+- The reason of using mongodb is recording processed result, such as several table's join result
+
+- Issue of the book
+```
+airplanes.write.format("org.elasticsearch.spark.sql")\
+  .option("es.resource","agile_data_science/airplane")\
+  .mode("overwrite")\
+  .save()
+
+
+curl -XGET 'localhost:9200/agile_data_science/airplanes/_search?q=*'
+// There should be 's' after airplanes
+```
+
+### Chapter 7
+
+- Some link related with regression
+https://stattrek.com/statistics/dictionary.aspx?definition=Regression
+
+https://projects.ncsu.edu/labwrite/res/gt/gt-reg-home.html
+
+- late_flights.sample example
+```
+late_flights.sample(False, 0.01).show()
+```
+https://spark.apache.org/docs/latest/api/python/pyspark.sql.html?highlight=tojson#pyspark.sql.DataFrame.sample
+
+- Code need more investigation
+
+```
+weather_delay_histogram = on_time_dataframe\
+  .select("WeatherDelay")\
+  .rdd\
+  .flatMap(lambda x: x)\
+  .histogram([1, 15, 30, 60, 120, 240, 480, 720, 24*60.0])
+print(weather_delay_histogram)
+```
+output
+```
+>>> print(weather_delay_histogram)
+([0.0, 121.1, 242.2, 363.29999999999995, 484.4, 605.5, 726.5999999999999, 847.6999999999999, 968.8, 1089.8999999999999, 1211.0], [1057655, 4477, 873, 216, 94, 55, 29, 20, 15, 5])
+
+>>> print(weather_delay_histogram)
+([1, 15, 30, 60, 120, 240, 480, 720, 1440.0], [19740, 16007, 13569, 9442, 4598, 1136, 152, 72])
+
+```
+
+- Error in book
+```
+Testing model persistance...
+Traceback (most recent call last):
+  File "train_sklearn_model.py", line 135, in <module>
+    model_f = open(regressor_path, 'wb')
+FileNotFoundError: [Errno 2] No such file or directory: '/Agile_Data_Code_2/models/sklearn_regressor.pkl'
+```
+
+
+### Chapter 8
+- Restart mongo
+```
+service mongodb restart
+```
+- A better way to init sc and spark
+```
+  try:
+    sc and spark
+  except NameError as e:
+    import findspark
+    findspark.init()
+    import pyspark
+    import pyspark.sql
+    
+    sc = pyspark.SparkContext()
+    spark = pyspark.sql.SparkSession(sc).builder.appName(APP_NAME).getOrCreate()
+```
+
+- Commands
+```
+python fetch_prediction_requests.py 2019-10-04 .
+
+cat data/prediction_tasks_daily.json/2019-10-04/part-00000
+
+python make_predictions.py 2019-10-04 .
+
+Input path does not exist: file:/root/Agile_Data_Code_2/ch08/models/string_indexer_model_DayOfMonth.bin/metadata
+
+python load_prediction_results.py 2019-10-04 .
+```
+
+- Airflow
+```
+ln -s $PROJECT_HOME/ch02/airflow_setup
+airflow test agile_data_science_batch_prediction_model_training pyspark_extract_features 2019-10-04
+airflow backfil -s 2019-10-04 -e 2019-10-04 agile_data_science_batch_predictions_daily
+```
+
+- Kafka
+```
+kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic flight_delay_classification_request
+kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic flight_delay_classification_request --from-beginning
+kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic flight_delay_classification_request --from-beginning
+```
+
+- Issue related with linking spark-streaming-kafka lib
+```
+  Spark Streaming's Kafka libraries not found in class path. Try one of the following.
+
+  1. Include the Kafka library and its dependencies with in the
+     spark-submit command as
+
+     $ bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8:2.1.1 ...
+
+  2. Download the JAR of the artifact from Maven Central http://search.maven.org/,
+     Group Id = org.apache.spark, Artifact Id = spark-streaming-kafka-0-8-assembly, Version = 2.1.1.
+     Then, include the jar in the spark-submit command as
+
+#!/usr/bin/env python
+     $ bin/spark-submit --jars <spark-streaming-kafka-0-8-assembly.jar> ...
+```
+reference:
+    https://community.cloudera.com/t5/Support-Questions/getting-error-while-submitting-spark-job/td-p/129955  
+    https://spark.apache.org/docs/latest/streaming-kafka-0-8-integration.html  
+    https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-8-assembly_2.11/2.1.0/  
+how I fix it:
+```
+// https://stackoverflow.com/questions/35910427/java-lang-noclassdeffounderror-kafka-common-topicandpartition
+/root/spark/bin/spark-submit --jars /root/spark/jars/spark-streaming-kafka-0-8-assembly_2.11-2.1.0.jar make_predictions_streaming.py .
+```
+
 
 
 ## More information
@@ -181,6 +330,7 @@ Kill related process: https://stackoverflow.com/questions/19071512/socket-error-
 - [Mongo db methods](https://docs.mongodb.com/manual/reference/method/)
 
 ### Elasticsearch
+- [Elasticsearch学习](https://blog.csdn.net/laoyang360/article/details/52244917)
 - [Configuration](https://www.elastic.co/guide/en/elasticsearch/hadoop/current/configuration.html)
 
 ### Airflow
