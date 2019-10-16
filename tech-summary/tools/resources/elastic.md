@@ -112,17 +112,17 @@ curl -XGET 'url:80/osrm-test/_mapping?pretty'
 
 ### Error related with logstash match pattern
 Problem description: Logstash Configuration Error: “Expected one of #,”
+
 Root cause: Finally, I found its due to I past regular expression from microsoft onenote which secretly changed the character set, especially for space.
-Related links: 
-https://discuss.elastic.co/t/logstash-configuration-error-expected-one-of/150827
-https://discuss.elastic.co/t/configurationerror-message-expected-one-of-input-filter-output-at-line-1-column-1/156154
-https://discuss.elastic.co/t/logstash-configurationerror-message-expected-one-of-at-line/128999
+
+Related links: [link1](https://discuss.elastic.co/t/logstash-configuration-error-expected-one-of/150827) [link2](https://discuss.elastic.co/t/configurationerror-message-expected-one-of-input-filter-output-at-line-1-column-1/156154) [link3](https://discuss.elastic.co/t/logstash-configurationerror-message-expected-one-of-at-line/128999)
 
 ### Error related Kibana
 Problem description: While trying to generate a virtualization graph for traffic-speed-value(key-value), I found following errors
 ```
 Visualize: Fielddata is disabled on text fields by default. Set fielddata=true on [lua-speed-items] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
 ```
+
 Solution: From link [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/fielddata.html), it mentioned how to handle fielddata for text, but it also mentioned text is not for such purpose.  
 Originally, I use following strategy to change lua-speed-items from string to int.z
 ```
