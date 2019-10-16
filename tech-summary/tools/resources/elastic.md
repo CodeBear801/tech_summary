@@ -1,3 +1,17 @@
+
+- [ELK tool set](#elk-tool-set)
+  - [Beats](#beats)
+  - [Logstash](#logstash)
+    - [Debug grok](#debug-grok)
+    - [Logstash links](#logstash-links)
+  - [Elasticsearch](#elasticsearch)
+    - [Elasticsearch links](#elasticsearch-links)
+  - [Kibana](#kibana)
+    - [Kibana links](#kibana-links)
+  - [Issues](#issues)
+    - [Error related with logstash match pattern](#error-related-with-logstash-match-pattern)
+    - [Error related Kibana](#error-related-kibana)
+
 # ELK tool set
 
 This task records my initial experience with ELK tech stack related with [this task](https://github.com/Telenav/osrm-backend/issues/65).  
@@ -97,13 +111,13 @@ curl -XGET 'url:80/osrm-test/_mapping?pretty'
 
 ```
 
-### Elasticsearch useful links
+### Elasticsearch links
 - [elastic doc search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html)
 
 
 ## Kibana
 
-### Kibana Useful links
+### Kibana links
 - [elastic doc xy-chart](https://www.elastic.co/guide/en/kibana/current/xy-chart.html)
 
 
