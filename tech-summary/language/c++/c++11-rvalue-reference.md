@@ -1,6 +1,33 @@
+- [C++11 RRef & URef](#c11-rref--uref)
+  - [Lvalue & Rvalue](#lvalue--rvalue)
+    - [In C](#in-c)
+    - [Why lvalue & rvalue](#why-lvalue--rvalue)
+    - [Basic case](#basic-case)
+    - [Enumeration Constants](#enumeration-constants)
+    - [unary &](#unary)
+    - [unary *](#unary)
+    - [Data storage](#data-storage)
+    - [const](#const)
+      - [Const type](#const-type)
+      - [Const object](#const-object)
+    - [references](#references)
+    - [pass parameter by value or reference](#pass-parameter-by-value-or-reference)
+    - [references and temporaries](#references-and-temporaries)
+      - [Exceptions](#exceptions)
+    - [operator](#operator)
+  - [Type deduction](#type-deduction)
+    - [Template type deduction](#template-type-deduction)
+      - [Non-Uref Reference/Pointer parameters](#non-uref-referencepointer-parameters)
+      - [Universal reference](#universal-reference)
+      - [By value parameters](#by-value-parameters)
+    - [auto type deduction](#auto-type-deduction)
+    - [Lambda capture type deduction](#lambda-capture-type-deduction)
+    - [Decltype deduction](#decltype-deduction)
+    - [Function return type](#function-return-type)
+  - [std::move & std::forward](#stdmove--stdforward)
+  - [Reference](#reference)
 
-
-# C++ rvalue reference
+# C++11 RRef & URef
 
 ## Lvalue & Rvalue
 
@@ -32,15 +59,15 @@ Function return value: no name, you can't take it address, candidate for moving
 
 
 <span style="color:blue">Why differentiate lvalue & rvalue</span>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_1.png" alt="c++_lvalue_rvalue_why_1" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_2.png" alt="c++_lvalue_rvalue_why_2" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_3.png" alt="c++_lvalue_rvalue_why_3" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_4.png" alt="c++_lvalue_rvalue_why_4" width="500"/>
-
+<br/>
 <span style="color:red">rvalue give compiler the permission for optimization.</span>
 
 
@@ -137,8 +164,10 @@ blue = green; // wrong, blue is an rvalue
 
 
 ### unary *
-In contrast to unary &, unary * yields an lvalue
-<span style="color:red">A pointer p can point to an object, so *p is an lvalue</span>
+In contrast to unary &, unary * yields an lvalue  
+
+<span style="color:red">A pointer p can point to an object, so *p is an lvalue</span>  
+
 <span style="color:red">However, its operand can be an rvalue, while result is lvalue</span>
 
 ```C
@@ -244,6 +273,133 @@ string *p = &(s + t);   // wrong
 
 ## Type deduction
 
+C98 is simple, only template, pass by value, pass by &/*  
+C++11 add auto, universal reference, lambda capture and return, decltype  
+C++14 add function return types, lambda init capture  
+
+<img src="resource/pictures/c++_lvalue_rvalue_type_deduction.png" alt="c++_lvalue_rvalue_type_deduction" width="500"/>
+
+
+### Template type deduction
+
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_template_type_deduction.png" alt="c++_lvalue_rvalue_template_type_deduction" width="500"/>
+
+**Pass by reference is the easier one, pass by value is the complicated one**
+
+#### Non-Uref Reference/Pointer parameters
+
+<img src="resource/pictures/c++_lvalue_rvalue_template_type_deduction_2.png" alt="c++_lvalue_rvalue_template_type_deduction_2" width="500"/>
+
+& will always be ignored, for <span style="color:red">none-uref</span>
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_template_type_deduction_3.png" alt="c++_lvalue_rvalue_template_type_deduction_3" width="500"/>
+
+<br/>
+pointer
+<br/>
+<img src="resource/pictures/c++_lvalue_rvalue_pointer_type_deduction.png" alt="c++_lvalue_rvalue_pointer_type_deduction" width="500"/>
+
+
+<span style="color:red">Auto behaves exact the same as type deductions</span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction.png" alt="c++_lvalue_rvalue_auto_type_deduction" width="500"/>
+
+#### Universal reference
+
+<img src="resource/pictures/c++_lvalue_rvalue_universal_reference.png" alt="c++_lvalue_rvalue_universal_reference" width="500"/>
+
+
+f(22)  22 is a rvalue, universal references be initial as rvalue value, became rvalue references 
+
+Summary: when you have a universal reference
+    if you init it with lvalue, the type be deduced as lvalue reference(E&).  
+    <span style="color:red">Type T will be deduced to reference only when you deal with universal reference</span>
+    
+
+#### By value parameters
+
+<img src="resource/pictures/c++_lvalue_rvalue_by_value_param.png" alt="c++_lvalue_rvalue_by_value_param" width="500"/>
+
+<span style="color:red">Pass by value gives a completely independent object</span>
+
+### auto type deduction
+
+Auto & template deduction has the same rules
+
+<img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction2.png" alt="c++_lvalue_rvalue_auto_type_deduction2" width="500"/>
+
+
+
+<span style="color:red">If you want to have a reference, you must manually add &when you use auto</span>
+
+Auto&& is not that common,  but in C++14 you could use it in lambda(forward)
+
+<img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction3.png" alt="c++_lvalue_rvalue_auto_type_deduction3" width="500"/>
+
+<span style="color:red">A brace initializer don't has type</span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction4.png" alt="c++_lvalue_rvalue_auto_type_deduction4" width="500"/>
+
+Only "auto" works
+
+<img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction5.png" alt="c++_lvalue_rvalue_auto_type_deduction5" width="500"/>
+
+
+### Lambda capture type deduction
+
+### Decltype deduction
+
+<img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction.png" alt="c++_lvalue_rvalue_decltype_type_deduction" width="500"/>
+
+
+Decltype didn't throw const/&/valotile
+
+Below is a special rule
+
+<img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction2.png" alt="c++_lvalue_rvalue_decltype_type_deduction2" width="500"/>
+
+<span style="color:red">Usually, a lvalue reference expression already be a reference type </span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction3.png" alt="c++_lvalue_rvalue_decltype_type_deduction3" width="500"/>
+
+(x) is an expression
+
+<img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction4.png" alt="c++_lvalue_rvalue_decltype_type_deduction4" width="500"/>
+
+
+### Function return type
+
+<img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction.png" alt="c++_lvalue_rvalue_function_return_type_deduction" width="500"/>
+
+Auto vs. template: only diff is {} initialization
+
+<img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction2.png" alt="c++_lvalue_rvalue_function_return_type_deduction2" width="500"/>
+
+Auto itself never a reference type
+
+Auto will make a copy
+
+<img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction3.png" alt="c++_lvalue_rvalue_function_return_type_deduction3" width="500"/>
+
+
+Decltype(auto) add &
+
+<img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction4.png" alt="c++_lvalue_rvalue_function_return_type_deduction4" width="500"/>
+
+(retVal) is not longer a name of variable, this is an expression
+
+Deduce return type should be used carefully, most time you just directly return type
+
+<img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction5.png" alt="c++_lvalue_rvalue_function_return_type_deduction5" width="500"/>
+
+When you declare an object, you should prefer to use auto: readability
+
+
+## std::move & std::forward
+
 
 
 
@@ -252,8 +408,13 @@ string *p = &(s + t);   // wrong
 
 
 ## Reference
-- [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8)
-- [CppCon 2014: Scott Meyers "Type Deduction and Why You Care"](https://www.youtube.com/watch?v=wQxj20X-tIU)
+- [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+- [CppCon 2014: Scott Meyers "Type Deduction and Why You Care"](https://www.youtube.com/watch?v=wQxj20X-tIU) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+- [2015 Scott Meyers An Effective C++11 14 Sampler](https://www.youtube.com/watch?v=IqVZG6jWXvs) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+- [2012 Scott Meyers Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+- [Blog: Return Value Optimization](https://shaharmike.com/cpp/rvo/)
+- [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
+
 
 
 
