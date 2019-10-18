@@ -242,7 +242,7 @@ string *p = &(s + t);   // wrong
 ```
 
 
-
+## Type deduction
 
 
 
@@ -253,7 +253,7 @@ string *p = &(s + t);   // wrong
 
 ## Reference
 - [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8)
-
+- [CppCon 2014: Scott Meyers "Type Deduction and Why You Care"](https://www.youtube.com/watch?v=wQxj20X-tIU)
 
 
 
