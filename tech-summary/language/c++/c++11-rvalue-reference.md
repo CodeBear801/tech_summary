@@ -1,5 +1,6 @@
-# C++ rvalue reference
 
+
+# C++ rvalue reference
 
 ## Lvalue & Rvalue
 
@@ -7,10 +8,7 @@ Lvalue & rvalue are <span style="color:red">**sematic properties of expressions*
 
 
 ### In C
-```C
-int E2 = 2;
-E1 = E2;
-```
+
 - Every expression in C either a lvalue or a rvalue
 - An lvalue is an expression referring to an object.  An object is a region of storage.
 - An rvalue is simply an expression that's not an lvalue
@@ -23,6 +21,7 @@ E1 = E2;
 <span style="color:red">Why lvalue is none moveable - lvalue means it could have more than one way to access that variable </span>
 
 <img src="resource/pictures/c++_lvalue_rvalue_rvalues.png" alt="c++_lvalue_rvalue_rvalues" width="500"/>
+
 Function return value: no name, you can't take it address, candidate for moving
 
 
@@ -42,7 +41,7 @@ Function return value: no name, you can't take it address, candidate for moving
 
 <img src="resource/pictures/c++_lvalue_rvalue_why_4.png" alt="c++_lvalue_rvalue_why_4" width="500"/>
 
-<span style="color:red">**Rvalue give compiler the permission for optimization.**</span>
+<span style="color:red">rvalue give compiler the permission for optimization.</span>
 
 
 
@@ -155,9 +154,8 @@ Char *s = Null
 
 ### Data storage
 
+<img src="resource/pictures/c++_lvalue_rvalue_data_storage.png" alt="c++_lvalue_rvalue_data_storage" width="500"/>
 
-
-c++_lvalue_rvalue_data_storage
 
 ### const
 
@@ -253,13 +251,14 @@ string *p = &(s + t);   // wrong
 
 
 
+## Reference
+- [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8)
 
 
 
 
 
-
-
+***
 
 
 
