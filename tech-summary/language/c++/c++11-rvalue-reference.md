@@ -272,6 +272,7 @@ s = s + string(",") + t // lvalue + rvalue + lvalue
 string *p = &(s + t);   // wrong
 ```
 
+***
 
 ## Type deduction
 
@@ -398,6 +399,7 @@ Deduce return type should be used carefully, most time you just directly return 
 
 When you declare an object, you should prefer to use auto: readability
 
+***
 
 ## std::move & std::forward
 
@@ -448,7 +450,7 @@ When use move operator, If the type you want to cast to don't support move, then
 Notice that, param is a lvalue  
 If what was passed originally was a rvalue, then turn param back to rvalue even though it’s a lvalue inside the function  
 If what was passed originally was a lvalue, then the fact of param is lvalue should be unchanged  
-That's why it’s a conditional cast  
+That's why std::forward is a conditional cast  
 
 <img src="resource/pictures/c++_lvalue_rvalue_forward2.png" alt="c++_lvalue_rvalue_forward2" width="500"/>
 
@@ -456,11 +458,11 @@ That's why it’s a conditional cast
 for lvalues, returns T& Reference clapsing <br/>
 Is deduce type always none reference:  
 For lvalues, the deduce type is lvalue reference  
-For rvalues, its none-reference  
+For rvalues, its none-reference revalue  
 
 
 
-
+***
 
 
 
@@ -592,7 +594,7 @@ Emplace_back, we don't know what we passed, emplace_back is not overloaded
 <span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.
 
 
-
+***
 
 ## Return Rref&Uref
 
@@ -718,11 +720,53 @@ When RVO doesn't happen
 - Returning a global parameter
 - RVO can only happen when an object is created from a return value.  http://cpp.sh/4czmi
 
+***
 
 ## Reference collapsing
 
-
 Reference collapsing only happens for template type deduction, auto type deduction, typedef, decltype
+
+[reference collapsing rules](http://thbecker.net/articles/rvalue_references/section_08.html): If T = U&, then T&& = U&, but if T = U&&, then T&& = U&&, so you always end up with the correct type inside the function body. Finally, you need forward to turn the lvalue-turned x (because it has a name now!) back into an rvalue reference if it was one initially.  
+
+**Std::forward avoid using pointer to pass rvalue reference.  For example, an object is allocated on stack, use std::forward act like std::move, to pass obj from one place to another.**  
+
+
+- Reference Collapsing Rules ( C++ 11 ):
+    * T& &   ==>  T&
+    *  T& &&  ==>  T&
+    * T&& &  ==>  T&
+    * T&& && ==>  T&&
+
+```C++
+// Example 1
+template< classs T >
+struct remove_reference;    // It removes reference on type T
+
+// T is int&
+remove_refence<int&>::type i;  // int i;
+
+// T is int
+remove_refence<int>::type i;   // int i;
+
+
+// Example 2
+template< typename T >
+void relay(T&& arg ) {
+   ...
+}
+// T&& variable is intialized with rvalue => rvalue reference
+  relay(9); =>  T = int&& =>  T&& = int&& && = int&&
+// T&& variable is intialized with lvalue => lvalue reference
+  relay(x); =>  T = int&  =>  T&& = int& && = int&
+
+// Example 3
+template< typename T >
+void relay(T&& arg ) {
+  foo( std::forward<T>( arg ) );
+}
+
+```
+
 
 ### General rules
 
@@ -794,49 +838,6 @@ template <typename ...Args> void f(Args && ...args)
 {
   g(std::forward<Args>(args)...);
 }
-
-```
-That's because of the [reference collapsing rules](http://thbecker.net/articles/rvalue_references/section_08.html): If T = U&, then T&& = U&, but if T = U&&, then T&& = U&&, so you always end up with the correct type inside the function body. Finally, you need forward to turn the lvalue-turned x (because it has a name now!) back into an rvalue reference if it was one initially.  
-
-**Std::forward avoid using pointer to pass rvalue reference.  For example, an object is allocated on stack, use std::forward act like std::move, to pass obj from one place to another.**  
-
-
-- Reference Collapsing Rules ( C++ 11 ):
-    * T& &   ==>  T&
-    *  T& &&  ==>  T&
-    * T&& &  ==>  T&
-    * T&& && ==>  T&&
-
-```C++
-// Example 1
-template< classs T >
-struct remove_reference;    // It removes reference on type T
-
-// T is int&
-remove_refence<int&>::type i;  // int i;
-
-// T is int
-remove_refence<int>::type i;   // int i;
-
-
-// Example 2
-template< typename T >
-void relay(T&& arg ) {
-   ...
-}
-// T&& variable is intialized with rvalue => rvalue reference
-  relay(9); =>  T = int&& =>  T&& = int&& && = int&&
-// T&& variable is intialized with lvalue => lvalue reference
-  relay(x); =>  T = int&  =>  T&& = int& && = int&
-
-// Example 3
-template< typename T >
-void relay(T&& arg ) {
-  foo( std::forward<T>( arg ) );
-}
-
-
-
 
 ```
 
