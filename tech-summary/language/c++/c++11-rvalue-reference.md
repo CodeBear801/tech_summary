@@ -401,6 +401,61 @@ When you declare an object, you should prefer to use auto: readability
 ## std::move & std::forward
 
 
+**important**
+
+<img src="resource/pictures/c++_lvalue_rvalue_move_forward.png" alt="c++_lvalue_rvalue_move_forward.png" width="500"/>
+
+
+Std::move and std::forward talks to compiler, if std::move it means this expression here is a rvalue, if std::forward it means this expression here **might** be a rvalue.
+
+<img src="resource/pictures/c++_lvalue_rvalue_move.png" alt="c++_lvalue_rvalue_move" width="500"/>
+<br/>
+<img src="resource/pictures/c++_lvalue_rvalue_move2.png" alt="c++_lvalue_rvalue_move2" width="500"/>
+
+
+
+
+Why move
+
+<img src="resource/pictures/c++_lvalue_rvalue_move3.png" alt="c++_lvalue_rvalue_move3" width="500"/>
+
+
+https://stackoverflow.com/questions/21605579/how-true-is-want-speed-pass-by-value
+
+<img src="resource/pictures/c++_lvalue_rvalue_move4.png" alt="c++_lvalue_rvalue_move4" width="500"/>
+
+
+
+Move to a const object?  
+
+<img src="resource/pictures/c++_lvalue_rvalue_move5.png" alt="c++_lvalue_rvalue_move5" width="500"/>
+
+Finally call copy constructor.  **Move doesn't move**
+
+<img src="resource/pictures/c++_lvalue_rvalue_move6.png" alt="c++_lvalue_rvalue_move6" width="500"/>
+
+
+When use move operator, If the type you want to cost to don't support move, then it will fall back to copy
+-- you can only pay really really close attention to avoid this
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_forward.png" alt="c++_lvalue_rvalue_forward" width="500"/>
+
+
+Notice that, param is a lvalue  
+If what was passed originally was a rvalue, then turn param back to rvalue even though it’s a lvalue inside the function  
+If what was passed originally was a lvalue, then the fact of param is lvalue should be unchanged  
+That's why it’s a conditional cast  
+
+<img src="resource/pictures/c++_lvalue_rvalue_forward2.png" alt="c++_lvalue_rvalue_forward2" width="500"/>
+
+
+for lvalues, returns T& Reference clapsing <br/>
+Is deduce type always none reference:  
+For lvalues, the deduce type is lvalue reference  
+For rvalues, its none-reference  
+
+
 
 
 
