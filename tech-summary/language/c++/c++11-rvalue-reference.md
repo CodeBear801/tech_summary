@@ -464,6 +464,137 @@ For rvalues, its none-reference
 
 
 
+## Universal reference vs Rvalue Reference
+
+### Distinguish Uref & RRef
+
+Rvalue references, wrap by std::move  
+Universal reference, wrap by std::forward  
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_distinguish_uref_rref.png" alt="c++_lvalue_rvalue_distinguish_uref_rref" width="500"/>
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_double_life_of_dref.png" alt="c++_lvalue_rvalue_double_life_of_dref" width="500"/>
+
+**important**
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_double_life_of_dref2.png" alt="c++_lvalue_rvalue_double_life_of_dref2" width="500"/>
+
+
+The purpose of rvalue reference is used to identify whether the object can be moved from  
+Universal reference also has name forward reference
+
+<img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell.png" alt="c++_lvalue_rvalue_in_a_nutshell" width="500"/>
+
+
+
+<span style="color:red">If a variable or parameter is declared to have type T&& for some deduced type T, that variable or parameter is a universal reference.</span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell2.png" alt="c++_lvalue_rvalue_in_a_nutshell2" width="500"/>
+
+<span style="color:red">UURef, the form is T&& and there has to be a type deduction for T</span>
+Otherwise its just a Rvalue reference
+
+<img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell3.png" alt="c++_lvalue_rvalue_in_a_nutshell3" width="500"/>
+
+
+<span style="color:red">Object type is independency of rvalueness or lvalueness</span>  
+What universal reference really is depened on how the expression was initialized  
+If the expression initializing a universal reference is an lvalue, the universal reference becomes an lvalue reference.  
+If the expression initializing the universal reference is an rvalue, the universal reference becomes an rvalue reference.  
+
+<br/>
+<span style="color:red">Parameters are lvalues, its type could be lvalue or rvalue</span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_param_are_lvalue.png" alt="c++_lvalue_rvalue_param_are_lvalue" width="500"/>
+
+
+
+Rhs is lvalue, while its type is rvalue reference  
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_example1.png" alt="c++_lvalue_rvalue_uref_example1" width="500"/>
+
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_example2.png" alt="c++_lvalue_rvalue_uref_example2" width="500"/>
+
+```C++
+Widget&& var1 = Widget();   // Widget() generate a rvalue for object Widget
+                            // you could take the address of var1, so var1 is lvalue
+Widget&& var4 = va1;        // wrong, rvalue reference could only combine with rvalue, while var1 is lvalue
+
+auto&& var3 = var1;         // var3's type declaration of auto&& makes it a universal reference 
+                            // and because it's being init with var1 an lvalue, var3 becomes an lvalue reference)
+                            // It the same as Widget&var3 = var1;
+
+std::vector<int> v;
+
+Auto&& val = v[0];          // val is universal reference, with a call to std::vector<int>::operator[]
+                            // That function returns an lvalue reference to an element of vector
+                            // so in the result var is lvalue reference
+
+//http://cpp.sh/7tf5
+```
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_autodref.png" alt="c++_lvalue_rvalue_uref_autodref" width="500"/>
+
+User code, in C++14 lambda, always to take auto&& parameters  
+<img src="resource/pictures/c++_lvalue_rvalue_uref_autodref2.png" alt="c++_lvalue_rvalue_uref_autodref2" width="500"/>
+
+
+
+
+### T&& not always Uref
+#### Case 1: No template deduce
+
+**Exceptions**
+
+<img src="resource/pictures/c++_lvalue_rvalue_type_decution_uref_exception.png" alt="c++_lvalue_rvalue_type_decution_uref_exception" width="500"/>
+
+Push_back(int&& x)    There is no type deduced here  
+Look from the user code, when you call push_back, vi's type already be decided.  
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_pushback_emplace_back.png" alt="c++_lvalue_rvalue_uref_pushback_emplace_back" width="500"/>
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_pushback_emplace_back2.png" alt="c++_lvalue_rvalue_uref_pushback_emplace_back2" width="500"/>
+
+<span style="color:blue">Why need std::move? </span> take the vector as an example, there are two overload, with rvalue referece you could get additional efficiency with std::move.  Preserve rvalueness, pass value into several deep who really do the work.  
+
+
+
+#### Case 2: Const/Volatile
+<img src="resource/pictures/c++_lvalue_rvalue_uref_sntax_matters.png" alt="c++_lvalue_rvalue_uref_sntax_matters" width="500"/>
+
+Const will not be deduced for f(const T&& param)  
+Rvalue reference means candidate for moving, const means can't be modified  
+Rvalue reference to const is very very very **uncommon**  
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_sntax_matters2.png" alt="c++_lvalue_rvalue_uref_sntax_matters2" width="500"/>
+
+
+### function overloading
+
+You will overload rvalue reference functions, but you won't for uref version
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_overloading.png" alt="c++_lvalue_rvalue_uref_overloading" width="500"/>
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_overloading2.png" alt="c++_lvalue_rvalue_uref_overloading2" width="500"/>
+
+
+
+<span style="color:blue">Why not always use std::forward, since it could automatically be translated to rvalueref/lvalue ref:</span> Yes you can, but, when I wrote std::move I want clearly represent the idea of: this is an rvalue and I want to keep the rvalueness in the following function call, when I wrote std::forward I want to represent the idea of universal reference, might be a rvalue reference or might be a lvalue reference, they make different statement, I want the reader have a clear idea of this.
+
+<img src="resource/pictures/c++_lvalue_rvalue_uref_overloading3.png" alt="c++_lvalue_rvalue_uref_overloading3" width="500"/>
+
+Push_back, we know exactly what the type is, there is no type deduction   
+Emplace_back, we don't know what we passed, emplace_back is not overloaded   
+<span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.
+
+
+
+
+
 
 ## Reference
 - [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
