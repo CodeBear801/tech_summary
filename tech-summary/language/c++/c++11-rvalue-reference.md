@@ -25,6 +25,8 @@
     - [Decltype deduction](#decltype-deduction)
     - [Function return type](#function-return-type)
   - [std::move & std::forward](#stdmove--stdforward)
+    - [std::move](#stdmove)
+    - [std::forward](#stdforward)
   - [Reference](#reference)
 
 # C++11 RRef & URef
@@ -378,14 +380,13 @@ Auto vs. template: only diff is {} initialization
 
 <img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction2.png" alt="c++_lvalue_rvalue_function_return_type_deduction2" width="500"/>
 
-Auto itself never a reference type
-
-Auto will make a copy
+Auto itself never a reference type  
+Auto will make a copy  
 
 <img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction3.png" alt="c++_lvalue_rvalue_function_return_type_deduction3" width="500"/>
 
 
-Decltype(auto) add &
+Decltype(auto) add &  
 
 <img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction4.png" alt="c++_lvalue_rvalue_function_return_type_deduction4" width="500"/>
 
