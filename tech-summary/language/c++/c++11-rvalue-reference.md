@@ -623,7 +623,7 @@ So the first line should take it as copied, only last sentence applied std::forw
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule3.png" alt="c++_lvalue_rvalue_return_type_refine_rule3" width="500"/>
 
-Temp is rvalue ref, is safe to change
+Temp is rvalue ref, it is safe to change
 Std::move(temp) means I want the content of Matrix to be moved to return value, its different with return value optimization, which is not work on rvalue reference
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule4.png" alt="c++_lvalue_rvalue_return_type_refine_rule4" width="500"/>
@@ -636,14 +636,10 @@ Without forward it will be copied into return value, otherwise it could be moved
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule6.png" alt="c++_lvalue_rvalue_return_type_refine_rule6" width="500"/>
 
-C++ compiler rule: if you have local variable and the type is the same with return value and you return that local variable, then compiler will directly construct it at return value's location.  There is no move or copy
-
-Std::move is a function call, compiler don't know what happened.
+C++ compiler rule: if you have local variable and the type is the same with return value and you return that local variable, then compiler will directly construct it at return value's location.  There is no move or copy  
+For the second situation, std::move is a function call, compiler don't know what happened.
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule7.png" alt="c++_lvalue_rvalue_return_type_refine_rule7" width="500"/>
-
-
-
 
 ### return rule optimization
 
@@ -723,13 +719,43 @@ When RVO doesn't happen
 - RVO can only happen when an object is created from a return value.  http://cpp.sh/4czmi
 
 
+## Reference collapsing
 
 
+Reference collapsing only happens for template type deduction, auto type deduction, typedef, decltype
+
+### General rules
+
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing.png" alt="c++_lvalue_rvalue_reference_collapsing" width="500"/>
+
+<span style="color:red">As a user, you are not permitted to declare reference over references</span>
+
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_uref.png" alt="c++_lvalue_rvalue_reference_collapsing_uref" width="500"/>
+
+W is a Widget, even after move operation it still be a Widget, except for special stl container, others should be fine
+
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_ref2ref.png" alt="c++_lvalue_rvalue_reference_collapsing_ref2ref" width="500"/>
 
 
+You can't write such code, but this is what compiler do
 
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_rule.png" alt="c++_lvalue_rvalue_reference_collapsing_rule" width="500"/>
 
+If either value is an lvalue reference, then the result is lvalue reference  
+If both value are rvalue reference, the result is rvalue reference  
 
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_rule2.png" alt="c++_lvalue_rvalue_reference_collapsing_rule2" width="500"/>
+
+### auto&& much less common
+
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_auto.png" alt="c++_lvalue_rvalue_reference_collapsing_auto" width="500"/>
+
+### typedef
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_typedef.png" alt="c++_lvalue_rvalue_reference_collapsing_typedef" width="500"/>
+Bad name
+
+### decltype
+<img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_decltype.png" alt="c++_lvalue_rvalue_reference_collapsing_decltype" width="500"/>
 
 ## Reference
 - [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
