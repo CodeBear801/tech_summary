@@ -370,7 +370,7 @@ Below is a special rule
 <img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction4.png" alt="c++_lvalue_rvalue_decltype_type_deduction4" width="500"/>
 
 
-### Function return type
+### Function return type deduction
 
 <img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction.png" alt="c++_lvalue_rvalue_function_return_type_deduction" width="500"/>
 
@@ -400,6 +400,7 @@ When you declare an object, you should prefer to use auto: readability
 
 ## std::move & std::forward
 
+### std::move
 
 **important**
 
@@ -435,9 +436,10 @@ Finally call copy constructor.  **Move doesn't move**
 <img src="resource/pictures/c++_lvalue_rvalue_move6.png" alt="c++_lvalue_rvalue_move6" width="500"/>
 
 
-When use move operator, If the type you want to cost to don't support move, then it will fall back to copy
+When use move operator, If the type you want to cast to don't support move, then it will fall back to copy
 -- you can only pay really really close attention to avoid this
 
+### std::forward
 
 <img src="resource/pictures/c++_lvalue_rvalue_forward.png" alt="c++_lvalue_rvalue_forward" width="500"/>
 
