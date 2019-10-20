@@ -523,7 +523,7 @@ Otherwise its just a Rvalue reference
 
 <img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell3.png" alt="c++_lvalue_rvalue_in_a_nutshell3" width="500"/>
 
-<span style="color:red"> ** Object type is independency of rvalueness or lvalueness** </span>  
+<span style="color:red">Object type is independency of rvalueness or lvalueness</span>  
 What universal reference really is depened on how the expression was initialized  
 If the expression initializing a universal reference is an lvalue, the universal reference becomes an lvalue reference.  
 If the expression initializing the universal reference is an rvalue, the universal reference becomes an rvalue reference.  
@@ -831,6 +831,9 @@ Bad name
 
 ### decltype
 <img src="resource/pictures/c++_lvalue_rvalue_reference_collapsing_decltype.png" alt="c++_lvalue_rvalue_reference_collapsing_decltype" width="500"/>
+
+
+***
 
 ## Reference
 - [Core C++ 2019 :: Dan Saks :: Understanding Lvalues and Rvalues](https://www.youtube.com/watch?v=mK0r21-djk8) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
