@@ -440,8 +440,21 @@ Finally call copy constructor.  **Move doesn't move**
 <img src="resource/pictures/c++_lvalue_rvalue_move6.png" alt="c++_lvalue_rvalue_move6" width="500"/>
 
 
-When use move operator, If the type you want to cast to don't support move, then it will fall back to copy
--- you can only pay really really close attention to avoid this
+When use move operator, If the type you want to cast to don't support move, then it will **fall back to copy**.  You can only pay really really close attention to avoid this  
+
+The most useful place for rvalue reference is overloading copy constructor and assignment operator, to achieve move semantics.
+```C++
+X& X::operator=(X const & rhs); 
+X& X::operator=(X&& rhs);
+```
+Move semantics is implemented for all STL containers, which means:
+ 1. Move to C++ 11, You code will be faster without changing a thing.
+ 2. You should use passing by value more often.
+
+```C++
+vector<int> foo() { std::vector<int> vTmp;  return vTmp; }
+```
+
 
 ### std::forward
 
@@ -459,9 +472,17 @@ That's why std::forward is a conditional cast
 for lvalues, returns T& Reference clapsing <br/>
 Is deduce type always none reference:  
 For lvalues, the deduce type is lvalue reference  
-For rvalues, its none-reference revalue  
+For rvalues, its none-reference revalue??  
+<br/>
 
+The most frequent std::forward showc case
+```C++
+template <typename ...Args> void f(Args && ...args)
+{
+  g(std::forward<Args>(args)...);
+}
 
+```
 
 ***
 
@@ -502,8 +523,7 @@ Otherwise its just a Rvalue reference
 
 <img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell3.png" alt="c++_lvalue_rvalue_in_a_nutshell3" width="500"/>
 
-
-<span style="color:red">Object type is independency of rvalueness or lvalueness </span>  
+<span style="color:red"> ** Object type is independency of rvalueness or lvalueness** </span>  
 What universal reference really is depened on how the expression was initialized  
 If the expression initializing a universal reference is an lvalue, the universal reference becomes an lvalue reference.  
 If the expression initializing the universal reference is an rvalue, the universal reference becomes an rvalue reference.  
@@ -726,7 +746,7 @@ When RVO doesn't happen
 ## Reference collapsing
 
 Reference collapsing only happens for template type deduction, auto type deduction, typedef, decltype  
-The hard part to understand is the following
+Think about the following example:
 ```C++
 template <typename T>
 void f(T&& param)
@@ -829,27 +849,6 @@ Bad name
 
 
 
-- The most useful place for rvalue reference is overloading copy constructor and assignment operator, to achieve move semantics.
-```C++
-X& X::operator=(X const & rhs); 
-X& X::operator=(X&& rhs);
-```
 
-- Move semantics is implemented for all STL containers, which means:
- 1. Move to C++ 11, You code will be faster without changing a thing.
- 2. You should use passing by value more often.
-
-```C++
-vector<int> foo() { std::vector<int> vTmp;  return vTmp; }
-```
-
-- The most frequent std::forward showc case
-```C++
-template <typename ...Args> void f(Args && ...args)
-{
-  g(std::forward<Args>(args)...);
-}
-
-```
 
 
