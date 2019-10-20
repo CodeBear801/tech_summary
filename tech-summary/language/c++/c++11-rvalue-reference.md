@@ -72,6 +72,9 @@ Function return value: no name, you can't take it address, candidate for moving
 <br/>
 <span style="color:red">rvalue give compiler the permission for optimization.</span>
 
+### Data storage
+
+<img src="resource/pictures/c++_lvalue_rvalue_data_storage.png" alt="c++_lvalue_rvalue_data_storage" width="500"/>
 
 
 ### Basic case
@@ -155,7 +158,7 @@ int&& c = 3;
 enum color {red, green, blue};
 color c;
 
-c = green;  // OK, c is an lvalue, green is rvalue
+c = green;   // OK, c is an lvalue, green is rvalue
 blue = green; // wrong, blue is an rvalue
 
 ```
@@ -184,9 +187,6 @@ Char *s = Null
 
 ```
 
-### Data storage
-
-<img src="resource/pictures/c++_lvalue_rvalue_data_storage.png" alt="c++_lvalue_rvalue_data_storage" width="500"/>
 
 
 ### const
