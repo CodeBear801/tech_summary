@@ -725,7 +725,17 @@ When RVO doesn't happen
 
 ## Reference collapsing
 
-Reference collapsing only happens for template type deduction, auto type deduction, typedef, decltype
+Reference collapsing only happens for template type deduction, auto type deduction, typedef, decltype  
+The hard part to understand is the following
+```C++
+template <typename T>
+void f(T&& param)
+{}      
+       // if expr is lvalue with deduced type E, T deduced as E&
+
+f(x)   // x is lvalue -> T is int&, param's type is int&
+```
+No matter what, this is forward **reference**, so in the end there should be an reference.
 
 [reference collapsing rules](http://thbecker.net/articles/rvalue_references/section_08.html): If T = U&, then T&& = U&, but if T = U&&, then T&& = U&&, so you always end up with the correct type inside the function body. Finally, you need forward to turn the lvalue-turned x (because it has a name now!) back into an rvalue reference if it was one initially.  
 
