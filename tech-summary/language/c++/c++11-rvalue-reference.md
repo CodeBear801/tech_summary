@@ -78,11 +78,11 @@ Function return value: no name, you can't take it address, candidate for moving
 
 ```C
 int m, n
-m=n.    // n is lvalue, this assignment uses the lvalue expressions n as an rvalue
-              // due to c++ performs an lvalue-to-rvalue conversion
-              // assign to lvalue m
+m=n     // n is lvalue, this assignment uses the lvalue expressions n as an rvalue
+        // due to c++ performs an lvalue-to-rvalue conversion
+        // assign to lvalue m
 
-m+n.     // the result in a compiler-generated temporary object, such as a CPU register -> rvalue
+m+n     // the result in a compiler-generated temporary object, such as a CPU register -> rvalue
 ```
 
 More examples
@@ -150,6 +150,7 @@ int&& c = 3;
 
 ### Enumeration Constants
 - When used in expressions, enum constans are also rvalues
+
 ```C
 enum color {red, green, blue};
 color c;

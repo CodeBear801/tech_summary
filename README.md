@@ -29,6 +29,7 @@ Date | Name | Links | Comments
 [\<\<Hit Refresh\>\>](tech-summary/books/hit_refresh.md) 拯救曾经过气的微软  
 [\<\<Who Says Elephants Cant Dance\>\>]()   
 [\<\<User story Mapping\>\>](tech-summary/books/user-story-mapping/user-story-mapping.md) Become a better project manager
+[\<\<Effective Morden C++\>\>]() 
 
 ## Meetup & Tech Conference
 
