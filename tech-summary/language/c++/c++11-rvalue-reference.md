@@ -2,11 +2,11 @@
   - [Lvalue & Rvalue](#lvalue--rvalue)
     - [In C](#in-c)
     - [Why lvalue & rvalue](#why-lvalue--rvalue)
+    - [Data storage](#data-storage)
     - [Basic case](#basic-case)
     - [Enumeration Constants](#enumeration-constants)
     - [unary &](#unary)
     - [unary *](#unary)
-    - [Data storage](#data-storage)
     - [const](#const)
       - [Const type](#const-type)
       - [Const object](#const-object)
@@ -23,10 +23,24 @@
     - [auto type deduction](#auto-type-deduction)
     - [Lambda capture type deduction](#lambda-capture-type-deduction)
     - [Decltype deduction](#decltype-deduction)
-    - [Function return type](#function-return-type)
+    - [Function return type deduction](#function-return-type-deduction)
   - [std::move & std::forward](#stdmove--stdforward)
     - [std::move](#stdmove)
     - [std::forward](#stdforward)
+  - [Universal reference vs Rvalue Reference](#universal-reference-vs-rvalue-reference)
+    - [Distinguish Uref & RRef](#distinguish-uref--rref)
+    - [T&& not always Uref](#t-not-always-uref)
+      - [Case 1: No template deduce](#case-1-no-template-deduce)
+      - [Case 2: Const/Volatile](#case-2-constvolatile)
+    - [function overloading](#function-overloading)
+  - [Return Rref&Uref](#return-rrefuref)
+    - [Return by std::move & std::forward](#return-by-stdmove--stdforward)
+    - [return rule optimization](#return-rule-optimization)
+  - [Reference collapsing](#reference-collapsing)
+    - [General rules](#general-rules)
+    - [auto&& much less common](#auto-much-less-common)
+    - [typedef](#typedef)
+    - [decltype](#decltype)
   - [Reference](#reference)
 
 # C++11 RRef & URef
@@ -844,14 +858,6 @@ Bad name
 - [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
 
-
-
-
 ***
-
-
-
-
-
 
 
