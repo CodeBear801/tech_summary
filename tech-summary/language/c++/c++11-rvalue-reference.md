@@ -387,6 +387,8 @@ Below is a special rule
 
 <img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction4.png" alt="c++_lvalue_rvalue_decltype_type_deduction4" width="500"/>
 
+Sample code to nicely print decltype: [code link](http://cpp.sh/7li6a)
+
 
 ### Function return type deduction
 
