@@ -642,8 +642,11 @@ You will overload rvalue reference functions, but you won't for uref version
 Push_back, we know exactly what the type is, there is no type deduction   
 Emplace_back, we don't know what we passed, emplace_back is not overloaded   
 <span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.  
+<br/>
 
-
+Functions taking universal references are the greediest functions in C++.  
+They instantiate to create exact matches for almost any type of argument.  
+(The few kinds of arguments where this isn't the case are described in Item 30.)  This is why combining overloading and universal references is almost always a bad idea: the universal reference overload vacuums up far more argument types than the developer doing the overloading generally expects.  [code example](http://cpp.sh/9wntl)
 
 
 ***
