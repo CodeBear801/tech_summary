@@ -383,7 +383,20 @@ Below is a special rule
 
 <img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction3.png" alt="c++_lvalue_rvalue_decltype_type_deduction3" width="500"/>
 
-(x) is an expression
+(x) is an expression  
+
+A rule differentiate decltype with auto: Decltype deal with lvalue expression generates lvalue&
+```C++
+template<typename Container, typename Index>  
+auto authAndAccess(Container& c, Index i)     
+  -> decltype(c[i])                           
+{
+  authenticateUser();
+  return c[i];
+}
+// without -> decltype(c[i])  will return rvalue
+```
+[code link](http://cpp.sh/5xbut)
 
 <img src="resource/pictures/c++_lvalue_rvalue_decltype_type_deduction4.png" alt="c++_lvalue_rvalue_decltype_type_deduction4" width="500"/>
 
@@ -628,7 +641,9 @@ You will overload rvalue reference functions, but you won't for uref version
 
 Push_back, we know exactly what the type is, there is no type deduction   
 Emplace_back, we don't know what we passed, emplace_back is not overloaded   
-<span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.
+<span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.  
+
+
 
 
 ***
