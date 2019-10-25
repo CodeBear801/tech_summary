@@ -513,6 +513,9 @@ template <typename ...Args> void f(Args && ...args)
 
 ```
 
+When std::forward didn't work: C++'s default constructor expect "const ref" to be passed in, while move operator expect none-const  [code example](http://cpp.sh/4owozo)  
+
+
 ***
 
 
@@ -831,7 +834,7 @@ void relay(T&& arg ) {
 }
 
 ```
-
+[code example](http://cpp.sh/7uklj)
 
 ### General rules
 
