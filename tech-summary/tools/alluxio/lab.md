@@ -1,5 +1,6 @@
 - [Prerequisite](#prerequisite)
 - [Background](#background)
+  - [Common Use Case](#common-use-case)
 - [Task0: Login to the AMI instance](#task0-login-to-the-ami-instance)
   - [MacOS or Linux Users](#macos-or-linux-users)
   - [Windows Putty Users](#windows-putty-users)
@@ -29,6 +30,8 @@
 <br/>
 <img src="../resources/alluxio_lab_4.png" alt="alluxio_lab_4.png" width="400"/>
 <br/>
+
+## Common Use Case
 <img src="../resources/alluxio_lab_5.png" alt="alluxio_lab_5.png" width="400"/>
 <br/>
 
