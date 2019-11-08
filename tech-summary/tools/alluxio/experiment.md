@@ -16,6 +16,7 @@
 
 * Address of the assigned instances. If you were not assigned with the address during your check-in, please talk to a TA.
 * A working SSH client installed on your local laptop.
+* You could create your own instance from aws and search for "Alluxio presto sandbox"
 
 # Task0: Login to the AMI instance
 
@@ -190,6 +191,45 @@ presto:alluxio> with ssr as
  group by rollup (channel, sk) limit 100;
 ```
 
+My reverse engineering on this query:
+- What's the total amount of return money based on different channel of promotion
+- Table store_sales
+```
+create external table store_sales
+(
+    ...
+    ss_store_sk               int,
+    ss_promo_sk               int,
+    ss_ticket_number          int,
+    ...
+)
+```
+- Table store_returns
+(
+    ...
+    sr_store_sk               int,
+    sr_ticket_number          int,
+    ...
+)
+- Table promotion
+(
+    ...
+    p_promo_sk                int,
+    p_channel_dmail           string,
+    p_channel_email           string,
+    p_channel_catalog         string,
+    p_channel_tv              string,
+    p_channel_radio           string,
+    p_channel_press           string,
+    p_channel_event           string,
+    p_channel_demo            string,
+    p_channel_details         string,
+    ...
+)
+- The query in [`with`](https://teradata.github.io/presto/docs/141t/sql/select.html) defines named relations for use within a query, it sums all sold items with certain promotion channel
+- Then next query list all result by (channel, channel-id, sum)
+- [`ROLLUP`](https://prestodb.github.io/docs/current/sql/select.html) operator generates all possible subtotals for a given set of columns.
+
 You are expected to see running information like the following indicating the status:
 
 ```
@@ -217,6 +257,25 @@ Splits: 4,039 total, 4,039 done (100.00%)
 The first run of this query took 6min 51sec with 3.31GB data processed. The query time can vary depending on the network traffic and how many users are querying the same S3 bucket concurrently.
 
 Re-run the same query and compare the duration to finish the queries. The second time is supposed to finish in about 2 minutes because the data is cached in Alluxio now. You can run this queries multiple times and see that having data cached in Alluxio leads to much more consistent performance.
+
+My testing result
+```
+store channel |   34 |  2.5149941141199903E9
+ store channel |   64 |   2.533709799259994E9
+ store channel |  190 |   2.522522362150005E9
+ store channel |  115 |   2.526016496579988E9
+ store channel |  328 |  2.5132327335100026E9
+ store channel |   20 |  2.5206218145399942E9
+ store channel |  188 |  2.5187698155200047E9
+ store channel |  196 |   2.525871516370006E9
+ store channel |  400 |   2.518581968089997E9
+...
+ NULL          | NULL | 2.5244082774835992E11
+
+Query 20191107_211955_00030_amcp7, FINISHED, 1 node
+Splits: 4,039 total, 4,039 done (100.00%)
+3:00 [317M rows, 3.31GB] [1.76M rows/s, 18.8MB/s]
+```
 
 # (Bonus) Task4: Alluxio specific operations
 
