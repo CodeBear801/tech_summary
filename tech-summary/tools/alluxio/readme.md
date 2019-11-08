@@ -4,12 +4,12 @@
 - [Alluxio: The Journey Thus Far and the Road ahead](https://www.infoq.com/presentations/alluxio/)
 - [Building a Large-scale Interactive SQL Query Engine using Presto and Alluxio in JD.com](https://www.alluxio.io/blog/building-a-large-scale-interactive-sql-query-engine-using-presto-and-alluxio-in-jd-com/) [slides](https://conferences.oreilly.com/strata/strata-eu-2018/public/schedule/detail/64692)
 
-Highly recommend [Alluxio's Lab here](./experiment.md).
+Highly recommend [Alluxio's Lab here](./lab.md).
 
 ## Best scenario
 - Alluxio acted as cache layer for Hotspot.
 - Alluxio hide data access between different data access, such as from cloud provider(S3, Azure file storage) or HDFS
-- Alluxio not suggest for streaming processing or live data processing
+- Alluxio not suggest for live data processing
 
 
 ## More info
