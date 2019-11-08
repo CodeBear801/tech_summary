@@ -1,4 +1,5 @@
 - [Prerequisite](#prerequisite)
+- [Background](#background)
 - [Task0: Login to the AMI instance](#task0-login-to-the-ami-instance)
   - [MacOS or Linux Users](#macos-or-linux-users)
   - [Windows Putty Users](#windows-putty-users)
@@ -17,6 +18,24 @@
 * Address of the assigned instances. If you were not assigned with the address during your check-in, please talk to a TA.
 * A working SSH client installed on your local laptop.
 * You could create your own instance from aws and search for "Alluxio presto sandbox"
+
+# Background
+
+<img src="../resources/alluxio_lab_1.png" alt="alluxio_lab_1.png" width="400"/>
+<br/>
+<img src="../resources/alluxio_lab_2.png" alt="alluxio_lab_2.png" width="400"/>
+<br/>
+<img src="../resources/alluxio_lab_3.png" alt="alluxio_lab_3.png" width="400"/>
+<br/>
+<img src="../resources/alluxio_lab_4.png" alt="alluxio_lab_4.png" width="400"/>
+<br/>
+<img src="../resources/alluxio_lab_5.png" alt="alluxio_lab_5.png" width="400"/>
+<br/>
+
+case 1: Both computation and storage on cloud  
+case 2: Data recorded on HDFS(local), calculation on satellite center  
+case 3: Data recorded on HDFS(local), use cloud resource to do calculation  
+
 
 # Task0: Login to the AMI instance
 
@@ -337,6 +356,12 @@ $ alluxio fs du -s -h /s3
 File Size     In Alluxio       Path
 37.36GB       0B (0%)          /s3
 ```
+
+<img src="../resources/alluxio_lab_6.png" alt="alluxio_lab_6.png" width="400"/>
+<br/>
+
+<img src="../resources/alluxio_lab_7.png" alt="alluxio_lab_7.png" width="400"/>
+<br/>
 
 ## Reference
 - The experiment information is coming from: https://gist.github.com/apc999/9c73439e66defdb09628f40bf8bdb822
