@@ -224,13 +224,16 @@ create external table store_sales
 )
 ```
 - Table store_returns
+```
 (
     ...
     sr_store_sk               int,
     sr_ticket_number          int,
     ...
 )
+```
 - Table promotion
+```
 (
     ...
     p_promo_sk                int,
@@ -245,6 +248,7 @@ create external table store_sales
     p_channel_details         string,
     ...
 )
+```
 - The query in [`with`](https://teradata.github.io/presto/docs/141t/sql/select.html) defines named relations for use within a query, it sums all sold items with certain promotion channel
 - Then next query list all result by (channel, channel-id, sum)
 - [`ROLLUP`](https://prestodb.github.io/docs/current/sql/select.html) operator generates all possible subtotals for a given set of columns.
