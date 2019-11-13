@@ -5,7 +5,7 @@
 If I want add indexes created start with `logstash-` applied specific settings, such as
 - disabling the _all fields search
 - set the default attribute to @message
-- To saving sapce and indexing time, I disallowed create index for source/source_host/source_path etc
+- To saving space and indexing time, I disallowed create index for source/source_host/source_path etc
 
 
 I could do as following  

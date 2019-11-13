@@ -35,6 +35,15 @@ print out.read()
 
 ## System
 
+```
+// start
+./elasticsearch -d
+// find pid
+ps -ef | grep elastic
+
+```
+
+
 ## DBOP
 
 - Create/Delete index

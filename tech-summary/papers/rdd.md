@@ -1,3 +1,15 @@
+- [Resilient Distributed Datasets](#resilient-distributed-datasets)
+  - [Why](#why)
+  - [Pre-solutions](#pre-solutions)
+  - [RDD](#rdd)
+    - [Interface of RDD](#interface-of-rdd)
+    - [Comments](#comments)
+    - [RDD vs DSM](#rdd-vs-dsm)
+    - [Fault handling](#fault-handling)
+      - [Recovery from faults](#recovery-from-faults)
+      - [checkpointing](#checkpointing)
+    - [Example](#example)
+
 # Resilient Distributed Datasets
 
 Notes for [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)   
@@ -38,50 +50,94 @@ Notes for [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-M
    + -still has rigidness from MR (writes to disk after map, to replicated storage after reduce, RAM)
 
 
-## Spark
 
-### RDD
-RDD means Resilient Distributed Datasets, an RDD is a collection of partitions of records.
-Two operations on RDDs:
-Transformations: compute a new RDD from existing RDDs (flatMap, reduceByKey).  This just specifies a plan. runtime is lazy, doesn't have to materialize (compute), so it doesn't
+## RDD
+RDD means Resilient Distributed Datasets, an RDD is a collection of partitions of records.  
+```
+The main challenge in designing RDDs is defining a programming interface 
+that can provide fault tolerance efficiently. 
+```
+Basically, there are two ways: replicate the data across machines(or data checkpoint) or to log updates across machines.  Both approaches are expensive for data-intensive workloads, as they require copying large amounts of data over the cluster network, whose bandwidth is far lower than that of RAM, and they incur substantial storage overhead.  **RDDs provide an interface based on coarse-grained transformations (e.g., map, filter and join) that apply the same operation to many data items**.  
+
+### Interface of RDD
+
+<img src="resources/pictures/spark_rdd_interface.png" alt="spark_rdd_interface" width="500"/>  <br/>
+
+
+ - `partitions` -- returns a list of partitions
+ - `preferredLocations(p)` -- returns the preferred locations of a partition
+   + tells you about machines where computation would be faster
+ - `dependencies`
+   + how you depend on other RDDs
+ - `iterator(p, parentIters)`
+   + ask an RDD to compute one of its partitions
+ - `partitioner`
+   + allows you to specify a partitioning function
+
+
+### Comments
+
+- Transformations & Actions  
+Two operations on RDDs:  
+Transformations: compute a new RDD from existing RDDs (flatMap, reduceByKey).  This just specifies a plan. runtime is lazy, doesn't have to materialize (compute)  
+
+<img src="resources/pictures/spark_rdd_narrow_wide_transform.png" alt="spark_rdd_narrow_wide_transform" width="500"/>  <br/>
+
+
 
 Actions: where some effect is requested: result to be stored, get specific value, etc.  Causes RDDs to materialize.
 
+- Fault tolerance vs performance    
 Spark gives user control over trade off between fault tolerance with performance  
-if user frequently perist w/REPLICATE, fast recovery, but slower execution  
+if user frequently persist w/REPLICATE, fast recovery, but slower execution  
 if infrequently, fast execution but slow recovery  
 
-
+- What partition carry metadata  
 RDD carry metadata on its partitioning, so transformations that depend on multiple RDDs know whether they need to shuffle data (wide dependency) or not (narrow)
 Allows users control over locality and reduces shuffles.
 
+- What if not enough memory  
+   + LRU (Least Recently Used) on partitions
+        * first on non-persisted
+        * then persisted (but they will be available on disk. makes sure user cannot overbook RAM)
+   + user can have control on order of eviction via "persistence priority"
+   + no reason not to discard non-persisted partitions (if they've already been used)
 
 
-#### RDD vs DSM
+
+
+### RDD vs DSM
+
+<img src="resources/pictures/spark_rdd_rdd_vs_dsm.png" alt="spark_rdd_rdd_vs_dsm" width="500"/>  <br/>
+
 
 ### Fault handling
 
+When Spark computes, by default it only generates one copy of the result, doesn't replicate. Without replication, no matter if it's put in RAM or disk, if node fails, on permanent failure, data is gone.  
+When some partition is lost and needs to be recomputed, the scheduler needs to find a way to recompute it. (a fault can be detected by using a heartbeat)  
+will need to compute all partitions it depends on, until a partition in RAM/disk, or in replicated storage.  
+if wide dependency, will need all partitions of that dependency to recompute, if narrow just one that RDD  
+  
+#### Recovery from faults
 
-Handling faults.
-    When Spark computes, by default it only generates one copy of the result, doesn't replicate. Without replication, no matter if it's put in RAM or disk, if node fails, on permanent failure, data is gone.
-    When some partition is lost and needs to be recomputed, the scheduler needs to find a way to recompute it. (a fault can be detected by using a heartbeat)
-      will need to compute all partitions it depends on, until a partition in RAM/disk, or in replicated storage.
-      if wide dependency, will need all partitions of that dependency to recompute, if narrow just one that RDD
-      
-    So two mechanisms enable recovery from faults: lineage, and policy of what partitions to persist (either to one node or replicated)
-    We talked about lineage before (Transformations)
+So two mechanisms enable recovery from faults: **lineage**, and **policy of what partitions to persist**(either to one node or replicated)  
+
+    Lineage is represented by Transformations.  
 
     The user can call persist on an RDD.
       With RELIABLE flag, will keep multiple copies (in RAM if possible, disk if RAM is full)
       With REPLICATE flag, will write to stable storage (HDFS)
       Without flags, will try to keep in RAM (will spill to disk when RAM is full)
 
-    Why implement checkpointing? (it's expensive)
-    A: Long lineage could cause large recovery time. Or when there are wide dependencies a single failure might require many partition re-computations.
+#### checkpointing
+Why implement checkpointing? (it's expensive)  
+Long lineage could cause large recovery time. Or when there are wide dependencies a single failure might require many partition re-computations.  
 
-    Checkpointing is like buying insurance: pay writing to stable storage so can recover faster in case of fault.
-    Depends on frequency of failure and on cost of slower recovery
-    An automatic checkpointing will take these into account, together with size of data (how much time it takes to write), and computation time.
+Checkpointing is like buying insurance: pay writing to stable storage so can recover faster in case of fault.  
+Depends on frequency of failure and on cost of slower recovery  
+An automatic checkpointing will take these into account, together with size of data (how much time it takes to write), and computation time.  
+So can handle a node failure by recomputing lineage up to partitions that can be read from RAM/Disk/replicated storage.  
 
-    So can handle a node failure by recomputing lineage up to partitions that can be read from RAM/Disk/replicated storage.
 
+### Example
+pagerank(todo)
