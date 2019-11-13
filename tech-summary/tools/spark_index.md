@@ -1,10 +1,11 @@
-# Spark Information Main page
+# Spark Main page
 
 ## Notes
 - [Paper of Resilient Distributed Datasets](../papers/rdd.md)
 - [Paper of SparkSQL]() todo
 - [Intro to Apache Spark By Ted Malaska](../lectures/intro_to_apache_spark_for_java_and_scala_developers.md)
 - [RDD, DataFrame, DataSet]() todo
+- [Spark Streaming]() todo
 
 ## Docs
 - [RDD Programming](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
@@ -19,7 +20,7 @@
 - [Saprk SQL map functions](https://sparkbyexamples.com/spark/spark-sql-map-functions/)
 - [Spark streaming, consume data from kafka in JSON format](https://sparkbyexamples.com/spark/spark-streaming-kafka-consumer-example-in-json-format/)
 - [Different ways to Create DataFrame in Spark](https://sparkbyexamples.com/spark/different-ways-to-create-a-spark-dataframe/)
-***
+
 
 ## Others
 - [awesome-spark/awesome-spark](https://github.com/awesome-spark/awesome-spark)
