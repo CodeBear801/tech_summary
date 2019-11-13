@@ -1,7 +1,7 @@
 # Elastic Main Page
 
 ## Notes
-- [Elastic with OSRM](./elastic/elastic.md)
+- [Elastic experience while working with OSRM](./elastic/elastic.md)
 - [Elasticsearch commands](./elastic/elasticsearch_commands.md)
 - [Elasticsearch template](./elastic/elasticsearch_template.md)
 
