@@ -73,7 +73,6 @@ Why use Kafka for streaming system
 Need both table and messaging(event).  
 
 
-<img src="resources/imgs/event_arch_jay_kreps_event_s3
-.png" alt="event_arch_jay_kreps_event_s3" width="400"/>
+<img src="resources/imgs/event_arch_jay_kreps_event_s3.png" alt="event_arch_jay_kreps_event_s3" width="400"/>
 <br/>
 
