@@ -10,9 +10,20 @@ Jay Kreps | Kafka Summit 2018 Keynote (The Death and Rebirth of the Event-Driven
 Event could capture change and **state**  
 Difference with message?  From [Difference Between Event and Message](https://bradirby.com/difference-between-events-and-messages/)
 ```
-An important difference between events and messages is that there is no expectation of further processing for an event.  After the event is published it can be ignored by all systems without any harm coming out of it.  A message, however, carries the assumption that something somewhere will process it.
+Events are lightweight in that they do not include all aggregate data – their 
+payload can either be just the ID of the aggregate that changed, or the ID and 
+just the properties that have changed so the receiver can update their cached copy.
 
-Another difference is that messages can affect 0 or more aggregates while an event reflects a change to exactly one aggregate.  The Use Case that is executed in response to a message can decide what aggregates need to be updated, possibly resulting in no changes at all.  Each aggregate that is created, however, should publish an event stating changes that were made.
+An important difference between events and messages is that there is no expectation 
+of further processing for an event.  After the event is published it can be ignored 
+by all systems without any harm coming out of it.  A message, however, carries the 
+assumption that something somewhere will process it.
+
+Another difference is that messages can affect 0 or more aggregates while an event 
+reflects a change to exactly one aggregate.  The Use Case that is executed in 
+response to a message can decide what aggregates need to be updated, possibly 
+resulting in no changes at all.  Each aggregate that is created, however, should 
+publish an event stating changes that were made.
 ```
 
 
