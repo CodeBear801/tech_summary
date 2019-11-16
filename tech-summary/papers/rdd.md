@@ -59,6 +59,16 @@ that can provide fault tolerance efficiently.
 ```
 Basically, there are two ways: replicate the data across machines(or data checkpoint) or to log updates across machines.  Both approaches are expensive for data-intensive workloads, as they require copying large amounts of data over the cluster network, whose bandwidth is far lower than that of RAM, and they incur substantial storage overhead.  **RDDs provide an interface based on coarse-grained transformations (e.g., map, filter and join) that apply the same operation to many data items**.  
 
+```
+每个RDD都包含：
+（1）一组RDD分区（partition，即数据集的原子组成部分）；
+（2）对父RDD的一组依赖，这些依赖描述了RDD的Lineage；
+（3）一个函数，即在父RDD上执行何种计算；
+（4）元数据，描述分区模式和数据存放的位置。
+例如，一个表示HDFS文件的RDD包含：各个数据块的一个分区，并知道各个数据块放在哪些节点上。
+而且这个RDD上的map操作结果也具有同样的分区，map函数是在父数据上执行的。表3总结了RDD的内部接口。
+```
+
 ### Interface of RDD
 
 <img src="resources/pictures/spark_rdd_interface.png" alt="spark_rdd_interface" width="500"/>  <br/>
