@@ -79,3 +79,7 @@ db.stats()—This works very similarly to the way it does in a standard replicas
 sh.status()—This command shows you the distributions of chunks across your entire cluster. It’s useful for checking the status of the balancer.
 ```
 
+## More info
+
+- [Mongodb sharding](https://docs.mongodb.com/manual/sharding/)
+
