@@ -1,7 +1,5 @@
 # notes about real time logs by Jay Kreps
 
-https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying
-
 ## logs
 - what is log 
 - how to use logs for data integration, real time processing, and system building.
@@ -74,4 +72,5 @@ The things a log can do:
 
 
 ## More info
+- [The Log: What every software engineer should know about real-time data's unifying abstraction](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)
 - Building an Event Streaming Platform [part1](https://www.confluent.io/blog/stream-data-platform-1/) [part2](https://www.confluent.io/blog/stream-data-platform-2/)
