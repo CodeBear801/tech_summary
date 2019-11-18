@@ -36,7 +36,7 @@ ETL = Extract, transform, load
 
 ## Logs & Real-time Stream Processing
 What is streaming processing  
-infrastructure for continuous data processing with low latency
+infrastructure for continuous data processing with low latency  
 The real driver for the processing model is the method of data collection. Data which is collected in batch is naturally processed in batch. When data is collected continuously, it is naturally processed continuously.
 
 Problem: during data processing, the input is keep on changing.  stream processing is just processing which includes a notion of time in the underlying data being processed and does not require a static snapshot of the data so it can produce output at a user-controlled frequency instead of waiting for the "end" of the data set to be reached. 
