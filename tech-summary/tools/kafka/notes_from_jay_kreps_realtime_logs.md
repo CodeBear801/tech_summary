@@ -12,8 +12,8 @@ It is an append-only, totally-ordered sequence of records ordered by time
 <img src="../resources/real_time_logs_jay_kreps_logs1.png" alt="real_time_logs_jay_kreps_logs1.png" width="400"/>
 <br/>
 
-## why log is important
-The answer is that logs have a specific purpose: they record what happened and when
+## Why log is important
+The answer is that logs have a specific purpose: they record what happened and when  
 The two problems a log solves—ordering changes and distributing data—are even more important in distributed data systems.
 
 One of the beautiful things about this approach is that the time stamps that index the log now act as the clock for the state of the replicas—you can describe each replica by a single number, the timestamp for the maximum log entry it has processed. This timestamp combined with the log uniquely captures the entire state of the replica.
@@ -30,7 +30,7 @@ Primary-Backup -> Active-Passive ->  a single master execute the transformation
 A log, after all, represents a series of decisions on the "next" value to append. 
 
 ## Data Integration
-Data integration is making all the data an organization has available in all its services and systems.
+Data integration is making all the data an organization has available in all its services and systems.  
 ETL = Extract, transform, load
 
 
