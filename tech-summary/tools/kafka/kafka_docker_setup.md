@@ -3,6 +3,8 @@
 
 ## docker-compose file
 
+kafka + zookeeper
+
 ```
 version: '2'
 services:
