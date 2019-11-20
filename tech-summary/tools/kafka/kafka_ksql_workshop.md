@@ -8,6 +8,33 @@ Apache Kafka and KSQL in Action
 <br/>
 
 
+## Take away
+- To inspect a topic contents, we could use KSQL by PRINT or using kafkacat
+- We could build a STREAM based on given TOPIC
+    + Inside STREAM, we could do operations like format conversion(from avro to csv)
+    + We could analysis(DESCRIBE), query(SELECT), filter(SELECT ... WHERE ...) STREAM
+    + [more information](https://docs.confluent.io/current/streams/introduction.html)
+- We could create a STREAM based on filtered STREAM
+    + Each processed message is written to a new Kafka topic
+    + Its a continuous query, every single source message -- **past, present and future** will be processed
+- We could use kafka-connector to load data to Kafka topic or unload data from Kafka to other places
+    + In the workshop, we use kconnect to experience CDC changes from mysql
+    + When make changes in mysql, we could use KSQL to observe the change
+    + We could also use kafka-connect to print same information to stdout
+
+<img src="../resources/kafka_ksql_workshop_demo_connect.png" alt="kafka_ksql_workshop_demo_connect.png" width="400"/>
+<br/>
+
+- When create STREAM, we could re-key topics.  The purpose is that join two table must have the same key
+- KSQL Table enables us to work with the data in the topic as key/value pairs, with a single value for each key
+- KSQL support JOIN
+  + We could populating a kafka topic with the results of a STREAM-TABLE join with **CREATE STREAM … AS**
+  + Additional filter could be applied on that STREAM
+- Aggregation by time window(WINDOW TUMBLING)
+  + We could use table to persist result.  We could persist with a CREATE TABLE, since aggregates are always a table (key + value)
+
+
+## Notes
 
 The result of topic inside ksql
 
