@@ -4,6 +4,9 @@ Apache Kafka and KSQL in Action
 
 [video](https://www.youtube.com/watch?v=Z8_O0wEIafw) [slides](https://speakerdeck.com/rmoff/javazone-workshop-apache-kafka-and-ksql-in-action-lets-build-a-streaming-data-pipeline) [code](https://github.com/confluentinc/demo-scene/tree/master/ksql-workshop) [wiki](https://github.com/confluentinc/demo-scene/blob/master/ksql-workshop/ksql-workshop.adoc)
 
+<img src="../resources/kafka_ksql_workshop_demo.png" alt="kafka_ksql_workshop_demo.png" width="400"/>
+<br/>
+
 
 
 The result of topic inside ksql
