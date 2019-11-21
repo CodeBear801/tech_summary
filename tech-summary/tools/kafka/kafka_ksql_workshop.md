@@ -30,7 +30,7 @@ Apache Kafka and KSQL in Action
 - KSQL support JOIN
   + We could populating a kafka topic with the results of a STREAM-TABLE join with **CREATE STREAM … AS**
   + Additional filter could be applied on that STREAM
-- Aggregation by time window(WINDOW TUMBLING)
+- Aggregation by time window(WINDOW TUMBLING) (todo)
   + We could use table to persist result.  We could persist with a CREATE TABLE, since aggregates are always a table (key + value)
 
 
