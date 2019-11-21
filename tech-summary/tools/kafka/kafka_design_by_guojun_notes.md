@@ -20,3 +20,30 @@ https://www.infoq.cn/article/kafka-analysis-part-8
 - **Consumer** 消息消费者，向 Kafka broker 读取消息的客户端。
 - **Consumer Group** 每个 Consumer 属于一个特定的 Consumer Group（可为每个 Consumer 指定 group name，若不指定 group name 则属于默认的 group）
 
+## Kafka 拓扑结构
+
+<img src="../resources/kafka_design_guojun_topo.png" alt="kafka_design_guojun_topo.png" width="600"/>
+<br/>
+
+## Topic & partition
+
+Topic 在逻辑上可以被认为是一个 queue，每条消费都必须指定它的 Topic，可以简单理解为必须指明把这条消息放进哪个 queue 里。为了使得 Kafka 的吞吐率可以线性提高，物理上把 Topic 分成一个或多个 Partition，每个 Partition 在物理上对应一个文件夹，该文件夹下存储这个 Partition 的所有消息和索引文件。若创建 topic1 和 topic2 两个 topic，且分别有 13 个和 19 个分区，则整个集群上会相应会生成共 32 个文件夹（本文所用集群共 8 个节点，此处 topic1 和 topic2 replication-factor 均为 1），如下图所示。
+
+<img src="../resources/kafka_design_guojun_partition.png" alt="kafka_design_guojun_partition.png" width="600"/>
+<br/>
+每个日志文件都是一个 log entrie 序列，每个 log entrie 包含一个 4 字节整型数值（值为 N+5），1 个字节的 "magic value"，4 个字节的 CRC 校验码，其后跟 N 个字节的消息体。每条消息都有一个当前 Partition 下唯一的 64 字节的 offset，它指明了这条消息的起始位置。磁盘上存储的消息格式如下：
+
+<img src="../resources/kafka_design_guojun_pysical.png" alt="kafka_design_guojun_pysical.png" width="600"/>
+<br/>
+这个 log entries 并非由一个文件构成，而是分成多个 segment，每个 segment 以该 segment 第一条消息的 offset 命名并以“.kafka”为后缀。另外会有一个索引文件，它标明了每个 segment 下包含的 log entry 的 offset 范围，如下图所示。
+kafka_design_guojun_segment
+
+因为每条消息都被 append 到该 Partition 中，属于顺序写磁盘，因此效率非常高（经验证，顺序写磁盘效率比随机写内存还要高，这是 Kafka 高吞吐率的一个很重要的保证）。
+
+<img src="../resources/kafka_design_guojun_partition_write.png" alt="kafka_design_guojun_partition_write.png" width="600"/>
+<br/>
+
+对于传统的 message queue 而言，一般会删除已经被消费的消息，而 Kafka 集群会保留所有的消息，无论其被消费与否。当然，因为磁盘限制，不可能永久保留所有数据（实际上也没必要），因此 Kafka 提供两种策略删除旧数据。一是基于时间，二是基于 Partition 文件大小
+
+
+因为 offet 由 Consumer 控制，**所以 Kafka broker 是无状态的**，它不需要标记哪些消息被哪些消费过，也不需要通过 broker 去保证同一个 Consumer Group 只有一个 Consumer 能消费某一条消息，因此也就不需要锁机制
