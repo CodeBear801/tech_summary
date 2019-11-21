@@ -150,7 +150,7 @@ Build Table to store all the songs
             .withValueSerde(valueSongSerde));
 ```
 
-```
+```java
     final SpecificAvroSerde<Song> keySongSerde = new SpecificAvroSerde<>();
     keySongSerde.configure(serdeConfig, true);
 
@@ -160,7 +160,7 @@ Build Table to store all the songs
 
 
 Record play event
-```
+```java
     final StreamsBuilder builder = new StreamsBuilder();
 
     // get a stream of play events
@@ -209,7 +209,7 @@ Record play event
 
 
 
-```
+```java
     // Compute the top five charts for each genre. The results of this computation will continuously update the state
     // store "top-five-songs-by-genre", and this state store can then be queried interactively via a REST API (cf.
     // MusicPlaysRestService) for the latest charts per genre.
