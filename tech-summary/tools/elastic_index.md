@@ -8,6 +8,6 @@
 ## Docs
 - Elasticsearch Guide [EN](https://www.elastic.co/guide/en/elasticsearch/guide/master/index.html) [CN](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)
 
-## Others
+## More Info
 - [Awesome Elasticsearch](https://github.com/dzharii/awesome-elasticsearch)
 

@@ -22,6 +22,6 @@
 - [Different ways to Create DataFrame in Spark](https://sparkbyexamples.com/spark/different-ways-to-create-a-spark-dataframe/)
 
 
-## Others
+## More Info
 - [awesome-spark/awesome-spark](https://github.com/awesome-spark/awesome-spark)
 - [Spark学习笔记--超全总结](http://chant00.com/2017/07/28/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/) 全到看不完

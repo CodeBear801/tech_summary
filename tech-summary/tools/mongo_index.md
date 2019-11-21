@@ -6,7 +6,7 @@
 - [mongodb commands](./mongodb/mongodb_commands.md)
 
 
-## Others
+## More Info
 - [Things I wish I knew about MongoDB a year ago](http://snmaynard.com/2012/10/17/things-i-wish-i-knew-about-mongodb-a-year-ago/)
 - [6 Rules of Thumb for MongoDB Schema Design: Part 1](https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1) [CN](https://www.itcodemonkey.com/article/1622.html)
 - [Five Things About Scaling MongoDB](https://emptysqua.re/blog/five-things/)
