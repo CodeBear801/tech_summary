@@ -3,14 +3,14 @@ By 郭俊
 
 ## links
 
-https://www.infoq.cn/article/kafka-analysis-part-1/
-https://www.infoq.cn/article/kafka-analysis-part-2
-https://www.infoq.cn/article/kafka-analysis-part-3
-https://www.infoq.cn/article/kafka-analysis-part-4
-https://www.infoq.cn/article/kafka-analysis-part-5
-https://www.infoq.cn/article/kafka-analysis-part-6
-https://www.infoq.cn/article/kafka-analysis-part-7
-https://www.infoq.cn/article/kafka-analysis-part-8
+https://www.infoq.cn/article/kafka-analysis-part-1  
+https://www.infoq.cn/article/kafka-analysis-part-2  
+https://www.infoq.cn/article/kafka-analysis-part-3  
+https://www.infoq.cn/article/kafka-analysis-part-4  
+https://www.infoq.cn/article/kafka-analysis-part-5  
+https://www.infoq.cn/article/kafka-analysis-part-6  
+https://www.infoq.cn/article/kafka-analysis-part-7  
+https://www.infoq.cn/article/kafka-analysis-part-8  
 
 ## Terminology
 - **Broker** Kafka 集群包含一个或多个服务器，这种服务器被称为 broker

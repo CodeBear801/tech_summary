@@ -7,8 +7,6 @@
 ## What is log
 It is an append-only, totally-ordered sequence of records ordered by time
 
-
-
 <img src="../resources/real_time_logs_jay_kreps_logs1.png" alt="real_time_logs_jay_kreps_logs1.png" width="400"/>
 <br/>
 
