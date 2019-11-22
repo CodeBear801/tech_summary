@@ -9,7 +9,7 @@ You either build a specific architecture or use streaming systems like kafka.
 Moving data from database to kafka or vice verse
 
 ## ETL process changed
-The idea of events and the idea of real-time processing. Building you a dataplatform around events
+The idea of events and the idea of real-time processing. Building you a data platform around events
 
 ## Time
 In batch processing, you know what your time window is.  
@@ -22,8 +22,8 @@ If I want to build search index for my database, at first will take a snapshot o
 
 ## Why Kafka is high performant
 - Write ahead log: how to implement : [Crashes and Recovery: Write-ahead Logging, columbia](https://www.cs.columbia.edu/~du/ds/assets/lectures/lecture15.pdf)
-
 - Events: events not message, it could rebuild state
+- There are more...
 
 
 Workshop: Real-time SQL Stream Processing at Scale with Apache Kafka and KSQL (Mac/Linux)
