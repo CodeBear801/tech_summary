@@ -4,7 +4,7 @@
 
 ### flatMap
 
-```
+```java
 KStream<Long, String> stream = ...;
 KStream<String, Integer> transformed = stream.flatMap(
      // Here, we generate two output records for each input record.
@@ -71,6 +71,7 @@ KGroupedStream<String, String> groupedStream = stream.groupBy(
   );
 
 // https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/KStream.html#groupBy-org.apache.kafka.streams.kstream.KeyValueMapper-
+// https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/KeyValueMapper.html
 // https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/Grouped.html
 
 // Group the table by a new key and key type, and also modify the value and value type.
@@ -250,7 +251,7 @@ KTable<String, String> joined = left.join(right,
 
 
 Sample code
-```
+```java
 KStream<String, Long> left = ...;
 KTable<String, Double> right = ...;
 
