@@ -90,7 +90,7 @@ Producer 发送消息到 broker 时，会根据 Paritition 机制选择将其存
 Discussion on hacker news:
 https://news.ycombinator.com/item?id=9266725
 
-
+Exactly-once Semantics are Possible: Here’s How Kafka Does it
 https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/
 
 A broker could fail
@@ -135,9 +135,7 @@ Design doc
 https://docs.google.com/document/d/11Jqy_GjUGtdXJK94XGsEIK7CP1SnQGdp2eF0wSw9ra8/edit#heading=h.xq0ee1vnpz4o
 
 Implementation:
-
 https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery+and+Transactional+Messaging
-
 https://cwiki.apache.org/confluence/display/KAFKA/KIP-129%3A+Streams+Exactly-Once+Semantics
 
 

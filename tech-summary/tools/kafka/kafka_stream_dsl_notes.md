@@ -90,6 +90,8 @@ Question: Can I understand that groupby just change key's type, but map might us
 
 ### Kafka Aggregation
 
+Question: what's the meaning of Aggregators add/sub?
+
 ### Kafka Join
 
 #### Questions
