@@ -267,7 +267,7 @@ Record play event
 ```
 The implementation of TopFiveSongs::add()
 ```java
-//[Perry] Keep a TreeSet only have top 5 element
+//[Perry] Keep a TreeSet only have top 5 elements
     public void add(final SongPlayCount songPlayCount) {
       if(currentSongs.containsKey(songPlayCount.getSongId())) {
         topFive.remove(currentSongs.remove(songPlayCount.getSongId()));
