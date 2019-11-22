@@ -1,16 +1,15 @@
 
-https://github.com/confluentinc/kafka-streams-examples#packaging-and-running
 
-https://docs.confluent.io/current/streams/kafka-streams-examples/docs/index.html
-
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExample.java
-
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExampleDriver.java
+# KafkaMusicExample
+- [KafkaMusicExample.java](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExample.java)
+- [KafkaMusicExampleDriver.java](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExampleDriver.java)
+- [Kafka Streams Demo Application](https://docs.confluent.io/current/streams/kafka-streams-examples/docs/index.html)
+- [Env Steup](https://github.com/confluentinc/kafka-streams-examples#packaging-and-running)
 
 
 ## Operations
 
-Re-use the image of cp-all-in-one
+Re-use the env setup of [cp-all-in-one](./kafka_example_confluent_cp_all_in_one.md)
 ```
 docker-compose up -d --build
 
@@ -65,7 +64,7 @@ http://localhost:7070/kafka-music/charts/top-five
 
 ## protocal
 
-playevent https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/playevent.avsc
+[playevent](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/playevent.avsc) 
 ```
 {"namespace": "io.confluent.examples.streams.avro",
  "type": "record",
@@ -77,7 +76,7 @@ playevent https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post
 }
 ```
 
-Song https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/song.avsc
+[Song](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/song.avsc) 
 ```
 {"namespace": "io.confluent.examples.streams.avro",
  "type": "record",
