@@ -91,7 +91,38 @@ docker exec -it docker-kafka_kafka1_1 kafka-console-producer.sh --topic topic001
 
 For more command and information, please go to [here](https://hub.docker.com/r/wurstmeister/kafka/)
 
+## Dev environment setup
+
+### JDK
+```
+apk add openjdk-8-jdk
+```
+
+### mvn
+- [mvn docker example](https://github.com/Zenika/alpine-maven/blob/master/jdk8/Dockerfile)
+- [mvn install instruction](https://www.baeldung.com/install-maven-on-windows-linux-mac#installing-maven-on-linux)
+- [mvn download information](https://maven.apache.org/download.cgi)
+
+```
+wget http://us.mirrors.quenda.co/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.zip
+unzip -d /usr/local/ apache-maven-3.6.2-bin.zip
+export M2_HOME=/usr/local/apache-maven-3.6.2
+export M2=$M2_HOME/bin
+export MAVEN_OPTS=-Xms256m -Xmx512m
+export PATH=$M2:$PATH
+```
+
+### gradle
+- [gradle install instruction](https://docs.gradle.org/current/userguide/installation.html)
+
+```
+wget https://downloads.gradle-dn.com/distributions/gradle-6.0-bin.zip
+mkdir /opt/gradle
+unzip -d /opt/gradle gradle-6.0.1-bin.zip
+export PATH=$PATH:/opt/gradle/gradle-6.0/bin
+```
+
 
 ## Others
-- [Fast data dev (20 +connectors)](https://github.com/lensesio/fast-data-dev/wiki)
+- [Kafka Docker Fast data dev (20 +connectors)](https://github.com/lensesio/fast-data-dev/wiki)
 
