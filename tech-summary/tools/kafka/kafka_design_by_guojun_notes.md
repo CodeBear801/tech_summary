@@ -144,3 +144,50 @@ https://cwiki.apache.org/confluence/display/KAFKA/Idempotent+Producer
 
 Transactional Messaging in Kafka
 https://cwiki.apache.org/confluence/display/KAFKA/Transactional+Messaging+in+Kafka
+
+
+
+## Kafka High Availability
+
+为了更好的做负载均衡，Kafka 尽量将所有的 Partition 均匀分配到整个集群上。一个典型的部署方式是一个 Topic 的 Partition 数量大于 Broker 的数量。同时为了提高 Kafka 的容错能力，也需要将同一个 Partition 的 Replica 尽量分散到不同的机器。实际上，如果所有的 Replica 都在同一个 Broker 上，那一旦该 Broker 宕机，该 Partition 的所有 Replica 都无法工作，也就达不到 HA 的效果。
+
+```
+kafka 分配 Replica 的算法如下：
+	1. 将所有 Broker（假设共 n 个 Broker）和待分配的 Partition 排序
+	2. 将第 i 个 Partition 分配到第（i mod n）个 Broker 上
+    3. 将第 i 个 Partition 的第 j 个 Replica 分配到第（(i + j) mode n）个 Broker 上 
+```
+
+<img src="../resources/kafka_design_guojun_kafka_partition.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
+<br/>
+
+<img src="../resources/kafka_design_guojun_kafka_partition_write.png" alt="kafka_design_guojun_kafka_partition_write.png" width="600"/>
+<br/>
+
+<img src="../resources/kafka_design_guojun_kafka_partition_write2.png" alt="kafka_design_guojun_kafka_partition_write2.png" width="600"/>
+<br/>
+<img src="../resources/kafka_design_guojun_kafka_partition_write3.png" alt="kafka_design_guojun_kafka_partition_write3.png" width="600"/>
+<br/>
+
+<img src="../resources/kafka_design_guojun_kafka_partition_write4.png" alt="kafka_design_guojun_kafka_partition_write4.png" width="600"/>
+<br/>
+
+<img src="../resources/kafka_design_guojun_kafka_partition_write5.png" alt="kafka_design_guojun_kafka_partition_write5.png" width="600"/>
+<br/>
+
+<img src="../resources/kafka_design_guojun_kafka_partition_write6.png" alt="kafka_design_guojun_kafka_partition_write6.png" width="600"/>
+<br/>
+
+## 流式计算的新贵 Kafka Stream
+
+
+<img src="../resources/kafka_design_guojun_kafka_stream.png" alt="kafka_design_guojun_kafka_stream.png" width="600"/>
+<br/>
+
+## processor topology
+基于 Kafka Stream 的流式应用的业务逻辑全部通过一个被称为 Processor Topology 的地方执行。它与 Storm 的 Topology 和 Spark 的 DAG 类似，都定义了数据在各个处理单元（在 Kafka Stream 中被称作 Processor）间的流动方式，或者说定义了数据的处理逻辑
+
+### ktable vs kstream
+KStream 是一个数据流，可以认为所有记录都通过 Insert only 的方式插入进这个数据流里。而 KTable 代表一个完整的数据集，可以理解为数据库中的表。由于每条记录都是 Key-Value 对，这里可以将 Key 理解为数据库中的 Primary Key，而 Value 可以理解为一行记录。可以认为 KTable 中的数据都是通过 Update only 的方式进入的。也就意味着，如果 KTable 对应的 Topic 中新进入的数据的 Key 已经存在，那么从 KTable 只会取出同一 Key 对应的最后一条数据，相当于新的数据更新了旧的数据。  
+
+CDC or final result  
