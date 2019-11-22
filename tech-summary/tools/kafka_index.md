@@ -15,3 +15,7 @@
 - [Confluent KSQL Workshop](./kafka/kafka_ksql_workshop.md)
 - [Confluent demo cp-all-in-one](./kafka/kafka_example_confluent_cp_all_in_one.md) If you just want to set up kafka env with zookeeper/kafka/kafka connectors, you could use this one.
 - [Confluent stream examples](./kafka/kafka_stream_example_confluent.md)
+
+## Doc
+- [Excellent!!! Kafka document](https://kafka.apache.org/documentation/#gettingStarted)
+- [KStream API from confluent](https://docs.confluent.io/current/streams/developer-guide/dsl-api.html)
