@@ -18,7 +18,7 @@ KStream<String, Integer> transformed = stream.flatMap(
     }
   );
 ```
-Question: why here is List, could it be ArrayList<KeyValue<String, Integer>>, can it also be covert to KStream<String, Integer>?
+Question: why here use LinkedList, could it be ArrayList<KeyValue<String, Integer>>, can it also be covert to KStream<String, Integer>?
 
 ### flatMapValues
 **flatMapValues is preferable to flatMap because it will not cause data re-partitioning. However, you cannot modify the key or key type like flatMap does.**
@@ -56,7 +56,7 @@ KGroupedStream<byte[], String> groupedStream = stream.groupByKey(
 Groups the records by a new key, which may be of a different key type. When grouping a table, you may also specify a new value and value type. groupBy is a shorthand for selectKey(...).groupByKey().  
 **Always causes data re-partitioning**
 
-```
+```java
 KStream<byte[], String> stream = ...;
 KTable<byte[], String> table = ...;
 // Java 8+ examples, using lambda expressions
@@ -68,7 +68,9 @@ KGroupedStream<String, String> groupedStream = stream.groupBy(
       Serdes.String())  /* value */
   );
 
-// [Perry]
+// Question
+// https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/KStream.html#groupBy-org.apache.kafka.streams.kstream.KeyValueMapper-
+// https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/Grouped.html
 
 // Group the table by a new key and key type, and also modify the value and value type.
 KGroupedTable<String, Integer> groupedTable = table.groupBy(
@@ -79,18 +81,42 @@ KGroupedTable<String, Integer> groupedTable = table.groupBy(
   );
 ```
 
-Question: Can I understand that groupby just change key's type, but map might use a different key, such as a field from value???
+<del>Question: Can I understand that groupby just change key's type, but map might use a different key, such as a field from value???
+- `groupByKey` means group the records by the existing key
+   + Grouping vs. Windowing: A related operation is windowing, which lets you control how to “sub-group” the grouped records of the same key into so-called windows for stateful operations such as windowed aggregations or windowed joins.
+- `groupBy` means group the records by a new key, which may be of a different key type.  `groupBy` is a shorthand for `selectKey(...).groupByKey()`.  It will always cause data re-partitioning
+- `map` takes one record and produces one record.  You can modify the record key and value, including their types.
+- 在传统数据库中，`Group By`就是根据"By"指定的规则对数据进行分组,所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。就是根据By的规则把数据重新组织
 
 ## [Stateful transformations](https://docs.confluent.io/current/streams/developer-guide/dsl-api.html#stateful-transformations)
 
-
+Except join, almost all other operation will return KTable.  
 
 <img src="../resources/kafka_confluent_stream_dsl_stateful_trans.png" alt="kafka_confluent_stream_dsl_stateful_trans.png" width="400"/>
 <br/>
 
-### Kafka Aggregation
+### Aggregation
+After records are grouped by key via groupByKey or groupBy – and thus represented as either a KGroupedStream or a KGroupedTable, they can be aggregated via an operation such as reduce.  Aggregating is a generalization of reduce.
 
-Question: what's the meaning of Aggregators add/sub?
+```java
+KGroupedTable<byte[], String> groupedTable = ...;
+
+// Aggregating a KGroupedTable (note how the value type changes from String to Long)
+KTable<byte[], Long> aggregatedTable = groupedTable.aggregate(
+    () -> 0L, /* initializer */
+    (aggKey, newValue, aggValue) -> aggValue + newValue.length(), /* adder */
+    (aggKey, oldValue, aggValue) -> aggValue - oldValue.length(), /* subtractor */
+    Materialized.as("aggregated-table-store") /* state store name */
+	.withValueSerde(Serdes.Long()) /* serde for aggregate value */
+```
+<del>Question: what's the meaning of Aggregators add/sub?  
+- Aggregation works like accumulator, it will iterate all events and then calculate final status based on each key.  
+- When making Table from a stream, we are will generate insert/update/delete operation based on each key, that's why both Adder/Subtractor is needed.
+
+
+### Reduce
+Rolling aggregation. Combines the values of (non-windowed) records by the grouped key. The current record value is combined with the last reduced value, and a new reduced value is returned. **The result value type cannot be changed**, unlike `aggregate`.
+
 
 ### Kafka Join
 

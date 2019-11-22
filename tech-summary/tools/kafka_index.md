@@ -19,3 +19,7 @@
 ## Doc
 - [Excellent!!! Kafka document](https://kafka.apache.org/documentation/#gettingStarted)
 - [KStream API from confluent](https://docs.confluent.io/current/streams/developer-guide/dsl-api.html)
+
+
+## Other info
+- [Why Kafka Streams didn't work for us?](https://aseigneurin.github.io/2017/08/04/why-kafka-streams-didnt-work-for-us-part-1.html)
