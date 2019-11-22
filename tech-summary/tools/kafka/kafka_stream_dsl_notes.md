@@ -284,3 +284,4 @@ KTable<Windowed<String>, Long> sessionizedPageViewCounts = pageViews
 - [Confluent Join doc](https://docs.confluent.io/current/streams/developer-guide/dsl-api.html#joining)
 - [Crossing the Streams – Joins in Apache Kafka](https://www.confluent.io/blog/crossing-streams-joins-apache-kafka/) <span>&#9733;</span><span>&#9733;</span>
 - [Join Semantics in Kafka Streams](https://dzone.com/articles/join-semantics-in-kafka-streams)
+- [SerDes](https://kafka.apache.org/10/documentation/streams/developer-guide/datatypes.html)
