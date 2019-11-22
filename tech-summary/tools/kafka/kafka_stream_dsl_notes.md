@@ -32,8 +32,10 @@ Question: what does it means?
 
 
 ### groupByKey
-groupByKey causes data re-partitioning if and only if the stream was marked for re-partitioning. groupByKey is preferable to groupBy because it re-partitions data only if the stream was already marked for re-partitioning. However, groupByKey does not allow you to modify the key or key type like groupBy does.
+groupByKey causes data re-partitioning if and only if the stream was marked for re-partitioning. groupByKey is preferable to groupBy because it re-partitions data only if the stream was already marked for re-partitioning. However, groupByKey does not allow you to modify the key or key type like groupBy does.  
+
 Question: why need groupByKey, what's the difference between 'to' or 'through'?  
+
 For the following code, I don't know the difference:
 ```java
 KStream<byte[], String> stream = ...;
@@ -68,7 +70,6 @@ KGroupedStream<String, String> groupedStream = stream.groupBy(
       Serdes.String())  /* value */
   );
 
-// Question
 // https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/KStream.html#groupBy-org.apache.kafka.streams.kstream.KeyValueMapper-
 // https://docs.confluent.io/current/streams/javadocs/org/apache/kafka/streams/kstream/Grouped.html
 
