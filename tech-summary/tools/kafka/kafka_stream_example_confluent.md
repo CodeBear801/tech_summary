@@ -90,7 +90,8 @@ http://localhost:7070/kafka-music/charts/top-five
  ]
 }
 ```
-SongPlayCount https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/songplaycount.avsc
+
+[SongPlayCount](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/songplaycount.avsc) 
 ```
 {"namespace": "io.confluent.examples.streams.avro",
  "type": "record",
@@ -101,9 +102,7 @@ SongPlayCount https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-
  ]
 }
 ```
-## Driver
-
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExampleDriver.java
+## [Driver](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExampleDriver.java)
 
 Driver will load song into array[code](https://github.com/confluentinc/kafka-streams-examples/blob/453b3ebbf64f765310943ce5b45ddf979900d3b2/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExampleDriver.java#L70), then create playevent producer and songproducer.  
 
@@ -136,7 +135,7 @@ Simulate play event and send into topic of play-events
 ```
 
 
-## KafkaMusic
+## [KafkaMusic](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/interactivequeries/kafkamusic/KafkaMusicExample.java)
 
 
 Build Table to store all the songs
@@ -202,10 +201,7 @@ Record play event
                            .withKeySerde(valueSongSerde)
                            .withValueSerde(Serdes.Long()));
 
-
-
 ```
-
 
 
 ```java
@@ -241,52 +237,19 @@ Record play event
 
 ```
 
-More example about joins
-https://dzone.com/articles/join-semantics-in-kafka-streams
-discussion about join
-https://stackoverflow.com/questions/50213221/how-to-join-two-kafka-streams-and-produce-the-result-in-a-topic-with-avro-values
 
-More information about aggregate
-https://kafka.apache.org/20/javadoc/org/apache/kafka/streams/kstream/KGroupedTable.html#aggregate-org.apache.kafka.streams.kstream.Initializer-org.apache.kafka.streams.kstream.Aggregator-org.apache.kafka.streams.kstream.Aggregator-org.apache.kafka.streams.kstream.Materialized-
-
-++++ https://docs.confluent.io/current/streams/developer-guide/dsl-api.html#aggregating
-
-https://stackoverflow.com/questions/53400832/kafka-stream-aggregation-with-custom-object-data-type
+More info
+- [how-to-join-two-kafka-streams-and-produce-the-result-in-a-topic-with-avro-values](https://stackoverflow.com/questions/50213221/how-to-join-two-kafka-streams-and-produce-the-result-in-a-topic-with-avro-values)
+- [kafka-stream-aggregation-with-custom-object-data-type](https://stackoverflow.com/questions/53400832/kafka-stream-aggregation-with-custom-object-data-type)
+- [Schema Management, how to handle multiple version](https://docs.confluent.io/current/schema-registry/index.html)
 
 
 
 
 
+# Wiki avro example
+- [Wiki feed avro file](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/wikifeed.avsc)
+- [Driver](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/WikipediaFeedAvroExampleDriver.java)
+- [AvroLambdaExample](https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/WikipediaFeedAvroLambdaExample.java)
 
-
-
-
-
-
-
-
-
-
-
-
-Wiki avro example
-
-Wiki feed
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/resources/avro/io/confluent/examples/streams/wikifeed.avsc
-
-
-Driver
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/WikipediaFeedAvroExampleDriver.java
-
-
-AvroLambdaExample
-https://github.com/confluentinc/kafka-streams-examples/blob/5.3.1-post/src/main/java/io/confluent/examples/streams/WikipediaFeedAvroLambdaExample.java
-
-
-
-
-
-
-## More info
-- [Schema Mangement, how to handle multiple version](https://docs.confluent.io/current/schema-registry/index.html)
 
