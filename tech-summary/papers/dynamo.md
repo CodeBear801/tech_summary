@@ -52,7 +52,7 @@ Distribute writing is different with DB writing, different user could go to diff
 <img src="resources/pictures/dynamo_christopher_dynamo++.png" alt="dynamo_christopher_dynamo++" width="500"/>
  <br/>
 
-Letls say you have 3 replica, rather than keep on appending, let all three stop what they are doing, have them chat and agree on next.
+Let's say you have 3 replica, rather than keep on appending, let all three stop what they are doing, have them chat and agree on next.
 Its very slow.   What you need is consensus algorithm, for distribute consensus (PAXOS, RAFT)
 
 
