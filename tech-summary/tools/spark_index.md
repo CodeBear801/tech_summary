@@ -3,7 +3,7 @@
 ## Notes
 - [Paper of Resilient Distributed Datasets](../papers/rdd.md)
 - [RDD, DataFrame, DataSet](../lectures/spark_rdd_dataframe_dataset.md) 
-- [Paper of SparkSQL]() todo
+- [Paper of SparkSQL](../papers/spark_sql.md) todo
 - [Intro to Apache Spark By Ted Malaska](../lectures/intro_to_apache_spark_for_java_and_scala_developers.md)
 - [Spark Streaming]() todo
 
