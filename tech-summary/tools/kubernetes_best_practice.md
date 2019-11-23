@@ -118,5 +118,4 @@ Kubectl rollout history deployments my-deployment
 
 
 ## Reference
-- [五大Kubernetes最佳实践](https://blog.csdn.net/M2l0ZgSsVc7r69eFdTj/article/details/79946780
-)
+- [五大Kubernetes最佳实践](https://blog.csdn.net/M2l0ZgSsVc7r69eFdTj/article/details/79946780)
