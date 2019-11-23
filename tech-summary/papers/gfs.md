@@ -19,7 +19,28 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - Large streaming reads
 - High sustained throughput favored over low latency
 
+## GFS's architecture
 
+<img src="resources/pictures/gfs_arch.png" alt="gfs_arch" width="600"/>
+ <br/>
+
+- master has single point of failure
+- master has operation log
+- For each file, master just record the mapping of trunk index <-> trunk server, let trunk server handle how the trunk be recorded
+
+
+<img src="resources/pictures/gfs_mutations.png" alt="gfs_mutations" width="600"/>
+ <br/>
+## Master's responsibility
+- Metadata store
+- Namespace management locking
+- Periodic communication with chunkservers
+- chunk creation, re-replication, rebalancing
+- GC
+
+## Fault tolerance
+- High availability (fast recovery, chunk replication, shadow master)
+- Data integrity(checksum)
 
 ## More info
 - [The Google File System](https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf)
