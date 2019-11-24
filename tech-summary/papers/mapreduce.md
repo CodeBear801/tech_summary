@@ -1,6 +1,6 @@
 
 
-## Map Reduce's architecture
+## MapReduce's architecture
 
 <img src="resources/pictures/mapreduce_arch.png" alt="mapreduce_arch" width="600"/>
  <br/>
@@ -79,7 +79,7 @@ Solution:
 
 * <span style="color:blue">What if a single worker is very slow -- a "straggler"?</span>
   - perhaps due to flakey hardware.  master starts a second copy of last few tasks.
-  
+
 * <span style="color:blue">What if a worker computes incorrect output, due to broken h/w or s/w?</span>
   - No way! MR assumes "fail-stop" CPUs and software.
 
@@ -89,7 +89,13 @@ Solution:
 
 ## Examples
 
-### Word Count
+#### Cooking
+
+<img src="resources/pictures/mapreduce_example_cooking.png" alt="mapreduce_example_cooking" width="600"/>
+ <br/>
+
+
+#### Word Count
 
 <img src="resources/pictures/mapreduce_example_word_count.png" alt="mapreduce_example_word_count" width="800"/>
  <br/>
@@ -98,7 +104,7 @@ Solution:
  <br/>
 
 
-### Reverse Index
+#### Reverse Index
 
 <img src="resources/pictures/mapreduce_example_reverse_index.png" alt="mapreduce_example_reverse_index" width="800"/>
  <br/>
@@ -107,7 +113,7 @@ Solution:
 <img src="resources/pictures/mapreduce_example_reverse_index_code.png" alt="mapreduce_example_reverse_index_code" width="600"/>
  <br/>
 
-### Real world example
+#### Real world example
 
 How might a real-world web company use MapReduce?
 
