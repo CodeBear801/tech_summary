@@ -8,3 +8,8 @@ How MapReduce scales
     - Rather than special-purpose efficient parallelizations of each application.
 
 
+How does detailed design reduce effect of slow network?
+- Map input is read from GFS replica on local disk, not over network.
+- Intermediate data goes over network just once.  Map worker writes to local disk, not GFS.
+- Intermediate data partitioned into files holding many keys. (Q: Why not stream the records to the reducer (via TCP) as they are being produced by the mappers?)
+
