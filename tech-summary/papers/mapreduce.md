@@ -51,3 +51,14 @@ master re-starts worker's unfinished tasks on other workers.
 * Reduce worker crashes in the middle of writing its output.
 GFS has atomic rename that prevents output from being visible until complete.
 so it's safe for the master to re-run the Reduce tasks somewhere else.
+
+* What if the master gives two workers the same Map() task?
+perhaps the master incorrectly thinks one worker died.  it will tell Reduce workers about only one of them.
+* What if the master gives two workers the same Reduce() task?
+they will both try to **write the same output file** on GFS!  atomic GFS rename prevents mixing; one complete file will be visible.
+* What if a single worker is very slow -- a "straggler"?
+perhaps due to flakey hardware.  master starts a second copy of last few tasks.
+* What if a worker computes incorrect output, due to broken h/w or s/w?
+No way! MR assumes "fail-stop" CPUs and software.
+* What if the master crashes?
+recover from check-point, or give up on job
