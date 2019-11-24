@@ -1,6 +1,6 @@
 
 
-## MapReduce's architecture
+## MapReduce's Architecture
 
 <img src="resources/pictures/mapreduce_arch.png" alt="mapreduce_arch" width="600"/>
  <br/>
@@ -8,20 +8,16 @@
 - Master: gives tasks to workers; remembers where intermediate output is
 - M Map tasks, R Reduce tasks
 - Input stored in GFS, be split into several parts, 3 copies of each Map input file
-- One copy of user's program into master, others are workers.  Tasks contains M map tasks and R reduce tasks.  All computers run both GFS and MR workers
-- **many more input tasks than workers**
-- Master gives a Map task to each worker, then hands out new tasks as old ones finish
-- For each worker, when he get map task, he will handle one of the split.  Map will pass key-value in data into Map() and buffer result in the memory
-- Map worker hashes intermediate keys into R partitions, on local disk(Think about What's a good data structure for implementing this?)
-- **no Reduce calls until all Maps are finished**
-- master tells Reducers to fetch intermediate data partitions from Map workers
-- Reduce workers write final output to GFS (one file per Reduce task)
-
-
-
-
-
-- Reducer will get data for its part, sort data and send (key, a list of value) into reducer function
+- One copy of user's program into master, others are workers.  Tasks contains M map tasks and R reduce tasks.  All computers run both GFS and MR workers.  **Many more input tasks than workers**
+- Map
+  - Master gives a Map task to each worker, then hands out new tasks as old ones finish
+  - For each worker, when he get map task, he will handle one of the split.  Map will pass key-value in data into Map() and buffer result in the memory
+  - Map worker hashes intermediate keys into R partitions, on local disk(Think about What's a good data structure for implementing this?)
+- Reduce
+  - **no Reduce calls until all Maps are finished**
+  - master tells Reducers to fetch intermediate data partitions from Map workers
+  - Reducer will get data for its part, sort data and send (key, a list of value) into reducer function
+  - Reduce workers write final output to GFS (one file per Reduce task)
 
 
 ## Questionnaire
