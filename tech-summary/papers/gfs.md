@@ -45,6 +45,16 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - GC
 - master keeps state in memory(64 bytes of metadata per each chunk)
 
+## Operations
+
+### Read
+
+<img src="resources/pictures/gfs_read.png" alt="gfs_read" width="600"/>
+ <br/>
+
+
+
+
 ## Fault tolerance
 - fault tolerance of data (3 copies)
 - High availability (fast recovery, chunk replication, shadow master)
