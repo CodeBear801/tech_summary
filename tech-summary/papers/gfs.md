@@ -1,3 +1,18 @@
+- [Google File System](#google-file-system)    
+    - [Challenge for distribute file system](#challenge-for-distribute-file-system)        
+        - [Local vs distribute](#local-vs-distribute)        
+        - [GFS's challenge](#gfss-challenge)        
+        - [GFS's motivation](#gfss-motivation)        
+        - [GFS's Assumption](#gfss-assumption)    
+    - [GFS's architecture](#gfss-architecture)    
+    - [Master's responsibility](#masters-responsibility)    
+    - [Operations](#operations)        
+        - [Read](#read)        
+        - [write/append](#writeappend)    
+    - [Fault tolerance](#fault-tolerance)    
+    - [Summary](#summary)    
+    - [More info](#more-info)<!-- /TOC -->
+
 # Google File System
 
 ## Challenge for distribute file system
@@ -82,12 +97,14 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - If one replica doesn't respond, client retries
     + After contacting master
 
-## Fault tolerance
+## Summary
+
+### Fault tolerance
 - fault tolerance of data (3 copies)
 - High availability (fast recovery, chunk replication, shadow master)
 - Data integrity(checksum)
 
-## Summary
+### P&C
 (based on original paper)
 Great | Less well
 ---|---
@@ -95,5 +112,5 @@ huge sequential reads and writes<br/>appends<br/>huge throughput (3 copies, stri
 
 ## More info
 - [The Google File System](https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf)
-- [Distributed computing seminar lecture 3 - distributed file systems - Aaron kimball 2007](https://www.youtube.com/watch?v=5Eib_H_zCEY&t=2394s) [slides](Distributed computing seminar   lecture 3 - distributed file systems)
+- [Distributed computing seminar lecture 3 - distributed file systems - Aaron kimball 2007](https://www.youtube.com/watch?v=5Eib_H_zCEY&t=2394s) [slides](https://www.slideshare.net/tugrulh/distributed-computing-seminar-lecture-3-distributed-file-systems)
 
