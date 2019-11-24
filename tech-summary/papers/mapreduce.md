@@ -21,3 +21,15 @@ Solution:
 - Master hands out new tasks to workers who finish previous tasks.
 - So no task is so big it dominates completion time (hopefully).
 - So faster servers do more work than slower ones, finish abt the same time.
+
+fault tolerance
+what if a server crashes during a MR job?
+
+MR re-runs just the failed Map()s and Reduce()s.
+MR requires them to be pure functions:
+  they don't keep state across calls,
+  they don't read or write files other than expected MR inputs/outputs,
+  there's no hidden communication among tasks.
+So re-execution yields the same output.
+The requirement for pure functions is a major limitation of MR compared to other parallel programming schemes.
+But it's critical to MR's simplicity.
