@@ -33,3 +33,21 @@ MR requires them to be pure functions:
 So re-execution yields the same output.
 The requirement for pure functions is a major limitation of MR compared to other parallel programming schemes.
 But it's critical to MR's simplicity.
+
+
+* Map worker crashes:
+master sees worker no longer responds to pings
+crashed worker's intermediate Map output is lost but is likely needed by every Reduce task!
+master re-runs, spreads tasks over other GFS replicas of input.
+some Reduce workers may already have read failed worker's intermediate data.
+  here we depend on functional and deterministic Map()!
+master need not re-run Map if Reduces have fetched all intermediate data
+  though then a Reduce crash would then force re-execution of failed Map
+
+* Reduce worker crashes.
+finshed tasks are OK -- stored in GFS, with replicas.
+master re-starts worker's unfinished tasks on other workers.
+
+* Reduce worker crashes in the middle of writing its output.
+GFS has atomic rename that prevents output from being visible until complete.
+so it's safe for the master to re-run the Reduce tasks somewhere else.
