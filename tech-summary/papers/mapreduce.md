@@ -1,4 +1,20 @@
 
+
+## Map Reduce's architecture
+
+<img src="resources/pictures/mapreduce_arch.png" alt="mapreduce_arch" width="600"/>
+ <br/>
+
+- User's input data be recorded in GFS, and be split into several parts
+- One copy of user's program into master, others are workers.  Tasks contains M map tasks and R reduce tasks
+- For each worker, when he get map task, he will handle one of the split.  Map will pass key-value in data into Map() and buffer result in the memory
+- Result from map will be buffered into disk, and this will consider there will be R reducers, so will distribute them into R parts
+- Reducer will get data for its part, sort data and send (key, a list of value) into reducer function
+- When map reduce finished, will aggregate all result or go to next step
+
+
+
+
 How MapReduce scales 
 - N computers gets you Nx throughput.
     - Assuming M and R are >= N (i.e., lots of input files and map output keys).
@@ -62,3 +78,47 @@ perhaps due to flakey hardware.  master starts a second copy of last few tasks.
 No way! MR assumes "fail-stop" CPUs and software.
 * What if the master crashes?
 recover from check-point, or give up on job
+
+
+## Examples
+
+### Word Count
+
+<img src="resources/pictures/mapreduce_example_word_count.png" alt="mapreduce_example_word_count" width="800"/>
+ <br/>
+
+<img src="resources/pictures/mapreduce_example_word_count_code.png" alt="mapreduce_example_reverse_index_code" width="600"/>
+ <br/>
+
+
+### Reverse Index
+
+<img src="resources/pictures/mapreduce_example_reverse_index.png" alt="mapreduce_example_reverse_index" width="800"/>
+ <br/>
+
+
+<img src="resources/pictures/mapreduce_example_reverse_index_code.png" alt="mapreduce_example_reverse_index_code" width="600"/>
+ <br/>
+
+### Real world example
+
+How might a real-world web company use MapReduce?
+  "CatBook", a new company running a social network for cats; needs to:
+  1) build a search index, so people can find other peoples' cats
+  2) analyze popularity of different cats, to decide advertising value
+  3) detect dogs and remove their profiles
+  Can use MapReduce for all these purposes!
+  - run large batch jobs over all profiles every night
+  1) build inverted index: map(profile text) -> (word, cat_id)
+                           reduce(word, list(cat_id) -> list(word, list(cat_id))
+  2) count profile visits: map(web logs) -> (cat_id, "1")
+                           reduce(cat_id, list("1")) -> list(cat_id, count)
+  3) filter profiles: map(profile image) -> img analysis -> (cat_id, "dog!")
+                      reduce(cat_id, list("dog!")) -> list(cat_id)
+
+
+
+## More info
+- [MapReduce: Simplified Data Processing on Large Clusters](https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf)
+- [MapReduce: A major step backwards](https://homes.cs.washington.edu/~billhowe/mapreduce_a_major_step_backwards.html)
+
