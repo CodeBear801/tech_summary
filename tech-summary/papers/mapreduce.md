@@ -5,12 +5,23 @@
 <img src="resources/pictures/mapreduce_arch.png" alt="mapreduce_arch" width="600"/>
  <br/>
 
-- User's input data be recorded in GFS, and be split into several parts
-- One copy of user's program into master, others are workers.  Tasks contains M map tasks and R reduce tasks
+- Master: gives tasks to workers; remembers where intermediate output is
+- M Map tasks, R Reduce tasks
+- Input stored in GFS, be split into several parts, 3 copies of each Map input file
+- One copy of user's program into master, others are workers.  Tasks contains M map tasks and R reduce tasks.  All computers run both GFS and MR workers
+- **many more input tasks than workers**
+- Master gives a Map task to each worker, then hands out new tasks as old ones finish
 - For each worker, when he get map task, he will handle one of the split.  Map will pass key-value in data into Map() and buffer result in the memory
-- Result from map will be buffered into disk, and this will consider there will be R reducers, so will distribute them into R parts
+- Map worker hashes intermediate keys into R partitions, on local disk(Think about What's a good data structure for implementing this?)
+- **no Reduce calls until all Maps are finished**
+- master tells Reducers to fetch intermediate data partitions from Map workers
+- Reduce workers write final output to GFS (one file per Reduce task)
+
+
+
+
+
 - Reducer will get data for its part, sort data and send (key, a list of value) into reducer function
-- When map reduce finished, will aggregate all result or go to next step
 
 
 ## Questionnaire
@@ -63,25 +74,32 @@ Solution:
   - master need not re-run Map if Reduces have fetched all intermediate data
       + though then a Reduce crash would then force re-execution of failed Map
 
+
 - <span style="color:blue">Reduce worker crashes.</span>
   - finished tasks are OK -- stored in GFS, with replicas.
   - master re-starts worker's unfinished tasks on other workers.
+
 
 - <span style="color:blue">Reduce worker crashes in the middle of writing its output.</span>
   - GFS has atomic rename that prevents output from being visible until complete.
   - so it's safe for the master to re-run the Reduce tasks somewhere else.
 
+
 - <span style="color:blue">What if the master gives two workers the same Map() task?</span>
   - perhaps the master incorrectly thinks one worker died.  it will tell Reduce workers about only one of them.
+
 
 - <span style="color:blue">What if the master gives two workers the same Reduce() task?</span>
   - they will both try to **write the same output file** on GFS!  atomic GFS rename prevents mixing; one complete file will be visible.
 
+
 * <span style="color:blue">What if a single worker is very slow -- a "straggler"?</span>
   - perhaps due to flakey hardware.  master starts a second copy of last few tasks.
 
+
 * <span style="color:blue">What if a worker computes incorrect output, due to broken h/w or s/w?</span>
   - No way! MR assumes "fail-stop" CPUs and software.
+
 
 * <span style="color:blue">What if the master crashes?</span>
   - recover from check-point, or give up on job
