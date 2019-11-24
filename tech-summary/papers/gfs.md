@@ -81,10 +81,11 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 <img src="resources/pictures/gfs_write.png" alt="gfs_write" width="600"/>
  <br/>
 
-- ask master where to store
+- Ask master where to store
     + if append, maybe master chooses a new set of chunk servers if crossing 64 MB
     + master responds with chunk servers and version #
     + one chunk server is primary
+    + Write data first to trunk server near user, might not to primary replica
 - Clients pushes data to replicas
     + Replicas form a chain
     + Chain respects network topology
