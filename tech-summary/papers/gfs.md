@@ -52,8 +52,35 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 <img src="resources/pictures/gfs_read.png" alt="gfs_read" width="600"/>
  <br/>
 
+- send file name and offset to master
+- master replies with set of servers that have that chunk
+   + response includes version # of chunk
+   + clients cache that information
+- ask nearest chunk server
+   + checks version #
+   + if version # is wrong, re-contact master
 
 
+### write/append
+
+<img src="resources/pictures/gfs_write.png" alt="gfs_write" width="600"/>
+ <br/>
+
+- ask master where to store
+    + if append, maybe master chooses a new set of chunk servers if crossing 64 MB
+    + master responds with chunk servers and version #
+    + one chunk server is primary
+- Clients pushes data to replicas
+    + Replicas form a chain
+    + Chain respects network topology
+    + Allows fast replication
+- Client contacts primary when data is on all chunk servers
+    + primary assigns sequence number
+    + primary applies change locally
+    + primary forwards request to replicas
+    + primary responds to client after receiving acks from all replicas
+- If one replica doesn't respond, client retries
+    + After contacting master
 
 ## Fault tolerance
 - fault tolerance of data (3 copies)
