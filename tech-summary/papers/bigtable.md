@@ -15,3 +15,5 @@
    + [Bigtable in action (Google Cloud Next '17)](https://www.youtube.com/watch?v=KaRbKdMInuc&list=PLZuzb42lP7X7LlVIPJ0iaJgd4thV3qxfL&index=13)
 - [github - spotify/simple-bigtable](https://github.com/spotify/simple-bigtable)
 - [谷歌技术"三宝"之BigTable](https://blog.csdn.net/OpenNaive/article/details/7532589)
+- [Rutgers CS 417 Distribute Systems - BigTable](https://www.cs.rutgers.edu/~pxk/417/notes/content/bigtable.html)
+
