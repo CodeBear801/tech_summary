@@ -48,9 +48,9 @@ Solution:
 - So faster servers do more work than slower ones, finish abt the same time.
 
 
-<span style="color:blue">Fault tolerance </span>
+![#1589F0](https://placehold.it/15/0000FF/000000?text=+)<span style="color:blue">Fault tolerance </span>
 
-- <span style="color:blue">what if a server crashes during a MR job?</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">what if a server crashes during a MR job?</span>
   - MR re-runs just the failed Map()s and Reduce()s.
   - MR requires them to be pure functions:
       + they don't keep state across calls,
@@ -60,7 +60,7 @@ Solution:
   - The requirement for pure functions is a major limitation of MR compared to other parallel programming schemes.  **But it's critical to MR's simplicity.**
 
 
-- <span style="color:blue">Map worker crashes</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">Map worker crashes</span>
   - master sees worker no longer responds to pings
   - crashed worker's intermediate Map output is lost but is likely needed by every Reduce task!
   - master re-runs, spreads tasks over other GFS replicas of input.
@@ -70,33 +70,33 @@ Solution:
       + though then a Reduce crash would then force re-execution of failed Map
 
 
-- <span style="color:blue">Reduce worker crashes.</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">Reduce worker crashes.</span>
   - finished tasks are OK -- stored in GFS, with replicas.
   - master re-starts worker's unfinished tasks on other workers.
 
 
-- <span style="color:blue">Reduce worker crashes in the middle of writing its output.</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">Reduce worker crashes in the middle of writing its output.</span>
   - GFS has atomic rename that prevents output from being visible until complete.
   - so it's safe for the master to re-run the Reduce tasks somewhere else.
 
 
-- <span style="color:blue">What if the master gives two workers the same Map() task?</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">What if the master gives two workers the same Map() task?</span>
   - perhaps the master incorrectly thinks one worker died.  it will tell Reduce workers about only one of them.
 
 
-- <span style="color:blue">What if the master gives two workers the same Reduce() task?</span>
+- ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">What if the master gives two workers the same Reduce() task?</span>
   - they will both try to **write the same output file** on GFS!  atomic GFS rename prevents mixing; one complete file will be visible.
 
 
-* <span style="color:blue">What if a single worker is very slow -- a "straggler"?</span>
+* ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">What if a single worker is very slow -- a "straggler"?</span>
   - perhaps due to flakey hardware.  master starts a second copy of last few tasks.
 
 
-* <span style="color:blue">What if a worker computes incorrect output, due to broken h/w or s/w?</span>
+* ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">What if a worker computes incorrect output, due to broken h/w or s/w?</span>
   - No way! MR assumes "fail-stop" CPUs and software.
 
 
-* <span style="color:blue">What if the master crashes?</span>
+* ![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">What if the master crashes?</span>
   - recover from check-point, or give up on job
 
 
