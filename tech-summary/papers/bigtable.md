@@ -1,6 +1,42 @@
 # Big table
 
+```
+A Bigtable is a sparse, distributed, persistent multidimensional sorted map.
 
+The map is indexed by a row key, column key, and a timestamp; each value in the map is an uninterpreted array of bytes.
+```
+## Background
+
+### Motivation
+
+<img src="resources/pictures/bigtable_motivation.png" alt="bigtable_motivation" width="400"/>
+<br/>
+
+
+### Why not commercial DB
+- Google's data is too large to scale
+- Cost is too high
+- Low level storage opertimization helps performance significantly
+
+### What
+<img src="resources/pictures/bigtable_what.png" alt="bigtable_what" width="400"/>
+<br/>
+
+
+### System Structure
+
+<img src="resources/pictures/bigtable_system_structure.png" alt="bigtable_system_structure" width="400"/>
+<br/>
+
+
+<img src="resources/pictures/bigtable_building_blocks.png" alt="bigtable_building_blocks" width="400"/>
+<br/>
+
+
+
+### Data model
+<img src="resources/pictures/bigtable_data_model.png" alt="bigtable_data_model" width="400"/>
+<br/>
 
 
 ## More info
