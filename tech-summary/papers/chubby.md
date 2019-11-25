@@ -92,4 +92,4 @@ coarse-grained意思是粗颗粒度的，Chubby的lock service是coarse-grained�
 ## More info
 - [The Chubby lock service for loosely-coupled distributed systems](https://ai.google/research/pubs/pub27897)
 - [Google利器之Chubby](https://blog.csdn.net/historyasamirror/article/details/3870168)
-
+- [The Chubby lock service for loosely coupled distributed systems](https://blog.acolyer.org/2015/02/13/the-chubby-lock-service-for-loosely-coupled-distributed-systems/)
