@@ -152,4 +152,4 @@ run large batch jobs over all profiles every night!!
 - [Cluster Computing and MapReduce Lecture 2 - Aaron kimball 2007](https://www.youtube.com/watch?v=-vD6PUdf3Js)   [slides](https://courses.cs.washington.edu/courses/cse490h/07sp/lecture/lec2.ppt)
 - [Higher order functions - map, fold and filter](http://www.cse.unsw.edu.au/~en1000/haskell/hof.html)
 - [MapReduce: A major step backwards](https://homes.cs.washington.edu/~billhowe/mapreduce_a_major_step_backwards.html)
-
+- [谷歌技术"三宝"之MapReduce](https://blog.csdn.net/OpenNaive/article/details/7514146)

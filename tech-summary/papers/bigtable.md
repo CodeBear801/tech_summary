@@ -82,7 +82,6 @@ For example, row for the key "aaaab" should be right next to the row with key "a
 ### Multidimensional
 
 
-
 ### Sparse
 
  A given row can have any number of columns in each column family, or none at all. The other type of sparseness is row-based gaps which merely means that there may be gaps between keys.
@@ -90,7 +89,7 @@ For example, row for the key "aaaab" should be right next to the row with key "a
 
 ## More info
 - [Bigtable: A Distributed Storage System for Structured Data](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf)
-- [BigTable: A Distributed Structured Storage System By Jeff Dean 2014](https://www.youtube.com/watch?v=2cXBNQClehA)
+- [BigTable: A Distributed Structured Storage System By Jeff Dean 2014](https://www.youtube.com/watch?v=2cXBNQClehA) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
 - [Designs, Lessons and Advice from Building Large Distributed Systems By Jeff Dean](https://www.cs.cornell.edu/projects/ladis2009/talks/dean-keynote-ladis2009.pdf) 
 - [Building Software Systems At Google and Lessons Learned By Jeff Dean 2011](https://www.youtube.com/watch?v=modXC5IWTJI)
 - [Introduction to HBase Schema Design](http://0b4af6cdc2f0c5998459-c0245c5c937c5dedcca3f1764ecc9b2f.r43.cf2.rackcdn.com/9353-login1210_khurana.pdf)
@@ -101,4 +100,4 @@ For example, row for the key "aaaab" should be right next to the row with key "a
 - [github - spotify/simple-bigtable](https://github.com/spotify/simple-bigtable)
 - [谷歌技术"三宝"之BigTable](https://blog.csdn.net/OpenNaive/article/details/7532589)
 - [Rutgers CS 417 Distribute Systems - BigTable](https://www.cs.rutgers.edu/~pxk/417/notes/content/bigtable.html)
-
+- [Bittiger Bigtable](https://posts.careerengine.us/p/5c1f17f86f311d533b55a93e)
