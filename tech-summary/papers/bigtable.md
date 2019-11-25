@@ -42,6 +42,19 @@ The map is indexed by a row key, column key, and a timestamp; each value in the 
 <img src="resources/pictures/bigtable_data_model.png" alt="bigtable_data_model" width="400"/>
 <br/>
 
+#### Table's logic view
+
+<img src="resources/pictures/bigtable_logic_view_example.png" alt="bigtable_logic_view_example" width="400"/>
+<br/>
+
+
+
+#### Logic view to physical storage
+
+<img src="resources/pictures/bigtable_logic_view_2_physical_view.png" alt="bigtable_logic_view_2_physical_view" width="600"/>
+<br/>
+
+
 ## Key words
 
 ### [map](https://en.wikipedia.org/wiki/Associative_array)
@@ -170,3 +183,4 @@ For example, row for the key "aaaab" should be right next to the row with key "a
 - [谷歌技术"三宝"之BigTable](https://blog.csdn.net/OpenNaive/article/details/7532589)
 - [Rutgers CS 417 Distribute Systems - BigTable](https://www.cs.rutgers.edu/~pxk/417/notes/content/bigtable.html)
 - [Bittiger Bigtable](https://posts.careerengine.us/p/5c1f17f86f311d533b55a93e)
+- [浅析 Bigtable 和 LevelDB 的实现](https://draveness.me/bigtable-leveldb)
