@@ -1,4 +1,16 @@
 
+- [MapReduce](#mapreduce)
+  - [MapReduce's Architecture](#mapreduces-architecture)
+  - [Questionnaire](#questionnaire)
+  - [Examples](#examples)
+      - [Cooking](#cooking)
+      - [Word Count](#word-count)
+      - [Reverse Index](#reverse-index)
+      - [Real world example](#real-world-example)
+  - [More info](#more-info)
+
+# MapReduce
+
 
 ## MapReduce's Architecture
 
