@@ -25,9 +25,13 @@ The map is indexed by a row key, column key, and a timestamp; each value in the 
 
 ### System Structure
 
-<img src="resources/pictures/bigtable_system_structure.png" alt="bigtable_system_structure" width="400"/>
+<img src="resources/pictures/bigtable_system_structure.png" alt="bigtable_system_structure" width="600"/>
 <br/>
 
+
+
+<img src="resources/pictures/bigtable_system_structure_2.png" alt="bigtable_system_structure_2" width="600"/>
+<br/>
 
 <img src="resources/pictures/bigtable_building_blocks.png" alt="bigtable_building_blocks" width="400"/>
 <br/>
@@ -80,6 +84,71 @@ For example, row for the key "aaaab" should be right next to the row with key "a
 
 
 ### Multidimensional
+- `column` could be treat as a nested structure inside `table`.
+```
+{
+  "1" : {
+    "A" : "x",
+    "B" : "z"
+  },
+  "aaaaa" : {
+    "A" : "y",
+    "B" : "w"
+  },
+  "aaaab" : {
+    "A" : "world",
+    "B" : "ocean"
+  },
+  "xyz" : {
+    "A" : "hello",
+    "B" : "there"
+  },
+  "zzzzz" : {
+    "A" : "woot",
+    "B" : "1337"
+  }
+}
+// each key points to a map with exactly two keys: "A" and "B".
+// top-level key/map pair as a "row".
+// the "A" and "B" mappings would be called "Column Families".
+```
+- A table's column families are specified when the table is created, and are difficult or impossible to modify later.  But, a column family may have any number of columns, denoted by a column "qualifier" or "label".  
+```
+{
+    "aaaaa" : {
+    "A" : {
+      "foo" : "y",
+      "bar" : "d"
+    },
+    "B" : {
+      "" : "w"
+    }
+  },
+}
+// the "A" column family has two columns: "foo" and "bar"
+```
+- When asking BigTable for data, you must provide the full column name in the form "<family>:<qualifier>".  For example, "A:foo", "A:bar".
+
+- The column families are static, the columns themselves are not.  Each row may have any number of different columns, there's no built-in way to query for a list of all columns in all rows. To get that information, you'd have to do a full table scan. 
+
+- The final dimension represented in BigTable is time.  In most cases, applications will simply ask for a given cell's data, without specifying a timestamp, BigTable will return the most recent version since it stores these in reverse chronological order.
+
+```
+{
+  // ...
+  "aaaaa" : {
+    "A" : {
+      "foo" : {
+        15 : "y",
+        4 : "m"
+      },
+      "bar" : {
+        15 : "d",
+      }
+    },
+  // ...
+}
+```
 
 
 ### Sparse
