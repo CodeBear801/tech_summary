@@ -1,17 +1,18 @@
-- [Google File System](#google-file-system)    
-    - [Challenge for distribute file system](#challenge-for-distribute-file-system)        
-        - [Local vs distribute](#local-vs-distribute)        
-        - [GFS's challenge](#gfss-challenge)        
-        - [GFS's motivation](#gfss-motivation)        
-        - [GFS's Assumption](#gfss-assumption)    
-    - [GFS's architecture](#gfss-architecture)    
-    - [Master's responsibility](#masters-responsibility)    
-    - [Operations](#operations)        
-        - [Read](#read)        
-        - [write/append](#writeappend)    
-    - [Fault tolerance](#fault-tolerance)    
-    - [Summary](#summary)    
-    - [More info](#more-info)<!-- /TOC -->
+- [Google File System](#google-file-system)
+  - [Challenge for distribute file system](#challenge-for-distribute-file-system)
+    - [Local vs distribute](#local-vs-distribute)
+    - [GFS's challenge](#gfss-challenge)
+    - [GFS's motivation](#gfss-motivation)
+    - [GFS's Assumption](#gfss-assumption)
+  - [GFS's architecture](#gfss-architecture)
+  - [Master's responsibility](#masters-responsibility)
+  - [Operations](#operations)
+    - [Read](#read)
+    - [write/append](#writeappend)
+  - [Summary](#summary)
+    - [Fault tolerance](#fault-tolerance)
+    - [P&C](#pc)
+  - [More info](#more-info)
 
 # Google File System
 
@@ -50,9 +51,9 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - shadow masters that lag a little behind master, can be promoted to master
 - For each file, master just record the mapping of trunk index <-> trunk server, let trunk server handle how the trunk be recorded
 
-<img src="resources/pictures/gfs_mutations.png" alt="gfs_mutations" width="600"/>
- <br/>
+
 ## Master's responsibility
+
 - Metadata store
 - Namespace management locking
 - Periodic communication with chunkservers
@@ -98,6 +99,10 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - If one replica doesn't respond, client retries
     + After contacting master
 
+<img src="resources/pictures/gfs_mutations.png" alt="gfs_mutations" width="600"/>
+ <br/>
+
+
 ## Summary
 
 ### Fault tolerance
@@ -107,9 +112,10 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 
 ### P&C
 (based on original paper)
+
 Great | Less well
 ---|---
-huge sequential reads and writes<br/>appends<br/>huge throughput (3 copies, striping)<br/>fault tolerance of data (3 copies) |     fault-tolerance of master<br/> small files (master a bottleneck)<br/>clients may see stale data<br/>appends maybe duplicated
+-huge sequential reads and writes<br/> -appends<br/>-huge throughput (3 copies, striping)<br/>-fault tolerance of data (3 copies) |     -fault-tolerance of master<br/> -small files (master a bottleneck)<br/>-clients may see stale data<br/>-appends maybe duplicated
 
 ## More info
 - [The Google File System](https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf)
