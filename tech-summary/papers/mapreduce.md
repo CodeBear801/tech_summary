@@ -22,7 +22,7 @@
 
 ## Questionnaire
 
-<span style="color:blue">How MapReduce scales</span> 
+<span style="color:blue;">How MapReduce scales</span> 
 
 - N computers gets you Nx throughput.
     - Assuming M and R are >= N (i.e., lots of input files and map output keys).
