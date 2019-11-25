@@ -22,7 +22,7 @@
 
 ## Questionnaire
 
-<span style="color:blue;">How MapReduce scales</span> 
+![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue;">How MapReduce scales</span> 
 
 - N computers gets you Nx throughput.
     - Assuming M and R are >= N (i.e., lots of input files and map output keys).
@@ -31,14 +31,13 @@
 - So you can get more throughput by buying more computers.
     - Rather than special-purpose efficient parallelizations of each application.
 
-
-<span style="color:blue">How does detailed design reduce effect of slow network?</span>
+![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">How does detailed design reduce effect of slow network?</span>
 
 - Map input is read from GFS replica on **local disk**, not over network.
 - Intermediate data goes over network just once.  Map worker writes to local disk, not GFS.
 - Intermediate data partitioned into files holding many keys. (Q: Why not stream the records to the reducer (via TCP) as they are being produced by the mappers?)
 
-<span style="color:blue">How do they get good load balance?</span>
+![#1589F0](https://placehold.it/15/0000FF/000000?text=+) <span style="color:blue">How do they get good load balance?</span>
 
 Critical to scaling -- bad for N-1 servers to wait for 1 to finish.  But some tasks likely take longer than others.
 [packing variable-length tasks into workers]
