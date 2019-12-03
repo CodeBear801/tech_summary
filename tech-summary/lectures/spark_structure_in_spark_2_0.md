@@ -11,11 +11,11 @@ by Michael Armbrust [video](https://www.youtube.com/watch?v=1a4pgYzeFwE&t=54s)
 
 
 - when you call rdd, it will return you an iterator
-- data itself is serializer to obejct from byte array, can't look specific column, uncompressed, etc
+- data itself is serializer to obejct from byte array, or reversely, can't look specific column, change to uncompressed, etc
 - optimization is limited
 
 ### What Structure
-Define common pattern of the data analysis, let you describe your computation in that way, like join, select, etc.
+Define **common pattern** of the data analysis, let you describe your computation in that way, like join, select, etc.
 
 ### Why Structure
 
@@ -59,14 +59,11 @@ Scala's type safe class or Java's javabins
 <br/>
 <br/>
 <img src="resources/imgs/spark_structure_spark_2_0_columns4.png" alt="spark_structure_spark_2_0_columns4" width="400"/>
-<br/>
-<br/>
-
 
 - Hash partition the data over cluster using a shuffle
 - Make sure both side have a hash table
-- Merge sort will result nlogn
-- Spark take a giant dataset and sort it, if the column is the same they will be sort to the same place
+- Merge sort will result in the complexity of nlogn
+- Spark take a giant dataset and sort it, if the column is the same they will be sort to the **same place**
 
 
 
@@ -82,7 +79,7 @@ Scala's type safe class or Java's javabins
 <br/>
 
 
-Spark knows where the data is and he will try to jump to the location when generating low level code, no need to construct entire object
+**Spark knows where the data is and he will try to jump to the location when generating low level code, no need to construct entire object**
 
 ## Structured streaming
 
