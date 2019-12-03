@@ -1,3 +1,14 @@
+- [Structuring Apache Spark 2.0: SQL, DataFrames, Datasets And Streaming](#structuring-apache-spark-20-sql-dataframes-datasets-and-streaming)
+  - [Why not RDD](#why-not-rdd)
+    - [What is a RDD](#what-is-a-rdd)
+    - [What Structure](#what-structure)
+    - [Why Structure](#why-structure)
+    - [DataSet](#dataset)
+    - [DataFrame](#dataframe)
+  - [Structured Spark Internal](#structured-spark-internal)
+  - [Data model](#data-model)
+  - [Structured streaming](#structured-streaming)
+
 # Structuring Apache Spark 2.0: SQL, DataFrames, Datasets And Streaming
 by Michael Armbrust [video](https://www.youtube.com/watch?v=1a4pgYzeFwE&t=54s)
 
