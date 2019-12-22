@@ -45,7 +45,7 @@ do{
 <img src="../resources/dijkstra_bidir_proof.png" alt="dijkstra_bidir_proof" width="400"/>
 <br/>
 
-## A*
+## A Star
 
 - Goal directed, add heuristic, make the ball become ellipse
 
@@ -78,4 +78,17 @@ This could prove in ideal situation, why A* works.
 Let's assume in all vertex you record shortest path to t, so node on shortest path be pops because:  
 
 <img src="../resources/astar_fomular_2.png" alt="astar_formular_2" width="400"/>
+<br/>
+
+
+## Bidirectional A Star
+
+- Make forward search and backward search consistent
+
+<img src="../resources/astar_alg_2.png" alt="astar_alg_2" width="600"/>
+<br/>
+
+- Stop condition
+
+<img src="../resources/astar_alg_stop.png" alt="astar_alg_stop" width="600"/>
 <br/>
