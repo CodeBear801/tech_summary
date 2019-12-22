@@ -111,19 +111,21 @@ Bellman Ford有这几个假设
 <img src="../resources/book_acm_1.png" alt="book_acm_1" width="600"/>
 <br/>
 
-
-
-
 <img src="../resources/book_acm_2.png" alt="book_acm_2" width="600"/>
 <br/>
-
 
 <img src="../resources/book_acm_3.png" alt="book_acm_3" width="600"/>
 <br/>
 
-
 <<算法导论>>
-
 
 <img src="../resources/book_ita_3.png" alt="book_ita_3" width="400"/>
 <br/>
+
+
+## Fibonacci heap 
+
+-  Why Fibonacci heap 
+https://stackoverflow.com/questions/14252582/how-can-i-use-binary-heap-in-the-dijkstra-algorithm  
+Heap data-structures have no way of getting at any particular node that is not the minimum or the last node!  
+For specific node in heap, we might find a better path to him with lower cost
