@@ -10,7 +10,7 @@
   - [Structured streaming](#structured-streaming)
 
 # Structuring Apache Spark 2.0: SQL, DataFrames, Datasets And Streaming
-by Michael Armbrust [video](https://www.youtube.com/watch?v=1a4pgYzeFwE&t=54s)
+by Michael Armbrust [video](https://www.youtube.com/watch?v=1a4pgYzeFwE&t=54s) 2016
 
 ## Why not RDD
 
@@ -77,18 +77,15 @@ Scala's type safe class or Java's javabins
 - Spark take a giant dataset and sort it, if the column is the same they will be sort to the **same place**
 
 
-
 ## Data model
 <img src="resources/imgs/spark_structure_spark_2_0_data_model.png" alt="spark_structure_spark_2_0_data_model" width="400"/>
 <br/>
-
 
 <img src="resources/imgs/spark_structure_spark_2_0_data_model2.png" alt="spark_structure_spark_2_0_data_model2" width="400"/>
 <br/>
 
 <img src="resources/imgs/spark_structure_spark_2_0_data_model3.png" alt="spark_structure_spark_2_0_data_model3" width="400"/>
 <br/>
-
 
 **Spark knows where the data is and he will try to jump to the location when generating low level code, no need to construct entire object**
 
