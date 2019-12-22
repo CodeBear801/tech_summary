@@ -30,3 +30,17 @@ do{
 } while(Stop())
 ```
 
+
+## Bidirectional Dijkstra
+- Grow a ball around end(s and t) until they meet
+
+- Unlike uni-direction dijkstra, first meet could not guarantee best solution:
+
+
+<img src="../resources/dijkstra_bidir_stop.png" alt="dijkstra_bidir_stop" width="400"/>
+<br/>
+
+- Proof
+
+<img src="../resources/dijkstra_bidir_proof.png" alt="dijkstra_bidir_proof" width="400"/>
+<br/>
