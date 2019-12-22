@@ -44,3 +44,38 @@ do{
 
 <img src="../resources/dijkstra_bidir_proof.png" alt="dijkstra_bidir_proof" width="400"/>
 <br/>
+
+## A*
+
+- Goal directed, add heuristic, make the ball become ellipse
+
+- Algorithm detail
+
+<img src="../resources/astar_alg_1.png" alt="astar_alg_1" width="400"/>
+<br/>
+
+- Why is A* equivalent to Dijkstra on the modified graph?
+
+<img src="../resources/astar_why_1.png" alt="astar_why_1" width="400"/>
+<br/>
+
+
+- Why is π(v) a lower bound on dist(v, t) when π is feasible and π(t)=0?
+
+<img src="../resources/astar_why_2.png" alt="astar_why_2" width="400"/>
+<br/>
+
+
+- How to make sure l' is > 0
+Triangle inequality ensures 
+
+<img src="../resources/astar_fomular_1.png" alt="astar_formular_1" width="400"/>
+<br/>
+
+- What's the meaning of Dijkstra's algorithm only explore the shortest path?
+In extreme case, only edges on shortest path would pop-out.  
+This could prove in ideal situation, why A* works.  
+Let's assume in all vertex you record shortest path to t, so node on shortest path be pops because:  
+
+<img src="../resources/astar_fomular_2.png" alt="astar_formular_2" width="400"/>
+<br/>
