@@ -92,3 +92,38 @@ Let's assume in all vertex you record shortest path to t, so node on shortest pa
 
 <img src="../resources/astar_alg_stop.png" alt="astar_alg_stop" width="600"/>
 <br/>
+
+
+## Bellman Ford
+
+ 
+<img src="../resources/bellman_ford_1.png" alt="bellman_ford_1" width="600"/>
+<br/>
+
+如果不是从起点开始 开始的loop是不是就浪费了?
+
+Bellman Ford有这几个假设
+1. 从起点到任何一个点的最短距离，顶多会经过n-1个端点(无环)  
+2.相当于从起点一层一层往外推，每次更新一层的cost  
+
+<<挑战程序竞赛>>
+
+<img src="../resources/book_acm_1.png" alt="book_acm_1" width="600"/>
+<br/>
+
+
+
+
+<img src="../resources/book_acm_2.png" alt="book_acm_2" width="600"/>
+<br/>
+
+
+<img src="../resources/book_acm_3.png" alt="book_acm_3" width="600"/>
+<br/>
+
+
+<<算法导论>>
+
+
+<img src="../resources/book_ita_3.png" alt="book_ita_3" width="400"/>
+<br/>
