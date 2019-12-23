@@ -29,12 +29,31 @@ even further away: mainly orange(motorway/highway) roads
 <img src="../resources/ch_hierarchical_approach_ch.png" alt="ch_hierarchical_approach_ch.png" width="400"/>
 <br/>
 
-## How to contraction
+## How to contract
+
+### Basic
+
 
 <img src="../resources/ch_basic_idea.png" alt="ch_basic_idea.png" width="600"/>
+<br/>
+
+### 
+
+
+### EDS5
+
+
+<img src="../resources/ch_eds5.png" alt="ch_eds5.png" width="600"/>
+<br/>
+
+### N5
+
+
+
+<img src="../resources/ch_n5.png" alt="ch_n5.png" width="600"/>
 <br/>
 
 
 ## More info
 - [Contraction Hierarchies briefly explained](../resources/Contraction&#32;Hierarchies&#32;briefly&#32;explained.pdf)
-
+- [Adaptive Routing on contracted graphs](https://www.youtube.com/watch?v=O74F-hpaKWM)
