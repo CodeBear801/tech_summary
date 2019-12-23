@@ -40,12 +40,17 @@ do{
 <img src="../resources/dijkstra_bidir_stop.png" alt="dijkstra_bidir_stop" width="400"/>
 <br/>
 
+another example  
+
+<img src="../resources/dijkstra_bidir_first_meet.png" alt="dijkstra_bidir_first_meet" width="400"/>
+<br/>
+
 - Proof
 
 <img src="../resources/dijkstra_bidir_proof.png" alt="dijkstra_bidir_proof" width="400"/>
 <br/>
 
-## A Star
+## AStar
 
 - Goal directed, add heuristic, make the ball become ellipse
 
@@ -81,7 +86,7 @@ Let's assume in all vertex you record shortest path to t, so node on shortest pa
 <br/>
 
 
-## Bidirectional A Star
+## Bidirectional AStar
 
 - Make forward search and backward search consistent
 
