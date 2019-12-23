@@ -65,3 +65,4 @@ Could get result in one dijkstra on reverse map
 ## More info
 - [Landmarks - Algorithms on Graphs - University of California San Diego](https://www.coursera.org/lecture/algorithms-on-graphs/landmarks-optional-h3uOb)
 - [Landmark selection - On Preprocessing the ALT-Algorithm - Fabian Fuchs from KIT](http://www.fabianfuchs.com/fabianfuchs_ALT.pdf)
+- [Graphhopper - Now flexible routing is at least 15 times faster](https://www.graphhopper.com/blog/2017/08/14/flexible-routing-15-times-faster/)
