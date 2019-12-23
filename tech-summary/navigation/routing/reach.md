@@ -32,6 +32,10 @@ Make use of reverse-reach value during bidirectional search.
 <img src="../resources/reach_prune_2.png" alt="reach_prune_2" width="400"/>
 <br/>
 
+## Computing Reach Value
 
+Compute every s-t path is not practical.
 
+<img src="../resources/reach_compute_reach_value.png" alt="reach_compute_reach_value" width="400"/>
+<br/>
 
