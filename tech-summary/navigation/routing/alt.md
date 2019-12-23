@@ -48,4 +48,5 @@ Could get result in one dijkstra on reverse map
 
 
 
-
+## More info
+- [Landmarks - Algorithms on Graphs - University of California San Diego](https://www.coursera.org/lecture/algorithms-on-graphs/landmarks-optional-h3uOb)
