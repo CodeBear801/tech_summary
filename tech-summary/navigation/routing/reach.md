@@ -17,5 +17,21 @@ Vertices on local roads have low reach
 Reach is used to prune the search during an s-t query.  During scanning an edge (v, w)  
 If `reach(w) < min{d(s, v) + l(v, w), LB(w, t)}`, then w can be pruned  
 
+<img src="../resources/reach_prune_1.png" alt="reach_prune_1" width="400"/>
+<br/>
+
+## How to obtain lower bounds
+
+### Explicitly
+Euclidean distance  
+Landmarks  
+
+### Implicitly
+Make use of reverse-reach value during bidirectional search.
+
+<img src="../resources/reach_prune_2.png" alt="reach_prune_2" width="400"/>
+<br/>
+
+
 
 
