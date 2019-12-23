@@ -26,7 +26,7 @@ h(u) = |dist(l, u) - dist(l, t)| <= dist (u,t)
 <img src="../resources/alt_multiple_landmarks.png" alt="alt_multiple_landmarks" width="400"/>
 <br/>
 
-- How to select landmarks
+- What are good landmarks
 A good landmark appears “before” v or “after” w.
 
 <img src="../resources/alt_landmark_selection_1.png" alt="alt_landmark_selection_1" width="400"/>
@@ -35,6 +35,7 @@ A good landmark appears “before” v or “after” w.
 <img src="../resources/alt_landmark_selection_2.png" alt="alt_landmark_selection_2" width="200"/>
 <br/>
 
+- How to select landmarks
 
 
 - How to compute distance from all vertex to specific landmark
