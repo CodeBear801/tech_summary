@@ -31,13 +31,33 @@ even further away: mainly orange(motorway/highway) roads
 
 ## How to contract
 
-### Basic
-
-
 <img src="../resources/ch_basic_idea.png" alt="ch_basic_idea.png" width="600"/>
 <br/>
 
-### 
+## Node Ordering
+
+Node ordering is very important for CH's performance.  
+
+Bad case:  
+<img src="../resources/ch_bad_case.png" alt="ch_bad_case.png" width="400"/>
+<br/>
+
+Maintain the nodes in a priority queue, in the order of how attractive it is to contract the respective node next  
+The less shortcuts we have to add, the better  
+
+## ED
+
+<img src="../resources/ch_ed.png" alt="ch_ed.png" width="400"/>
+<br/>
+
+
+
+### Spatial diversity heuristic
+For each node maintain a count of the number of neig y hbours that have already been contracted, and add this to the ED.
+**The more neighbours have already been contracted, the later this node will be contracted**
+
+<img src="../resources/ch_spatial_diversity.png" alt="ch_spatial_diversity.png" width="400"/>
+<br/>
 
 
 ### EDS5
@@ -47,8 +67,6 @@ even further away: mainly orange(motorway/highway) roads
 <br/>
 
 ### N5
-
-
 
 <img src="../resources/ch_n5.png" alt="ch_n5.png" width="600"/>
 <br/>
