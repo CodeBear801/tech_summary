@@ -50,7 +50,8 @@ The less shortcuts we have to add, the better
 <img src="../resources/ch_ed.png" alt="ch_ed.png" width="400"/>
 <br/>
 
-
+<img src="../resources/ch_ed2.png" alt="ch_ed2.png" width="400"/>
+<br/>
 
 ### Spatial diversity heuristic
 For each node maintain a count of the number of neig y hbours that have already been contracted, and add this to the ED.
@@ -73,5 +74,6 @@ For each node maintain a count of the number of neig y hbours that have already 
 
 
 ## More info
+- [Contraction Hierarchies: Faster and Simpler Hierarchical Routing in Road Networks](http://algo2.iti.kit.edu/schultes/hwy/contract.pdf)
 - [Contraction Hierarchies briefly explained](../resources/Contraction&#32;Hierarchies&#32;briefly&#32;explained.pdf)
 - [Adaptive Routing on contracted graphs](https://www.youtube.com/watch?v=O74F-hpaKWM)
