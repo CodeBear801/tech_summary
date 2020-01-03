@@ -77,3 +77,4 @@ For each node maintain a count of the number of neig y hbours that have already 
 - [Contraction Hierarchies: Faster and Simpler Hierarchical Routing in Road Networks](http://algo2.iti.kit.edu/schultes/hwy/contract.pdf)
 - [Contraction Hierarchies briefly explained](../resources/Contraction&#32;Hierarchies&#32;briefly&#32;explained.pdf)
 - [Adaptive Routing on contracted graphs](https://www.youtube.com/watch?v=O74F-hpaKWM)
+- [Contraction Hierarchies animation](https://www.mjt.me.uk/posts/contraction-hierarchies/)
