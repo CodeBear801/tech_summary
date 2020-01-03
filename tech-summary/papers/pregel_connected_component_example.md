@@ -2,10 +2,10 @@
 
 ## Problem description
 
-- Vertexes are recorded in different machine, they have global unique ID
+- Vertexes are recorded in different machine, they have global unique ID be assigned
 - Directed graph
 - Find connected components, use the smallest vertex id for component ID
-  - There are two connected components, for lower one every vertex will record `1` and for upper one every vertex will record `5`
+  - There are two connected components in this example(picture below), for lower component every vertex will record `1` and for upper one every vertex will record `5`
 
 ### Step 1
 
@@ -29,7 +29,7 @@
 <img src="resources/pictures/pregel_calc_connected_components_2_1.png" alt="pregel_calc_connected_components_2_1" width="500"/>  <br/>
 
 
-- Messages has been delivered, all Vertex record min(node id sanded to him)
+- Messages has been delivered, all Vertex record min(node id send to him)
    - Like `6` will receive value from 5 which is smaller, so he will record `5`  
 
 <img src="resources/pictures/pregel_calc_connected_components_2_2.png" alt="pregel_calc_connected_components_2_2" width="500"/>  <br/>
@@ -37,7 +37,7 @@
 
 
 - Send message along side edge and against edge
-   - Why along side the edge: give vertex chance to update smallest vertex id found in this round.  Like `6`, he changed his value to a smaller value, so he need send out `5`
+   - Why along side the edge: give vertex chance to update smallest vertex id found in this round.  Like `6`, he changed his value to a smaller value, so he need send out value `5` to `7`
    - Why against: Take `2`->`1` as an example.  At first `1` don't know there is `2` until 2 send message to him.  Because `2` has bigger number compare with `1`, so `1` will send message against edge back to `2`
 
 ### Step 3
