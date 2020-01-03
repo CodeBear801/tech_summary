@@ -60,3 +60,7 @@
 
 
 - Stops when everyone is inactive.
+
+
+## More info
+-  [Large-scale graphs with Google(TM) Pregel by MICHAEL HACKSTEIN at Big Data Spain 2014](https://www.youtube.com/watch?v=yX_zJyNbpac)
