@@ -9,8 +9,10 @@ Reach is a **pruning strategy**.  Reach value could help to filter un-reasonable
 
 ## Why Reach
 
-Vertices on highways have high reach  
-Vertices on local roads have low reach  
+Vertices on highways have high reach.    
+Vertices on local roads have low reach.  
+Let's assume we calculate all shortest path in the graph between each vertices pair.  For important nodes, you could image nodes on highway/national roads, there will be more shortest route pass it, which result bigger value compare to nodes which are on local roads.  
+
 
 ## How Reach works
 
