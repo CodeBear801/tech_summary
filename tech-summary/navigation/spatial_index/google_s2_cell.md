@@ -63,7 +63,9 @@ z = r * sin θ
 [Comments from s2cell_hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
 
 ```
-(x, y, z)\ Spherical point: The final S2Point is obtained by projecting the (face, u, v) coordinates onto the unit sphere. Cells in (x,y,z)-coordinates are quadrilaterals bounded by four spherical geodesic edges.
+(x, y, z)\ Spherical point: The final S2Point is obtained by projecting the 
+(face, u, v) coordinates onto the unit sphere. Cells in (x,y,z)-coordinates 
+are quadrilaterals bounded by four spherical geodesic edges.
 ```
 
 
@@ -92,7 +94,13 @@ func xyzToFaceUV(r r3.Vector) (f int, u, v float64) {
 [Comments from s2cell_hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
 
 ```
-(face, u, v)\ Cube-space coordinates: To make the cells at each level more uniform in size after they are projected onto the sphere, we apply a nonlinear transformation of the form u=f(s), v=f(t) before projecting points onto the sphere. This function also scales the (u,v)-coordinates so that each face covers the biunit square [-1,1]×[-1,1]. Cells in (u,v)-coordinates are rectangular, and are not necessarily subdivided around their center point (because of the nonlinear transformation “f”).
+(face, u, v)\ Cube-space coordinates: To make the cells at each level more 
+uniform in size after they are projected onto the sphere, we apply a nonlinear 
+transformation of the form u=f(s), v=f(t) before projecting points onto the 
+sphere. This function also scales the (u,v)-coordinates so that each face 
+covers the biunit square [-1,1]×[-1,1]. Cells in (u,v)-coordinates are 
+rectangular, and are not necessarily subdivided around their center point 
+(because of the nonlinear transformation “f”).
 ```
 
 ## Step 3: Non-linear transform (face, u, v) -> (face, s, t)
@@ -164,7 +172,11 @@ func uvToST(u float64) float64 {
 [Comments from s2cell_hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
 
 ```
-(face, s, t)\ Cell-space coordinates: “s” and “t” are real numbers in the range [0,1] that identify a point on the given face. For example, the point (s, t) = (0.5, 0.5) corresponds to the center of the cell at level 0. Cells in (s, t)-coordinates are perfectly square and subdivided around their center point, just like the Hilbert curve construction.
+(face, s, t)\ Cell-space coordinates: “s” and “t” are real numbers in the range
+ [0,1] that identify a point on the given face. For example, the point 
+ (s, t) = (0.5, 0.5) corresponds to the center of the cell at level 0. 
+ Cells in (s, t)-coordinates are perfectly square and subdivided around 
+ their center point, just like the Hilbert curve construction.
 ```
 **u，v的值域是`[-1,1]`，变换以后，是s，t的值域是`[0,1]`。**
 
@@ -201,14 +213,21 @@ func clampInt(x, min, max int) int {
 
 [Comments from s2cell_hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
 ```
-(face, i, j)\ Leaf-cell coordinates: The leaf cells are the subsquares that result after 30 levels of Hilbert curve subdivision, consisting of a 230 × 230 array on each face. “i” and “j” are integers in the range [0, 230-1] that identify a particular leaf cell. The (i, j) coordinate system is right-handed on every face, and the faces are oriented such that Hilbert curves connect continuously from one face to the next.
+(face, i, j)\ Leaf-cell coordinates: The leaf cells are the subsquares that 
+result after 30 levels of Hilbert curve subdivision, consisting of a 230 × 230 
+array on each face. “i” and “j” are integers in the range [0, 230-1] that 
+identify a particular leaf cell. The (i, j) coordinate system is right-handed 
+on every face, and the faces are oriented such that Hilbert curves connect 
+continuously from one face to the next.
 
 ```
 
 ## Step 5: Generate Cell id
 [Comments from s2cell_hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
 ```
-Cell id: A 64-bit encoding of a face and a Hilbert curve parameter on that face, as discussed above. The Hilbert curve parameter implicitly encodes both the position of a cell and its subdivision level.
+Cell id: A 64-bit encoding of a face and a Hilbert curve parameter on that face, 
+as discussed above. The Hilbert curve parameter implicitly encodes both the 
+position of a cell and its subdivision level.
 ```
 <img src="../resources/google_s2_cellid_step5_1.png" alt="google_s2_cellid_step5_1" width="400"/>
 
