@@ -1,3 +1,12 @@
+- [Google S2 Cell](#google-s2-cell)
+  - [Step 1: p=(lat, lon) -> (x, y, z)](#step-1-plat-lon---x-y-z)
+  - [Step 2: (x, y, z) -> (face, u, v)](#step-2-x-y-z---face-u-v)
+  - [Step 3: Non-linear transform (face, u, v) -> (face, s, t)](#step-3-non-linear-transform-face-u-v---face-s-t)
+    - [Problem](#problem)
+    - [Solutions](#solutions)
+  - [Step 4: (face, s, t) -> (face, i, j)](#step-4-face-s-t---face-i-j)
+  - [Step 5: Generate Cell id](#step-5-generate-cell-id)
+
 # Google S2 Cell
 
 Give a `(lat, lon)`, how to find cellid for it.  
@@ -96,7 +105,8 @@ func xyzToFaceUV(r r3.Vector) (f int, u, v float64) {
 
 投影比例不同的问题
 
-google_s2_cellid_step3_projection_Issue
+<img src="../resources/google_s2_cellid_step3_projection_Issue.png" alt="google_s2_cellid_step3_projection_Issue" width="400"/>
+
 
 在两级的投影比在赤道区域要大.  需要一个转换将上面长的拉短、将下面短的拉长，尽量让区间变相同。
 Similar issue also exists in mercator projection, you could find this interesting article from CNN: [What's the real size of Africa? How Western states used maps to downplay size of continent](https://www.cnn.com/2016/08/18/africa/real-size-of-africa/index.html)
@@ -208,7 +218,7 @@ Cell id: A 64-bit encoding of a face and a Hilbert curve parameter on that face,
 
 You could think the problem as, for given `(i, j)`, how could you find corresponding s2 cell.  
 
-There are only three part of code matters from [cellid.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.g0)
+Code from [cellid.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go)
 
 1. Definition
 
