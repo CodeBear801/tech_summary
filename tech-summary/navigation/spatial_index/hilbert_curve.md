@@ -48,12 +48,9 @@ n dimension
 
 ### Stable result
 
-
-
 <img src="../resources/serpentine_shape.gif" width="600" height="200" />
 
 <img src="../resources/hilbert_curve_stable_result.gif" width="600" height="200" />
-
 
 ### Better locality
 
