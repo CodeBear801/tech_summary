@@ -51,6 +51,8 @@ Fill world with Hilbert curve in middle levels.
 
 <img src="../resources/spatial_index_s2_world_hilbert_curve.png" alt="spatial_index_s2_world_hilbert_curve" width="400"/>
 
+<img src="../resources/spatial_index_s2_simple_hilbert_curve.png" alt="spatial_index_s2_simple_hilbert_curve" width="400"/>
+
 
 ## Deep dive
 
