@@ -1,11 +1,14 @@
 - [Google S2 Cell](#google-s2-cell)
-  - [Step 1: p=(lat, lon) -> (x, y, z)](#step-1-plat-lon---x-y-z)
-  - [Step 2: (x, y, z) -> (face, u, v)](#step-2-x-y-z---face-u-v)
-  - [Step 3: Non-linear transform (face, u, v) -> (face, s, t)](#step-3-non-linear-transform-face-u-v---face-s-t)
-    - [Problem](#problem)
-    - [Solutions](#solutions)
-  - [Step 4: (face, s, t) -> (face, i, j)](#step-4-face-s-t---face-i-j)
-  - [Step 5: Generate Cell id](#step-5-generate-cell-id)
+	- [Step 1: p=(lat, lon) -> (x, y, z)](#step-1-plat-lon---x-y-z)
+	- [Step 2: (x, y, z) -> (face, u, v)](#step-2-x-y-z---face-u-v)
+	- [Step 3: Non-linear transform (face, u, v) -> (face, s, t)](#step-3-non-linear-transform-face-u-v---face-s-t)
+		- [Problem](#problem)
+		- [Solutions](#solutions)
+	- [Step 4: (face, s, t) -> (face, i, j)](#step-4-face-s-t---face-i-j)
+	- [Step 5: Generate Cell id](#step-5-generate-cell-id)
+		- [Part1: Definition](#part1-definition)
+		- [Part2: Init](#part2-init)
+		- [Part3: Query](#part3-query)
 
 # Google S2 Cell
 
@@ -239,7 +242,7 @@ You could think the problem as, for given `(i, j)`, how could you find correspon
 
 Code from [cellid.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go)
 
-1. Definition
+### Part1: Definition
 
 ```go
 // Constants related to the bit mangling in the Cell ID.
@@ -282,13 +285,14 @@ var (
 	lookupPos        [1 << (2*lookupBits + 2)]int
 )
 ```
+- 
 
 - At `order 2`, Hilbert curve has four kind of shape
 
-pic
+<img src="../resources/google_s2_cellid_impl_order2.png" alt="google_s2_cellid_impl_order2" width="600"/>
 
 - At `order 2`, the value of i's range is [0,1], the value of j's range is [0,1].  Both i, j just need 1 bit to represent.  We will use i as high-order bit and j as low-order bit to generate a value with 2 bits, like `ij`
-   + `ij`'s combination is 00, 01, 10, 11
+   + `ij`'s combination is `00, 01, 10, 11`, in binary, its `0, 1, 2, 3`
    + For `canonical order`, follow the sequence of curve, the value of pos is  `0, 1, 3, 2`
    + For `axes swapped`, follow the sequence of curve, the value of pos is  `0, 3, 1, 2`
    + For `canonical order`, follow the sequence of curve, the value of pos is  `2, 3, 1, 0`
@@ -296,16 +300,29 @@ pic
    + Thats how `ijToPos` is defined for
 
 
-pic
+
+<img src="../resources/google_s2_cellid_impl_order2_ij2pos.png" alt="google_s2_cellid_impl_order2_ij2pos" width="600"/>
 
 - `posToIJ` is the reverse of `ijToPos`.  For each shape, each position, what is related `ij`.
 
+```go
+	posToIJ = [4][4]int{
+		{0, 1, 3, 2}, // canonical order:    (0,0), (0,1), (1,1), (1,0)
+		{0, 2, 3, 1}, // axes swapped:       (0,0), (1,0), (1,1), (0,1)
+		{3, 2, 0, 1}, // bits inverted:      (1,1), (1,0), (0,0), (0,1)
+		{3, 1, 0, 2}, // swapped & inverted: (1,1), (0,1), (0,0), (1,0)
+	}
+```
 
+- Just from shape's perspective, you could find each of them could be converted from previous one by shifting clockwise by 90 degree.
+  + You might find people say by shifting Counterclockwise, that's because they define coordinate origin upper left.
+  + We could consider using bit operation to record the transition between different shapes
 
+<img src="../resources/google_s2_cellid_impl_order2_transition.png" alt="google_s2_cellid_impl_order2_transition" width="600"/>
 
+- 
 
-
-2. [Init](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L721)
+### Part2: [Init](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L721)
 ```go
 func init() {
 	initLookupCell(0, 0, 0, 0, 0, 0)
@@ -336,7 +353,7 @@ func initLookupCell(level, i, j, origOrientation, pos, orientation int) {
 
 ```
 
-3. [Query](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L564)
+### Part3: [Query](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L564)
 ```go
 // cellIDFromFaceIJ returns a leaf cell given its cube face (range 0..5) and IJ coordinates.
 func cellIDFromFaceIJ(f, i, j int) CellID {
