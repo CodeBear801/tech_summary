@@ -283,6 +283,28 @@ var (
 )
 ```
 
+- At `order 2`, Hilbert curve has four kind of shape
+
+pic
+
+- At `order 2`, the value of i's range is [0,1], the value of j's range is [0,1].  Both i, j just need 1 bit to represent.  We will use i as high-order bit and j as low-order bit to generate a value with 2 bits, like `ij`
+   + `ij`'s combination is 00, 01, 10, 11
+   + For `canonical order`, follow the sequence of curve, the value of pos is  `0, 1, 3, 2`
+   + For `axes swapped`, follow the sequence of curve, the value of pos is  `0, 3, 1, 2`
+   + For `canonical order`, follow the sequence of curve, the value of pos is  `2, 3, 1, 0`
+   + For `canonical order`, follow the sequence of curve, the value of pos is  `2, 1, 3, 0`
+   + Thats how `ijToPos` is defined for
+
+
+pic
+
+- `posToIJ` is the reverse of `ijToPos`.  For each shape, each position, what is related `ij`.
+
+
+
+
+
+
 2. [Init](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L721)
 ```go
 func init() {
