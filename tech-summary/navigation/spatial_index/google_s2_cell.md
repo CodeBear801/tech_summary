@@ -314,7 +314,7 @@ var (
 
 - Just from shape's perspective, you could find each of them could be converted from previous one by rotating clockwise by 90 degree.
   + Some people may say by rotating Counterclockwise, that's because they define coordinate origin upper left.  We have the same meaning just different shape of hilbert curve.
-  + We could consider using bit to represent each shape/rotation, thus a sequence of rotation could be represented by bit operation
+  + We could consider using bit to represent each shape/rotation, thus a sequence of rotation could be represented by bit operation  
   	<img src="../resources/google_s2_cellid_impl_order2_transition.png" alt="google_s2_cellid_impl_order2_transition" width="600"/>
 
 - What's the rule of further divide one kind of curve to next level?  We want to find parent->child relationship.
@@ -322,29 +322,25 @@ var (
        - duplicate `canonical order` into four
        - for first one in the original curve(pos 0), shift that one clockwise for 90 degrees.  `canonical order` changed to `axes swapped`
        - for last one in the original curve(pos 3), shift that one counterclockwise for 90 degrees.  `canonical order` changed to `swapped & inverted`  
-    <img src="../resources/google_s2_cellid_impl_canonical_2_next.png" alt="google_s2_cellid_impl_canonical_2_next" width="600"/>
-	   - Imagine you have
+    <img src="../resources/google_s2_cellid_impl_canonical_2_next.png" alt="google_s2_cellid_impl_canonical_2_next" width="600"/>  
    + If current curve is `axes swapped`, the process of further divide could be imagine as 
        - duplicate `axes swapped` into four, 
        - for first one in the  original curve(pos 0), shift that one counterclockwise for 90 degrees, `axes swapped` changed to `canonical order`
        - for last one in the original curve(pos 3), shift that one clockwise for 90 degrees, `axes swapped` changed to `bits inverted`  
-    <img src="../resources/google_s2_cellid_impl_axes_swapped_2_next.png" alt="google_s2_cellid_impl_axes_swapped_2_next" width="600"/>
+    <img src="../resources/google_s2_cellid_impl_axes_swapped_2_next.png" alt="google_s2_cellid_impl_axes_swapped_2_next" width="600"/>  
    + If current curve is `bits inverted`, the process of further divide could be imagine as 
        - duplicate `bits inverted` into four, 
        - for first one in the  original curve(pos 0), shift that one clockwise for 90 degrees, `bits inverted` changed to `swapped & inverted`
        - for last one in the original curve(pos 3), shift that one counterclockwise for 90 degrees, `bits inverted` changed to `axes swapped`  
-    <img src="../resources/google_s2_cellid_impl_bits_inverted_2_next.png" alt="google_s2_cellid_impl_bits_inverted_2_next" width="600"/>
+    <img src="../resources/google_s2_cellid_impl_bits_inverted_2_next.png" alt="google_s2_cellid_impl_bits_inverted_2_next" width="600"/>  
    + If current curve is `swapped & inverted`, the process of further divide could be imagine as 
        - duplicate `swapped & inverted` into four, 
        - for first one in the  original curve(pos 0), shift that one counterclockwise for 90 degrees, `swapped & inverted` changed to `bits inverted`
        - for last one in the original curve(pos 3), shift that one clockwise for 90 degrees, `swapped & inverted` changed to `canonical order`  
     <img src="../resources/google_s2_cellid_impl_swapped_inverted_2_next.png" alt="google_s2_cellid_impl_swapped_inverted_2_next" width="600"/>	
 
-- That is the usage of 
-```go
-posToOrientation = [4]int{swapMask, 0, 0, invertMask | swapMask}
-// posToOrientation = [4]int{1, 0, 0, 3}
-```
+- That is the usage of `posToOrientation = [4]int{swapMask, 0, 0, invertMask | swapMask}`
+   + The actual value is: posToOrientation = [4]int{1, 0, 0, 3}
    + Given the definition: `canonical order` = `0x00`, `axes swapped` = `0x01`, `bits inverted` = `0x10`,`swapped & inverted` = `0x11`
    + The value of `posToOrientation` record relation of `canonical order`(`0x00`) and its children:`0x01`, `0x00`, `0x00`, `0x11`
    + If parent is `axes swapped` = `0x01`, its children are: `0x00`, `0x01`, `0x01`, `0x10`
@@ -372,7 +368,7 @@ posToOrientation = [4]int{swapMask, 0, 0, invertMask | swapMask}
 0x11 ^ 0x00 = 0x11
 0x11 ^ 0x11 = 0x00
 ``` 
-- The most important summary is, we could calculate what is the curve if we decide quad divide one grid based on **`parent's curve`, `pos in the curve` and `posToOrientation`**
+- The most important summary is, we could calculate the curve if we decide quad divide one grid based on **`parent's curve`, `pos in the curve` and `posToOrientation`**
 
 - Google design the `query` as 4 bits from i, 4 bits from j, and combine them, so pre-calculate a table for all kinds of combination of ij comes out following code:
 ```go
@@ -384,8 +380,6 @@ posToOrientation = [4]int{swapMask, 0, 0, invertMask | swapMask}
 	lookupIJ         [1 << (2*lookupBits + 2)]int
 	lookupPos        [1 << (2*lookupBits + 2)]int
 ```
-
-
 
 ### Part2: [Init](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L721)
 ```go
@@ -417,6 +411,10 @@ func initLookupCell(level, i, j, origOrientation, pos, orientation int) {
 }
 
 ```
+
+- Let's just take a look at one time call of `initLookupCell()`.  Basically, the function use `recursion` to generate all combination of i`[0000, 1111]` and j`[0000, 1111]` in `order 4` hilbert curve.(why order 4? 1 bit of i,j could be represented by `order 1` hilbert curve, 2 bit of i,j could be represented by `order 2` hilbert curve)
+
+
 
 ### Part3: [Query](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid.go#L564)
 ```go
