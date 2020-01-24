@@ -40,7 +40,7 @@ Language
 
 Soft Skills
 - Project Management
-- Team
+- Team Management
 - Product Management
 
 
