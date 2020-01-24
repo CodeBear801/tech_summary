@@ -39,6 +39,9 @@ Language
 - [golang notes](tech-summary/language/go/go-notes.md)
 
 Soft Skills
+- Project Management
+- Team
+- Product Management
 
 
 ## Talks
