@@ -63,7 +63,7 @@ Then we can divide each of the six faces of the cube into four equal parts - thi
 
 ### Indexing
 
-Fill world with Hilbert curve in middle levels.
+Fill space with Hilbert curve in middle levels.
 
 <img src="../resources/spatial_index_s2_world_hilbert_curve.png" alt="spatial_index_s2_world_hilbert_curve" width="400"/>
 <br/>
@@ -72,9 +72,9 @@ Fill world with Hilbert curve in middle levels.
 
 ## Deep dive
 
-### [How Hilbert curve works](./hilbert_curve.md)<span>&#9733;</span>
+### [How Hilbert curve works](./hilbert_curve.md) <span>&#9733;</span>
 
-### [How S2 Cell is generated](./google_s2_cell.md)<span>&#9733;</span>
+### [How S2 Cell is generated](./google_s2_cell.md) <span>&#9733;</span>
 
 
 ## More info

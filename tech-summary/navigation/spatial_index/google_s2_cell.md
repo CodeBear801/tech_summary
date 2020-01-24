@@ -13,7 +13,7 @@
 
 # Google S2 Cell
 
-Give a `(lat, lon)`, how to find cellid for it.  
+<span style="color:#1589F0">&#9650;</span> Give a `(lat, lon)`, how to find cellid for it.  
 
 [Comments from C++ impl -> s2coords.h](https://github.com/google/s2geometry/blob/20c8f339cc9a55fdca1c0e8ab519da399752e70b/src/s2/s2coords.h#L38)
 ```C++
