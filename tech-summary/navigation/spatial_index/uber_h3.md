@@ -87,3 +87,20 @@ Level 2, the world
 <img src="../resources/uber_h3_level_2_kml.png" alt="uber_h3_level_2_kml" width="400"/>
 
 
+## Deep dive
+
+### [Uber H3 experiments](./uber_h3_experiment.md)
+
+## More info
+
+- [H3: Uber’s Hexagonal Hierarchical Spatial Index](https://eng.uber.com/h3/)
+  - [Related discussion on Hacker News](https://news.ycombinator.com/item?id=16135302)
+- [Uber H3 doc](https://uber.github.io/h3/#/documentation/overview/introduction)  
+- [Visualizing City Cores with H3, Uber’s Open Source Geospatial Indexing System](https://eng.uber.com/visualizing-city-cores-with-h3/)
+
+Application
+- [Unwinding Uber’s Most Efficient Service](https://medium.com/@buckhx/unwinding-uber-s-most-efficient-service-406413c5871d#.dg5v6irao)
+- [How We Built Uber Engineering’s Highest Query per Second Service Using Go](https://eng.uber.com/go-geofence/)
+
+- [地理索引（Uber h3）](https://www.jianshu.com/p/e42d903dce38)
+- [Geojson2h3](https://github.com/uber/geojson2h3)
