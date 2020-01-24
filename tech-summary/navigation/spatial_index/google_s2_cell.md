@@ -415,7 +415,7 @@ func initLookupCell(level, i, j, origOrientation, pos, orientation int) {
 - Let's just take a look at one time call of `initLookupCell()`.  
    + Basically, the function use `recursion` to generate all combination of i`[0000, 1111]` and j`[0000, 1111]` in `order 4` hilbert curve.(why order 4? 1 bit of i,j could be represented by `order 1` hilbert curve, 2 bit of i,j could be represented by `order 2` hilbert curve).  `Level` guarantees all bits has been full-filled
    + Let's first simplify our problem, we want to pre-calculate query table for i and j with just 1 bit for each of them.  `ijToPos` is your dish, you are welcome!  
-   + Let's assume we want to pre-calculate query table for i and j with 2 bits for each of them.  i's range is [00, 11], j's range is [00, 11].  We could pick high-order one bit from i and another high-order one bit from j to generate `order 1` hilbert curve, and then use low-order one bit from i and another low-order one bit from j to further dived each cell from `order 1`.  If i's high level bit is 0, then final value could only exists in grid 0 and 1, by high level bit from j we could specify the grid.  Then based on previous steps's analysis we know how to further divide this grid, so we got a curve for it, and then based on low-order bit from i and j we could specify final grid, thus we got a position from hilbert curve.
+   + Let's assume we want to pre-calculate query table for i and j with 2 bits for each of them.  i's range is [00, 11], j's range is [00, 11].  We could pick high-order one bit from i and another high-order one bit from j to generate `order 1` hilbert curve, and then use low-order one bit from i and another low-order one bit from j to further dived each cell from `order 1`.  If i's high level bit is 0, then final value could only exists in grid 0 and 1, by high level bit from j we could specify the grid.  Then based on previous steps's analysis we know how to further divide this grid, so we got a curve for it, and then based on low-order bit from i and j we could specify final grid, thus we got a position from hilbert curve.  
    <img src="../resources/google_s2_cellid_impl_2bits_curve.png" alt="google_s2_cellid_impl_2bits_curve" width="600"/><br/>  
    + Generate query table for i and j with 4 bits for each of them is nothing hard but continue the recursion.
    + For function `initLookupCell()`, parameter `orientation` specify the curve for this round
@@ -432,7 +432,7 @@ func init() {
 	initLookupCell(0, 0, 0, 0, 0, 0)
 }
 ```
-- But as our analysis for 1 bit of ij and 2 bits of ij, with more bits means we will further divide the grid.  That gave us two additional requirements:
+- But as our analysis shows for 1 bit of ij and 2 bits of ij, with more bits means we will further divide the grid.  That gave us two additional requirements:
   + `Order 4` is not the end of divide, its just the end of one round.  So we need information of `current position` in hilbert curve and `orientation` to guide if we want to further divide what is the curve looks like.
   + Since we want to generate pre-calculated table to speed up query, the curve from previous iteration could be any of the four, we must calculate all the condition for `canonical order`, `axes swapped`, `bits inverted`, `swapped & inverted`.  That's why `initLookupCell()` be called for four times in `Init()`.
 
@@ -469,7 +469,7 @@ func cellIDFromFaceIJ(f, i, j int) CellID {
 Give an example for how this part works, let's say we make a call with:
 ```
 f, i, j
-10,100001101110100000011110100,11000100011111100000110000010
+2,100001101110100000011110100,11000100011111100000110000010
 ```
 ```
 k = 7
