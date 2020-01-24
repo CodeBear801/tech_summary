@@ -78,10 +78,10 @@ n dimension
 
 ### Find value in quad tree
 
-Given a value, how to know which box it belonging to in quad tree?  
-For example, s = 0.5(decimal)  
--> s = 0.100000000…(binary)  
--> group the digits of “s” into pairs, [10, 00, 00, 00, …]
+Given a value in the range of [0, 1], how to know which box it belonging to in quad tree?  
+For example, s = 0.5(decimal)    
+-> s = 0.100000000…(binary) ([link](https://stackoverflow.com/questions/13663026/how-to-represent-floating-point-in-binary-ieee))   
+-> group the digits of “s” into pairs, [10, 00, 00, 00, …]  
 -> Each pair of binary digits corresponds to a decimal number between 0 and 3, and indicates which of the 4 setsquares to choose at each step of the construction process.  
 
 <img src="../resources/hilbert_curve_one_dimension_two_dimension.png" alt="hilbert_curve_one_dimension_two_dimension" width="400"/>
@@ -98,11 +98,13 @@ H(0.5) = (0.5, 0.5)
 
 <img src="../resources/hilbert_curve_density.png" alt="hilbert_curve_density" width="300"/>
 
+More divide in dense area, less divide in sparse area.
+
 
 ### Implement hilbert curve by recursion
 
 <img src="../resources/hilbert_curve_recursion_1.png" alt="hilbert_curve_recursion_1" width="400"/>
-
+<br/>
 <img src="../resources/hilbert_curve_recursion_2.png" alt="hilbert_curve_recursion_2" width="400"/>
 
 
