@@ -84,8 +84,6 @@ Level 2, the world
 
 <br/>
 
-<img src="../resources/uber_h3_level_2_kml.png" alt="uber_h3_level_2_kml" width="400"/>
-
 
 ## Deep dive
 
