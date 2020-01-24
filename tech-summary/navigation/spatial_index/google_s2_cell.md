@@ -9,6 +9,7 @@
 		- [Part1: Definition](#part1-definition)
 		- [Part2: Init](#part2-init)
 		- [Part3: Query](#part3-query)
+	- [More info](#more-info)
 
 # Google S2 Cell
 
@@ -536,3 +537,7 @@ bits-query = 1001110000
 n = 10001111010000111001011110101011001010101010010001010110011100
 bits = 0
 ```
+
+## More info
+- [S2 Cell hierarchy](https://s2geometry.io/devguide/s2cell_hierarchy.html)
+- [cellid_test.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cellid_test.go#L170)

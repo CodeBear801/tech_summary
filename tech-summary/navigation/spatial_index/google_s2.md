@@ -1,3 +1,19 @@
+- [Google S2](#google-s2)
+  - [Why S2](#why-s2)
+  - [How S2 works](#how-s2-works)
+    - [Three dimensional space to two](#three-dimensional-space-to-two)
+    - [Two dimensional space to one](#two-dimensional-space-to-one)
+    - [Indexing](#indexing)
+  - [Deep dive](#deep-dive)
+    - [How Hilbert curve works](#how-hilbert-curve-works)
+    - [How S2 Cell is generated<span>&#9733;</span>](#how-s2-cell-is-generated%e2%98%85)
+  - [More info](#more-info)
+    - [Doc](#doc)
+    - [Demo](#demo)
+    - [Code](#code)
+    - [Applications & Examples](#applications--examples)
+    - [Articles](#articles)
+
 # Google S2
 
 S2 is a library for spherical geometry that aims to have the same robustness, flexibility, and performance as the very best planar geometry libraries.
@@ -50,19 +66,15 @@ Then we can divide each of the six faces of the cube into four equal parts - thi
 Fill world with Hilbert curve in middle levels.
 
 <img src="../resources/spatial_index_s2_world_hilbert_curve.png" alt="spatial_index_s2_world_hilbert_curve" width="400"/>
-
+<br/>
 <img src="../resources/spatial_index_s2_simple_hilbert_curve.png" alt="spatial_index_s2_simple_hilbert_curve" width="400"/>
 
 
 ## Deep dive
 
-### How Hilbert curve works
+### [How Hilbert curve works](./hilbert_curve.md)
 
-### How S2 Cell is generated
-
-
-
-## Questions
+### [How S2 Cell is generated](./google_s2_cell.md)<span>&#9733;</span>
 
 
 ## More info
