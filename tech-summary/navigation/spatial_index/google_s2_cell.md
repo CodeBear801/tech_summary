@@ -412,7 +412,29 @@ func initLookupCell(level, i, j, origOrientation, pos, orientation int) {
 
 ```
 
-- Let's just take a look at one time call of `initLookupCell()`.  Basically, the function use `recursion` to generate all combination of i`[0000, 1111]` and j`[0000, 1111]` in `order 4` hilbert curve.(why order 4? 1 bit of i,j could be represented by `order 1` hilbert curve, 2 bit of i,j could be represented by `order 2` hilbert curve)
+- Let's just take a look at one time call of `initLookupCell()`.  
+   + Basically, the function use `recursion` to generate all combination of i`[0000, 1111]` and j`[0000, 1111]` in `order 4` hilbert curve.(why order 4? 1 bit of i,j could be represented by `order 1` hilbert curve, 2 bit of i,j could be represented by `order 2` hilbert curve).  `Level` guarantees all bits has been full-filled
+   + Let's first simplify our problem, we want to pre-calculate query table for i and j with just 1 bit for each of them.  `ijToPos` is your dish, you are welcome!  
+   + Let's assume we want to pre-calculate query table for i and j with 2 bits for each of them.  i's range is [00, 11], j's range is [00, 11].  We could pick high-order one bit from i and another high-order one bit from j to generate `order 1` hilbert curve, and then use low-order one bit from i and another low-order one bit from j to further dived each cell from `order 1`.  If i's high level bit is 0, then final value could only exists in grid 0 and 1, by high level bit from j we could specify the grid.  Then based on previous steps's analysis we know how to further divide this grid, so we got a curve for it, and then based on low-order bit from i and j we could specify final grid, thus we got a position from hilbert curve.
+   <img src="../resources/google_s2_cellid_impl_2bits_curve.png" alt="google_s2_cellid_impl_2bits_curve" width="600"/><br/>  
+   + Generate query table for i and j with 4 bits for each of them is nothing hard but continue the recursion.
+   + For function `initLookupCell()`, parameter `orientation` specify the curve for this round
+   + Based on `r := posToIJ[orientation]` you will know how i and j goes in this specific round\
+   + `r[]>>1` will get higher level bits, `r[]&1` will get lower level bits
+   + `pos <<= 2` guarantees each grid has proper start value
+   + `orientation^posToOrientation` generate curve for next level
+- If our target is just `order 4`'s hilbert curve, then then following code is enough.
+```go
+	lookupIJ         [1 << (2*lookupBits)]int
+	lookupPos        [1 << (2*lookupBits)]int
+
+func init() {
+	initLookupCell(0, 0, 0, 0, 0, 0)
+}
+```
+- But as our analysis for 1 bit of ij and 2 bits of ij, with more bits means we will further divide the grid.  That gave us two additional requirements:
+  + `Order 4` is not the end of divide, its just the end of one round.  So we need information of `current position` in hilbert curve and `orientation` to guide if we want to further divide what is the curve looks like.
+  + Since we want to generate pre-calculated table to speed up query, the curve from previous iteration could be any of the four, we must calculate all the condition for `canonical order`, `axes swapped`, `bits inverted`, `swapped & inverted`.  That's why `initLookupCell()` be called for four times in `Init()`.
 
 
 
@@ -444,3 +466,73 @@ func cellIDFromFaceIJ(f, i, j int) CellID {
 }
 ```
 
+Give an example for how this part works, let's say we make a call with:
+```
+f, i, j
+10,100001101110100000011110100,11000100011111100000110000010
+```
+```
+k = 7
+mask = 1111
+bits+x = 0
+bits+y = 100
+bits-query = 1110
+n = 10001100000000000000000000000000000000000000000000000000000000
+bits = 10
+
+k = 6
+mask = 1111
+bits+x = 100000010
+bits+y = 100100010
+bits-query = 1101000001
+n = 10001111010000000000000000000000000000000000000000000000000000
+bits = 1
+
+k = 5
+mask = 1111
+bits+x = 11000001
+bits+y = 11100001
+bits-query = 1110010110
+n = 10001111010000111001010000000000000000000000000000000000000000
+bits = 10
+
+k = 4
+mask = 1111
+bits+x = 111000010
+bits+y = 111111110
+bits-query = 1110101001
+n = 10001111010000111001011110101000000000000000000000000000000000
+bits = 1
+
+k = 3
+mask = 1111
+bits+x = 100000001
+bits+y = 100110001
+bits-query = 1100101011
+n = 10001111010000111001011110101011001010000000000000000000000000
+bits = 11
+
+k = 2
+mask = 1111
+bits+x = 11
+bits+y = 111
+bits-query = 1010100111
+n = 10001111010000111001011110101011001010101010010000000000000000
+bits = 11
+
+k = 1
+mask = 1111
+bits+x = 1111000011
+bits+y = 1111100011
+bits-query = 1010110
+n = 10001111010000111001011110101011001010101010010001010100000000
+bits = 10
+
+k = 0
+mask = 1111
+bits+x = 100000010
+bits+y = 100001010
+bits-query = 1001110000
+n = 10001111010000111001011110101011001010101010010001010110011100
+bits = 0
+```
