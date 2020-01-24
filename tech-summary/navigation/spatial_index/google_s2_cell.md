@@ -322,17 +322,17 @@ var (
        - duplicate `canonical order` into four
        - for first one in the original curve(pos 0), shift that one clockwise for 90 degrees.  `canonical order` changed to `axes swapped`
        - for last one in the original curve(pos 3), shift that one counterclockwise for 90 degrees.  `canonical order` changed to `swapped & inverted`  
-    <img src="../resources/google_s2_cellid_impl_canonical_2_next.png" alt="google_s2_cellid_impl_canonical_2_next" width="600"/>  
+    <img src="../resources/google_s2_cellid_impl_canonical_2_next.png" alt="google_s2_cellid_impl_canonical_2_next" width="600"/><br/>  
    + If current curve is `axes swapped`, the process of further divide could be imagine as 
        - duplicate `axes swapped` into four, 
        - for first one in the  original curve(pos 0), shift that one counterclockwise for 90 degrees, `axes swapped` changed to `canonical order`
        - for last one in the original curve(pos 3), shift that one clockwise for 90 degrees, `axes swapped` changed to `bits inverted`  
-    <img src="../resources/google_s2_cellid_impl_axes_swapped_2_next.png" alt="google_s2_cellid_impl_axes_swapped_2_next" width="600"/>  
+    <img src="../resources/google_s2_cellid_impl_axes_swapped_2_next.png" alt="google_s2_cellid_impl_axes_swapped_2_next" width="600"/><br/>   
    + If current curve is `bits inverted`, the process of further divide could be imagine as 
        - duplicate `bits inverted` into four, 
        - for first one in the  original curve(pos 0), shift that one clockwise for 90 degrees, `bits inverted` changed to `swapped & inverted`
        - for last one in the original curve(pos 3), shift that one counterclockwise for 90 degrees, `bits inverted` changed to `axes swapped`  
-    <img src="../resources/google_s2_cellid_impl_bits_inverted_2_next.png" alt="google_s2_cellid_impl_bits_inverted_2_next" width="600"/>  
+    <img src="../resources/google_s2_cellid_impl_bits_inverted_2_next.png" alt="google_s2_cellid_impl_bits_inverted_2_next" width="600"/><br/>   
    + If current curve is `swapped & inverted`, the process of further divide could be imagine as 
        - duplicate `swapped & inverted` into four, 
        - for first one in the  original curve(pos 0), shift that one counterclockwise for 90 degrees, `swapped & inverted` changed to `bits inverted`
