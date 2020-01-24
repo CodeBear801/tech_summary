@@ -1,10 +1,26 @@
 Tech summary and code snippets
 
-## Tech Summary
-[Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)  
-[C++11 notes](tech-summary/language/c++/c++11-notes.md)  
-[C++ tools](tech-summary/language/c++/c++tools.md)   
-[golang notes](tech-summary/language/go/go-notes.md)
+## Tech Summary  
+
+Navigation & Map
+- [Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)
+- [Direction]()
+- [Map Matching](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/mapmatching_basic.md)
+- [Spatial Index](tech-summary/navigation/spatial_index/spatial_index.md)
+
+Data
+- How to improve ETA based on user's data
+
+Distribute System
+- Docker
+- Kubernetes
+
+Language 
+- [C++11 notes](tech-summary/language/c++/c++11-notes.md)  
+- [C++ tools](tech-summary/language/c++/c++tools.md)   
+- [golang notes](tech-summary/language/go/go-notes.md)
+
+
 
 ## Talks
 
