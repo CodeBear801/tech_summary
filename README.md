@@ -1,10 +1,48 @@
 Tech summary and code snippets
 
-## Tech Summary
-[Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)  
-[C++11 notes](tech-summary/language/c++/c++11-notes.md)  
-[C++ tools](tech-summary/language/c++/c++tools.md)   
-[golang notes](tech-summary/language/go/go-notes.md)
+## Tech Summary  
+
+Navigation & Map
+- [Open source experiences in Telenav](https://github.com/Telenav/open-source-spec)
+- [Direction](tech-summary/navigation/routing/direction_index.md)
+- [Map Matching](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/mapmatching_basic.md)
+- [Spatial Index](tech-summary/navigation/spatial_index/spatial_index.md)
+
+Data & Distribute System
+- How to improve ETA based on user's data
+- Tools 
+   + [spark](tech-summary/tools/spark_index.md) 
+   + [kafka](tech-summary/tools/kafka_index.md) 
+   + [mongo](tech-summary/tools/mongo_index.md) 
+   + [elastic](tech-summary/tools/elastic_index.md) 
+   + [docker](tech-summary/tools/docker.md) 
+   + [kubernetes](tech-summary/tools/kubernetes_best_practice.md) 
+   + [alluxio](tech-summary/tools/alluxio/readme.md)
+- Papers
+   + [map reduce](tech-summary/papers/mapreduce.md)
+   + [gfs](tech-summary/papers/gfs.md)
+   + [big table](tech-summary/papers/bigtable.md)
+   + [dynamo](tech-summary/papers/dynamo.md)
+   + [memcache](tech-summary/papers/memcache.md)
+   + [raft](tech-summary/papers/raft.md)
+   + [rdd](tech-summary/papers/rdd.md)
+   + [spark sql](tech-summary/papers/spark_sql.md)
+   + [chubby](tech-summary/papers/chubby.md)
+   + [pregel](tech-summary/papers/pregel_connected_component_example.md)
+   + [lamport logic clock](tech-summary/papers/lamport_logic_clock.md)
+   + [2pc 3pc](tech-summary/papers/2pc_3pc.md)
+
+
+Language 
+- [C++11 notes](tech-summary/language/c++/c++11-notes.md)  
+- [C++ tools](tech-summary/language/c++/c++tools.md)   
+- [golang notes](tech-summary/language/go/go-notes.md)
+
+Soft Skills
+- Project Management
+- Team Management
+- Product Management
+
 
 ## Talks
 

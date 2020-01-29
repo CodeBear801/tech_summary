@@ -14,9 +14,9 @@
 
 ### Static space divide
 
-- Geohash
-- Google S2
-- Uber H3
+- [Google S2](./google_s2.md)
+- [Uber H3](./uber_h3.md)
+- [Geohash](./geohash.md)
 
 ## Comparison
 
@@ -30,8 +30,4 @@
 <br/>
 
 
-### GeoHash VS S2
-
-
-### S2 VS H3
 

@@ -112,7 +112,8 @@ Structure gives the ability to do things in a declative matter, similar to datab
 
 ### Catalyst
 
-spark_rdd_df_ds_2017_catalyst
+<img src="resources/imgs/spark_rdd_df_ds_2017_catalyst.png" alt="spark_rdd_df_ds_2017_catalyst" width="600"/>
+
 1. Any query(sql, dataframe, dataset) will create unresolved logical plan
 2. Then check for `catalog` to see which column you are referring to
 3. Then create logical plan and optimized on

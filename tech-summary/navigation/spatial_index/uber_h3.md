@@ -84,12 +84,37 @@ Level 2, the world
 
 <br/>
 
-<img src="../resources/uber_h3_level_2_kml.png" alt="uber_h3_level_2_kml" width="400"/>
-
 
 ## Deep dive
 
 ### [Uber H3 experiments](./uber_h3_experiment.md)
+
+### Why Hexagon
+
+
+<img src="../resources/uber_h3_hexagon_1.png" alt="uber_h3_hexagon_1" width="400"/>
+<br/>
+<img src="../resources/uber_h3_hexagon_2.png" alt="uber_h3_hexagon_2" width="400"/>
+<br/>
+<img src="../resources/uber_h3_hexagon_3.png" alt="uber_h3_hexagon_3" width="400"/>
+
+Features when choose rectangle
+
+<img src="../resources/uber_h3_hexagon_4.png" alt="uber_h3_hexagon_4" width="400"/>
+
+Features when choose hexagon
+
+<img src="../resources/uber_h3_hexagon_5.png" alt="uber_h3_hexagon_5" width="400"/>
+
+Pentagon is just a Hexagon missing one of its coordinate
+
+### Issues
+
+#### Incomplete covering between upper cell and lower cells
+
+<img src="../resources/uber_h3_covering.png" alt="uber_h3_covering" width="400"/>
+
+
 
 ## More info
 
