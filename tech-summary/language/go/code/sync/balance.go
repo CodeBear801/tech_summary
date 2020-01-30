@@ -38,30 +38,33 @@ func requester(work chan Request) {
 	c := make(chan int)
 	for {
 		time.Sleep(time.Duration(rand.Int63n(nWorker * 2e9)))
+		// [Perry] send request
 		work <- Request{op, c}
+		// [Perry] wait for answer, result:= <-c, then further process on result
 		<-c
 	}
 }
 
 type Worker struct {
-	i        int
-	requests chan Request
-	pending  int
+	i        int            // index in the loop
+	requests chan Request   // work to do(a buffered channel)
+	pending  int            // count of pending tasks
 }
 
 func (w *Worker) work(done chan *Worker) {
 	for {
-		req := <-w.requests
-		req.c <- req.fn()
-		done <- w
+		req := <-w.requests  // get request from load balancer
+		req.c <- req.fn()    // call fn and send result to requester
+		done <- w            // tell balancer we finished the job 
 	}
 }
 
+// slice
 type Pool []*Worker
 
 // [Perry] why here using Pool not *Pool
 // 1. Pool is not going to change
-// 2. Passing by value often is cheaper in golang
+// 2.Passing by value often is cheaper in golang
 // Go uses escape analysis to determine if variable can be safely
 // allocated on function’s stack frame, which could be much cheaper
 // then allocating variable on the heap. Passing by value simplifies
@@ -99,10 +102,11 @@ func (p *Pool) Pop() interface{} {
 	return w
 }
 
+
 type Balancer struct {
-	pool Pool
-	done chan *Worker
-	i    int
+	pool Pool                // pool is the slice represent for workers, make(Pool, 0, nWorker)
+	done chan *Worker        // ?make(chan *Worker, nWorker)
+	i    int                 // i could be ignore, used for round robin
 }
 
 func NewBalancer() *Balancer {
@@ -141,6 +145,7 @@ func (b *Balancer) print() {
 	fmt.Printf(" %.2f %.2f\n", avg, variance)
 }
 
+// Send request to worker
 func (b *Balancer) dispatch(req Request) {
 	if *roundRobin {
 		w := b.pool[b.i]
@@ -153,22 +158,30 @@ func (b *Balancer) dispatch(req Request) {
 		return
 	}
 
+	// get least loaded worker
 	w := heap.Pop(&b.pool).(*Worker)
+	// assign the task
 	w.requests <- req
+	// add one more in its queue
 	w.pending++
 	//	fmt.Printf("started %p; now %d\n", w, w.pending)
+	// pub it back to heap
 	heap.Push(&b.pool, w)
 }
 
+// job is complete; update heap
 func (b *Balancer) completed(w *Worker) {
 	if *roundRobin {
 		w.pending--
 		return
 	}
 
+	// one fewer in its queue
 	w.pending--
 	//	fmt.Printf("finished %p; now %d\n", w, w.pending)
+	// remove it from heap
 	heap.Remove(&b.pool, w.i)
+	// adjust heap by push back
 	heap.Push(&b.pool, w)
 }
 
