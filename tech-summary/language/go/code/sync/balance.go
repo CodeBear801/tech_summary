@@ -55,7 +55,7 @@ func (w *Worker) work(done chan *Worker) {
 	for {
 		req := <-w.requests  // get request from load balancer
 		req.c <- req.fn()    // call fn and send result to requester
-		done <- w            // tell balancer we finished the job 
+		done <- w            // tell balancer we finished the job, send worker's pointer 
 	}
 }
 
@@ -105,8 +105,8 @@ func (p *Pool) Pop() interface{} {
 
 type Balancer struct {
 	pool Pool                // pool is the slice represent for workers, make(Pool, 0, nWorker)
-	done chan *Worker        // ?make(chan *Worker, nWorker)
-	i    int                 // i could be ignore, used for round robin
+	done chan *Worker        // ? make(chan *Worker, nWorker)
+	i    int                 // i used for round robin
 }
 
 func NewBalancer() *Balancer {
@@ -187,6 +187,8 @@ func (b *Balancer) completed(w *Worker) {
 
 func main() {
 	flag.Parse()
+	// unbuffered channel, all request could go into loadbalancer one by one
+	// due to code in requester => work <- Request{op, c}
 	work := make(chan Request)
 	for i := 0; i < nRequester; i++ {
 		go requester(work)
