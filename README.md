@@ -48,6 +48,7 @@ Soft Skills
 
 Date | Name | Links | Comments
 ---|:---|:---|:---
+12-20-2019|Optimal Charge Station Selection|[slides](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/slides/optimal_charging_station_select_strategy_12172019_reduced_size.pptx)|
 04-10-2019|Open Source Navigation Solution|[slides](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/resource/presentations/20190410_open_source_solution_for_Navigation.pptx)|
 11-02-2018|Valhalla Map Matching|[slides](https://github.com/Telenav/open-source-spec/blob/master/valhalla/resource/presentations/valhalla_mm_11202018.pptx) |
 10-27-2018|Streaming Architecture|[slides](https://github.com/CodeBear801/zoo/blob/master/tech-summary/slides/10262018_streaming_architecture.pptx)|
