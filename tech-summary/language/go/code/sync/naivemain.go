@@ -1,7 +1,7 @@
 // naivemain runs the Subscribe example with the naive Subscribe
 // implementation and a fake RSS fetcher.
 
-https://github.com/golang/talks/blob/5ca518b26a5529a11839285645c750ffc2f96500/content/2013/advconc/naivemain/naivemain.go
+// https://github.com/golang/talks/blob/5ca518b26a5529a11839285645c750ffc2f96500/content/2013/advconc/naivemain/naivemain.go
 
 // +build ignore,OMIT
 
