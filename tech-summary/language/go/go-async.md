@@ -202,4 +202,138 @@ Version 3.0
 https://talks.golang.org/2012/concurrency.slide#48
   Iterate all replica, put result into channel, returns as long as there is value in channel
 
+### RSS client
+[code](https://github.com/golang/talks/blob/5ca518b26a5529a11839285645c750ffc2f96500/content/2013/advconc/naivemain/naivemain.go) [slides](https://talks.golang.org/2013/advconc.slide#11) [slides-source](https://github.com/golang/talks/blob/master/content/2013/advconc.slide) [video](https://www.youtube.com/watch?v=QDDwwePbDtw)
 
+Requirement:
+- Given Fetch api to fetch items for uri + the time when the next fetch should be attempted
+- items contain {Title, Channel, GUID string}
+- Expect result 
+   - stream    <-chan item
+   - multiple subscriptions
+
+```go
+	// Subscribe to some feeds, and create a merged update stream.
+	merged := Merge(
+		NaiveSubscribe(Fetch("blog.golang.org")),
+		NaiveSubscribe(Fetch("googleblog.blogspot.com")),
+		NaiveSubscribe(Fetch("googledevelopers.blogspot.com")))
+```
+
+- given
+
+```go
+// A Fetcher fetches Items and returns the time when the next fetch should be
+// attempted.  On failure, Fetch returns a non-nil error.
+type Fetcher interface {
+	Fetch() (items []Item, next time.Time, err error)
+}
+
+// Fetch returns a Fetcher for Items from domain.
+func Fetch(domain string) Fetcher {
+```
+
+- To implement
+
+```go
+// A Subscription delivers Items over a channel.  Close cancels the
+// subscription, closes the Updates channel, and returns the last fetch error,
+// if any.
+type Subscription interface {
+	Updates() <-chan Item
+	Close() error
+}
+
+// Subscribe returns a new Subscription that uses fetcher to fetch Items.
+func Subscribe(fetcher Fetcher) Subscription { }
+
+// Merge returns a Subscription that merges the item streams from subs.
+// Closing the merged subscription closes subs.
+func Merge(subs ...Subscription) Subscription { }
+
+func (s *sub) Close() error { }
+
+// Subscribe returns a new Subscription that uses fetcher to fetch Items.
+func Subscribe(fetcher Fetcher) Subscription {
+	s := &sub{
+		fetcher: fetcher,
+		updates: make(chan Item),       // for Updates
+		closing: make(chan chan error), // for Close
+	}
+	go s.loop()
+	return s
+}
+
+// sub implements the Subscription interface.
+type sub struct {
+	fetcher Fetcher         // fetches items
+	updates chan Item       // sends items to the user
+	closing chan chan error // for Close
+}
+
+func (s *sub) loop() { ... }
+
+```
+
+Loop's duty:
+- Periodically call fetch
+- send fetched items on the Updates channel
+- exit when Close is called
+
+version 1:
+
+
+<img src="resource/rss_v1.png" alt="rss_v1" width="500"/> 
+
+- Issue: race condition => s.closed
+- Issue: time.sleep(next.Sub(now)) could keep loop running even you set flag to closed.  Next.Sub() could return a month later
+- Loop may block forever on s.updates: client might close s.updates channel, s.updates <- item will block send infinitely
+
+Solution
+- for - select pattern
+- `chan chan` pattern
+
+
+<img src="resource/rss_v2.png" alt="rss_v2" width="500"/> 
+
+<br/>
+<img src="resource/rss_v3.png" alt="rss_v3" width="500"/> 
+
+- Fetch
+
+startFetch controls next time to fetch, and will always be update in select  
+
+
+<img src="resource/rss_v4.png" alt="rss_v4" width="500"/> 
+
+- Send
+
+
+<img src="resource/rss_v5.png" alt="rss_v5" width="500"/> 
+
+Here pending could be nil
+
+**Send/receive on nil channel always blocks, but never panic**
+
+
+<img src="resource/rss_v6.png" alt="rss_v6" width="500"/> 
+
+initially updates is nil, only when there is value in pending, then first will be assigned  
+then enable send case, so select will gointo the case, otherwise, will skip there  
+
+- Avoid duplicates in fetch: filter items before adding to pending
+
+
+<img src="resource/rss_v7.png" alt="rss_v7" width="500"/> 
+
+- Limit the size of pending
+Stop `startFerch` then based on limit condition to reopen it
+
+
+<img src="resource/rss_v8.png" alt="rss_v8" width="500"/> 
+
+- Run fetch async incase fetch is too slow
+
+
+
+<img src="resource/rss_v9.png" alt="rss_v9" width="500"/> 
