@@ -363,7 +363,6 @@ pkg/
 
 
 
-
 ## Reference
 - [Golang UK Conference 2017 | Mat Ryer - Writing Beautiful Packages in Go](https://www.youtube.com/watch?v=cAWlv2SeQus&t=18s)
 
