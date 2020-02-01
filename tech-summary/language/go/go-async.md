@@ -179,3 +179,27 @@ func (b *Balancer) balance(work chan Request) {
 ### Google search Example
 
 [code]() [video](https://www.youtube.com/watch?v=f6kdp27TYZs&t=1021s)
+
+Requirement:
+- Send search request
+- Search from web, image, youtube, etc
+- mix result and response
+
+Version 1:
+- Just append information to final results sequentially
+https://talks.golang.org/2012/concurrency.slide#45
+
+Version 2:
+- Put results into channel, goroutine 
+https://talks.golang.org/2012/concurrency.slide#46
+
+Version 2.1
+- Add timeout for slow servers
+https://talks.golang.org/2012/concurrency.slide#47
+
+Version 3.0
+- Add replica, avoid time out, 
+https://talks.golang.org/2012/concurrency.slide#48
+  Iterate all replica, put result into channel, returns as long as there is value in channel
+
+
