@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// https://talks.golang.org/2010/io/eval2.go
+
 // +build ignore,OMIT
 
 package main
@@ -41,8 +43,8 @@ func (p *Parser) stop(c uint8) bool {
 			return true
 		}
 		return false
-	case strings.IndexRune(alphanum, int(c)) >= 0:
-		return strings.IndexRune(alphanum, int(p.src[p.pos])) < 0
+	case strings.IndexRune(alphanum, rune(c)) >= 0:
+		return strings.IndexRune(alphanum, rune(p.src[p.pos])) < 0
 	}
 	return true
 }
