@@ -34,6 +34,7 @@ type Request struct {
 	c  chan int
 }
 
+// [Perry] requester simulate the call from external users
 func requester(work chan Request) {
 	c := make(chan int)
 	for {
@@ -74,6 +75,7 @@ type Pool []*Worker
 func (p Pool) Len() int { return len(p) }
 
 func (p Pool) Less(i, j int) bool {
+	// [Perry]? safety check for i,j?  
 	return p[i].pending < p[j].pending
 }
 
@@ -105,7 +107,7 @@ func (p *Pool) Pop() interface{} {
 
 type Balancer struct {
 	pool Pool                // pool is the slice represent for workers, make(Pool, 0, nWorker)
-	done chan *Worker        // ? make(chan *Worker, nWorker)
+	done chan *Worker        // make(chan *Worker, nWorker), when worker finished put in this channel, like a trigger
 	i    int                 // i used for round robin
 }
 
@@ -159,6 +161,8 @@ func (b *Balancer) dispatch(req Request) {
 	}
 
 	// get least loaded worker
+	// [Perry] why  .(*Worker)
+	// Tried with (*Worker)(), but got: cannot convert heap.Pop(&b.pool) (type interface {}) to type *Worker: need type assertion
 	w := heap.Pop(&b.pool).(*Worker)
 	// assign the task
 	w.requests <- req
