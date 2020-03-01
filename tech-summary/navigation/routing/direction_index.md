@@ -10,3 +10,7 @@
 - [Graph Partition](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/graph_partition.md)
 - [Partitioning using natural cut heuristics (PUNCH)](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/punch.md)
 - [Inertial flow](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/inertial_flow.md)
+
+***
+
+- [Efficient Route Planning given by Prof. Dr. Hannah Bast @Freiburg 2012](https://ad-wiki.informatik.uni-freiburg.de/teaching/EfficientRoutePlanningSS2012)
