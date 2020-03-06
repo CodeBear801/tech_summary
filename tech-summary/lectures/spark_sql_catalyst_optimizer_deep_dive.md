@@ -8,19 +8,22 @@
 ### Original version
 
 
-<img src="./resources/imgs/spark_sql_catalyst_optimizer_example_original.png" alt="spark_sql_catalyst_optimizer_example_original" width="400"/>
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_example_original.png" alt="spark_sql_catalyst_optimizer_example_original" width="600"/>
 
 Analysis the query
 
 
-<img src="./resources/imgs/spark_sql_catalyst_optimizer_example_analysis.png" alt="spark_sql_catalyst_optimizer_example_analysis" width="400"/>
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_example_analysis.png" alt="spark_sql_catalyst_optimizer_example_analysis" width="600"/>
 
 
 <img src="./resources/imgs/spark_sql_catalyst_optimizer_example_analysis2.png" alt="spark_sql_catalyst_optimizer_example_analysis2" width="400"/>
 
 ### Optimized version
 
-Write special rule to match the cases when we join intervals
+**Write a special query plan rule to match the cases when we join two intervals and calculate intersection directly and then put back to query plan.**
+
+
+// high light code is the condition which triggers the rule:
 
 <img src="./resources/imgs/spark_sql_catalyst_optimizer_example_optimized_1.png" alt="spark_sql_catalyst_optimizer_example_optimized_1" width="600"/>
 <br/>
