@@ -71,7 +71,7 @@ Make logic plan really executable in physical distribute environment.  For examp
 
 In the upper case, take the functor of `avg` as an example,  it will generate two nodes: Aggregates(Partial, map stage) and Aggregates(Final, reduce stage)  
 
-```
+```js
 TableScan->Project(dept, math_score * 1.2: expr1, eng_score * 0.8: expr2)
 -> AggretatePartial(avg(expr1):avg1, avg(expr2):avg2, GROUP: dept)
 -> ShuffleExchange(Row, KEY:dept)
