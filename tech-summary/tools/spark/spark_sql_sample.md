@@ -1,4 +1,7 @@
-# How Spark SQL works by a simple query
+# How Spark SQL works by a simple query example
+
+<img src="../resources/spark_sql_paper_flow.png" alt="spark_sql_paper_flow" width="600"/>
+<br/>
 
 ## Case:
 In the university, generate a summary of weighted mean scores for each department
