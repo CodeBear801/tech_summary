@@ -70,3 +70,49 @@ abstraction of users programs
 Expression -> new value  
 Query plan -> new dataset  
 Query plan use one or more expressions
+
+
+#### Transformation
+
+spark_sql_catalyst_optimizer_transformation
+
+A `transformation` is defined as a partial function, which is a function that is defined for a subset of its possible arguments.
+
+spark_sql_catalyst_optimizer_transformation_example
+
+
+#### Optimization
+
+// predicate pushdown: t2.id>50000 only apply to t2
+
+spark_sql_catalyst_optimizer_predicate_pushdown
+
+
+// only need 3 columns: from t1: column id and value, from t2: column id
+// reduce IO cost(column data format)
+
+spark_sql_catalyst_optimizer_column_pruning
+
+// combine rules
+
+spark_sql_catalyst_optimizer_combine_rules
+
+Rule executor to combine multiple rules  
+
+Two strategy to apply rule  
+Fixed point: apply rules to batch again and again, until the tree is not changed anymore   
+Once: apply all the rules to the same batch just once, get them all trigger  
+
+spark_sql_catalyst_optimizer_multiple_rules
+
+
+#### Physical plan
+
+spark_sql_catalyst_optimizer_logical_2_physical
+
+
+## Overview
+
+spark_sql_catalyst_optimizer_overview
+
+
