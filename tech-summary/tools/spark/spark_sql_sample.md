@@ -3,7 +3,7 @@
 <img src="../resources/spark_sql_paper_flow.png" alt="spark_sql_paper_flow" width="600"/>
 <br/>
 
-## Case:
+## A query case
 In the university, generate a summary of weighted mean scores for each department
 
 ```sql
@@ -65,7 +65,7 @@ CBO更加复杂，比如根据JOIN代价来调整JOIN顺序, 如果某个表小�
 More info
 - [spark/sql/catalyst/optimizer/Optimizer.scala](https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/Optimizer.scala)
 
-## Code generation and query planner]
+## Code generation and query planner
 
 Make logic plan really executable in physical distribute environment.  For example, for `Join`, spark defines strategies like `BroadcastHashJoin`, `ShuffleHashJoin`, `SortMergeJoin` for different situation.
 
