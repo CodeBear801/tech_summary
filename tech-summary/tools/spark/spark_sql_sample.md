@@ -44,3 +44,48 @@ More info
 - [spark/sql/catalyst/analysis/Analyzer.scala](https://github.com/apache/spark/blob/8d5ef2f766166cce3cc7a15a98ec016050ede4d8/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/analysis/Analyzer.scala#L201)
 
 
+## Optimize logical plan
+### Rule based optimization
+
+RBO的优化策略就是对语法树进行一次遍历，模式匹配能够满足特定规则的节点，再进行相应的等价转换，即将一棵树等价地转换为另一棵树。
+
+- predicate pushdown(谓词下推)
+- constant folding(常量累加)
+- column pruning(列值裁剪)
+- combine limits(Limits合并)
+
+
+### Cost based optimization
+CBO更加复杂，比如根据JOIN代价来调整JOIN顺序, 如果某个表小于特定值就广播分发
+
+
+More info
+- [spark/sql/catalyst/optimizer/Optimizer.scala](https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/Optimizer.scala)
+
+## Code generation and query planner]
+
+Make logic plan really executable in physical distribute environment.  For example, for `Join`, spark defines strategies like `BroadcastHashJoin`, `ShuffleHashJoin`, `SortMergeJoin` for different situation.
+
+In the upper case, take the functor of `avg` as an example,  it will generate two nodes: Aggregates(Partial, map stage) and Aggregates(Final, reduce stage)  
+
+```
+TableScan->Project(dept, math_score * 1.2: expr1, eng_score * 0.8: expr2)
+-> AggretatePartial(avg(expr1):avg1, avg(expr2):avg2, GROUP: dept)
+-> ShuffleExchange(Row, KEY:dept)
+-> AggregateFinal(avg1, avg2, GROUP:dept)
+-> Project(dept, avg1 + avg2)
+-> TableSink
+```
+All the operations will be converted to code running on JVM and work with RDD.
+
+Fake implementation of `project` in spark
+```scala
+currentPlan.mapPartitions { iter =>
+projection = loadContext()
+iter.map { row => projection(row) } 
+```
+
+
+
+
+
