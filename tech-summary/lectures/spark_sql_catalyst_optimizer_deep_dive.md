@@ -74,45 +74,51 @@ Query plan use one or more expressions
 
 #### Transformation
 
-spark_sql_catalyst_optimizer_transformation
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_transformation.png" alt="spark_sql_catalyst_optimizer_transformation" width="400"/>
+
 
 A `transformation` is defined as a partial function, which is a function that is defined for a subset of its possible arguments.
 
-spark_sql_catalyst_optimizer_transformation_example
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_transformation_example.png" alt="spark_sql_catalyst_optimizer_transformation_example" width="400"/>
+
 
 
 #### Optimization
 
 // predicate pushdown: t2.id>50000 only apply to t2
 
-spark_sql_catalyst_optimizer_predicate_pushdown
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_predicate_pushdown.png" alt="spark_sql_catalyst_optimizer_predicate_pushdown" width="400"/>
 
 
-// only need 3 columns: from t1: column id and value, from t2: column id
+
+// only need 3 columns: from t1: column id and value, from t2: column id  
 // reduce IO cost(column data format)
 
-spark_sql_catalyst_optimizer_column_pruning
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_column_pruning.png" alt="spark_sql_catalyst_optimizer_column_pruning" width="400"/>
+
 
 // combine rules
 
-spark_sql_catalyst_optimizer_combine_rules
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_combine_rules.png" alt="spark_sql_catalyst_optimizer_combine_rules" width="400"/>
+
 
 Rule executor to combine multiple rules  
 
 Two strategy to apply rule  
 Fixed point: apply rules to batch again and again, until the tree is not changed anymore   
 Once: apply all the rules to the same batch just once, get them all trigger  
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_multiple_rules.png" alt="spark_sql_catalyst_optimizer_multiple_rules" width="400"/>
 
-spark_sql_catalyst_optimizer_multiple_rules
 
 
 #### Physical plan
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_logical_2_physical.png" alt="spark_sql_catalyst_optimizer_logical_2_physical" width="400"/>
 
-spark_sql_catalyst_optimizer_logical_2_physical
 
 
 ## Overview
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_overview.png" alt="spark_sql_catalyst_optimizer_overview" width="400"/>
 
-spark_sql_catalyst_optimizer_overview
+
 
 
