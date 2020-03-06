@@ -34,3 +34,39 @@ The result:
 
 <img src="./resources/imgs/spark_sql_catalyst_optimizer_example_optimized_3.png" alt="spark_sql_catalyst_optimizer_example_optimized_3" width="400"/>
 
+
+## Deep Dive
+
+### Why structure API
+
+- Structure will limit what can be impressed -> enable optimizations
+- In practice, accommodate the vast majority of computations
+
+<img src="./resources/imgs/
+spark_sql_catalyst_optimizer_why_structure_api.png" alt="
+spark_sql_catalyst_optimizer_why_structure_api" width="600"/>
+
+### How to take advantage of optimization opportunities?
+
+```
+Get an optimizer that automatically finds out
+the most efficient plan to execute data
+operations specified in the user's program
+```
+
+### Trees
+
+abstraction of users programs
+
+#### Expression
+
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_expressions.png" alt="spark_sql_catalyst_optimizer_expressions" width="400"/>
+
+
+#### Query plan
+
+<img src="./resources/imgs/spark_sql_catalyst_optimizer_query_plan.png" alt="spark_sql_catalyst_optimizer_query_plan" width="400"/>
+
+Expression -> new value  
+Query plan -> new dataset  
+Query plan use one or more expressions
