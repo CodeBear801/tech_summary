@@ -18,5 +18,16 @@ define source, here input is kafka
 
 Convert records into string as key and count number of each key
 
-
 <img src="resources/imgs/spark_structured_stream_tahadas_example_s2.png" alt="spark_structured_stream_tahadas_example_s2" width="600"/>
+
+
+### Step 3
+
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example_s3.png" alt="spark_structured_stream_tahadas_example_s3" width="800"/>
+
+### Step4
+
+What to do with final wordcount -> define sink
+
+spark_structured_stream_tahadas_example_s4
