@@ -117,16 +117,19 @@ https://databricks.com/spark/getting-started-with-apache-spark/streaming
 
 ### Event time
 
-spark_structured_stream_tahadas_eventtime_issue
+
+<img src="resources/imgs/spark_structured_stream_tahadas_eventtime_issue.png" alt="spark_structured_stream_tahadas_eventtime_issue" width="600"/>
 
 **Windowing is another kind of grouping**
 
-spark_structured_stream_tahadas_eventtime_agg
+
+<img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg.png" alt="spark_structured_stream_tahadas_eventtime_agg" width="600"/>
 
 
 ### How to aggregate
 
-spark_structured_stream_tahadas_eventtime_agg_how
+
+<img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg_how.png" alt="spark_structured_stream_tahadas_eventtime_agg_how" width="600"/>
 
 
 - Inside spark, there is running aggregation going on for every window.
@@ -134,7 +137,8 @@ spark_structured_stream_tahadas_eventtime_agg_how
 - Keep state for every trigger in distrubute env
 - State record in excutor's memory, write-ahead log, including check point location 
 
-spark_structured_stream_tahadas_handle_late_data
+
+<img src="resources/imgs/spark_structured_stream_tahadas_handle_late_data.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
 
 ### Watermarking
 
