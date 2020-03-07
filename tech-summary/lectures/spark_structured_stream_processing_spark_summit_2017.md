@@ -50,3 +50,15 @@ spark_structured_stream_tahadas_example_s6_cp
 
 ## Details
 
+Traditional way of design complex streaming ETL
+
+spark_structured_stream_tahadas_traditional_etl
+
+Issue: for data to be usable, it takes hours, long time
+
+spark_structured_stream_tahadas_spark_etl
+
+
+
+
+
