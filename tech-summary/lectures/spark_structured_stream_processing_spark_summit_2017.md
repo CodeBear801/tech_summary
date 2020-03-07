@@ -58,7 +58,25 @@ Issue: for data to be usable, it takes hours, long time
 
 spark_structured_stream_tahadas_spark_etl
 
+### How
+
+Another example
+
+spark_structured_stream_tahadas_example2_1
+
+spark_structured_stream_tahadas_example2_2
+
+Raw data -> Dataframe, a collection of row
+
+spark_structured_stream_tahadas_example2_3
 
 
+3 steps:
 
+1.cast to string, then into json format
+2.json string to nested columns
+3.flatten:nested -> un-nested
+
+=> powerful build-in APIs to perform complex data transformations
+https://docs.databricks.com/_static/notebooks/transform-complex-data-types-scala.html
 
