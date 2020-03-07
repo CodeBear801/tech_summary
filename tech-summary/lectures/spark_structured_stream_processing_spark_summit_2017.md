@@ -125,7 +125,7 @@ https://databricks.com/spark/getting-started-with-apache-spark/streaming
 
 #### How to aggregate
 
-<span style="color:red">&#9724;</span> Important  
+<span>&#9733;</span> Important  
 
 
 - Inside spark, there is running aggregation going on for every window. t=1, t=2, t=3
