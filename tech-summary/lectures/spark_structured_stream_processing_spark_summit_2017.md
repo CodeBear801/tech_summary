@@ -80,3 +80,34 @@ spark_structured_stream_tahadas_example2_3
 => powerful build-in APIs to perform complex data transformations
 https://docs.databricks.com/_static/notebooks/transform-complex-data-types-scala.html
 
+spark_structured_stream_tahadas_example2_4
+
+
+spark_structured_stream_tahadas_example2_5
+
+
+spark_structured_stream_tahadas_example2_6
+
+Return a handle to streaming query
+
+spark_structured_stream_tahadas_example2_7
+
+spark_structured_stream_tahadas_example2_8
+
+How parquet table is updated incrementally?  我理解的应该是只是不停的在写同一个文件
+
+More info:  
+https://databricks.com/spark/getting-started-with-apache-spark/streaming
+
+## Play with Time
+
+### Event time
+
+spark_structured_stream_tahadas_eventtime_issue
+
+**Windowing is another kind of grouping**
+
+spark_structured_stream_tahadas_eventtime_agg
+
+
+### How to aggregate
