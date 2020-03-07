@@ -68,13 +68,16 @@ Issue: for data to be usable, it takes hours, long time
 
 Another example
 
-spark_structured_stream_tahadas_example2_1
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_1.png" alt="spark_structured_stream_tahadas_example2_1" width="600"/>
 
-spark_structured_stream_tahadas_example2_2
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_2.png" alt="spark_structured_stream_tahadas_example2_2" width="600"/>
+
 
 Raw data -> Dataframe, a collection of row
 
-spark_structured_stream_tahadas_example2_3
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_3.png" alt="spark_structured_stream_tahadas_example2_3" width="600"/>
+
 
 
 3 steps:
