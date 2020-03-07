@@ -1,8 +1,9 @@
 # Easy, Scalable, Fault Tolerant Stream Processing with Structured Streaming in Apache Spark
 
-Spark Summit 2017
+[Spark Summit 2017 session](https://databricks.com/session/easy-scalable-fault-tolerant-stream-processing-with-structured-streaming-in-apache-spark)
 
-Question: How could spark continues update query result?
+
+Question: How spark continuously update query result?
 
 ## High level overview
 
@@ -21,26 +22,23 @@ Convert records into string as key and count number of each key
 <img src="resources/imgs/spark_structured_stream_tahadas_example_s2.png" alt="spark_structured_stream_tahadas_example_s2" width="600"/>
 
 
-### Step 3
-
-
 <img src="resources/imgs/spark_structured_stream_tahadas_example_s3.png" alt="spark_structured_stream_tahadas_example_s3" width="800"/>
 
-### Step4
+### Step3
 
 What to do with final wordcount -> define sink
 
 
 <img src="resources/imgs/spark_structured_stream_tahadas_example_s4.png" alt="spark_structured_stream_tahadas_example_s4" width="600"/>
 
-### Step 5
+### Step 4
 
 When -> how you want it to be executed
 
 
 <img src="resources/imgs/spark_structured_stream_tahadas_example_s5.png" alt="spark_structured_stream_tahadas_example_s5" width="600"/>
 
-### Step 6
+### Step 5
 
 Fault tolerant
 
@@ -68,10 +66,10 @@ Issue: for data to be usable, it takes hours, long time
 
 Another example
 
-<img src="resources/imgs/spark_structured_stream_tahadas_example2_1.png" alt="spark_structured_stream_tahadas_example2_1" width="600"/>
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_1.png" alt="spark_structured_stream_tahadas_example2_1" width="800"/>
 
 
-<img src="resources/imgs/spark_structured_stream_tahadas_example2_2.png" alt="spark_structured_stream_tahadas_example2_2" width="600"/>
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_2.png" alt="spark_structured_stream_tahadas_example2_2" width="800"/>
 
 
 Raw data -> Dataframe, a collection of row
@@ -80,11 +78,10 @@ Raw data -> Dataframe, a collection of row
 
 
 
-3 steps:
-
-1.cast to string, then into json format  
-2.json string to nested columns  
-3.flatten:nested -> un-nested  
+3 steps:  
+1. cast to string, then into json format  
+2. json string to nested columns  
+3. flatten:nested -> un-nested  
 
 => powerful build-in APIs to perform complex data transformations
 https://docs.databricks.com/_static/notebooks/transform-complex-data-types-scala.html
@@ -108,14 +105,14 @@ Return a handle to streaming query
 
 <img src="resources/imgs/spark_structured_stream_tahadas_example2_8.png" alt="spark_structured_stream_tahadas_example2_8" width="600"/>
 
-How parquet table is updated incrementally?  我理解的应该是只是不停的在写同一个文件  
+How parquet table is updated incrementally?  My understanding is parquet file is partitioned by time, `parseData`'s result will continuously, small patch by small patch, append to certain parquet file.   
 
 More info:  
 https://databricks.com/spark/getting-started-with-apache-spark/streaming
 
-## Play with Time
+### Play with Time
 
-### Event time
+#### Event time
 
 
 <img src="resources/imgs/spark_structured_stream_tahadas_eventtime_issue.png" alt="spark_structured_stream_tahadas_eventtime_issue" width="600"/>
@@ -126,8 +123,9 @@ https://databricks.com/spark/getting-started-with-apache-spark/streaming
 <img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg.png" alt="spark_structured_stream_tahadas_eventtime_agg" width="600"/>
 
 
-### How to aggregate
+#### How to aggregate
 
+Important slide:  
 
 <img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg_how.png" alt="spark_structured_stream_tahadas_eventtime_agg_how" width="600"/>
 
