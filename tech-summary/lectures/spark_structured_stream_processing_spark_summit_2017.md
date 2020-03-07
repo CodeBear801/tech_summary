@@ -1,3 +1,18 @@
+- [Easy, Scalable, Fault Tolerant Stream Processing with Structured Streaming in Apache Spark](#easy-scalable-fault-tolerant-stream-processing-with-structured-streaming-in-apache-spark)
+  - [High level overview](#high-level-overview)
+    - [Step 1](#step-1)
+    - [Step 2](#step-2)
+    - [Step3](#step3)
+    - [Step 4](#step-4)
+    - [Step 5](#step-5)
+  - [Details](#details)
+    - [How](#how)
+    - [Play with Time](#play-with-time)
+      - [Event time](#event-time)
+      - [How to aggregate](#how-to-aggregate)
+    - [Watermarking](#watermarking)
+    - [3 time to be distinguish](#3-time-to-be-distinguish)
+
 # Easy, Scalable, Fault Tolerant Stream Processing with Structured Streaming in Apache Spark
 
 [Spark Summit 2017 session](https://databricks.com/session/easy-scalable-fault-tolerant-stream-processing-with-structured-streaming-in-apache-spark)
