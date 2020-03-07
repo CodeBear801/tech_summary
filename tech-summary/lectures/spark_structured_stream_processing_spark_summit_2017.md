@@ -31,3 +31,22 @@ Convert records into string as key and count number of each key
 What to do with final wordcount -> define sink
 
 spark_structured_stream_tahadas_example_s4
+
+### Step 5
+
+When -> how you want it to be executed
+
+spark_structured_stream_tahadas_example_s5
+
+### Step 6
+
+Fault tolerant
+
+spark_structured_stream_tahadas_example_s6
+
+spark_structured_stream_tahadas_example_s6_cp
+
+**compatible**
+
+## Details
+
