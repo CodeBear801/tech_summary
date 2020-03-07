@@ -130,10 +130,10 @@ Important slide:
 <img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg_how.png" alt="spark_structured_stream_tahadas_eventtime_agg_how" width="600"/>
 
 
-- Inside spark, there is running aggregation going on for every window.
-- To keep this aggregations alive across micro baches
-- Keep state for every trigger in distrubute env
-- State record in excutor's memory, write-ahead log, including check point location 
+- Inside spark, there is running aggregation going on for every window. t=1, t=2, t=3
+- To keep this aggregations alive across micro baches, need to keep them around distribute state
+- Keep state for every trigger in distribute env
+- State record in executor's memory, write-ahead log, including check point location 
 
 
 <img src="resources/imgs/spark_structured_stream_tahadas_handle_late_data.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
@@ -142,7 +142,9 @@ Important slide:
 
 - How long to keep each window open? 
 - Limit the size of state to be aggregate
-- System keep on tracking `max event time`(most latest)
+- System keep on tracking `max event time`(most latest) and calculate gap
+    + If event's time in the range of `(max event time) - watermark` -> late data allowed to aggregate
+    + If event's time late than `(max event time) - watermark`, dropped
 
 
 <img src="resources/imgs/spark_structured_stream_tahadas_watermark1.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
