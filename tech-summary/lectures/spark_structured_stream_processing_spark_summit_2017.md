@@ -111,3 +111,31 @@ spark_structured_stream_tahadas_eventtime_agg
 
 
 ### How to aggregate
+
+spark_structured_stream_tahadas_eventtime_agg_how
+
+
+- Inside spark, there is running aggregation going on for every window.
+- To keep this aggregations alive across micro baches
+- Keep state for every trigger in distrubute env
+- State record in excutor's memory, write-ahead log, including check point location 
+
+spark_structured_stream_tahadas_handle_late_data
+
+### Watermarking
+
+- How long to keep each window open? 
+- Limit the size of state to be aggregate
+- System keep on tracking `max event time`(most latest)
+
+spark_structured_stream_tahadas_watermark1
+
+spark_structured_stream_tahadas_watermark2
+
+How late data do you want
+
+spark_structured_stream_tahadas_watermark3
+
+### 3 time to be distinguish
+
+spark_structured_stream_tahadas_3_time
