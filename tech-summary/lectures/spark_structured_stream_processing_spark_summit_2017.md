@@ -82,28 +82,33 @@ Raw data -> Dataframe, a collection of row
 
 3 steps:
 
-1.cast to string, then into json format
-2.json string to nested columns
-3.flatten:nested -> un-nested
+1.cast to string, then into json format  
+2.json string to nested columns  
+3.flatten:nested -> un-nested  
 
 => powerful build-in APIs to perform complex data transformations
 https://docs.databricks.com/_static/notebooks/transform-complex-data-types-scala.html
 
-spark_structured_stream_tahadas_example2_4
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_4.png" alt="spark_structured_stream_tahadas_example2_4" width="600"/>
 
 
-spark_structured_stream_tahadas_example2_5
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_5.png" alt="spark_structured_stream_tahadas_example2_5" width="600"/>
 
 
-spark_structured_stream_tahadas_example2_6
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_6.png" alt="spark_structured_stream_tahadas_example2_6" width="600"/>
 
 Return a handle to streaming query
 
-spark_structured_stream_tahadas_example2_7
 
-spark_structured_stream_tahadas_example2_8
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_7.png" alt="spark_structured_stream_tahadas_example2_7" width="600"/>
 
-How parquet table is updated incrementally?  我理解的应该是只是不停的在写同一个文件
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example2_8.png" alt="spark_structured_stream_tahadas_example2_8" width="600"/>
+
+How parquet table is updated incrementally?  我理解的应该是只是不停的在写同一个文件  
 
 More info:  
 https://databricks.com/spark/getting-started-with-apache-spark/streaming
