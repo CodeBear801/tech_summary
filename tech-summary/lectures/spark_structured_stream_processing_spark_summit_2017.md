@@ -2,7 +2,7 @@
 
 [Spark Summit 2017 session](https://databricks.com/session/easy-scalable-fault-tolerant-stream-processing-with-structured-streaming-in-apache-spark)
 
-
+<span style="color:blue">&#9724;</span>
 Question: How spark continuously update query result?
 
 ## High level overview
@@ -125,9 +125,7 @@ https://databricks.com/spark/getting-started-with-apache-spark/streaming
 
 #### How to aggregate
 
-Important slide:  
-
-<img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg_how.png" alt="spark_structured_stream_tahadas_eventtime_agg_how" width="600"/>
+<span style="color:red">&#9724;</span> Important  
 
 
 - Inside spark, there is running aggregation going on for every window. t=1, t=2, t=3
@@ -135,6 +133,11 @@ Important slide:
 - Keep state for every trigger in distribute env
 - State record in executor's memory, write-ahead log, including check point location 
 
+<img src="resources/imgs/spark_structured_stream_tahadas_eventtime_agg_how.png" alt="spark_structured_stream_tahadas_eventtime_agg_how" width="600"/>
+
+
+<br/>
+<br/>
 
 <img src="resources/imgs/spark_structured_stream_tahadas_handle_late_data.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
 
