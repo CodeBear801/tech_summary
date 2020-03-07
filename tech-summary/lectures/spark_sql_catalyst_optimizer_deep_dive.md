@@ -1,3 +1,18 @@
+- [A Deep Dive into Spark SQL's Catalyst Optimizer with Yin Huai](#a-deep-dive-into-spark-sqls-catalyst-optimizer-with-yin-huai)
+  - [Example](#example)
+    - [Original version](#original-version)
+    - [Optimized version](#optimized-version)
+  - [Deep Dive](#deep-dive)
+    - [Why structure API](#why-structure-api)
+    - [How to take advantage of optimization opportunities?](#how-to-take-advantage-of-optimization-opportunities)
+    - [Trees](#trees)
+      - [Expression](#expression)
+      - [Query plan](#query-plan)
+      - [Transformation](#transformation)
+      - [Optimization](#optimization)
+      - [Physical plan](#physical-plan)
+  - [Overview](#overview)
+
 # A Deep Dive into Spark SQL's Catalyst Optimizer with Yin Huai
 
 [video](https://www.youtube.com/watch?v=RmUn5vHlevc)
