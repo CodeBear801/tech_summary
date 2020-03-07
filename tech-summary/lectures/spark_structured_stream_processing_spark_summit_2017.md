@@ -30,21 +30,25 @@ Convert records into string as key and count number of each key
 
 What to do with final wordcount -> define sink
 
-spark_structured_stream_tahadas_example_s4
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example_s4.png" alt="spark_structured_stream_tahadas_example_s4" width="600"/>
 
 ### Step 5
 
 When -> how you want it to be executed
 
-spark_structured_stream_tahadas_example_s5
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example_s5.png" alt="spark_structured_stream_tahadas_example_s5" width="600"/>
 
 ### Step 6
 
 Fault tolerant
 
-spark_structured_stream_tahadas_example_s6
 
-spark_structured_stream_tahadas_example_s6_cp
+<img src="resources/imgs/spark_structured_stream_tahadas_example_s6.png" alt="spark_structured_stream_tahadas_example_s6" width="600"/>
+
+
+<img src="resources/imgs/spark_structured_stream_tahadas_example_s6_cp.png" alt="spark_structured_stream_tahadas_example_s6_cp" width="600"/>
 
 **compatible**
 
@@ -52,11 +56,13 @@ spark_structured_stream_tahadas_example_s6_cp
 
 Traditional way of design complex streaming ETL
 
-spark_structured_stream_tahadas_traditional_etl
+
+
+<img src="resources/imgs/spark_structured_stream_tahadas_traditional_etl.png" alt="spark_structured_stream_tahadas_traditional_etl" width="600"/>
 
 Issue: for data to be usable, it takes hours, long time
 
-spark_structured_stream_tahadas_spark_etl
+<img src="resources/imgs/spark_structured_stream_tahadas_spark_etl.png" alt="spark_structured_stream_tahadas_spark_etl" width="600"/>
 
 ### How
 
