@@ -146,14 +146,19 @@ https://databricks.com/spark/getting-started-with-apache-spark/streaming
 - Limit the size of state to be aggregate
 - System keep on tracking `max event time`(most latest)
 
-spark_structured_stream_tahadas_watermark1
 
-spark_structured_stream_tahadas_watermark2
+<img src="resources/imgs/spark_structured_stream_tahadas_watermark1.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
+
+
+<img src="resources/imgs/spark_structured_stream_tahadas_watermark2.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
 
 How late data do you want
 
-spark_structured_stream_tahadas_watermark3
+
+<img src="resources/imgs/spark_structured_stream_tahadas_watermark3.png" alt="spark_structured_stream_tahadas_handle_late_data" width="600"/>
 
 ### 3 time to be distinguish
 
-spark_structured_stream_tahadas_3_time
+
+
+<img src="resources/imgs/spark_structured_stream_tahadas_3_time.png" alt="spark_structured_stream_tahadas_3_time" width="600"/>
