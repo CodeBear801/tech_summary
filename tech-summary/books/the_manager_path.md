@@ -17,7 +17,7 @@ By Camille Fournier
 - <span style="color:#0000FF">&#9632;</span> Same question, suggestion from Jocelyn Goldfein for FB around 2010, about faster software shipment
     + move people around to unblock each other
     + enable feedback loops -> single branch -> use feature flags to enable/disable features
-    + Good iterative process 
+    + **Good iterative process** 
         * week 1 -> prototype, week 2 -> testing with facebook people, week 3 getting some form of external usage data, week 4 trying to polish and iterate on the thing learned.  At the end of week 4 prune the branch and start next iteration     
 
 
