@@ -68,7 +68,8 @@ Date | Name | Links | Comments
 [\<\<Hit Refresh\>\>](tech-summary/books/hit_refresh.md) 拯救曾经过气的微软  
 [\<\<Who Says Elephants Cant Dance\>\>]()   
 [\<\<User story Mapping\>\>](tech-summary/books/user-story-mapping/user-story-mapping.md) Become a better project manager  
-[\<\<Effective Morden C++\>\>](tech-summary/language/c++/c++11-rvalue-reference.md)
+[\<\<Effective Morden C++\>\>](tech-summary/language/c++/c++11-rvalue-reference.md)  
+[\<\<The Manager's path\>\>](tech-summary/books/the_manager_path.md) Software developers who do not want to be manager are not good developers.
 
 ## Meetup & Tech Conference
 
