@@ -14,6 +14,12 @@ By Camille Fournier
        *  Is the team bogged down in a bunch of pointless meetings or bureaucracy? 
        *  Do they feel like their ideas aren’t being heard and demotivated by a culture that expects them to just churn out code without listening to the team’s feedback on what they could be working on? 
 
+- Same question, suggestion from Jocelyn Goldfein for FB around 2010, about faster software shipment
+    + move people around to unblock each other
+    + enable feedback loops
+    + Good iterative process 
+        * week 1 -> prototype, week 2 -> testing with facebook people, week 3 getting some form of external usage data, week 4 trying to polish and iterate on the thing learned.  At the end of week 4 prune the branch and start next iteration     
+
 
 - <span style="color:#0000FF">&#9632;</span> Suggestions for new manager
    + Spend time getting to know your new team as individuals.  Team is important than project and technique.
