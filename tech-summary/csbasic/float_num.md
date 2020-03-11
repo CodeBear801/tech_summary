@@ -1,3 +1,14 @@
+- [Float number](#float-number)
+  - [Conversion](#conversion)
+    - [Binary fraction to decimal](#binary-fraction-to-decimal)
+    - [Decimal fraction to binary](#decimal-fraction-to-binary)
+  - [Storage the value of float](#storage-the-value-of-float)
+    - [float32](#float32)
+    - [float64](#float64)
+    - [Sign bit](#sign-bit)
+    - [Exponent](#exponent)
+    - [Mantissa](#mantissa)
+
 # Float number
 
 How computer represent float point  
