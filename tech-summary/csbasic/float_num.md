@@ -94,3 +94,4 @@ summary compare
 - https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1
 - https://indepth.dev/the-mechanics-behind-exponent-bias-in-floating-point/
 - https://indepth.dev/the-simple-math-behind-decimal-binary-conversion-algorithms/
+- https://www.electronics-tutorials.ws/binary/binary-fractions.html
