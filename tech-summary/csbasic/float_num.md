@@ -23,3 +23,14 @@ float_example_decimalfraction2binary
 - 1 bit for the sign of the number. 0 means positive and 1 means negative.
 - 8 bits for the exponent.
 - 23 bits for the mantissa.
+
+float_float32_format
+
+### float64
+
+**Double precision**, which uses 64 bits and has the following layout.
+- **1 bit** for the sign of the number. 0 means positive and 1 means negative.
+- **11 bits** for the exponent.
+- **52 bits** for the mantissa.
+
+float_float64_format
