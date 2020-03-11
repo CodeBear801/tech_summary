@@ -7,13 +7,15 @@ Decimal(fragment) => binary => float32/float64
 
 ### Binary fraction to decimal
 
-float_exmaple_binary2decimal
+<img src="resources/float_exmaple_binary2decimal.png" alt="float_exmaple_binary2decimal" width="400"/>
+
 
 ### Decimal fraction to binary
 
 (A great example from [quora](https://www.quora.com/How-do-I-convert-the-decimal-fraction-to-binary-with-a-maximum-of-6-places-to-the-right-of-the-radix-point-example-33-90625))
 
-float_example_decimalfraction2binary
+<img src="resources/float_example_decimalfraction2binary.png" alt="float_example_decimalfraction2binary" width="400"/>
+
 
 ## Storage the value of float
 
@@ -24,7 +26,9 @@ float_example_decimalfraction2binary
 - 8 bits for the exponent.
 - 23 bits for the mantissa.
 
-float_float32_format
+
+<img src="resources/float_float32_format.png" alt="float_float32_format" width="400"/>
+
 
 ### float64
 
@@ -33,7 +37,9 @@ float_float32_format
 - **11 bits** for the exponent.
 - **52 bits** for the mantissa.
 
-float_float64_format
+
+<img src="resources/float_float64_format.png" alt="float_float64_format" width="400"/>
+
 
 ### Sign bit
 0 for positive
