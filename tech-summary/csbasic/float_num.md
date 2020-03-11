@@ -8,6 +8,7 @@
     - [Sign bit](#sign-bit)
     - [Exponent](#exponent)
     - [Mantissa](#mantissa)
+  - [Reference](#reference)
 
 # Float number
 
@@ -84,3 +85,8 @@ Otherwise
 111.00101101 => 1.1100101101 => 1100101101
 0.0001011011 => 1.011011 => 011011
 ```
+
+## Reference
+- https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1
+- https://indepth.dev/the-mechanics-behind-exponent-bias-in-floating-point/
+- https://indepth.dev/the-simple-math-behind-decimal-binary-conversion-algorithms/
