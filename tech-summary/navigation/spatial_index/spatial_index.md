@@ -8,6 +8,9 @@
 
 ## Spatial Index
 
+### Dynamic space divide
+Spatial index is build based on density of data
+
 - Rtree
 - R*Tree
 - KD tree
@@ -29,5 +32,5 @@
 <img src="../resources/spatial_index_comparison_pic.png" alt="spatial_index_comparison_pic" width="400"/>
 <br/>
 
-
+## More information
 
