@@ -117,8 +117,9 @@ Shift once & incrementing exponent
 <img src="resources/float_specific_numbers.png" alt="float_specific_numbers" width="400"/>
 
 ## Reference
-- https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1
-- https://indepth.dev/the-mechanics-behind-exponent-bias-in-floating-point/
-- https://indepth.dev/the-simple-math-behind-decimal-binary-conversion-algorithms/
-- https://www.electronics-tutorials.ws/binary/binary-fractions.html
-- http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/lectures/04-float.pdf
+- [The simple math behind decimal-binary conversion algorithms](https://indepth.dev/the-simple-math-behind-decimal-binary-conversion-algorithms/) <span>&#9733;</span>
+- [The mechanics behind exponent bias in floating point](https://indepth.dev/the-mechanics-behind-exponent-bias-in-floating-point/)
+- [https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1](https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1)
+- [binary fractions](https://www.electronics-tutorials.ws/binary/binary-fractions.html)
+- [\<\<Computer Systems\>\> float point](http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/lectures/04-float.pdf) <span>&#9733;</span>
+
