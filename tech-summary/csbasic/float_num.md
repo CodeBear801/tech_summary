@@ -100,18 +100,21 @@ Otherwise
 
 #### Basic rules
 
-float_rounding_binary_num
+
+<img src="resources/float_rounding_binary_num.png" alt="float_rounding_binary_num" width="400"/>
+
 
 
 #### Avoid Overflow
 
-float_rounding_avoid_overflow
+<img src="resources/float_rounding_avoid_overflow.png" alt="float_rounding_avoid_overflow" width="400"/>
+
 
 Shift once & incrementing exponent
 
 ## Specific numbers
 
-
+<img src="resources/float_specific_numbers.png" alt="float_specific_numbers" width="400"/>
 
 ## Reference
 - https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1
