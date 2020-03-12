@@ -5,9 +5,10 @@
   - [Storage the value of float](#storage-the-value-of-float)
     - [float32](#float32)
     - [float64](#float64)
-    - [Sign bit](#sign-bit)
-    - [Exponent](#exponent)
-    - [Mantissa](#mantissa)
+    - [Example of floating point decoding](#example-of-floating-point-decoding)
+      - [Sign bit](#sign-bit)
+      - [Exponent](#exponent)
+      - [Mantissa / Significand](#mantissa--significand)
   - [Reference](#reference)
 
 # Float number
@@ -37,7 +38,7 @@ Decimal(fragment) => binary => float32/float64
 - 1 bit for the sign of the number. 0 means positive and 1 means negative.
 - 8 bits for the exponent.
 - 23 bits for the mantissa.
-
+- ≈ 7 decimal digits, 10±38
 
 <img src="resources/float_float32_format.png" alt="float_float32_format" width="400"/>
 
@@ -48,16 +49,20 @@ Decimal(fragment) => binary => float32/float64
 - **1 bit** for the sign of the number. 0 means positive and 1 means negative.
 - **11 bits** for the exponent.
 - **52 bits** for the mantissa.
-
+- ≈ 16 decimal digits, 10±308
 
 <img src="resources/float_float64_format.png" alt="float_float64_format" width="400"/>
 
 
-### Sign bit
+### Example of floating point decoding
+
+<img src="resources/float_example_c_decoding.png" alt="float_example_c_decoding" width="400"/>
+
+#### Sign bit
 0 for positive
 1 for negative
 
-### Exponent
+#### Exponent
 - Exponent can be positive (to represent large numbers) or negative (to represent small numbers, ie fractions).
 - Exponent number is a shift to `127`(`7F`)
 ```
@@ -79,8 +84,9 @@ Otherwise
      
 
 
-### Mantissa
+#### Mantissa / Significand
 - Always keep first digit as 1, which then could be ignored during store the value
+- Get extra leading bit for `free`
 ```
 111.00101101 => 1.1100101101 => 1100101101
 0.0001011011 => 1.011011 => 011011
