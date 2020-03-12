@@ -9,6 +9,10 @@
       - [Sign bit](#sign-bit)
       - [Exponent](#exponent)
       - [Mantissa / Significand](#mantissa--significand)
+    - [Rounding](#rounding)
+      - [Basic rules](#basic-rules)
+      - [Avoid Overflow](#avoid-overflow)
+  - [Specific numbers](#specific-numbers)
   - [Reference](#reference)
 
 # Float number
@@ -92,8 +96,21 @@ Otherwise
 0.0001011011 => 1.011011 => 011011
 ```
 
-Todo:
-summary compare
+### Rounding
+
+#### Basic rules
+
+float_rounding_binary_num
+
+
+#### Avoid Overflow
+
+float_rounding_avoid_overflow
+
+Shift once & incrementing exponent
+
+## Specific numbers
+
 
 
 ## Reference
