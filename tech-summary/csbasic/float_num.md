@@ -101,3 +101,4 @@ summary compare
 - https://indepth.dev/the-mechanics-behind-exponent-bias-in-floating-point/
 - https://indepth.dev/the-simple-math-behind-decimal-binary-conversion-algorithms/
 - https://www.electronics-tutorials.ws/binary/binary-fractions.html
+- http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/lectures/04-float.pdf
