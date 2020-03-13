@@ -1,4 +1,4 @@
-# notes about real time logs by Jay Kreps
+# Notes about real time logs by Jay Kreps
 
 ## logs
 - what is log 
