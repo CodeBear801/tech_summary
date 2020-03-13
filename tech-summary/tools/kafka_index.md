@@ -6,7 +6,7 @@
 - [Experimentation Using Event-based Systems from Martin Fowler and Toby Clemson 2018](../lectures/experimentation_using_event_based_system.md)
 - [real time log from Jay Kreps 2013](./kafka/notes_from_jay_kreps_realtime_logs.md)
 - [\<\<Streaming Systems\>\> notes](../books/streaming-system/streaming_system.md)
-- [General discussion about Kafka from Robin Moffatt](./kafka/notes_from_robin_moffatt_confluent)
+- [General discussion about Kafka from Robin Moffatt](./kafka/notes_from_robin_moffatt_confluent.md)
 - [Kafka设计解析笔记](./kafka/kafka_design_by_guojun_notes.md)
 
 ## Experience
