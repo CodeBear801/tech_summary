@@ -66,11 +66,7 @@ class S2Point /* Vector3_d */ {
   S2Point(double x, double y, double z);
 ```
 
-There are two ways to represent a point on 3D space.  By `Cartesian` way you could imagine there is a cubic of `[-1,+1]x[-1,+1]x[-1,+1]`， `x, y, z` represent for offset value on each dimension
-
-<img src="../resources/google_s2_lat_lon_xyz.png" alt="google_s2_lat_lon_xyz" width="400"/>
-
-(Ref from [Spherical to Cartesian coordinates Calculator](https://keisan.casio.com/exec/system/1359534351))
+There are two ways to represent a point on 3D space.  By `Cartesian` way you could imagine there is a cubic of `[-1,+1]x[-1,+1]x[-1,+1]`， `x, y, z` represent for offset value on each dimension.  More discussion please go to next section.
 
 
 ## S2LatLng
@@ -78,11 +74,33 @@ There are two ways to represent a point on 3D space.  By `Cartesian` way you cou
 The `S2LatLng` class represents a point on the unit sphere as a pair of latitude-longitude coordinates.
 
 
+```C++
+class S2LatLng {
+ public:
+   S2LatLng(S1Angle lat, S1Angle lng);
+
+```
+
+### Conversion between LatLon and XYZ
+
+- [s2latlng.cc](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2latlng.cc#L36
+)
+- [s2/latlng.go/PointFromLatLng](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/latlng.go#L85)
+
+```C++
+S2Point S2LatLng::ToPoint() const {
+  //...
+  double phi = lat().radians();
+  double theta = lng().radians();
+  double cosphi = cos(phi);
+  return S2Point(cos(theta) * cosphi, sin(theta) * cosphi, sin(phi));
+}
+```
+
+<img src="../resources/google_s2_lat_lon_xyz.png" alt="google_s2_lat_lon_xyz" width="400"/><br/>
+(Ref from [Spherical to Cartesian coordinates Calculator](https://keisan.casio.com/exec/system/1359534351))
 
 
 
-
-Convert from LatLon2XYZ: 
-https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2latlng.cc#L36
 
 
