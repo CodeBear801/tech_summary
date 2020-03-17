@@ -125,5 +125,14 @@ An `S2LatLngRect` is a type of `S2Region` that represents a rectangle in latitud
 - [s2/rect.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/rect.go#L28)
 
 
+## S1ChordAngle
+`S1ChordAngle` is a specialized angle type that represents the distance between two points on the sphere. (Note that the distance between two points can be expressed as the angle between those points measured from the sphere’s center.) Its representation makes it very efficient for computing and comparing distances, but unlike S1Angle it is only capable of representing angles between 0 and 180 degrees. (Internally, S1ChordAngle computes the squared distance between two points through the interior of the sphere, i.e. the squared length of the chord between those points).
+
+https://www.geogebra.org/m/UGPgDmmP
+
+`S1ChordAngle` is the preferred representation for distances internally, because it is much faster to compute than S1Angle and also supports the exact predicates needed for robust geometric algorithms. S1ChordAngle supports many of the same methods as S1Angle, and it is also easy to convert back and forth as required.
+
+- [s1chord_angle.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s1chord_angle.h#L46)
+- [s1/chordangle.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s1/chordangle.go#L37)
 
 
