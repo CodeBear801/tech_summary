@@ -1,4 +1,4 @@
-# Google S2 Basic Types
+# [Google S2 Basic Types](https://s2geometry.io/devguide/basic_types)
 
 ## S1Angle
 
@@ -104,10 +104,26 @@ S2Point S2LatLng::ToPoint() const {
 `φ` is the value of `latitude`, which is `theta` in the upper code  
 
 ```C++
+// S2LatLng::ToPoint() could be translated to
 x = r * cos θ * cos φ
 y = r * cos θ * sin φ 
 z = r * sin θ
 ```
+
+## S2Region
+
+An `S2Region` represents a two-dimensional region over the unit sphere. It is an abstract interface with various concrete subtypes, such as discs, rectangles, polylines, polygons, geometry collections, buffered shapes, etc.  `S2Region`'s interface is restricted to methods that are useful for computing approximations.
+
+- [s2region.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2region.h#L41)
+- [s2/region.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/region.go#L22)
+
+## S2LatLngRect
+
+An `S2LatLngRect` is a type of `S2Region` that represents a rectangle in latitude-longitude space. It is capable of representing the empty and full rectangles as well as single points. It has an `AddPoint` method that makes it easy to construct a bounding rectangle for a set of points, including point sets that span the 180 degree meridian.
+
+- [s2latlng_rect.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2latlng_rect.h#L60)
+- [s2/rect.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/rect.go#L28)
+
 
 
 
