@@ -136,3 +136,16 @@ https://www.geogebra.org/m/UGPgDmmP
 - [s1/chordangle.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s1/chordangle.go#L37)
 
 
+## S2Cap
+
+An `S2Cap` represents a spherical cap, i.e. a portion of a sphere cut off by a plane. This is the equivalent of a closed disc in planar geometry (i.e., a circle together with its interior), so if you are looking for a way to represent a circle or disc then you are probably looking for an `S2Cap`.
+
+
+<img src="../resources/s2_basic_type_s2cap_earth.png" alt="s2_basic_type_s2cap_earth" width="200"/><br/>
+(Ref from [depositphotos](https://depositphotos.com/254408214/stock-photo-black-hole-in-the-planet.html))
+
+### Interior and Exterior of a Circle
+
+s2_basic_type_s2cap_interior_exterior
+
+
