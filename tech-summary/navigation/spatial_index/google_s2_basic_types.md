@@ -158,3 +158,12 @@ An `S2Polyline` represents a sequence of zero or more vertices connected by stra
 
 - [s2polyline.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2polyline.h#L45)
 - [s2/polyline.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/polyline.go#L28)
+
+## S2 Loop
+
+- [s2loop.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2loop.h#L85)
+- [s2builder.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2builder.h#L134)
+- [s2/loop.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/loop.go#L45)
+
+
+
