@@ -140,12 +140,21 @@ https://www.geogebra.org/m/UGPgDmmP
 
 An `S2Cap` represents a spherical cap, i.e. a portion of a sphere cut off by a plane. This is the equivalent of a closed disc in planar geometry (i.e., a circle together with its interior), so if you are looking for a way to represent a circle or disc then you are probably looking for an `S2Cap`.
 
+- [s2cap.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2cap.h#L59)
+- [s2/cap.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/cap.go#L61)
 
 <img src="../resources/s2_basic_type_s2cap_earth.png" alt="s2_basic_type_s2cap_earth" width="200"/><br/>
 (Ref from [depositphotos](https://depositphotos.com/254408214/stock-photo-black-hole-in-the-planet.html))
 
 ### Interior and Exterior of a Circle
 
-s2_basic_type_s2cap_interior_exterior
+<img src="../resources/s2_basic_type_s2cap_interior_exterior.png" alt="s2_basic_type_s2cap_interior_exterior" width="400"/><br/>
+(Ref from [circle-e](https://www.math-only-math.com/circle-e.html))
 
 
+## S2Polyline
+
+An `S2Polyline` represents a sequence of zero or more vertices connected by straight edges (geodesics). Edges of length 0 and 180 degrees are not allowed, i.e. adjacent vertices should not be identical or antipodal.
+
+- [s2polyline.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2polyline.h#L45)
+- [s2/polyline.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/polyline.go#L28)
