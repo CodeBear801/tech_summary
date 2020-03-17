@@ -1,5 +1,6 @@
 - [Abseil Tips of the week](#abseil-tips-of-the-week)
   - [24: Copies](#24-copies)
+  - [77: Temporaries, Moves, and Copies](#77-temporaries-moves-and-copies)
   - [101: Return Values, References, and Lifetimes](#101-return-values-references-and-lifetimes)
 
 # Abseil Tips of the week
@@ -26,6 +27,8 @@ void bar() {
   std::string second = foo(local);
 }
 ```
+
+## [77: Temporaries, Moves, and Copies](https://abseil.io/tips/77)
 
 ## [101: Return Values, References, and Lifetimes](https://abseil.io/tips/101)
 
