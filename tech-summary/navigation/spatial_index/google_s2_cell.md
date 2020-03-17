@@ -44,7 +44,8 @@ func PointFromLatLng(ll LatLng) Point {
 
 (Ref from [Spherical to Cartesian coordinates Calculator](https://keisan.casio.com/exec/system/1359534351))
 
-`θ`即为经纬度的纬度，也就是上面代码中的`phi`，`φ`即为经纬度的经度，也就是上面代码的`theta`
+`θ` is the value of `longitude`, which is `phi` in the upper code  
+`φ` is the value of `latitude`, which is `theta` in the upper code  
 ```
 x = r * cos θ * cos φ
 y = r * cos θ * sin φ 

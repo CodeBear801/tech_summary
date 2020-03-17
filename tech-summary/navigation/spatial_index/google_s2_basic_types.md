@@ -100,7 +100,14 @@ S2Point S2LatLng::ToPoint() const {
 <img src="../resources/google_s2_lat_lon_xyz.png" alt="google_s2_lat_lon_xyz" width="400"/><br/>
 (Ref from [Spherical to Cartesian coordinates Calculator](https://keisan.casio.com/exec/system/1359534351))
 
+`θ` is the value of `longitude`, which is `phi` in the upper code  
+`φ` is the value of `latitude`, which is `theta` in the upper code  
 
+```C++
+x = r * cos θ * cos φ
+y = r * cos θ * sin φ 
+z = r * sin θ
+```
 
 
 
