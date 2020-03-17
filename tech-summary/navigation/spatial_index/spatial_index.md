@@ -34,3 +34,5 @@ Spatial index is build based on density of data
 
 ## More information
 
+- [Bing Map - Tile Coordinates and Quadkeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system#tile-coordinates-and-quadkeys)
+- [The google Tile Schema](https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
