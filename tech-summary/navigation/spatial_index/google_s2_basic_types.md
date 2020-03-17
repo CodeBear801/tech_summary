@@ -66,14 +66,23 @@ class S2Point /* Vector3_d */ {
   S2Point(double x, double y, double z);
 ```
 
-There are two ways to represent a point on 3D space.  By `Cartesian` way you could imagine there is a cubic of `[-1,+1]x[-1,+1]x[-1,+1]`， `x, y, z` represent for offset value on each dimention
+There are two ways to represent a point on 3D space.  By `Cartesian` way you could imagine there is a cubic of `[-1,+1]x[-1,+1]x[-1,+1]`， `x, y, z` represent for offset value on each dimension
 
 <img src="../resources/google_s2_lat_lon_xyz.png" alt="google_s2_lat_lon_xyz" width="400"/>
 
 (Ref from [Spherical to Cartesian coordinates Calculator](https://keisan.casio.com/exec/system/1359534351))
 
 
+## S2LatLng
+
+The `S2LatLng` class represents a point on the unit sphere as a pair of latitude-longitude coordinates.
 
 
+
+
+
+
+Convert from LatLon2XYZ: 
+https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2latlng.cc#L36
 
 
