@@ -84,6 +84,7 @@ Fill space with Hilbert curve in middle levels.
 - [S2 main page](https://s2geometry.io/)
 - [S2 Overview](https://s2geometry.io/about/overview)
 - [S2 Cells](https://s2geometry.io/devguide/s2cell_hierarchy.html)<span>&#9733;</span><span>&#9733;</span>
+- [S2 Covering Example](https://s2geometry.io/devguide/examples/coverings.html)
 - [Geometry on the Sphere: Google's S2 Library - Intro slides from Google](https://docs.google.com/presentation/d/1Hl4KapfAENAOf4gv-pSngKwvS_jwNVHRPZTTDzXXn6Q/view#slide=id.i0)
 
 
