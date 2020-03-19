@@ -62,3 +62,52 @@ S2CellUnion GetCovering(const S2ShapeIndex& index) {
 
 ```
 You could find more samples in this file [s2closest_point_query_test.cc](https://github.com/google/s2geometry/blob/bec06921d72068fb22ef2100830c718659a19b58/src/s2/s2closest_point_query_test.cc#L42)
+
+
+## Generate search terms
+
+[code]()
+
+```C++
+  std::vector<S2Point> documents;
+  documents.reserve(FLAGS_num_documents);
+  for (int docid = 0; docid < FLAGS_num_documents; ++docid) {
+    documents.push_back(S2Testing::RandomPoint());
+  }
+
+  // We use a hash map as our inverted index.  The key is an index term, and
+  // the value is the set of "document ids" where this index term is present.
+  std::unordered_map<string, std::vector<int>> index;
+
+  // Create an indexer suitable for an index that contains points only.
+  // (You may also want to adjust min_level() or max_level() if you plan
+  // on querying very large or very small regions.)
+  S2RegionTermIndexer::Options options;
+  options.set_index_contains_points_only(true);
+  S2RegionTermIndexer indexer(options);
+
+  // Add the documents to the index.
+  for (int docid = 0; docid < documents.size(); ++docid) {
+    S2Point index_region = documents[docid];
+    for (const auto& term : indexer.GetIndexTerms(index_region, kPrefix)) {
+      // [perry]
+      // - term string generated for multiple layers
+      // - for near by location, they will share similar prefix
+      // term is s2:9b1
+      // term is s2:9b0c
+      // term is s2:9b09
+      // term is s2:9b094
+      // term is s2:9b091
+      // term is s2:9b091c
+      // term is s2:9b091b
+      // term is s2:9b091b4
+      // term is s2:9b091b7
+      // term is s2:9b091b6c
+      // term is s2:9b091b6f
+      // term is s2:9b091b6fc
+      // term is s2:9b091b6fd
+      index[term].push_back(docid);
+    }
+  }
+```
+
