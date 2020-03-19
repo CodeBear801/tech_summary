@@ -112,7 +112,7 @@ z = r * sin θ
 
 ## S2Region
 
-An `S2Region` represents a two-dimensional region over the unit sphere. It is an abstract interface with various concrete subtypes, such as discs, rectangles, polylines, polygons, geometry collections, buffered shapes, etc.  `S2Region`'s interface is restricted to methods that are useful for computing approximations.
+An `S2Region` represents a two-dimensional region over the unit sphere. It is an abstract interface with various concrete subtypes, such as discs, rectangles, polylines, polygons, geometry collections, buffered shapes, etc.  **`S2Region`'s interface is restricted to methods that are useful for computing approximations.**
 
 - [s2region.h](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2region.h#L41)
 - [s2/region.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/region.go#L22)
