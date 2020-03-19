@@ -5,8 +5,8 @@
     - [Two dimensional space to one](#two-dimensional-space-to-one)
     - [Indexing](#indexing)
   - [Deep dive](#deep-dive)
-    - [How Hilbert curve works <span>&#9733;</span>](#how-hilbert-curve-works-%e2%98%85)
-    - [How S2 Cell is generated <span>&#9733;</span>](#how-s2-cell-is-generated-%e2%98%85)
+    - [How Hilbert curve works<span>&#9733;</span>](#how-hilbert-curve-works%e2%98%85)
+    - [How S2 Cell is generated<span>&#9733;</span>](#how-s2-cell-is-generated%e2%98%85)
   - [More info](#more-info)
     - [Doc](#doc)
     - [Demo](#demo)
@@ -72,9 +72,9 @@ Fill space with Hilbert curve in middle levels.
 
 ## Deep dive
 
-### [How Hilbert curve works](./hilbert_curve.md) <span>&#9733;</span>
+### [How Hilbert curve works<span>&#9733;</span>](./hilbert_curve.md) 
 
-### [How S2 Cell is generated](./google_s2_cell.md) <span>&#9733;</span>
+### [How S2 Cell is generated<span>&#9733;</span>](./google_s2_cell.md) 
 
 
 ## More info
