@@ -13,6 +13,15 @@ S2CellUnion GetCovering(const S2ShapeIndex& index) {
   return covering;
 }
 ```
+sample code
+```C++
+  S2RegionCoverer::Options options;
+  options.set_max_cells(5);
+  S2RegionCoverer coverer(options);
+  S2Cap cap(center, radius);
+  S2CellUnion covering = coverer.GetCovering(cap);
+```
+
 
 ## Test containment
 [code](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/mutable_s2shape_index.h#L79)
