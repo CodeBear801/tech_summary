@@ -33,3 +33,31 @@ S2CellUnion GetCovering(const S2ShapeIndex& index) {
     }
   }
 ```
+
+## S2ClosestPointQuery
+
+[code](https://github.com/google/s2geometry/blob/9398b7c8d55c15c4ad7cdc645c482232ea7c087a/src/s2/s2closest_point_query.h#L150)
+
+```C++
+  // Build an index containing random points anywhere on the Earth.
+  S2PointIndex<int> index;
+  for (int i = 0; i < FLAGS_num_index_points; ++i) {
+    index.Add(S2Testing::RandomPoint(), i);
+  }
+
+  // Create a query to search within the given radius of a target point.
+  S2ClosestPointQuery<int> query(&index);
+  query.mutable_options()->set_max_distance(
+      S1Angle::Radians(S2Earth::KmToRadians(FLAGS_query_radius_km)));
+
+  // Repeatedly choose a random target point, and count how many index points
+  // are within the given radius of that point.
+  int64 num_found = 0;
+  for (int i = 0; i < FLAGS_num_queries; ++i) {
+    S2ClosestPointQuery<int>::PointTarget target(S2Testing::RandomPoint());
+    num_found += query.FindClosestPoints(&target).size();
+  }
+
+  printf("Found %lld points in %d queries\n", num_found, FLAGS_num_queries);
+
+```
