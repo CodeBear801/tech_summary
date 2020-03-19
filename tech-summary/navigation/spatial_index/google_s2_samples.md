@@ -61,3 +61,4 @@ S2CellUnion GetCovering(const S2ShapeIndex& index) {
   printf("Found %lld points in %d queries\n", num_found, FLAGS_num_queries);
 
 ```
+You could find more samples in this file [s2closest_point_query_test.cc](https://github.com/google/s2geometry/blob/bec06921d72068fb22ef2100830c718659a19b58/src/s2/s2closest_point_query_test.cc#L42)
