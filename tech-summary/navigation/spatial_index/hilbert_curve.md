@@ -148,3 +148,4 @@ Notes:
 - [Hilbert curve generator](https://onlinemathtools.com/generate-hilbert-curve)
 - [Hilbert curve impl in c](https://www.compuphase.com/hilbert.htm)
 - [Hilbert curve impl in python](http://www.fundza.com/algorithmic/space_filling/hilbert/basics/)
+- Telenav tried with a [JAVA version of hilbert-curve implementation](https://github.com/davidmoten/hilbert-curve), which is used to generate a `64 bit hilbert value` sorting POI and street document, then leverage `Lucene`'s storage optimization to reduce search index size.
