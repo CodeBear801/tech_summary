@@ -166,4 +166,19 @@ An `S2Polyline` represents a sequence of zero or more vertices connected by stra
 - [s2/loop.go](https://github.com/golang/geo/blob/5b978397cfecc7280e598e9ac5854e9534b0918b/s2/loop.go#L45)
 
 
+## S2 Shape
+Shape could represent all kinds of `shapes`, which contains a `chain` of `edges`.
+- [s2shape.h](https://github.com/google/s2geometry/blob/bec06921d72068fb22ef2100830c718659a19b58/src/s2/s2shape.h#L25-L26)
+
+### Difference between shape and region
+
+
+<img src="../resources/s2_basic_type_shape_region.png" alt="s2_basic_type_shape_region" width="600"/><br/>
+
+- `s2shape` mainly used to represent polygonal geometry, it could represent `point`, `loop`, `polygon`.  Most of core operation of S2 works on `s2shape`.
+- `s2region` is used to calculate geometric approximations.  `S2RegionCoverer` could be used for approaching an area.  
+  +  `S2Builder` is a tool for assembling polygonal geometry from edges, it constructs `regions` using `snap rounding`
+
+
+<img src="../resources/s2_basic_type_stable_snap_rounding.png" alt="s2_basic_type_stable_snap_rounding" width="400"/><br/>
 
