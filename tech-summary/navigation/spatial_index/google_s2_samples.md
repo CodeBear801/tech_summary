@@ -13,7 +13,8 @@ S2CellUnion GetCovering(const S2ShapeIndex& index) {
   return covering;
 }
 ```
-sample code
+[sample code](https://github.com/google/s2geometry/blob/bec06921d72068fb22ef2100830c718659a19b58/src/s2/s2region_coverer.h#L40)
+
 ```C++
   S2RegionCoverer::Options options;
   options.set_max_cells(5);
