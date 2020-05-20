@@ -11,7 +11,7 @@
 - Design a test suite: the desire to reduce pain led teams to develop smaller and smaller tests
    + size: the resources that are required to run a test case, memory, processes and time
    + <img src="resources/software_engineering_in_google_C11_test_size.png" alt="software_engineering_in_google_C11_test_scope" width="600"/>
-   + scope: specific code paths we are verifying
+   + scope: how much code a test is intended to validate
    + <img src="resources/software_engineering_in_google_C11_test_scope.png" alt="software_engineering_in_google_C11_test_scope" width="600"/>
 
 - A better way to approach the quality of test suite is to think about the **behaviors that are tested**
@@ -20,8 +20,173 @@
    + Exploratory testing: which is a fundamentally creative endeavor in which someone treats the application under test as a puzzle to be broken
 
 
+## Chapter 12 Unit Testing
+- Maintainable tests: after writing them, engineers don't need to think about them again until they fail, and those failures indicate real bugs with clear causes
+
+### Avoid brittle tests
+
+- Brittle tests: the one that fails in the face of an unrelated change to production code that does not introduce any real bugs.
+   + Only breaking changes in a system's behavior should require going back to change its tests, and in such situations, the cost of updating those tests tend to be small relative to the cost of updating all of the system's users
 
 
+- [**Test via public API**](https://testing.googleblog.com/2015/01/testing-on-toilet-prefer-testing-public.html)
+   + public API means **explicit contracts**, they exposed by that unit to third parties outside of the team that owns the code
+   + If a method or class exists only to support one or two other classes, it probably shouldn't be considered its own unit
+   + If a package or class is designed to be accessible by anyone without having to consult with its owners, must need a unit test
+   + If a package or class can be accessed only by the people who own it, but it is designed to provide a general piece of functionality useful in a range of contexts("support library"), better also consider as a unit and test directly
+
+```java
+public void processTransaction(Transaction transaction) {
+	if (isValid(transaction)) {
+		saveToDatabase(transaction);
+	}
+}
+
+private boolean isValid(Transaction t) {
+	// ...
+}
+
+private void saveToDatabase(Transaction t) {
+	// ...
+}
+
+public void setAccountBalance(String accountName, int balance) {
+	// Write the balance to the database
+}
+
+public volid getAccountBalance(String accountName) {
+	// Read transactions from database
+}
+
+```
+
+```java
+@Test
+public void shouldTransferFunds() {
+    processor.setAccountBalance("me", 150);
+    processor.setAccountBalance("you", 20);
+
+    processor.processTransaction(newTransaction()
+        .setSender("me")
+        .setRecipient("you")
+        .setAmount(100));
+
+    assertThat(processor.getAccountBalance("me")).isEqualTo(50);
+    assertThat(processor.getAccountBalance("you")).isEqualTo(120);
+}
+
+@Test
+public void shouldNotPerformInvalidTransactions() {
+    processor.setAccountBalance("me", 50);
+    processor.setAccountBalance("you", 20);
+
+        processor.processTransaction(newTransaction()
+        .setSender("me")
+        .setRecipient("you")
+        .setAmount(100));
+
+    assertThat(processor.getAccountBalance("me")).isEqualTo(50);
+    assertThat(processor.getAccountBalance("you")).isEqualTo(20);
+}
+
+```
+- [**Test State, not interactions**](https://testing.googleblog.com/2013/03/testing-on-toilet-testing-state-vs.html)
+   + With state testing, you observe the system itself to see what it looks like after invoking with it.
+   + With interaction testing, you instead check that the system took an expected sequence of actions on its collaborators in response to invoking it
+   + interaction tests check **how** a system arrived at its result, whereas usually you should care only **what** the result is
+
+```java
+public void testSortNumbers() {
+  NumberSorter numberSorter = new NumberSorter(quicksort, bubbleSort);
+  // Verify that the returned list is sorted. It doesn't matter which sorting
+  // algorithm is used, as long as the right result is returned.
+  assertEquals(
+      new ArrayList(1, 2, 3),
+      numberSorter.sortNumbers(new ArrayList(3, 1, 2)));
+}
+```
+
+### Writing clear tests
+
+- A clear test is one whose purpose for existing and reason for falling is immediately clear to the engineer diagnosing a failure
+   + Unclear tests always result in be dropped off, introducing a subtle hole in test coverage
+
+- [**Make your tests complete and concise**](https://testing.googleblog.com/2014/03/testing-on-toilet-what-makes-good-test.html)
+   + test is complete when its body contains all of the information a reader needs in order to understand how it arrives at its result
+   + test is concise when it contains no other distraction or irrelevant information
+   + **a resilient test doesn't have to change unless the purpose or behavior of the class being tested changes.**
+   + a test's body should contain all of the information needed to understand it without containing any irrelevant or distracting information
+
+```java
+// incomplete and cluttered test
+@Test public void shouldPerformAddition() {
+  Calculator calculator = new Calculator(new RoundingStrategy(), 
+      "unused", ENABLE_COSIN_FEATURE, 0.01, calculusEngine, false);
+  int result = calculator.doComputation(makeTestComputation());
+  assertEquals(5, result); // Where did this number come from?
+}
+
+// Lots of distracting information is being passed to the constructor, and the important parts are hidden off in a helper method.
+
+// complete, concise test
+@Test public void shouldPerformAddition() {
+  Calculator calculator = newCalculator();
+  int result = calculator.doComputation(makeAdditionComputation(2, 3));
+  assertEquals(5, result);
+}
+
+```
+- [**Test behaviors, not methods**](https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html)
+```java
+// a transaction snippet
+@Test public void testProcessTransaction() {
+  User user = newUserWithBalance(LOW_BALANCE_THRESHOLD.plus(dollars(2));
+  transactionProcessor.processTransaction(
+      user,
+      new Transaction("Pile of Beanie Babies", dollars(3)));
+  assertContains("You bought a Pile of Beanie Babies", ui.getText());
+  assertEquals(1, user.getEmails().size());
+  assertEquals("Your balance is low", user.getEmails().get(0).getSubject());
+}
+
+// a method driven test
+@Test public void testDisplayTransactionResults() {
+    transactionProcessor.displayTransactionResults(
+        newUserWithBalance(LOW_BALANCE_THRESHOLD.plus(dollars(2))),
+        new Transaction("some item", dollars(3))
+    );
+    assertThat(ui.getText()).contains("You bought a some item");
+    assertThat(ui.getTest()).contains("Your balance is low")
+}
+
+// a behavior driven test
+@Test public void testProcessTransaction_displaysNotification() {
+  transactionProcessor.processTransaction(
+      new User(), new Transaction("Pile of Beanie Babies"));
+  assertContains("You bought a Pile of Beanie Babies", ui.getText());
+}
+@Test public void testProcessTransaction_sendsEmailWhenBalanceIsLow() {
+  User user = newUserWithBalance(LOW_BALANCE_THRESHOLD.plus(dollars(2));
+  transactionProcessor.processTransaction(
+      user,
+      new Transaction(dollars(3)));
+  assertEquals(1, user.getEmails().size());
+  assertEquals("Your balance is low", user.getEmails().get(0).getSubject());
+}
+
+```
+- rather than writing a test for each method, write a test for each behavior.  
+- A behavior is any gurantee that a system makes about how it will respond to a series of inputs while in a particular state
+- [**Given, When, Then**](https://martinfowler.com/bliki/GivenWhenThen.html)
+   + **given** defines how the system is set up
+   + **when** defines the action to be taken on the system
+   + **then** validates the result
+   + [Cucumber](https://cucumber.io/), [spock](http://spockframework.org/)
+- Split tests to [**keep them more focused**](https://testing.googleblog.com/2018/06/testing-on-toilet-keep-tests-focused.html)
+- Behavior driven tests tend to be clearer
+   + They read more like natural language, easy to be understood
+   + More clearly express [cause and effect](https://testing.googleblog.com/2017/01/testing-on-toilet-keep-cause-and-effect.html) because each test is more limited in scope
+   + the fact that each test is short and descriptive makes it easier to see what functionality is already tested and encourages engineer to add new streamlined test methods instead of piling onto existing methods
 
 ## Chapter 23.  Continuous Integration
 
