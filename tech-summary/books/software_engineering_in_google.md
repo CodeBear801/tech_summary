@@ -1,5 +1,27 @@
 # Software engineering in Google
 
+## Chapter 11 Testing Overview
+
+- Why test
+   + Catching bugs is only part of the motivation, an equally important reason is to **support the ability to change**
+   + tests can tell you how well your entire product conforms to its intended design, and more important, when it doesn't
+   + As software grows, so do test suits, face challenges like instability and slowness
+   + automatic test: the best team find which to turn the collective wisdom of its members into a benefit for the entire team
+
+- Design a test suite: the desire to reduce pain led teams to develop smaller and smaller tests
+   + size: the resources that are required to run a test case, memory, processes and time
+   + <img src="resources/software_engineering_in_google_C11_test_size.png" alt="software_engineering_in_google_C11_test_scope" width="600"/>
+   + scope: specific code paths we are verifying
+   + <img src="resources/software_engineering_in_google_C11_test_scope.png" alt="software_engineering_in_google_C11_test_scope" width="600"/>
+
+- A better way to approach the quality of test suite is to think about the **behaviors that are tested**
+
+- Limits of automated testing: some test need human judgment, such as search quality, video, audio.  Human explore, find problem, uncovered by probing commonly overlooked code paths or unusual responses from application, add automated test to prevent future regression.
+   + Exploratory testing: which is a fundamentally creative endeavor in which someone treats the application under test as a puzzle to be broken
+
+
+
+
 
 ## Chapter 23.  Continuous Integration
 
