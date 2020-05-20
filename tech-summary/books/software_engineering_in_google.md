@@ -188,6 +188,187 @@ public void testSortNumbers() {
    + More clearly express [cause and effect](https://testing.googleblog.com/2017/01/testing-on-toilet-keep-cause-and-effect.html) because each test is more limited in scope
    + the fact that each test is short and descriptive makes it easier to see what functionality is already tested and encourages engineer to add new streamlined test methods instead of piling onto existing methods
 
+```java
+@Test public void shouldTimeOutConnections() {
+    // Given two users
+    User user1 = newUser();
+    User user2 = newUser();
+
+    // And an empty connection pool with a 10-minute timeout
+    Pool pool = newPool(Duration.minutes(10));
+    
+    // When connecting both users to the pool
+    pool.connect(user1);
+    pool.connect(user2);
+    
+    // Then the pool should have two connections
+    assertThat(pool.getConnections()).hasSize(2);
+
+    // When waiting for 20 minutes
+    clock.advance(Duration.minutes(20));
+
+    // Then the pool should have no connections
+    assertThat(pool.getConnections()).isEmpty();
+
+    // And each user should be disconnected
+    assertThat(user1.isConnected()).isFalse();
+    assertThat(user2.isConnected()).isFalse();
+}
+```
+
+- [**Define clear test name**](https://testing.googleblog.com/2014/10/testing-on-toilet-writing-descriptive.html).  A good name describes both the actions that are being taken on a system and the expected outcome.
+   + Test names will sometimes include additional information like the state of the system or its environment before taking action on it
+   + A good trick if you're stuck is to try starting the test name with the word **should**.  When taken with the name of the class being tested, this naming scheme allows the test name to be read as a sentence.
+
+```
+shouldNotAllowWithdrawalsWhenBalanceIsEmpty
+shouldLockOutUserAfterThreeInvalidLoginAttempts
+```
+
+- [**Don't put logic into tests**](https://testing.googleblog.com/2014/07/testing-on-toilet-dont-put-logic-in.html)
+   + good test: a test is doing the correct thing just from glancing at it
+   + avoid operators, loops, conditionals
+   + in test code, stick to straight-line code over clever logic, and consider tolerating some duplication when it makes the test more descriptive and meaningful
+
+```java
+@Test public void shouldNavigateToPhotosPage() {
+  String baseUrl = "http://plus.google.com/";
+  Navigator nav = new Navigator(baseUrl);
+  nav.goToPhotosPage();
+  assertEquals(baseUrl + "/u/0/photos", nav.getCurrentUrl());
+}
+
+@Test public void shouldNavigateToPhotosPage() {
+  Navigator nav = new Navigator("http://plus.google.com/");
+  nav.goToPhotosPage();
+  assertEquals("http://plus.google.com//u/0/photos", nav.getCurrentUrl()); // Oops!
+}
+```
+
+- [**Write clear failure messages**](https://testing.googleblog.com/2014/12/testing-on-toilet-truth-fluent.html)
+   + A good failure message contains much the same information as the test's name: it should clearly express the desired outcome, the actual outcome, and any relevant parameters
+   + [Truth - Fluent assertions for java and android](https://truth.dev/)
+
+```golang
+result := Add(2, 3)
+if result != 5 {
+    t.Errorf("Add(2, 3) = %v, want %v", result, 5)
+}
+```
+
+- Tests and code sharing: DAMP(Descriptive and meaningful phrases), not DRY(Don't repeat yourself)
+   + [DRY code, DAMP DSLs](http://blog.jayfields.com/2006/05/dry-code-damp-dsls.html)
+
+```java
+
+
+@Test public void shouldAllowMultipleUsers() {
+    User user1 = newUser().setState(State.NORMAL).build();
+    User user2 = newUser().setState(State.NORMAL).build();
+
+    Forum forum  = new Forum();
+    forum.register(user1);
+    forum.register(user2);
+
+    assertThat(forum.hasRegisteredUser(user1)).isTrue();
+    assertThat(forum.hasRegisteredUser(user2)).isTrue();
+}
+
+@Test public shouldNotRegisterBannedUsers() {
+    User user = newUser().setState(State.BANNED).build();
+    Forum forum = new Forum();
+    try {
+        forum.register(user);
+    }catch(BannedUserException ignored){}
+
+    assertThat(forum.hasRegisteredUser(user)).isFalse();
+}
+
+```
+- DAMP is not a replacement for DRY, it is complementary to it.  Helper methods and test infrastructure can still help make tests clearer by making them more concise, factoring out repetitive steps whose details aren't relevant to the particular behavior being tested.
+
+- Shared Values
+    + [construct data using helper methods](https://testing.googleblog.com/2018/02/testing-on-toilet-cleanly-create-test.html)
+    + Builder pattern: [autovalue](https://github.com/google/auto/tree/master/value)
+
+
+```java
+private static final Account ACCOUNT_1 = Account.newBuilder().setState(AccountState.OPEN).setBalance(50).build();
+private static final Account ACCOUNT_2 = Account.newBuilder().setState(AccountState.CLOSED).setBalance(0).build();
+private static final ITEM = item.newBuilder().setName("Cheeseburger").setPrice(100).build();
+// ....
+
+@Test public void canBuyItem_returnsFalseForClosedAccounts() {
+    assertThat(store.canBuyItem(ITEM, ACCOUNT_1)).isFalse();
+}
+
+@Test public void canBuyItem_returnsFalseWhenBalanceInsufficient() {
+    assertThat(store.canBuyItem(ITEM, ACCOUNT_2)).isFalse();
+}
+
+// Change name to CLOSED_ACCOUNT and ACCOUNT_WITH_LOW_BALANCE helps a bit
+// difficult to see the exact details of the value being tested
+
+```
+
+```python
+def newContact(firstName="Grace", lastName="Hopper", phoneNumber="555-555-5555"):
+    return Contact(firstName, lastName, phoneNumber)
+
+# Tests call the helper, specifying values for only the parameters that they care about
+def test_fullNameShouldCombineFirstAndLastNames(self):
+    def contact = newContact(firstName="Ada", lastName="Lovelace")
+    self.assertEqual(contact.fullName(), "Ada Lovelace")
+
+```
+
+```java
+// Languages like Java that don't support named parameters can emulate them
+// by returning a mutable "builder" object that represents the value under
+// construction
+private static Contact.Builder newContact() {
+    return Contact.newBuilder()
+        .setFirstName("Grace")
+        .setLastName("Hopper")
+        .setPhoneNumber("555-555-5555");
+}
+
+// Tests then call methods on the bulder to overwrite only the parameters
+// that they care about, then call build() to get a real value out of the
+// builder
+@Test public void fullNameShouldCombineFirstAndLastNames() {
+    Contact contact = newContact()
+        .setFirstName("Ada")
+        .setLastName("Lovelace")
+        .build();
+    assertThat(contact.getFullName()).isEqualTo("Ada Lovelace")
+}
+
+```
+
+- Shared setup
+
+```java
+private NameService nameService;
+private UserStore userStore;
+
+@Before public void setUp() {
+    nameService = new NameService();
+    nameService.set("user1", "Donald Knuth");
+    userStore = new UserStore(nameService);
+}
+
+// don't use the default value in setUp, try to put all information in test function
+@Test public void shouldReturnNameFromService() {
+    nameService.set("user1", "Margaret Hamilton");
+    UserDetails user = userStore.get("user1");
+    assertThat(user.getName()).isEqualTo("Margaret Hamilton");
+}
+
+```
+
+
+
 ## Chapter 23.  Continuous Integration
 
 - Definition: the continuous assembling and testing of entire complex and rapidly evolving ecosystem
