@@ -1,12 +1,17 @@
-- [software engineering in Google](#software-engineering-in-google)    
-    - [Chapter 11 Testing Overview](#chapter-11-testing-overview)    
-    - [Chapter 12 Unit Testing](#chapter-12-unit-testing)        
+- [Software engineering in Google](#software-engineering-in-google)
+    - [Chapter 11 Testing Overview](#chapter-11-testing-overview)
+    - [Chapter 12 Unit Testing](#chapter-12-unit-testing)
         - [Avoid brittle tests](#avoid-brittle-tests)        
-        - [Writing clear tests](#writing-clear-tests)    
+        - [Writing clear tests](#writing-clear-tests)   
     - [Chapter 13 Test double](#chapter-13-test-double)        
-        - [Dependency injection](#dependency-injection)   
-        - [Mocking framework](#mocking-framework) 
+        - [Dependency injection](#dependency-injection)        
+        - [Mocking framework](#mocking-framework)       
+        - [Techniques](#techniques)            
+            - [Faking](#faking)            
+            - [Stubbing](#stubbing)            
+            - [Interaction Testing](#interaction-testing)    
     - [Chapter 23.  Continuous Integration](#chapter-23--continuous-integration)
+
 
 # Software engineering in Google
 
