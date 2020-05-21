@@ -1,4 +1,15 @@
+- [software engineering in Google](#software-engineering-in-google)    
+    - [Chapter 11 Testing Overview](#chapter-11-testing-overview)    
+    - [Chapter 12 Unit Testing](#chapter-12-unit-testing)        
+        - [Avoid brittle tests](#avoid-brittle-tests)        
+        - [Writing clear tests](#writing-clear-tests)    
+    - [Chapter 13 Test double](#chapter-13-test-double)        
+        - [Dependency injection](#dependency-injection)    
+    - [Chapter 23.  Continuous Integration](#chapter-23--continuous-integration)
+
 # Software engineering in Google
+
+[amazon link](https://www.amazon.com/Software-Engineering-Google-Lessons-Programming/dp/1492082791)
 
 ## Chapter 11 Testing Overview
 
@@ -367,6 +378,71 @@ private UserStore userStore;
 
 ```
 
+## Chapter 13 Test double
+
+A [test double](http://xunitpatterns.com/Test%20Double.html) is an object or function that can stand in for a real implementation in a test, similar to how a stunt double can stand in for an actor in a movie.  It could be achieved by mocking framework, which were easy to write, but they required constant effort to maintain while rarely finding bugs.  Better choice is **avoiding mocking frameworks but writing more realistic tests**.
+
+### Dependency injection
+
+When you develop an APP, you need call interface from other layers, such as: database, cache, HTTP/RGC, message queue.  I just care the logic in my layer and I want specific layers return certain value to test APP's logic.  
+
+<img src="resources/software_engineering_in_google_dependency_injection.png" alt="software_engineering_in_google_dependency_injection" width="600"/>
+
+The [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) pattern helps to solve these problems, which has following premises: **Dependencies are stateful, Dependencies are represented by interfaces**
+
+```golang
+package module
+
+type Module struct {
+	Store database.Store
+}
+
+
+package database
+
+type Store interface {
+  // Get will fetch the value (which is an integer) for a given ID
+	Get(ID int) (int, error)
+}
+```
+
+```golang
+package database
+
+import (
+  // We use the "testify" library for mocking our store
+	"github.com/stretchr/testify/mock"
+)
+
+// Create a MockStore struct with an embedded mock instance
+type MockStore struct {
+	mock.Mock
+}
+
+func (m *MockStore) Get(ID int) (int, error) {
+	// This allows us to pass in mocked results, so that the mock store will return whatever we define 
+  returnVals := m.Called(ID)
+  // return the values which we define
+	return returnVals.Get(0).(int), returnVals.Error(1)
+}
+```
+
+```golang
+func TestModuleSuccess(t *testing.T) {
+	// Create a new instance of the mock store
+	m := new(database.MockStore)
+	// In the "On" method, we assert that we want the "Get" method
+	// to be called with one argument, that is 2
+	// In the "Return" method, we define the return values to be 7, and nil (for the result and error values)
+    m.On("Get", 2).Return(7, nil)
+    //...
+    // Most important purpose is, let your test tell the story
+
+```
+You could go to here for more information's
+- Motivation for Guice(Java): https://github.com/google/guice/wiki/Motivation
+- Testify - Thou Shalt Write Tests(Golang): https://github.com/stretchr/testify
+- [「Guice」依赖注入框架中的小清新](https://zhuanlan.zhihu.com/p/32299568), [The many flavours of dependency injection in Golang](https://blog.gojekengineering.com/the-many-flavours-of-dependency-injection-in-go-25aa070d79a0)
 
 
 ## Chapter 23.  Continuous Integration
