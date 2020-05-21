@@ -4,7 +4,8 @@
         - [Avoid brittle tests](#avoid-brittle-tests)        
         - [Writing clear tests](#writing-clear-tests)    
     - [Chapter 13 Test double](#chapter-13-test-double)        
-        - [Dependency injection](#dependency-injection)    
+        - [Dependency injection](#dependency-injection)   
+        - [Mocking framework](#mocking-framework) 
     - [Chapter 23.  Continuous Integration](#chapter-23--continuous-integration)
 
 # Software engineering in Google
@@ -187,7 +188,8 @@ public void testSortNumbers() {
 
 ```
 - rather than writing a test for each method, write a test for each behavior.  
-- A behavior is any gurantee that a system makes about how it will respond to a series of inputs while in a particular state
+- Verify **one** behavior of a method in a single test
+- A behavior is any guarantee that a system makes about how it will respond to a series of inputs while in a particular state
 - [**Given, When, Then**](https://martinfowler.com/bliki/GivenWhenThen.html)
    + **given** defines how the system is set up
    + **when** defines the action to be taken on the system
@@ -443,6 +445,130 @@ You could go to here for more information's
 - Motivation for Guice(Java): https://github.com/google/guice/wiki/Motivation
 - Testify - Thou Shalt Write Tests(Golang): https://github.com/stretchr/testify
 - [「Guice」依赖注入框架中的小清新](https://zhuanlan.zhihu.com/p/32299568), [The many flavours of dependency injection in Golang](https://blog.gojekengineering.com/the-many-flavours-of-dependency-injection-in-go-25aa070d79a0)
+
+
+### Mocking framework
+- [mockito](https://site.mockito.org/)(java), you could find lots of examples here: [Getting Started with Mockito @Mock, @Spy, @Captor and @InjectMocks](https://www.baeldung.com/mockito-annotations)
+- [googlemock component of googletest](https://github.com/google/googletest)(C++)
+- [unittest.mock](https://docs.python.org/3/library/unittest.mock.html)(python)
+- [golang/mock](https://github.com/golang/mock)(golang)
+
+Using mocking framework requires engineers to follow [strict guidelines when designing the system under test](http://jmock.org/oopsla2004.pdf).  Real implementation is always preferred for testing, because tests have higher fidelity when they execute code as it will be executed in production.  As long as real implementation runs fast, deterministic(see more information [here](https://testing.googleblog.com/2012/10/hermetic-servers.html)), easy to construct dependencies.  Otherwise, please see following technical.
+
+### Techniques
+
+#### Faking
+A [fake](http://xunitpatterns.com/Fake%20Object.html) is a lightweight implementation of an API that behaves similar to the real implementation but isn't suitable for production, for example, an in-memory database.  
+Writing fake can be challenging because you need to ensure that **it has similar behavior to the real implementation, now and in the future**
+
+```java
+
+public class FakeFileSystem implements FileSystem {
+
+private Map<String, String> files = new HashMap<>();
+
+@Override
+public void writeFile(String fileName, string contents) {
+    files.add(fileName, contents);
+}
+
+@Override
+public String readFile(String fileName) {
+    String contents = files.get(fileName);
+
+    // The real implementation will throw this exception if the 
+    // file isn't found, so the fake must throw it too.
+    if (contents == null) {
+        throw new FileNotFoundException(fileName);
+    }
+    return contents;
+}
+
+}
+```
+
+- A fake must have its own tests to ensure that it conforms to the API of its corresponding real implementation.
+- Fake's fidelity, which means how closely the behavior of a fake matches the behavior of the real implementation
+   + Fake should maintain fidelity to the API contracts of the real implementation
+   + Fake must have perfect fidelity to the real implementation, but only from the perspective of the test
+- To reduce the number of fakes that need to be maintained, a fake should typically be created only at the root of the code that isn't feasible for use in tests.  For example, if a database can't be used in tests, a fake should exist for the database API itself rather than for each class that calls the database API.
+
+
+#### Stubbing
+[Stubbing](http://xunitpatterns.com/Test%20Stub.html) means you specify to the function exactly what values to return.
+
+```java
+@Test public void getTransactionCount() {
+    transactionCounter = new TransactionCounter(mockCreditCardServer);
+    // use stubbing to return three transactions
+    when(mockCreditCardServer.getTransactions()).thenReturn(newList(TRANSACTION_1, TRANSACTION_2, TRANSACTION_3));
+    assertThat(transactionCounter.getTransactionCount()).isEqualTo(3);
+}
+
+```
+Stubbing is a poor choice if the system under test depends on the real implementation's contract because you will be forced to duplicate the details of the contract.
+
+```java
+@Test public void creditCardIsChanged() {
+    // Pass in test doubles that were created by mocking framework.
+    paymentProcessor = new PaymentProcessor(mockCreditCardServer, mockTransactionProcessor);
+    // set up stubbing for these test doubles
+    when(mockCreditCardServer.isServerAvailable()).thenReturn(true);
+    when(mockTransactionProcessor.beginTransaction()).thenReturn(transaction);
+    when(mockCreditCardServer.initTransaction(transaction)).thenReturn(true);
+    when(mockCreditCardServer.pay(transaction, creditCard, 5000)).thenReturn(true);
+    when(mockTransactionProcessor.endTransaction()).thenReturn(true);
+
+    paymentProcessor.processPayment(creditCard, Money.dollars(5000));
+
+    // there is no way to tell if the pay() method actually carried out the 
+    // transaction, so the only thing the test can do is verify that the
+    // pay() method was called
+    verify(mockCreditCardServer).pay(transaction, creditCard, 5000);
+
+}
+```
+A better way, avoid stubbing
+```java
+@Test public void creditCardIsChanged() {
+    paymentProcessor = new PaymentProcessor(creditCardServer, transactionProcessor);
+    // call the system under test
+    paymentProcessor.processPayment(creditCard, Money.dollars(5000));
+    // Query the credit card server state to see if the payment went through
+    assertThat(creditCardServer.getMostRecentCharge(creditCard)).isEqualTo(500);
+}
+// option 1, creditCardServer and transactionProcessor better have a fake implementation
+// option 2, use a real implementation that talks to a hermetic credit card server
+```
+
+- When is Stubbing Appropriate?
+   + when you need a function to return a specific value to get the system under test into a certain state
+   + to ensure its purpose is clear, each stubbed function should have a direct relationship with the test's assertions.
+   + a test typically should stub out a small number of functions
+
+
+#### Interaction Testing
+[Interaction testing](http://xunitpatterns.com/Behavior%20Verification.html) validates how a function is called without actually calling the implementation of the function.  
+- Prefer to test code through [state testing](http://xunitpatterns.com/State%20Verification.html) over interaction testing.  
+- Tests overuse interaction testing as [change detector tests](https://testing.googleblog.com/2015/01/testing-on-toilet-change-detector-tests.html), which is less useful
+- Prefer to perform interaction testing only for state changing functions, like sendEmail(), saveRecord(), logAccess(), not like getUser(), findResults(), readFile()
+```java
+@Test public void grantUserPermission() {
+    UserAuthorizer userAuthorizer = new UserAuthorizer(mockUserService, mockPermissionDatabase);
+
+    // call the system under test
+    userAuthorizer.grantPermission(USER_ACCESS);
+
+    // addPermission() is state-changing, so it is reasonable to perform
+    // interaction testing to validate that it was called
+    verify(mockPermissionDatabase).addPermission(FAKE_USER, USER_ACCESS);
+
+    // getPermission() is non-state-changing, so this line of code isn't
+    // needed.  One clue that interaction testing may not be needed:
+    // getPermission() wa already stubbed earlier in this test
+    verify(mockPermissionDatabase).getPermission(FAKE_USER);
+}
+```
 
 
 ## Chapter 23.  Continuous Integration
