@@ -14,7 +14,7 @@
     - [Why need large test](#why-need-large-test)
     - [Structure of a large Test](#structure-of-a-large-test)
     - [Types of larger test](#types-of-larger-test)
-  - [Chapter 23.  Continuous Integration](#chapter-23-continuous-integration)
+  - [Chapter 23. Continuous Integration](#chapter-23-continuous-integration)
 
 
 # Software engineering in Google
@@ -648,7 +648,7 @@ Common gaps in unit tests
         * might modify the state of production, or has user-visible side effects 
 
 
-## Chapter 23.  Continuous Integration
+## Chapter 23. Continuous Integration
 
 - Definition: the continuous assembling and testing of entire complex and rapidly evolving ecosystem
 - Google's platform: TAP
