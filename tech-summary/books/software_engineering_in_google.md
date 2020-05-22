@@ -575,6 +575,20 @@ A better way, avoid stubbing
 }
 ```
 
+## Chapter 14 Larger Testing
+
+### Why need large test
+Fidelity
+
+Common gaps in unit tests
+- unfaithful doubles
+    + not representing real situation, and mocks become stale
+- configuration issues
+- Issues that under load
+
+
+### Structure of a large Test
+
 
 ## Chapter 23.  Continuous Integration
 
