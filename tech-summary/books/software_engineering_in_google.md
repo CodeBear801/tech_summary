@@ -580,6 +580,8 @@ A better way, avoid stubbing
 ### Why need large test
 Fidelity
 
+<img src="resources/software_engineering_in_google_large_test_fidelity.png" alt="software_engineering_in_google_large_test_fidelity" width="600"/>
+
 Common gaps in unit tests
 - unfaithful doubles
     + not representing real situation, and mocks become stale
@@ -588,6 +590,58 @@ Common gaps in unit tests
 
 
 ### Structure of a large Test
+- SUT: The system under test  
+  + More information: [Hermetic Servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
+  + In google, they use a larger test to generate a smaller one by recording the traffic to external services when running the larger test and replaying it when running smaller tests.  https://github.com/googleapis/google-cloud-go/blob/master/rpcreplay/doc.go
+<img src="resources/software_engineering_in_google_large_test_sut.png" alt="software_engineering_in_google_large_test_sut" width="600"/>
+
+- Test data
+
+- Verification
+   + manual
+   + assertions.  For example, for an integration test of google search of xyzyx, wirte assertion: assertThat(response.Contains("Colossal Cave"))
+   + A/B comparison: sending the same data and comparing the output
+
+
+### Types of larger test
+
+- Functional Testing
+- Browser and device testing
+- Performance, Load and stress testing
+- Exploratory Testing(manual testing, [more info](https://epdf.pub/exploratory-software-testing-tips-tricks-tours-and-techniques-to-guide-test-desi.html))
+
+- Deployment configuration testing
+   + SUT: single-machine hermetic or cloud-deployed isolated
+   + Data: none
+   + Verification: assertions(doesn't crash)
+
+- Probers and Canary Analysis
+    + SUT: production
+    + Data: production
+    + Verification: assertions and A/B diff
+    + How
+        * they are the ways to ensure the production env itself is healthy
+        * probers are functional tests that run encoded assertions against the production env.  For example, a prober perform a google search at www.google.com and verify a result is returned, but not actually verify the contents of the result.
+        * canary analysis is similar, except that it focus on when a release is being pushed to the production env.  Run both prober assertions targeting the upgraded(canary) services as well as compare health metrics of both canary and baseline parts of the production
+
+
+- A/B Diff regression Test
+   + SUT: two cloud-deployed isolated environments
+   + Data: usually multiplexed from production or sampled
+   + Verification: A/B diff comparison
+   + Challenges
+      * Test data must cover enough scenarios to identify corner-case difference.  How to identify useful traffic data to have high coverage?
+      * When diff exists, needs domain expert to manual analysis
+      * How to identify the real problem: let's say two SUT share interdependencies
+
+- Disaster Recovery and [CHAOS engineering](https://medium.com/better-programming/chaos-engineering-and-open-sourcing-of-netflix-chaos-generator-chaos-monkey-a68873f46269)
+    + SUT: production
+    + Data: production and user-crafted(fault injection)
+    + Verification: manual and A/B diff(metrics)
+    + The goal of CHAOS engineering is to help teams break assumptions of stability and reliability and help them grapple with the challeges of building resiliency in.
+    + Limitations
+        * DiRT(Disaster Recovery Testing, [ref](https://queue.acm.org/detail.cfm?id=2371516)) is quite expensive to run.
+        * might modify the state of production, or has user-visible side effects 
 
 
 ## Chapter 23.  Continuous Integration
