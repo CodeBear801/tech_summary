@@ -608,7 +608,7 @@ Common gaps in unit tests
 - Functional Testing
 - Browser and device testing
 - Performance, Load and stress testing
-- Exploratory Testing(manual testing, [more info](https://epdf.pub/exploratory-software-testing-tips-tricks-tours-and-techniques-to-guide-test-desi.html))
+- Exploratory Testing(manual testing looking for questionable behavior by trying out new user scenarios, [more info](https://epdf.pub/exploratory-software-testing-tips-tricks-tours-and-techniques-to-guide-test-desi.html))
 
 - Deployment configuration testing
    + SUT: single-machine hermetic or cloud-deployed isolated
