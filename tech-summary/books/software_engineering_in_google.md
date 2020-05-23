@@ -453,7 +453,7 @@ func TestModuleSuccess(t *testing.T) {
 You could go to here for more information's
 - Motivation for Guice(Java): https://github.com/google/guice/wiki/Motivation
 - Testify - Thou Shalt Write Tests(Golang): https://github.com/stretchr/testify
-- [「Guice」依赖注入框架中的小清新](https://zhuanlan.zhihu.com/p/32299568), [The many flavours of dependency injection in Golang](https://blog.gojekengineering.com/the-many-flavours-of-dependency-injection-in-go-25aa070d79a0)
+- [「Guice」依赖注入框架中的小清新](https://zhuanlan.zhihu.com/p/32299568), [The many flavours of dependency injection in Golang](https://blog.gojekengineering.com/the-many-flavours-of-dependency-injection-in-go-25aa070d79a0), [Compile-time Dependency Injection With Go Cloud's Wire](https://blog.golang.org/wire)
 
 
 ### Mocking framework
