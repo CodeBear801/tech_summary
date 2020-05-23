@@ -35,3 +35,50 @@
 
 ```
 You could find more results [here](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/domain/src/test/kotlin/com/yossisegev/domain/UseCasesTests.kt#L23)
+
+- [`DomainTestUtils`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/domain/src/main/kotlin/com/yossisegev/domain/common/DomainTestUtils.kt#L11) provide data for `value objects` used for testing.  
+
+## Data layer
+- Purpose
+   + provide all the data the application needs to function
+       * Implementation details, like [`MoviesRepositoryImpl`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/main/kotlin/com/yossisegev/data/repositories/MoviesRepositoryImpl.kt#L13) , which can be used by domain layer's `usecases`
+       * The data sources implementation is abstracted, `MoviesDataStore`
+       * `Mappers` has been used for conversion between different object representation, like from HTTP's GSON format or database's ['MovieData'](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/main/kotlin/com/yossisegev/data/entities/MovieData.kt#L12) to domain format of `MovieEntity`, you could find example [here](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/main/kotlin/com/yossisegev/data/mappers/MovieDataEntityMapper.kt#L13)
+
+- Tests
+  + the implementation of MoviesRepositoryImpl, via [`MovieRepositoryImplTests`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/test/kotlin/com/yossisegev/data/MovieRepositoryImplTests.kt#L21)
+  + Functionality of mappers, [`MappersTests`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/test/kotlin/com/yossisegev/data/MappersTests.kt#L47)
+  + Implementation of `MovieDataStore`, `MovieCache`, etc
+
+
+## The presentation layer
+Example of `PopularMoviesViewModel`
+```kotlin
+class PopularMoviesViewModel(private val getPopularMovies: GetPopularMovies,
+                             private val movieEntityMovieMapper: Mapper<MovieEntity, Movie>):
+        BaseViewModel() {
+
+    var viewState: MutableLiveData<PopularMoviesViewState> = MutableLiveData()
+    var errorState: SingleLiveEvent<Throwable?> = SingleLiveEvent()
+
+    init {
+        viewState.value = PopularMoviesViewState()
+    }
+
+    fun getPopularMovies() {
+        addDisposable(getPopularMovies.observable()
+                .flatMap { movieEntityMovieMapper.observable(it) }
+                .subscribe({ movies ->
+                    viewState.value?.let {
+                        val newState = this.viewState.value?.copy(showLoading = false, movies = movies)
+                        this.viewState.value = newState
+                        this.errorState.value = null
+                    }
+                }, {
+                    viewState.value = viewState.value?.copy(showLoading = false)
+                    errorState.value = it
+                }))
+    }
+}
+```
+
