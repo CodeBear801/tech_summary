@@ -38,8 +38,14 @@ A的低水位值不只和A本身的最旧数据有关，也跟上游的低水位
 如图所示，A的上游有C1-Cn各点，一直追溯到源头Ij1-Ijn。A中维护了一个Window，用于统计9:30-10:00这半个小时的数据，而lwm timer为10:00，由于此时A的lwm为9:50，还没有到lwm timer，因此Window不会关闭，会等待上游滞留的数据到达。lwm(A)之所以为9:50的原因是上游的数据有延迟，min(lwm of C1…Cn)=9:50。如果按照墙上时间10:30，此时早就应该触发了，便会导致结果的不准确。
 
 ## Exactly once semantic
+Excellent summary from [`Jerry Peng`](https://www.splunk.com/en_us/blog/it/exactly-once-is-not-exactly-the-same.html)
 ```
- Providing "exactly-once" processing semantics really means that distinct updates to the state of an operator that is managed by the stream processing engine are only reflected once. "Exactly-once" by no means guarantees that processing of an event, i.e. execution of arbitrary user-defined logic, will happen only once. Here at Streamlio, we prefer the term effectively once for this guarantee because processing is not necessarily guaranteed to occur once but the effect on the SPE-managed state is reflected once. 
+ Providing "exactly-once" processing semantics really means that distinct updates to the 
+ state of an operator that is managed by the stream processing engine are only reflected 
+ once. "Exactly-once" by no means guarantees that processing of an event, i.e. execution 
+ of arbitrary user-defined logic, will happen only once. Here at Streamlio, we prefer the 
+ term effectively once for this guarantee because processing is not necessarily guaranteed 
+ to occur once but the effect on the SPE-managed state is reflected once. 
 ```
 
 - 每一行处理的数据都会根据每一个key做一个checkpoint，而且每一行数据只提供一次。
@@ -49,12 +55,28 @@ A的低水位值不只和A本身的最旧数据有关，也跟上游的低水位
 ### 如何实现Exactly once
 
 #### 分布式快照 / 状态检查点
-此法受到 `Chandy-Lamport` 分布式快照算法的启发。通过这种机制，流应用程序中每个算子的所有状态都会定期做 checkpoint。如果是在系统中的任何地方发生失败，每个算子的所有状态都回滚到最新的全局一致 checkpoint 点。在回滚期间，将暂停所有处理。源也会重置为与最近 checkpoint 相对应的正确偏移量。整个流应用程序基本上是回到最近一次的一致状态，然后程序可以从该状态重新启动。
+此法受到 [`Chandy-Lamport`](https://en.wikipedia.org/wiki/Chandy%E2%80%93Lamport_algorithm) 分布式快照算法的启发。通过这种机制，流应用程序中每个算子的所有状态都会定期做 checkpoint。如果是在系统中的任何地方发生失败，每个算子的所有状态都回滚到最新的全局一致 checkpoint 点。在回滚期间，将暂停所有处理。源也会重置为与最近 checkpoint 相对应的正确偏移量。整个流应用程序基本上是回到最近一次的一致状态，然后程序可以从该状态重新启动。
 
 <img src="https://www.splunk.com/content/dam/splunk-blogs/images/2020/01/exactly_once_not_the_same4.png" alt="millwheel_wall_time_example" width="500"/>  <br/>
 
+在上图中，流应用程序在 T1 时间处正常工作，并且做了checkpoint。然而，在时间 T2，算子未能处理输入的数据。此时，S=4 的状态值已保存到持久存储器中，而状态值 S=12 保存在算子的内存中。为了修复这种差异，在时间 T3，处理程序将状态回滚到 S=4 并“重放”流中的每个连续状态直到最近，并处理每个数据。最终结果是有些数据已被处理了多次，但这没关系，因为无论执行了多少次回滚，结果状态都是相同的。
+
+pros | cons
+------------------------------|------------------------------
+Little performance and resource overhead | Larger impact to performance when recovering from failures
+- | Potential impact to performance increases as topology gets larger
+
 
 #### 至少一次事件传递和对重复数据去重
+
+在每个算子上实现至少一次事件传递和对重复数据去重来。使用此方法的流处理引擎将重放失败事件，以便在事件进入算子中的用户定义逻辑之前，进一步尝试处理并移除每个算子的重复事件。此机制要求为每个算子维护一个事务日志，以跟踪它已处理的事件。利用这种机制的引擎有 Google 的 MillWheel 和 Apache Kafka Streams。下图说明了这种机制的要点。
+
+<img src="https://www.splunk.com/content/dam/splunk-blogs/images/2020/01/exactly_once_not_the_same5.png" alt="millwheel_wall_time_example" width="500"/>  <br/>
+
+pros | cons
+------------------------------|------------------------------
+Performance impact of failures are localized | Potentially need large amounts of storage and infrastructure to support
+Impact of failures does not necessarily increase with the size of the topology | Performance overhead for every event at every operator
 
 
 
