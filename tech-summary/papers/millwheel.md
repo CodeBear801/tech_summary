@@ -37,9 +37,17 @@ A的低水位值不只和A本身的最旧数据有关，也跟上游的低水位
 
 如图所示，A的上游有C1-Cn各点，一直追溯到源头Ij1-Ijn。A中维护了一个Window，用于统计9:30-10:00这半个小时的数据，而lwm timer为10:00，由于此时A的lwm为9:50，还没有到lwm timer，因此Window不会关闭，会等待上游滞留的数据到达。lwm(A)之所以为9:50的原因是上游的数据有延迟，min(lwm of C1…Cn)=9:50。如果按照墙上时间10:30，此时早就应该触发了，便会导致结果的不准确。
 
-## Exactly one semantic
+## Exactly once semantic
 
+
+## 数据处理模式
+- MillWheel的数据处理单元主要对用户提供了两种数据处理的应用模式：
+   + 一是按数据包三元组触发用户处理函数，就是来一个包处理一次了。比较接近Storm的概念
+   + 二是按时间窗口或绝对时间（Wall time）触发用户处理函数，这种模式类似于Spark Streaming这样的小批量处理方式
+   + 这两种模式也可以在一个处理单元内部混合使用，简单来说比如按数据包触发计数，然后按时间窗口触发，在特定时间间隔向下游发送计数包之类。从应用模式上来说，相对比较灵活
 
 ## Reference
-- paper [eng](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41378.pdf) [cn](https://toutiao.io/posts/96aale/preview)
+- paper [en](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41378.pdf) [ch](https://toutiao.io/posts/96aale/preview)
 - [Google的大规模流式处理系统MillWheel](https://blog.csdn.net/colorant/article/details/13294741)
+- [MillWheel: Google是如何在事件流处理上做到exactly one semantic的](https://zhuanlan.zhihu.com/p/30560148)
+- [Exactly once is NOT exactly the same](https://www.splunk.com/en_us/blog/it/exactly-once-is-not-exactly-the-same.html) [ch](https://segmentfault.com/a/1190000019353382)
