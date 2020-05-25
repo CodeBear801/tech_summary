@@ -7,7 +7,19 @@
 - **保证数据满足严格一次投递(exactly-once delivery)要求** - 也就是说对应用程序而言，数据不会遗漏，也不会重复接收，减轻应用程序的实现负担
 - 最大创新 `low watermark`以及 `per key storage`
 
+
+
 ## Low watermarks
+
+why
+```
+(from paper)
+it is important to be able to distinguish whether a flurry of expected Arabic queries at 
+t = 1296167641 is simply delayed on the wire, or actually not there.
+Using the low watermark, we are able to distinguish between the two example cases – if 
+the low watermark advances past time t without the queries arriving, then we have high
+confidence that the queries were not recorded, and are not simply delayed. 
+```
 
 Low WaterMarks: 核心思想是针对分布式环境下，各个数据来源由于网络延迟或其它种种原因，同类数据不能保证严格按照时间戳顺序到达处理节点，因此有必要知道什么时候特定时间范围的数据在处理节点上已经完全获取完毕。以保证各种依赖于时间顺序或数据完整性才能正常工作的应用的运行。
 
@@ -49,8 +61,24 @@ Excellent summary from [`Jerry Peng`](https://www.splunk.com/en_us/blog/it/exact
 ```
 
 - 每一行处理的数据都会根据每一个key做一个checkpoint，而且每一行数据只提供一次。
-- MillWheel的设计是每一个事件流处理器会回报自己的最老还没处理的数据的时间戳，然后Injector会从每一个处理器收集最迟的时间戳。要收集最迟的时间戳因为每一个处理器的watermark应该都是一样且应该是最保守的。
-- MillWheel使用Big Table/Spanner等系统作为持久化的手段，主要针对一次写，多次读这样的应用模式。
+- MillWheel的设计是每一个事件流处理器会回报自己的最老还没处理的数据的时间戳，然后`Injector`会从每一个处理器收集最迟的时间戳。要收集最迟的时间戳因为每一个处理器的watermark应该都是一样且应该是最保守的。
+- MillWheel使用Big Table/Spanner等系统作为持久化的手段，主要针对一次写，多次读这样的应用模式。ProtocolBuf -> Write Ahead Log -> LSM -> Persist
+- `Injectors` bring external data into MillWheel. Since injectors seed low watermark values for the rest of the pipeline, they
+are able to publish an injector low watermark that propagates to any **subscribers** among their output streams, reflecting their potential deliveries along those streams.
+```java
+// Upon finishing a file or receiving a new
+// one, we update the low watermark to be the
+// minimum creation time.
+void OnFileEvent() {
+    int64 watermark = kint64max;
+    for (file : files) {
+        if (!file.AtEOF())
+            watermark = min(watermark, file.GetCreationTime());
+    }
+    if (watermark != kint64max)
+        UpdateInjectorWatermark(watermark);
+}
+```
 
 ### 如何实现Exactly once
 
@@ -81,6 +109,10 @@ Impact of failures does not necessarily increase with the size of the topology |
 
 
 ## 数据处理模式
+
+<img src="resources/pictures/millwheel_paper_pic2.png" alt="millwheel_paper_pic2" width="500"/>  <br/>
+
+
 - MillWheel的数据处理单元主要对用户提供了两种数据处理的应用模式：
    + 一是按数据包三元组触发用户处理函数，就是来一个包处理一次了。比较接近Storm的概念
    + 二是按时间窗口或绝对时间（Wall time）触发用户处理函数，这种模式类似于Spark Streaming这样的小批量处理方式
