@@ -129,3 +129,4 @@ Impact of failures does not necessarily increase with the size of the topology |
 - [Google的大规模流式处理系统MillWheel](https://blog.csdn.net/colorant/article/details/13294741)
 - [MillWheel: Google是如何在事件流处理上做到exactly one semantic的](https://zhuanlan.zhihu.com/p/30560148)
 - [Exactly once is NOT exactly the same](https://www.splunk.com/en_us/blog/it/exactly-once-is-not-exactly-the-same.html) [ch](https://segmentfault.com/a/1190000019353382)
+- How to implement Exponentiation [ref 1](https://www.cnblogs.com/alimayun/p/12056949.html) [ref 2](https://yq.aliyun.com/articles/53545)
