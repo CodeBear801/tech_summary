@@ -91,8 +91,35 @@ for _, k := range keys {
 
 ## Search in sorted array
 
+## C++
+[`lower_bound`](https://en.cppreference.com/w/cpp/algorithm/lower_bound) is an STL function, it use **binary search** over a sorted array a to find smallest pointer which meet condition of a[i] >=k.  
+[`uppter_bound`](https://en.cppreference.com/w/cpp/algorithm/upper_bound) finds smallest pointer which meet condition of a[i]>k
+
+```C++
+// find how many k from sorted array a whose size is n
+upper_bound(a, a+n, k) - lower_bound(a, a+n, k)
+```
+
+
+- In `C++`, `std::map` and `std::set` is sorted(rbtree)
+```C++
+std::set<pair<int, int>> bookingRecord; 
+public: 
+    bool book(int s, int e) { 
+        auto next = bookingRecord.lower_bound({s, e}); // first element with key not go before k (i.e., either it is equivalent or goes after). 
+    }
+```
+
+
+## Golang
+[golang sort.Search's example](https://golang.org/pkg/sort/#example_Search)
+
+
+
+## Insert element into sorted array
+
 ### Golang
-If existing slice's capacity is not enough, a new slice will be created and all values of existing slice will be copied.  [ref](https://stackoverflow.com/questions/42746972/golang-insert-to-a-sorted-slice), [golang sort.Search's example](https://golang.org/pkg/sort/#example_Search)
+If existing slice's capacity is not enough, a new slice will be created and all values of existing slice will be copied.  [ref](https://stackoverflow.com/questions/42746972/golang-insert-to-a-sorted-slice)
 ```go
 func Insert(ss []string, s string) []string {
     i := sort.SearchStrings(ss, s)
