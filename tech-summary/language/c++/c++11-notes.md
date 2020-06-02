@@ -329,6 +329,17 @@ p.func();
 - <span style="color:red">**Is shared_ptr thread safe?**</span>  
 Don't get your hopes up.  There are two parts in shared_ptr, one is ref-count and another is the pointer it points to.  If there is no protection who could gurantee the safeness of the pointer?
 
+- Difference between const shared ptr and shared ptr const  
+For the code [here](https://github.com/CodeBear801/zoo/blob/1ca40c7b2dee5cc1eebe712c2e33708bf1a214bc/oodesign/headfirstdesignpattern/c%2B%2B/Observer%20Pattern/Observer%20Pattern/Weather_Lambdas/HeatIndexDisplay.cpp#L11)
+```C++
+const std::shared_ptr<Subject>& weatherData
+```
+It means, shared_ptr `weatherData` itself is const, if we want also guarantee the object itself also `const` while passing into function, 
+```C++
+const std::shared_ptr<Subject const>& weatherData
+```
+[stackoverflow Difference between `const shared_ptr<T>` and `shared_ptr<const T>`?](https://stackoverflow.com/questions/17793333/difference-between-const-shared-ptrt-and-shared-ptrconst-t)
+
 
 - Manage 3rd party resource
 ```C++

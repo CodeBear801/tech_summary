@@ -89,7 +89,7 @@ for _, k := range keys {
 // Cecil 1
 ```
 
-## Add item to sorted array
+## Search in sorted array
 
 ### Golang
 If existing slice's capacity is not enough, a new slice will be created and all values of existing slice will be copied.  [ref](https://stackoverflow.com/questions/42746972/golang-insert-to-a-sorted-slice), [golang sort.Search's example](https://golang.org/pkg/sort/#example_Search)
