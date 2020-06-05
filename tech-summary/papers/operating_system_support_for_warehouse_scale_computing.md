@@ -4,6 +4,19 @@ The google infrastructure stack
 
 <img src="resources/pictures/google_infra_stack.png" alt="google_infra_stack.png" width="500"/>  <br/>
 
+My notes:  
+- [mapreduce](./mapreduce.md)
+- [gfs](./gfs.md)
+- [bigtable](./bigtable.md)
+- [pregel](./pregel.md)
+- [chubby](./chubby.md)
+- [flumejava](./flumejava.md)
+- [millwheel](./millwheel.md)
+- [dataflow](../lectures/dataflow_unified_model_for_batch_and_streaming.md)
+
 The facebook infrastructure stack
 
 <img src="resources/pictures/facebook_infra_stack.png" alt="facebook_infra_stack.png" width="500"/>  <br/>
+
+My notes:  
+- [memcache](./memcache.md)
