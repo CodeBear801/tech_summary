@@ -8,7 +8,7 @@ My notes:
 - [mapreduce](./mapreduce.md)
 - [gfs](./gfs.md)
 - [bigtable](./bigtable.md)
-- [pregel](./pregel.md)
+- [pregel](./pregel_connected_component_example.md)
 - [chubby](./chubby.md)
 - [flumejava](./flumejava.md)
 - [millwheel](./millwheel.md)
