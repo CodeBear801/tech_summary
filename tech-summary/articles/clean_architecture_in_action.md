@@ -86,3 +86,8 @@ class PopularMoviesViewModel(private val getPopularMovies: GetPopularMovies,
 
 
 <img src="resources/clean-arch_golang.png" alt="clean-arch_golang.png" width="600"/>
+
+
+## More info
+- https://github.com/tangxuehua/enode
+- [Building Microservices with Event Sourcing/CQRS in Go using gRPC, NATS Streaming and CockroachDB](https://medium.com/@shijuvar/building-microservices-with-event-sourcing-cqrs-in-go-using-grpc-nats-streaming-and-cockroachdb-983f650452aa)
