@@ -106,7 +106,7 @@ PCollection<KV<String, Integer>> scores = input
                  AtWatermark()  // 4
                    .withEarlyFirings(AtPeriod(Duration.standardMinutes(1))) // 3
                    .withLateFirings(AtCount(1)))  // 2
-               .accumulatingAndRetractingFiredPanes())   
+               .accumulatingAndRetractingFiredPanes())   // 1
 
   .apply(Sum.integersPerKey());
 
@@ -117,19 +117,25 @@ PCollection<KV<String, Integer>> scores = input
      For example, for the event of 5 and 9, withLateFirings will generate 
      second result for window 12:00 ~ 12:02 with value 14 
 
-# 3: withEarlyFirings solves too slow problem.  Any minite of processing time,
-     tiggers when any new value be generated
+# 3: withEarlyFirings solves too slow problem.  Any minute of processing time,
+     triggers when any new value be generated
 
 # 4: when watermark pass will generate the result.  Watermark link represent
      the system's idea of where inputs completes
 
 withAllowedLateness
+     triggering().withAllowedLateness(Duration.standardMinutes(1)))
+     For GC
      https://stackoverflow.com/questions/37246641/google-dataflow-late-data
      Dataflow's default windowing and trigger strategies discard late data. 
      If you want to ensure that your pipeline handles instances of late data, 
      you'll need to explicitly set .withAllowedLateness when you set your 
      PCollection's windowing strategy and set triggers for your PCollections 
      accordingly.
+     https://user-images.githubusercontent.com/16873751/84212097-ccaae680-aa71-11ea-8a43-26bfaeb3d299.png
+     6 is late, but due to .withAllowedLateness(Duration.standardMinutes(1)), 
+     its accepted, and actual time bound of `12:00 ~ 12:02`extend to 6's 
+     processing time + 1 minute.
 */
 ```
 
@@ -163,5 +169,6 @@ Session Window
 - https://beam.apache.org/documentation/programming-guide/#overview
 - https://github.com/tshauck/DataflowJavaSDK-examples/tree/master/src/main/java8/com/google/cloud/dataflow/examples/complete/game
 - https://github.com/jlewi/dataflow/blob/master/dataflow/src/main/java/sessions/SlidingWindowExample.java
+- [A Unified Model for Batch and Streaming Data Processing](https://www.youtube.com/watch?v=3UfZN59Nsk8)
 - [Fundamentals of Stream Processing with Apache Beam](https://www.youtube.com/watch?v=crKdfh63-OQ)
-- [Streaming 102: The world beyond batch](https://www.oreilly.com/radar/the-world-beyond-batch-streaming-102/)
+- [Streaming 102: The world beyond batch](https://www.oreilly.com/radar/the-world-beyond-batch-streaming-102/)<span>&#9733;</span><span>&#9733;</span>
