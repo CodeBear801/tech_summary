@@ -62,7 +62,7 @@ Why hubristic value for `watermark`
 - To balance `resource taken` for computation(whether a state can be dropped) and correctness of all data
    + too slow
    + too fast
-- Take `9` as a example, its generated around 12:01~12:02, but arrives for processing around 12:08~12:09, when calculating window of 12:00~12:02, if we want to taken `9` into consideration, the resource be used for calculating this window need to be hold for 7 more minutes(12:09 - 12:02) or more.
+- Take `9` as an example, its generated around 12:01 ~ 12:02, but arrives for processing around 12:08 ~ 12:09, when calculating window of 12:00~12:02, if we want to taken `9` into consideration, the resource be used for calculating this window need to be hold for 7 more minutes(12:09 - 12:02) or more.
 
 
 
