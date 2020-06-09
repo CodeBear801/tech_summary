@@ -37,6 +37,9 @@ Watermark is a heuristic event time progress
 
 
 ### Where
+
+Windowing divides data into **event-time-based** finite chunks.
+
 <img src="resources/imgs/dataflow_frances_perry_where.png" alt="dataflow_frances_perry_where" width="400"/><br/>
 
 
@@ -48,9 +51,9 @@ How the arriving time into system will affect the processing result
 
 `Watermarks`: A watermark is a notion of input completeness with respect to event times. A watermark with a value of time X makes the statement: “all input data with event times less than X have been observed.”   
 
-`Triggers`: A trigger is a mechanism for declaring when the output for a window should be materialized relative to some external signal.  
+`Triggers`: A trigger is a mechanism for declaring when the output for a window should be materialized relative to some external signal.  Not waiting all data, just wait for enough inputs to generate result.
 
-<img src="resources/imgs/dataflow_frances_perry_when.png" alt="dataflow_frances_perry_when" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/84209115-227b9080-aa6a-11ea-9a42-7462888148dd.png" alt="dataflow_frances_perry_when" width="400"/><br/>
 
 
 Why hubristic value for `watermark`  
@@ -77,7 +80,7 @@ Why hubristic value for `watermark`
 
 - `9` has been dropped
 - waiting to watermark to trigger
-- 
+
 <img src="resources/imgs/dataflow_frances_perry_example_trigger_at_watermark3.png" alt="dataflow_frances_perry_example_trigger_at_watermark3" width="400"/><br/>
 
 <img src="resources/imgs/dataflow_frances_perry_example_trigger_at_watermark4.png" alt="dataflow_frances_perry_example_trigger_at_watermark4" width="400"/><br/>
@@ -95,6 +98,40 @@ Why hubristic value for `watermark`
 <img src="resources/imgs/dataflow_frances_perry_4step_summary.png" alt="dataflow_frances_perry_4step_summary" width="400"/><br/>
 
 
+
+```java
+PCollection<KV<String, Integer>> scores = input
+  .apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))
+               .triggering(
+                 AtWatermark()  // 4
+                   .withEarlyFirings(AtPeriod(Duration.standardMinutes(1))) // 3
+                   .withLateFirings(AtCount(1)))  // 2
+               .accumulatingAndRetractingFiredPanes())   
+
+  .apply(Sum.integersPerKey());
+
+/*
+# 1: How do refinements relate - accumulation
+
+# 2: Give late firing after the window is closed, if any late data arrived
+     For example, for the event of 5 and 9, withLateFirings will generate 
+     second result for window 12:00 ~ 12:02 with value 14 
+
+# 3: withEarlyFirings solves too slow problem.  Any minite of processing time,
+     tiggers when any new value be generated
+
+# 4: when watermark pass will generate the result.  Watermark link represent
+     the system's idea of where inputs completes
+
+withAllowedLateness
+     https://stackoverflow.com/questions/37246641/google-dataflow-late-data
+     Dataflow's default windowing and trigger strategies discard late data. 
+     If you want to ensure that your pipeline handles instances of late data, 
+     you'll need to explicitly set .withAllowedLateness when you set your 
+     PCollection's windowing strategy and set triggers for your PCollections 
+     accordingly.
+*/
+```
 
 ## Demo
 
@@ -126,3 +163,5 @@ Session Window
 - https://beam.apache.org/documentation/programming-guide/#overview
 - https://github.com/tshauck/DataflowJavaSDK-examples/tree/master/src/main/java8/com/google/cloud/dataflow/examples/complete/game
 - https://github.com/jlewi/dataflow/blob/master/dataflow/src/main/java/sessions/SlidingWindowExample.java
+- [Fundamentals of Stream Processing with Apache Beam](https://www.youtube.com/watch?v=crKdfh63-OQ)
+- [Streaming 102: The world beyond batch](https://www.oreilly.com/radar/the-world-beyond-batch-streaming-102/)
