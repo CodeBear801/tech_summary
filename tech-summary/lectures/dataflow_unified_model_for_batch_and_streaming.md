@@ -26,6 +26,11 @@ Watermark is a heuristic event time progress
 
 <img src="resources/imgs/dataflow_frances_perry_four_steps.png" alt="dataflow_frances_perry_four_steps" width="400"/><br/>
 
+- What results are calculated? = transformations
+- Where in event-time are results calculated? = windowing
+- When in processing-time are results materialized? = watermarks + triggers
+- How do refinements of results relate? = accumulation
+
 
 ### What
 <img src="resources/imgs/dataflow_frances_perry_what.png" alt="dataflow_frances_perry_what" width="400"/><br/>
@@ -41,7 +46,21 @@ Session means a period time user is active.  More info about [session-windows](h
 
 How the arriving time into system will affect the processing result
 
+`Watermarks`: A watermark is a notion of input completeness with respect to event times. A watermark with a value of time X makes the statement: “all input data with event times less than X have been observed.”   
+
+`Triggers`: A trigger is a mechanism for declaring when the output for a window should be materialized relative to some external signal.  
+
 <img src="resources/imgs/dataflow_frances_perry_when.png" alt="dataflow_frances_perry_when" width="400"/><br/>
+
+
+Why hubristic value for `watermark`  
+
+<img src="https://user-images.githubusercontent.com/16873751/84205333-b9901a80-aa61-11ea-8e6c-d5b043d50fba.png" alt="dataflow_frances_perry_when" width="400"/><br/>
+- To balance `resource taken` for computation and correctness of all data
+   + too slow
+   + too fast
+- Take `9` as a example, its generated around 12:01~12:02, but arrives for processing around 12:08~12:09, when calculating window of 12:00~12:02, if we want to taken `9` into consideration, the resource be used for calculating this window need to be hold for 7 more minutes(12:09 - 12:02) or more.
+
 
 
 #### Example
