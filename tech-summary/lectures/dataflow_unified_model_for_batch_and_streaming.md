@@ -125,7 +125,7 @@ PCollection<KV<String, Integer>> scores = input
 
 withAllowedLateness
      triggering().withAllowedLateness(Duration.standardMinutes(1)))
-     For GC
+     Target for avoiding influence to the system's latency, like GC
      https://stackoverflow.com/questions/37246641/google-dataflow-late-data
      Dataflow's default windowing and trigger strategies discard late data. 
      If you want to ensure that your pipeline handles instances of late data, 
