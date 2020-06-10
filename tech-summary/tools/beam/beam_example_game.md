@@ -109,6 +109,7 @@ gcloud pubsub subscriptions seek projects/constant-jigsaw-272415/topics/beamgame
   private static final int THREAD_SLEEP_MS = 5000;
 ```
 
+
 - LeaderBoard
    + Create bigquery dataset https://console.cloud.google.com/bigquery?p=bigquery-public-data&page=project
 
@@ -117,18 +118,12 @@ gcloud pubsub subscriptions seek projects/constant-jigsaw-272415/topics/beamgame
 mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.complete.game.LeaderBoard -Dexec.args="--project=constant-jigsaw-272415 --dataset=beamgame2 --topic=projects/constant-jigsaw-272415/topics/beamgame"
 ```
 
+## Experiment
+
+<img src="
+https://user-images.githubusercontent.com/16873751/84213835-8d32c900-aa76-11ea-827a-f17062bb1b4e.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+<img src="
+https://user-images.githubusercontent.com/16873751/84213843-902db980-aa76-11ea-8794-a80d7224ff0c.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
 
