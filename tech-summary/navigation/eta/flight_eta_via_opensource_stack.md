@@ -196,12 +196,73 @@ Two ways to improve
 - hyperparameter tuning https://spark.apache.org/docs/latest/ml-tuning.html
 - feature selection https://www.analyticsvidhya.com/blog/2016/12/introduction-to-feature-selection-methods-with-an-example-or-how-to-select-the-right-variables/
 
-how to evaluate improvement  
+How to evaluate improvement  
 [MulticlassClassificationEvaluator from spark](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) offers four metrics: accuracy, weighted precision, weighted recall, and f1  
 - `Accuracy`: the number of correct predictions divided by the number of predictions
 - `Precision`: a measure of how useful the result is
 - `Recall` describes how complete the results are.
 - `f1` score incorporates both precision and recall to deter‐ mine overall quality
 
-The importance of a feature is a measure of how important that feature was in contributing to the accuracy of the model.  If we know how important a feature is, we can use this clue to make changes that increase the accuracy of the model, such as removing unimportant features and trying to engineer features similar to those that are most important.  The state of the art for many classification and regression tasks is a [gradient boosted decision tree](https://en.wikipedia.org/wiki/Gradient_boosting)
+`The importance of a feature` is a measure of how important that feature was in contributing to the accuracy of the model.  If we know how important a feature is, we can use this clue to make changes that increase the accuracy of the model, such as removing unimportant features and trying to engineer features similar to those that are most important.  The state of the art for many classification and regression tasks is a [gradient boosted decision tree](https://en.wikipedia.org/wiki/Gradient_boosting)
+
+How to find difference practically
+
+[code](https://github.com/CodeBear801/Agile_Data_Code_2/blob/master/ch09/Improving_Predictions.ipynb)
+
+- Loop and run the measurement code multiple times, cross validate, generate model score
+```py
+split_count = 3
+
+for i in range(1, split_count + 1):
+    training_data, test_data = final_vectorized_features.limit(1000000).randomSplit([0.8, 0.2])
+```
+- Use `pickle` to dump evaluation result's change
+```py
+metric_names = ["accuracy", "weightedPrecision", "weightedRecall", "f1"]
+
+# Compute the existing score log entry
+score_log_entry = {metric_name: score_averages[metric_name] for metric_name in metric_names}
+
+for metric_name in metric_names:
+  run_delta = score_log_entry[metric_name] - last_log[metric_name]
+
+# Append the existing average scores to the log
+# score_log = pickle.load(open(score_log_filename, "rb"))
+score_log.append(score_log_entry)
+
+# Persist the log for next run
+pickle.dump(score_log, open(score_log_filename, "wb"))
+``` 
+
+- Inspecting changes in feature importance, `RandomForestClassificationModel.featureImportances`
+
+```py
+# Collect feature importances
+  feature_names = vector_assembler.getInputCols()
+  feature_importance_list = model.featureImportances
+  for feature_name, feature_importance in zip(feature_names, feature_importance_list):
+    feature_importances[feature_name].append(feature_importance)
+```
+Also try to dump result with `pickle`
+```py
+# Compute averages for each feature
+feature_importance_entry = defaultdict(float)
+for feature_name, value_list in feature_importances.items():
+  average_importance = sum(value_list) / len(value_list)
+  feature_importance_entry[feature_name] = average_importance
+
+# Compute and display the change in score for each feature
+  #feature_log = pickle.load(open(feature_log_filename, "rb"))
+  last_feature_log = feature_log[-1]
+  for feature_name, importance in feature_importance_entry.items():
+    last_feature_log[feature_name] = importance
+
+feature_deltas = {}
+for feature_name in feature_importances.keys():
+  run_delta = feature_importance_entry[feature_name] - last_feature_log[feature_name]
+  feature_deltas[feature_name] = run_delta
+
+feature_log.append(feature_importance_entry)
+pickle.dump(feature_log, open(feature_log_filename, "wb"))
+```
 
