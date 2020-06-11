@@ -120,6 +120,8 @@ features = spark.read.json(
 
 # [perry] for how to decide bucket range, please go to original code
 # excellent description in Bucketizing a Continuous Variable for Classification
+# Try with multiple bucket range and visualize histogram
+# target is generating a balanced category
 
 # Use pysmark.ml.feature.Bucketizer to bucketize ArrDelay
 splits = [-float("inf"), -15.0, 0, 15.0, 30.0, float("inf")]
@@ -130,6 +132,76 @@ bucketizer = Bucketizer(
 )
 ml_bucketized_features = bucketizer.transform(features_with_route)
 
-# Bucketizing with pyspark.ml.feature.Bucketizer 
+# Vectorized features
 
+# Turn category fields(string) into categoric feature vectors, then drop # intermediate fields
+# [perry] https://spark.apache.org/docs/latest/ml-features#stringindexer
+#        new column of original_columnname_index has been generated for each string
+for column in ["Carrier", "DayOfMonth", "DayOfWeek", "DayOfYear",
+               "Origin", "Dest", "Route"]: 
+               string_indexer = StringIndexer(
+                                     inputCol=column,
+                                     outputCol=column + "_index" )
+ml_bucketized_features = string_indexer.fit(ml_bucketized_features)\ 
+                                       .transform(ml_bucketized_features)
+
+# [Perry] https://spark.apache.org/docs/2.0.0/api/python/pyspark.ml.html#pyspark.ml.feature.VectorAssembler
+#         https://spark.apache.org/docs/2.0.0/api/python/pyspark.ml.html#pyspark.ml.linalg.Vector 
+# VectorAssembler is used to combine numeric and index columns into a single feature vector
+
+# Handle continuous numeric fields by combining them into one feature vector
+numeric_columns = ["DepDelay", "Distance"]
+index_columns = ["Carrier_index", "DayOfMonth_index",
+                   "DayOfWeek_index", "DayOfYear_index", "Origin_index",
+                   "Origin_index", "Dest_index", "Route_index"]
+vector_assembler = VectorAssembler(
+  inputCols=numeric_columns + index_columns,
+  outputCol="Features_vec"
+)
+final_vectorized_features = vector_assembler.transform(ml_bucketized_features)
+
+# Drop the index columns
+for column in index_columns:
+  final_vectorized_features = final_vectorized_features.drop(column)
+
+
+
+# Test/train split
+training_data, test_data = final_vectorized_features.randomSplit([0.8, 0.2])
+
+# training
+rfc = RandomForestClassifier(
+featuresCol="Features_vec", labelCol="ArrDelayBucket",
+      maxBins=4657 
+    )
+# [Perry]maxBins is an experiment value
+# Fir default value 32, for initial run will throw an exception which indicates
+# that unique value for one feature more than 32 and will suggest the value of 4657
+model = rfc.fit(training_data)
+
+
+# Evaluation
+
+# Evaluate model using test data
+predictions = model.transform(test_data)
+evaluator = MulticlassClassificationEvaluator(
+      labelCol="ArrDelayBucket", metricName="accuracy"
+    )
+accuracy = evaluator.evaluate(predictions)
 ```
+
+### How to improve prediction model
+
+Two ways to improve
+- hyperparameter tuning https://spark.apache.org/docs/latest/ml-tuning.html
+- feature selection https://www.analyticsvidhya.com/blog/2016/12/introduction-to-feature-selection-methods-with-an-example-or-how-to-select-the-right-variables/
+
+how to evaluate improvement  
+[MulticlassClassificationEvaluator from spark](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) offers four metrics: accuracy, weighted precision, weighted recall, and f1  
+- `Accuracy`: the number of correct predictions divided by the number of predictions
+- `Precision`: a measure of how useful the result is
+- `Recall` describes how complete the results are.
+- `f1` score incorporates both precision and recall to deter‐ mine overall quality
+
+The importance of a feature is a measure of how important that feature was in contributing to the accuracy of the model.  If we know how important a feature is, we can use this clue to make changes that increase the accuracy of the model, such as removing unimportant features and trying to engineer features similar to those that are most important.  The state of the art for many classification and regression tasks is a [gradient boosted decision tree](https://en.wikipedia.org/wiki/Gradient_boosting)
+
