@@ -197,7 +197,7 @@ Two ways to improve
 - feature selection https://www.analyticsvidhya.com/blog/2016/12/introduction-to-feature-selection-methods-with-an-example-or-how-to-select-the-right-variables/
 
 How to evaluate improvement  
-[MulticlassClassificationEvaluator from spark](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) offers four metrics: accuracy, weighted precision, weighted recall, and f1  
+[MulticlassClassificationEvaluator from spark](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) offers four metrics: `accuracy`, `weighted precision`, `weighted recall`, and `f1`  
 - `Accuracy`: the number of correct predictions divided by the number of predictions
 - `Precision`: a measure of how useful the result is
 - `Recall` describes how complete the results are.
