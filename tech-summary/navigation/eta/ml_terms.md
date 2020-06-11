@@ -37,8 +37,14 @@ Mapping raw data to features
 
 <img src="https://user-images.githubusercontent.com/16873751/84331181-65a73380-ab3e-11ea-986e-4f538cc360ea.png" alt="feature_1" width="400"/><br/>
 
+- more info: [Text Vectorization and Transformation Pipelines](https://www.oreilly.com/library/view/applied-text-analysis/9781491963036/ch04.html)
+
 [`sparse representation`](https://developers.google.com/machine-learning/glossary#sparse_representation) to decrease resource usage  
 <img src="https://user-images.githubusercontent.com/16873751/84331022-ed407280-ab3d-11ea-9559-714f9b2c9a4d.png" alt="feature_1" width="400"/><br/>
+
+## vectorization
+
+
 
 
 ## Reference
