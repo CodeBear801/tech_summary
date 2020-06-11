@@ -61,6 +61,33 @@ training_data = np.random.choice(training_data, 1000000) # 'Sample down to 1MM e
 # Use DictVectorizer to convert feature dicts to vectors
 vectorizer = DictVectorizer()
 training_vectors = vectorizer.fit_transform(training_data)
-
 # [perry] https://datascience.stackexchange.com/questions/12321/difference-between-fit-and-fit-transform-in-scikit-learn-models
+
+
+# prepare for cross validation
+X_train, X_test, y_train, y_test = train_test_split(
+  training_vectors,
+  results_vector,
+  test_size=0.1, # perry: training data 90%, testing data 10%
+  random_state=43
+)
+
+# training
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+# predict
+predicted = regressor.predict(X_test)
+
+# evaluation
+
+# Median absolute error is the median of all absolute differences between the target and the prediction.
+# Less is better, more indicates a high error between target and prediction.
+medae = median_absolute_error(y_test, predicted)
+
+# R2 score is the coefficient of determination. Ranges from 1-0, 1.0 is best, 0.0 is worst.
+# Measures how well future samples are likely to be predicted.
+r2 = r2_score(y_test, predicted)
+
+
 ```

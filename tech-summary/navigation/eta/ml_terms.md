@@ -42,9 +42,37 @@ Mapping raw data to features
 [`sparse representation`](https://developers.google.com/machine-learning/glossary#sparse_representation) to decrease resource usage  
 <img src="https://user-images.githubusercontent.com/16873751/84331022-ed407280-ab3d-11ea-9559-714f9b2c9a4d.png" alt="feature_1" width="400"/><br/>
 
-## vectorization
+
+## cross validation
+[Cross-validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)) means we split our data into test and training sets, and then train the model on the training set before testing it on the test set. Cross-validation prevents `overfitting`, which is when a model seems quite accurate but fails to actually predict future events well.
 
 
+### Median absolute deviation
+
+[Median absolute error](https://en.wikipedia.org/wiki/Median_absolute_deviation) is the median of all absolute differences between the target and the prediction.  **Less is better,** more indicates a high error between target and prediction.
+
+
+[The median absolute deviation(MAD)](https://www.statisticshowto.com/median-absolute-deviation/) is a robust measure of how spread out a set of data is. The variance and standard deviation are also measures of spread, but they are more affected by extremely high or extremely low values and non normality. If your data is normal, the standard deviation is usually the best choice for assessing spread. However, if your data isn’t normal, the MAD is one statistic you can use instead. 
+
+```
+Example: Find the MAD of the following set of numbers: 3, 8, 8, 8, 8, 9, 9, 9, 9.
+Step 1: Find the median. The median for this set of numbers is 8.
+
+Step 2: Subtract the median from each x-value using the formula |yi – median|.
+|3 – 8| = 5
+|8 – 8| = 0
+|8 – 8| = 0
+|8 – 8| = 0
+|8 – 8| = 0
+|9 – 8| = 1
+|9 – 8| = 1
+|9 – 8| = 1
+|9 – 8| = 1
+
+Step 3: find the median of the absolute differences. The median of the differences (0,0,0,0,1,1,1,1,5) is 1.
+```
+
+<img src="https://user-images.githubusercontent.com/16873751/84334144-82e00000-ab46-11ea-87ed-82d7ef1bd0b0.png" alt="feature_1" width="400"/><br/>
 
 
 ## Reference
