@@ -75,5 +75,22 @@ Step 3: find the median of the absolute differences. The median of the differenc
 <img src="https://user-images.githubusercontent.com/16873751/84334144-82e00000-ab46-11ea-87ed-82d7ef1bd0b0.png" alt="feature_1" width="400"/><br/>
 
 
+### Coefficient of determination
+
+[R2](https://en.wikipedia.org/wiki/Coefficient_of_determination) score is the coefficient of determination. Ranges from 1 - 0, 1.0 is best, 0.0 is worst.  
+Measures how well future samples are likely to be predicted.
+
+[The coefficient of determination](https://www.statisticshowto.com/probability-and-statistics/coefficient-of-determination-r-squared/), R2, is used to analyze how differences in one variable can be explained by a difference in a second variable. For example, when a person gets pregnant has a direct relation to when they give birth.
+
+```
+Step 1: Find the correlation coefficient, r (it may be given to you in the question). Example, r = 0.543.
+
+Step 2: Square the correlation coefficient.
+0.5432 = .295
+
+Step 3: Convert the correlation coefficient to a percentage.
+.295 = 29.5%
+```
+
 ## Reference
 - [For all resource imported from other side, please go to here for the source link](https://github.com/CodeBear801/tech_summary/issues/2)
