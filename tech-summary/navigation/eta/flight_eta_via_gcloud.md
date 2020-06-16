@@ -200,7 +200,6 @@ sparse = {
 }
 
 
-
 # Build a wide-and-deep model.
 def wide_and_deep_classifier(inputs, linear_feature_columns, dnn_feature_columns, dnn_hidden_units):
     deep = tf.keras.layers.DenseFeatures(dnn_feature_columns, name='deep_inputs')(inputs)
