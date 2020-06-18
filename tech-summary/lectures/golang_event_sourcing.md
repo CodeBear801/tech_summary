@@ -209,6 +209,10 @@ func makeUpdateItemInput(tableName, hashKey, rangeKey string, eventsPerItem int,
 
 // dynamodb updateitem: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html
 ```
+For here, `partition` is not dynamoDB's partition, its a logic to **truck** different version of same item together into dynamoDB's record.
+
+<img src="https://user-images.githubusercontent.com/16873751/85053046-cb9f4680-b14e-11ea-8a1b-85457d1e9574.png" alt="dynamodb1" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/85053064-d22dbe00-b14e-11ea-9b25-274feedb4a1d.png" alt="dynamodb2" width="400"/><br/>
 
 
 ## keyword
