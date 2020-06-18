@@ -8,6 +8,26 @@ y = 1 if arrival delay < 15 minutes
 // marching learning algorithm predict the probability that the flight is on time
 ```
 
+Create cluster
+```
+gcloud beta dataproc clusters create \
+   --num-workers=2 \
+   --scopes=cloud-platform \
+   --worker-machine-type=n1-standard-4 \
+   --worker-boot-disk-size=500GB \
+   --master-machine-type=n1-standard-4 \
+   --master-boot-disk-size=500GB \
+   --image-version=1.4 \
+   --enable-component-gateway \
+   --optional-components=ANACONDA,JUPYTER \
+   --region=us-west2
+   --zone=$ZONE \
+   --initialization-actions=$INSTALL \
+   ch6cluster
+
+```
+
+
 
 ### Cloud Dataproc cluster with initialization actions for Datalab
 
@@ -233,4 +253,4 @@ tf.keras.utils.plot_model(model, 'flights_model.png', show_shapes=False, rankdir
 - [Wide & Deep Learning for Recommender Systems](https://arxiv.org/abs/1606.07792)
    + [Wide & Deep Learning: Memorization + Generalization with TensorFlow (TensorFlow Dev Summit 2017)](https://www.youtube.com/watch?v=NV1tkZ9Lq48)
    + Memorization vs Generalization and relevance vs diversity [知乎](https://zhuanlan.zhihu.com/p/53361519)
-
+- [Distributed TensorFlow training (Google I/O '18)](https://www.youtube.com/watch?v=bRMGoPqsn20)

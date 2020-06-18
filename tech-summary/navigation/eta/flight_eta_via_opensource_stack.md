@@ -93,6 +93,13 @@ r2 = r2_score(y_test, predicted)
 
 ### Classifier via Spark MLlib
 
+Target
+```
+// put data into these buckets
+-15.0, 0, 15.0, 30.0
+```
+
+
 [code](https://render.githubusercontent.com/view/ipynb?commit=46dc4e5514d0189fff1baaffb9ab817ba2aff19f&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f436f6465426561723830312f4167696c655f446174615f436f64655f322f343664633465353531346430313839666666316261616666623961623831376261326166663139662f636830372f4d616b696e675f50726564696374696f6e732e6970796e62&nwo=CodeBear801%2FAgile_Data_Code_2&path=ch07%2FMaking_Predictions.ipynb&repository_id=208912886&repository_type=Repository#Bucketizing-a-Continuous-Variable-for-Classification)
 
 ```py
