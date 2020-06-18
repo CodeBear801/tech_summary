@@ -159,6 +159,7 @@ func (m *memoryStore) Save(ctx context.Context, aggregateID string, records ...R
 - git repo https://github.com/savaki/eventsource/tree/master/provider/dynamodbstore
 - https://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html
 - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Java.html
+- NoSQL https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html
 
 ```java
 // create dynamo db's instance
@@ -185,6 +186,28 @@ func (m *memoryStore) Save(ctx context.Context, aggregateID string, records ...R
             table.waitForActive();
 
 
+```
+
+```go
+func makeUpdateItemInput(tableName, hashKey, rangeKey string, eventsPerItem int, aggregateID string, records ...eventsource.Record) ([]*dynamodb.UpdateItemInput, error) {
+    // ...
+	for partitionID, partition := range partitions {
+		input := &dynamodb.UpdateItemInput{
+			TableName: aws.String(tableName),
+			Key: map[string]*dynamodb.AttributeValue{
+				hashKey:  {S: aws.String(aggregateID)},
+				rangeKey: {N: aws.String(strconv.Itoa(partitionID))},
+			},
+			ExpressionAttributeNames: map[string]*string{
+				"#revision": aws.String("revision"),
+			},
+			ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+				":one": {N: aws.String("1")},
+			},
+        }
+        
+
+// dynamodb updateitem: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html
 ```
 
 
