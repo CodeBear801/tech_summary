@@ -1,8 +1,7 @@
 # Golang Event Sourcing
 
-[Gopherfest 2017: Event Sourcing – Architectures and Patterns (Matt Ho)](https://www.youtube.com/watch?v=B-reKkB8L5Q&t=562s)
-[git repo](https://github.com/savaki/eventsource/blob/master/examples/dynamodb/main.go)
-
+[Gopherfest 2017: Event Sourcing – Architectures and Patterns (Matt Ho)](https://www.youtube.com/watch?v=B-reKkB8L5Q&t=562s)  
+[git repo](https://github.com/savaki/eventsource/blob/master/examples/dynamodb/main.go)  
 
 ## Option
 
@@ -18,7 +17,6 @@ repo := eventsource.New(&User{}, eventsource.WithStore(store))
 
 Logic of `New`
 ```go
-
 func New(tableName string, opts ...Option) (*Store, error) {
 
 	for _, opt := range opts {
@@ -41,6 +39,7 @@ Interface Implementation Name -> Interface Impl Ptr
 
 client code
 ```go
+// mapping interface name with its implementation ptr
 	err := repo.Bind(
 		UserCreated{},
 		UserNameSet{},
