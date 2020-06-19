@@ -98,4 +98,34 @@ dataFrame.write
          .parquet(outputFile)
 ```
 
+### Experiment
+
+https://github.com/apache/parquet-mr
+
+#### set up env
+- via source code
+   +  https://github.com/apache/parquet-mr/tree/master/parquet-tools
+   + https://repo1.maven.org/maven2/org/apache/parquet/parquet-tools/1.11.0/parquet-tools-1.11.0.jar
+
+- via docker
+   + https://github.com/NathanHowell/parquet-tools/blob/master/Dockerfile
+```
+docker pull nathanhowell/parquet-tools:latest
+```
+
+#### Experiment via docker
+- https://github.com/apache/drill/blob/master/exec/java-exec/src/test/resources/lateraljoin/nested-customer.json
+- https://github.com/apache/drill/blob/master/exec/java-exec/src/test/resources/lateraljoin/nested-customer.parquet
+
+```
+wget https://github.com/apache/drill/blob/master/exec/java-exec/src/test/resources/lateraljoin/nested-customer.parquet
+
+docker run -it --rm nathanhowell/parquet-tools:latest --help
+
+docker run --rm -it -v /yourlocalpath:/test nathanhowell/parquet-tools:latest schema test/nested-customer.parquet
+```
+
+
+
+
 
