@@ -1,13 +1,15 @@
 
+resources for [discussion](https://github.com/Telenav/osrm-backend/issues/356#issuecomment-646378400)
+
 ## Why XGBoost
 - https://github.com/dmlc/xgboost
 - http://datascience.la/xgboost-workshop-and-meetup-talk-with-tianqi-chen/
 
-![image](https://user-images.githubusercontent.com/16873751/85156321-c1dd1800-b20e-11ea-8d2a-a4b1cb908f3b.png)
+<img src="https://user-images.githubusercontent.com/16873751/85156321-c1dd1800-b20e-11ea-8d2a-a4b1cb908f3b.png" alt="drawing" width="600"/><br/>
 
 decision tree, weak learner(individually they are quite inaccurate, but slightly better when work together)
 
-![image](https://user-images.githubusercontent.com/16873751/85156771-63646980-b20f-11ea-83e9-dcb2341a41cc.png)
+<img src="https://user-images.githubusercontent.com/16873751/85156771-63646980-b20f-11ea-83e9-dcb2341a41cc.png" alt="drawing" width="600"/><br/>
 
 second tree must provide positive effort when combine with first tree
 
@@ -16,8 +18,7 @@ second tree must provide positive effort when combine with first tree
 
 - https://setosa.io/ev/principal-component-analysis/
 
-![image](https://user-images.githubusercontent.com/16873751/85156926-9c9cd980-b20f-11ea-859a-5da8e06157a5.png)
-
+<img src="https://user-images.githubusercontent.com/16873751/85156926-9c9cd980-b20f-11ea-859a-5da8e06157a5.png" alt="drawing" width="800"/><br/>
 
 - Dimension for original data is reasonable for human beings, but might not friendly for decision tree
 
@@ -37,11 +38,12 @@ second tree must provide positive effort when combine with first tree
 - Organize data storage based on needs(query, filter)
 
 Sample data input   
-![image](https://user-images.githubusercontent.com/16873751/85159671-ac69ed00-b212-11ea-9f06-0623b2a568da.png)
-
+<img src="https://user-images.githubusercontent.com/16873751/85159671-ac69ed00-b212-11ea-9f06-0623b2a568da.png" alt="drawing" width="600"/><br/>
 
 Flat data vs. Nested data
-![image](https://user-images.githubusercontent.com/16873751/85159736-bb509f80-b212-11ea-877d-e6b7c68004f6.png)
+
+<img src="https://user-images.githubusercontent.com/16873751/85159736-bb509f80-b212-11ea-877d-e6b7c68004f6.png" alt="drawing" width="600"/><br/>
+
 
 Option on Parquet with `scala`
 ```java
@@ -63,7 +65,8 @@ nestedDF.write.option("compression", "snappy")
 
 ### How to avoid reading un-related column?
 
-![image](https://user-images.githubusercontent.com/16873751/85160645-72e5b180-b213-11ea-9d54-3a13eff17aef.png)
+
+<img src="https://user-images.githubusercontent.com/16873751/85160645-72e5b180-b213-11ea-9d54-3a13eff17aef.png" alt="drawing" width="600"/><br/>
 
 By record data column oriented, we could use different way to compress the data  
 Incrementally(record diff), or use dictionary  
@@ -72,10 +75,9 @@ More details could be found in [parquet encoding](https://github.com/apache/parq
 
 ### How to save space
 
-![image](https://user-images.githubusercontent.com/16873751/85160785-a88a9a80-b213-11ea-9a31-59ac44708bae.png)
+<img src="https://user-images.githubusercontent.com/16873751/85160785-a88a9a80-b213-11ea-9a31-59ac44708bae.png" alt="drawing" width="600"/><br/>
 
-![image](https://user-images.githubusercontent.com/16873751/85160804-afb1a880-b213-11ea-842e-b1198150ac43.png)
-
+<img src="https://user-images.githubusercontent.com/16873751/85160804-afb1a880-b213-11ea-842e-b1198150ac43.png" alt="drawing" width="600"/><br/>
 
 ### Parquet file internal
 
@@ -243,6 +245,9 @@ en | 24 | 200
 
 <img src="https://user-images.githubusercontent.com/16873751/85183495-c6babf80-b240-11ea-9a99-045b364bbbcb.png" alt="drawing" width="600"/><br/>
 
+
+### Experiment
+- https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/tools/spark/spark_docker_setup.md
 
 #### More info
 - https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/flumejava.md
