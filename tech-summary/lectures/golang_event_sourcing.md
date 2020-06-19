@@ -5,6 +5,11 @@
 
 ## Option
 
+Target  
+```
+opts ...Option
+```
+
 Definition
 ```go
 type Option func(registry *repository)
@@ -35,7 +40,8 @@ func WithStore(store Store) Option {
 
 
 ## How to define a interface mapping table
-Interface Implementation Name -> Interface Impl Ptr
+Target  
+Interface Implementation Name -> Interface Impl Ptr  
 
 client code
 ```go
