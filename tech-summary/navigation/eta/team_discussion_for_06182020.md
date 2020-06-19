@@ -154,6 +154,24 @@ message root {
 
 ## Why apache dataframe
 
+- why rdd https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/rdd.md
+- dataframe vs rdd https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/lectures/spark_rdd_dataframe_dataset.md
+- https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/flumejava.md
+
+### Why resilient distribute data
+
+map reduce flow
+<img src="https://user-images.githubusercontent.com/16873751/85180850-56f50680-b239-11ea-95f3-05ebea4329ca.png" alt="drawing" width="600"/><br/>
+
+Let's say there are multiple stage of map reduce
+- how to represent distribute data for programming language
+   + [google file system](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/gfs.md)  
+<img src="https://user-images.githubusercontent.com/16873751/85181162-1944ad80-b23a-11ea-934e-efce7c5610e9.png" alt="drawing" width="600"/><br/>
+
+- what if middle step failed, how to recover
+- how to let programmer easy to write mr program
+- let's say we want to first add 1 on all numbers then filter odd numbers, can we optimize calculation?
+
 
 
 
