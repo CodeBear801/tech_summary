@@ -157,6 +157,7 @@ message root {
 - why rdd https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/rdd.md
 - dataframe vs rdd https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/lectures/spark_rdd_dataframe_dataset.md
 - https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/flumejava.md
+- http://why-not-learn-something.blogspot.com/2016/07/apache-spark-rdd-vs-dataframe-vs-dataset.html
 
 ### Why resilient distribute data
 
@@ -166,12 +167,86 @@ map reduce flow
 Let's say there are multiple stage of map reduce
 - how to represent distribute data for programming language
    + [google file system](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/gfs.md)  
-<img src="https://user-images.githubusercontent.com/16873751/85181162-1944ad80-b23a-11ea-934e-efce7c5610e9.png" alt="drawing" width="600"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/85181162-1944ad80-b23a-11ea-934e-efce7c5610e9.png" alt="drawing" width="400"/><br/>
 
 - what if middle step failed, how to recover
 - how to let programmer easy to write mr program
 - let's say we want to first add 1 on all numbers then filter odd numbers, can we optimize calculation?
 
+
+RDD means Resilient Distributed Datasets, an RDD is a collection of partitions of records.
+```
+The main challenge in designing RDDs is defining a programming interface 
+that can provide fault tolerance efficiently. 
+```
+
+What is RDD
+```
+每个RDD都包含：
+（1）一组RDD分区（partition，即数据集的原子组成部分）；
+（2）对父RDD的一组依赖，这些依赖描述了RDD的Lineage；
+（3）一个函数，即在父RDD上执行何种计算；
+（4）元数据，描述分区模式和数据存放的位置。
+例如，一个表示HDFS文件的RDD包含：各个数据块的一个分区，并知道各个数据块放在哪些节点上。
+而且这个RDD上的map操作结果也具有同样的分区，map函数是在父数据上执行的。
+```
+
+Example code
+
+```java
+val rdd = sc.textFile("/mnt/wikipediapagecounts.gz")
+var parsedRDD = rdd.flatMap{
+    line => line.split("""\s+""") match {
+        case Array(project, page, numRequests,-)=>Some((project, page, numRequests))
+        case _=None
+    }
+}
+
+// filter only english pages; count pages and requests to it
+parsedRDD.filter{case(project, page, numRequests) => project == "en"}
+         .map{ case(_, page, numRequests) => (page, numRequests)}
+         .reduceByKey(_+_)
+         .take(100)
+         .foreach{case (page, requests) => println(s"$page:$requests")}
+```
+
+why not rdd
+
+<img src="https://user-images.githubusercontent.com/16873751/85183302-12209e00-b240-11ea-9320-315dcc40ec12.png" alt="drawing" width="400"/><br/>
+
+**Spark don't look into lambda functions, and he don't know what's the data/type**
+
+<img src="https://user-images.githubusercontent.com/16873751/85183330-32e8f380-b240-11ea-930f-1de4bf6de5d5.png" alt="drawing" width="400"/><br/>
+
+DataFrame Sample
+
+```java
+// convert RDD -> DF with colum names
+val df = parsedRDD.toDF("project", "page", "numRequests")
+// filter, groupBy, sum, and then agg()
+df.filter($"project" === "en")
+  .groupBy($"page")
+  .agg(sum($"numRequests").as("count"))
+  .limit(100)
+  .show(100)
+```
+
+project | page | numRequests
+---|---|---
+en | 23 | 45
+en | 24 | 200
+
+
+<img src="https://user-images.githubusercontent.com/16873751/85183481-c02c4800-b240-11ea-8f2e-2778368988c8.png" alt="drawing" width="600"/><br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/85183489-c3bfcf00-b240-11ea-9ccf-e714153a0b1f.png" alt="drawing" width="600"/><br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/85183495-c6babf80-b240-11ea-9a99-045b364bbbcb.png" alt="drawing" width="600"/><br/>
+
+
+#### More info
+- https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/flumejava.md
+- [pcollection in apache beam](https://beam.apache.org/documentation/programming-guide/#pcollections) 
 
 
 

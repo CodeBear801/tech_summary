@@ -51,6 +51,9 @@ Logic unit called files <br/> absolute path and logic path + name | Remote acces
 - shadow masters that lag a little behind master, can be promoted to master
 - For each file, master just record the mapping of trunk index <-> trunk server, let trunk server handle how the trunk be recorded
 
+A better picture from [From Google File System to Omega: A Decade of Advancement in Big Data Management at Google](https://www.semanticscholar.org/paper/From-Google-File-System-to-Omega%3A-A-Decade-of-in-at-Yang/4b3b210fc0b2bc3dbd7ea337260fb4e8b20681a5)  
+<img src="https://user-images.githubusercontent.com/16873751/85181162-1944ad80-b23a-11ea-934e-efce7c5610e9.png" alt="drawing" width="400"/><br/>
+
 
 ## Master's responsibility
 
