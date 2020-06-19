@@ -125,6 +125,34 @@ docker run -it --rm nathanhowell/parquet-tools:latest --help
 docker run --rm -it -v /yourlocalpath:/test nathanhowell/parquet-tools:latest schema test/nested-customer.parquet
 ```
 
+```
+➜  tmp docker run --rm -it -v /Users/xunliu/Downloads/tmp:/test nathanhowell/parquet-tools:latest schema test/nested-customer.parquet
+message root {
+  optional binary _id (UTF8);
+  optional binary c_address (UTF8);
+  optional double c_id;
+  optional binary c_name (UTF8);
+  repeated group orders {
+    repeated group items {
+      optional binary i_name (UTF8);
+      optional double i_number;
+      optional binary i_supplier (UTF8);
+    }
+    optional double o_amount;
+    optional double o_id;
+    optional binary o_shop (UTF8);
+  }
+}
+```
+
+
+- For how to generate parquet file from csv, I think the best ways is using `Apache Spark`, `Apache Drill` or other cloud platforms, such as [Databricks notbook](https://docs.databricks.com/data/data-sources/read-parquet.html)
+- I failed on following command line tools
+   + golang https://github.com/xitongsys/parquet-go failed to build
+   + python 2.7 https://github.com/redsymbol/csv2parquet failed to build
+
+
+## Why apache dataframe
 
 
 
