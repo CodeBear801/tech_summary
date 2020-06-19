@@ -53,7 +53,7 @@ client code
 	)
 ```
 Impl of Bind
-```
+```go
 
 func (r *repository) Bind(events ...Event) error {
 	for _, event := range events {
