@@ -32,6 +32,7 @@ second tree must provide positive effort when combine with first tree
 - Google Dremel 原理 - 如何能3秒分析1PB https://www.twblogs.net/a/5b82787e2b717766a1e868d0
 - Approaching NoSQL Design in DynamoDB https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-approach
 - Spark + Parquet In Depth https://www.youtube.com/watch?v=_0Wpwj_gvzg&t=1501s
+- https://medium.com/@rajnishtiwari2010/conversion-of-json-to-parquet-format-using-apache-parquet-in-java-b694a0a7487d
 
 ### Target of column based data organize
 - Only load needed data
