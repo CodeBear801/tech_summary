@@ -101,6 +101,9 @@ dataFrame.write
          .parquet(outputFile)
 ```
 
+### Understanding the case in paper
+https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/papers/dremel.md#understanding-the-case-in-paper
+
 ### Experiment
 
 https://github.com/apache/parquet-mr
