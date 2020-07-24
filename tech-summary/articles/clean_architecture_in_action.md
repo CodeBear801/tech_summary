@@ -1,14 +1,13 @@
 
-## project 1
 
-### [A Guided Tour inside a clean architecture code base](https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97)
+## [A Guided Tour inside a clean architecture code base](https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97)
 
 keyword: java, ddd  
 
 
 <img src="resources/clean_arch_1_3smlPZenpAtICXdgcjuHSg.jpeg" alt="clean_arch_1_3smlPZenpAtICXdgcjuHSg.jpeg" width="600"/>
 
-#### Domain layer
+### Domain layer
 
 - `Domain entities` like `value objects`, `usecases` act as `operations`
 - Abstraction of `MoviesCache`, `MoviesDataStore`, `MoviesRepository` from `domain/interface`
@@ -43,7 +42,7 @@ You could find more results [here](https://github.com/mrsegev/MovieNight/blob/7d
 
 - [`DomainTestUtils`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/domain/src/main/kotlin/com/yossisegev/domain/common/DomainTestUtils.kt#L11) provide data for `value objects` used for testing.  
 
-#### Data layer
+### Data layer
 - Purpose
    + provide all the data the application needs to function
        * Implementation details, like [`MoviesRepositoryImpl`](https://github.com/mrsegev/MovieNight/blob/7df52e6c93d6932b4b58de9f4f906f86df93dce1/data/src/main/kotlin/com/yossisegev/data/repositories/MoviesRepositoryImpl.kt#L13) , which can be used by domain layer's `usecases`
@@ -56,7 +55,7 @@ You could find more results [here](https://github.com/mrsegev/MovieNight/blob/7d
   + Implementation of `MovieDataStore`, `MovieCache`, etc
 
 
-#### The presentation layer
+### The presentation layer
 Example of `PopularMoviesViewModel`
 ```kotlin
 class PopularMoviesViewModel(private val getPopularMovies: GetPopularMovies,
@@ -87,13 +86,20 @@ class PopularMoviesViewModel(private val getPopularMovies: GetPopularMovies,
 }
 ```
 
-## Project 2
 
-### [Trying Clean Architecture on Golang](https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047)
+## [Trying Clean Architecture on Golang](https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047)
  
 keyword: golang  
 
 <img src="resources/clean-arch_golang.png" alt="clean-arch_golang.png" width="600"/>
+
+
+
+## Event Sourcing – Architectures and Patterns
+
+keyword: golang  
+
+My notes: [link](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/lectures/golang_event_sourcing.md)
 
 
 ## More info
