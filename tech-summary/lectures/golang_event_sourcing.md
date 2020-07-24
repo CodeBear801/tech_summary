@@ -10,14 +10,14 @@ Target
 opts ...Option
 ```
 
-Definition
+Declaration
 ```go
 type Option func(registry *repository)
 ```
 
 Client code
 ```go
-repo := eventsource.New(&User{}, eventsource.WithStore(store))
+repo := eventsource.New(&User{}, eventsource.WithStore(store), /*other variables...*/)
 ```
 
 Logic of `New`
@@ -153,11 +153,10 @@ func (r *repository) Save(ctx context.Context, events ...Event) error {
 	return r.store.Save(ctx, aggregateID, history...)
 }
 ```
-Here is impl of `Save`
+Here is code of calling `Save`
 
 ```go
-func (m *memoryStore) Save(ctx context.Context, aggregateID string, records ...Record) error {
-}
+err = repo.Save(ctx, setEmailEvent, setNameEvent)
 ```
 
 ## DynamoDB
