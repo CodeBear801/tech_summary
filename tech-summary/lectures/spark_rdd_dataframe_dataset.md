@@ -142,3 +142,6 @@ Step 3:
 <img src="resources/imgs/spark_rdd_df_ds_2017_df_ds_why_when.png" alt="spark_rdd_df_ds_2017_df_ds_why_when" width="600"/>
 <br/>
 
+## More info
+- http://why-not-learn-something.blogspot.com/2016/07/apache-spark-rdd-vs-dataframe-vs-dataset.html
+

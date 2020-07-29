@@ -31,6 +31,7 @@ Data & Distribute System
    + [pregel](tech-summary/papers/pregel_connected_component_example.md)
    + [lamport logic clock](tech-summary/papers/lamport_logic_clock.md)
    + [2pc 3pc](tech-summary/papers/2pc_3pc.md)
+   + [dremel](tech-summary/papers/dremel.md)
 
 
 Language 
