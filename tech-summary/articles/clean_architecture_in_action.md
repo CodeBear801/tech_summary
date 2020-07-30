@@ -2,6 +2,27 @@
 
 # Clean Architecture in Action
 
+## Event Sourcing – Architectures and Patterns
+
+keyword: golang  
+
+My notes: [link](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/lectures/golang_event_sourcing.md)
+
+## 开发者的第0个迭代
+
+keyword: DDD, java, 腾云
+
+- https://insights.thoughtworks.cn/backend-development-iteration0/
+- https://github.com/e-commerce-sample/ecommerce-order-service
+
+
+## Architecture Patterns with Python
+keyword: DDD, python
+
+- https://github.com/cosmicpython/code
+- https://www.amazon.com/Architecture-Patterns-Python-Domain-Driven-Microservices/dp/1492052205
+
+
 ## A Guided Tour inside a clean architecture code base
 [A Guided Tour inside a clean architecture code base](https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97)  
 keyword: java, ddd  
@@ -96,12 +117,6 @@ keyword: golang
 <img src="resources/clean-arch_golang.png" alt="clean-arch_golang.png" width="600"/>
 
 
-
-## Event Sourcing – Architectures and Patterns
-
-keyword: golang  
-
-My notes: [link](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/lectures/golang_event_sourcing.md)
 
 
 ## More info

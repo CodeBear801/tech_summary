@@ -1,8 +1,10 @@
 # Golang Event Sourcing
 
 [Gopherfest 2017: Event Sourcing – Architectures and Patterns (Matt Ho)](https://www.youtube.com/watch?v=B-reKkB8L5Q&t=562s)  
-[git repo](https://github.com/savaki/eventsource/blob/master/examples/dynamodb/main.go)  
+[git repo for demo](https://github.com/savaki/eventsource/blob/master/examples/dynamodb/main.go)   
+[git repo for reference](https://github.com/altairsix/eventsource)
 
+Below are some good code reference of programming with golang  
 ## Option
 
 Target  
