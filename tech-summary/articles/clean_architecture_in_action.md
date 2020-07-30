@@ -1,7 +1,9 @@
 
 
-## [A Guided Tour inside a clean architecture code base](https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97)
+# Clean Architecture in Action
 
+## A Guided Tour inside a clean architecture code base
+[A Guided Tour inside a clean architecture code base](https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97)  
 keyword: java, ddd  
 
 
@@ -87,8 +89,8 @@ class PopularMoviesViewModel(private val getPopularMovies: GetPopularMovies,
 ```
 
 
-## [Trying Clean Architecture on Golang](https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047)
- 
+## Trying Clean Architecture on Golang
+[Trying Clean Architecture on Golang](https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047)  
 keyword: golang  
 
 <img src="resources/clean-arch_golang.png" alt="clean-arch_golang.png" width="600"/>
