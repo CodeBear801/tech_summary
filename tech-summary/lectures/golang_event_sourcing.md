@@ -8,8 +8,12 @@ Below are some good code reference of programming with golang
 ## Option
 
 Target  
-```
+```go
 opts ...Option
+
+// Option provides functional configuration for a *Repository
+type Option func(*Repository)
+// [perry] Apply a list of operations on Repository
 ```
 
 Declaration
