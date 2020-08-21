@@ -87,7 +87,6 @@ def allocate(
         uow.commit()
 ```
 
-
 - So, the [domain model](https://github.com/CodeBear801/pythonArchtectureCode/blob/e3de63c922c2094d63949949b4cdf776fb5462dc/src/allocation/domain/model.py#L17) only need to focus on business logic
 ```py
 class Product:
@@ -110,6 +109,20 @@ class Product:
             return None
 
         # self.events = []  # type: List[events.Event]
+```
+Observer for `Allocated`
+```py
+EVENT_HANDLERS = {
+    events.Allocated: [publish_allocated_event, add_allocation_to_read_model],
+}
+# update to redis.pubsub
+# update view
+
+def publish_allocated_event(
+        event: events.Allocated, publish: Callable,
+):
+    #     publish: Callable = redis_eventpublisher.publish,
+    publish('line_allocated', event)
 ```
 
 
