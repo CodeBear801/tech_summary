@@ -1,5 +1,5 @@
 
-## Problem to solve
+## Problem 
 <img src="https://user-images.githubusercontent.com/16873751/90936435-04ab9f80-e3ba-11ea-904b-a19955d148db.png" alt="main_operational_flow" width="600"/>
 
 <img src="https://user-images.githubusercontent.com/16873751/90936196-9666dd00-e3b9-11ea-8717-83ec48687bb8.png" alt="story_1" width="600"/>  
@@ -123,6 +123,20 @@ def publish_allocated_event(
 ):
     #     publish: Callable = redis_eventpublisher.publish,
     publish('line_allocated', event)
+```
+Here is the code for how to use
+
+```py
+subscription = redis_client.subscribe_to('line_allocated')
+
+    for attempt in Retrying(stop=stop_after_delay(3), reraise=True):
+        with attempt:
+            message = subscription.get_message(timeout=1)
+            if message:
+                messages.append(message)
+                print(messages)
+            data = json.loads(messages[-1]['data'])
+
 ```
 
 
