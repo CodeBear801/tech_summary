@@ -1,6 +1,6 @@
 # Contraction Hierarchies
 
-Pre select "important" nodes, during query time route to far away only use specific nodes.
+Pre select "important" nodes, during query time route to node far away only use specific nodes.
 
 ## Hierarchical approach
 
