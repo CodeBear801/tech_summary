@@ -117,12 +117,12 @@ rectangular, and are not necessarily subdivided around their center point
 
 ### Problem
 
-投影比例不同的问题
+projection size 投影比例不同的问题
 
 <img src="../resources/google_s2_cellid_step3_projection_Issue.png" alt="google_s2_cellid_step3_projection_Issue" width="400"/>
 
 
-在两级的投影比在赤道区域要大.  需要一个转换将上面长的拉短、将下面短的拉长，尽量让区间变相同。
+在两级的投影比在赤道区域要大.  需要一个转换将上面长的拉短、将下面短的拉长，尽量让区间变相同。 
 Similar issue also exists in mercator projection, you could find this interesting article from CNN: [What's the real size of Africa? How Western states used maps to downplay size of continent](https://www.cnn.com/2016/08/18/africa/real-size-of-africa/index.html)
 
 ### Solutions
