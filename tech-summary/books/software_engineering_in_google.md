@@ -505,12 +505,12 @@ public String readFile(String fileName) {
 
 
 #### Stubbing
-[Stubbing](http://xunitpatterns.com/Test%20Stub.html) means you specify to the function exactly what values to return.
+[Stubbing](http://xunitpatterns.com/Test%20Stub.html) means you specify to the function exactly what values to return.  
 
 ```java
 @Test public void getTransactionCount() {
     transactionCounter = new TransactionCounter(mockCreditCardServer);
-    // use stubbing to return three transactions
+    // use stubbing to return three transactions(modify behavior)
     when(mockCreditCardServer.getTransactions()).thenReturn(newList(TRANSACTION_1, TRANSACTION_2, TRANSACTION_3));
     assertThat(transactionCounter.getTransactionCount()).isEqualTo(3);
 }
