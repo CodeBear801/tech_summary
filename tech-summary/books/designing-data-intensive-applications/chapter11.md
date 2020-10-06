@@ -5,6 +5,7 @@
 ## Questions
 - How streaming system handle joins?  
 - How streaming system tolerant fault?  
+- Exactly-Once Semantics
 
 ## Notes
 
@@ -21,7 +22,7 @@
 - At the core of a stream is a messaging system. The messaging system is responsible for receipt and delivery of events.
 - Broadly speaking, stream processing systems can be differentiated by asking two questions about their top-level functionality:
 	- What happens when the producer publishing outstrips consumer processing? There are three approaches: queueing, dropping messages, and backpressure (the latter being blocking the producer until the current set of messages have been processed).
-	- What are the durability guarantees? Messaging systems that may lose data will be faster than ones that provide strong durability.
+	- What happens if nodes crash or temporarily go offline, are any messages lost? Durability may require some combination of writing to disk and/or replication.
 - You can use any of the tools discussed in the data flow section to implement a message system:
 	- Direct producer-consumer messaging.
 		- This is simple, and doesn't require standing up new services, but mixes concerns (and doesn't scale very well because of that) and complicates application logic.
