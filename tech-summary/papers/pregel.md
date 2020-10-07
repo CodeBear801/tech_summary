@@ -1,6 +1,6 @@
 
 ## Problem
-- When graph is too large to feed into single machine.  
+- When graph is too large to feed into single machine, e.g. social graph, how to apply algorithm on it, how to scale  
 - Parallel graph model like BGM, lack of fault handling ability
 
 ## Overview
@@ -10,6 +10,17 @@ The function specifies behavior at a single vertex V and a single superstep S. I
 received at superstep S + 1, and modify the state of V and its outgoing edges. Messages are typically sent along outgoing edges, but a message may be sent to any vertex whose identifier is known.  
 The vertex-centric approach is reminiscent of MapReduce in that users focus on a local action, processing each item independently, and the system composes these actions to lift
 computation to a large dataset. By design the model is well suited for distributed implementations: it doesn’t expose any mechanism for detecting order of execution within a superstep, and all communication is from superstep S to superstep S + 1.
+
+### Pregel vs mapreduce
+
+Pregel 的图计算过程与 MapReduce 非常接近:在迭代的每一个步骤当中， 将会以图的节点为中心进行 Map 操作，这意味着在 Map 函数当中我们只有以
+某一节点为中心的局部信息， 这包括:
+1. 一个 Vertex 和它当前 Attach 的 Message
+2. 当前 Vertex 向外指向的 Edge 和 Edge 上的属性
+3. 当前 Vertex 在上一步计算当中所接收到的全部 Message
+对于图中的每一个 Vertex，在 Pregel 当中的一次 Superstep 包括接收消息、合并消息和发送消息三个步骤。
+
+在大多数算法当中，所有的 Vertex 都进入 Inactive 状态就意味着算法结束。
 
 ## C++ API
 
@@ -25,8 +36,32 @@ computation to a large dataset. By design the model is well suited for distribut
 
 
 
+
+
+## System design
+1. 将图分区到不同机器进行计算
+2. 使用主从模型进行任务调度和管理
+3. 使用 Message 缓冲近一步提高通讯吞吐量
+   - Message 缓冲是在计算节点(Worker)的层面上提高吞吐量的一个优化。 Message 在 Worker 之间传递时并不是来一个发一个，而是通过缓冲积攒一些
+Message，之后以 Batch 的形式批量发送。 这一优化可以减少网络请求的 Overhead。
+4. 使用 Checkpoint 和 Confined Recovery 实现容错性
+   - Pregel 使用两种方法来实现容错性:
+       - Checkpoint 在 Superstep 执行前进行，用来保存当前系统的状态。当某一图分区计算失败但 Worker 仍然可用时， 可以从 Checkpoint 执行快速恢复
+       - 当某一 Worker 整体失败当机使得它所记录的全部状态丢失时，新启动的 Worker 可能要重新接收上一步发送出来的消息。 为了避免无限制的递归重
+新计算之前的步骤，Pregel 将 Worker 将要发送的每一条消息写入 Write Ahead Log。 这种方法被称为 Confined Recovery
+
+
+## Examples
+
+### Find connected component 1
+[link](pregel_connected_component_example.md)
+
+
+### Find connected component 2
+https://user-images.githubusercontent.com/16873751/95391641-4205b700-08ac-11eb-9d18-667e9f4aca22.png
+
 ## More Info
 - Paper [EN](https://kowshik.github.io/JPregel/pregel_paper.pdf) [CN](https://developer.aliyun.com/article/4761)
 - [Pregel In Graphs - Models and Instances](https://www.slideshare.net/ChaseZhang3/pregel-in-graphs-models-and-instances)
- 
-
+- [Pregel（图计算）技术原理](https://cshihong.github.io/2018/05/30/Pregel%EF%BC%88%E5%9B%BE%E8%AE%A1%E7%AE%97%EF%BC%89%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/)
+- [Google's hama](https://github.com/apache/hama)
