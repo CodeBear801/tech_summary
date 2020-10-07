@@ -3,6 +3,7 @@
   - [Keywords](#keywords)
   - [Questions](#questions)
   - [Notes](#notes)
+    - [Batch with unix tools](#batch-with-unix-tools)
     - [MapReduce](#mapreduce)
     - [Dataflow](#dataflow)
     - [Graph processing](#graph-processing)
@@ -19,7 +20,21 @@
 
 ## Notes
 
+### Batch with unix tools
+get the five most popular pages on your site
+```bash
+cat /var/log/nginx/access.log |
+  awk '{print $7}' |
+  sort             |
+  uniq -c          |
+  sort -r -n       |
+  head -n 5        |
+```
+
+
 ### MapReduce
+
+- [My notes on MapReduce paper](../../papers/mapreduce.md)
 - We can place the nearness data processing systems on a continuum, between online systems on one end and batch processing systems on the other end (with stream processing as an intermediate; another chapter).
 - Batch processing systems process data on a scheduled or as-needed basis, instead of immediate basis of an online systme.
 - Thus the concerns are very different. Latency doesn't matter. We design for total application success or total failure. 
@@ -64,4 +79,6 @@ In practice, there are a lot of sneaky ways in which non-determinism may sneak i
 - [My notes on MapReduce paper](../../papers/mapreduce.md)
 - [My notes on Apache Spark](../../tools/spark_index.md)
 - [My notes on Pregel paper](../../papers/pregel.md)
+- My notes on [flumejava](../../papers/flumejava.md) [rdd](../../papers/rdd.md)
+
 
