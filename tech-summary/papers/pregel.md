@@ -83,6 +83,18 @@ N2 和 N3 户想发送消息，由于 N1 -> N3 -> N2 的路径更短，N2 的 Me
 N2 在上一步仍然是 Active 的状态，它将会向 N3 发送最后一次消息。 由于 N3 没有更新自己的值，此时图中三个节点都变味 Inactive，算法结束。
 
 
+### Page range
+
+PageRank 不能简单的以 Vertex 的状态作为算法终止的条件。 除了设定固定的迭代次数之外，另一个方法就是利用 Pregel 的 Aggregator 来跟踪计算过程。
+
+<img src="https://user-images.githubusercontent.com/16873751/95392734-26031500-08ae-11eb-93d1-64828a17ced2.png" alt="hortest_path_3" width="600"/>  <br/>
+
+N1 不断地将权值发送给自己和 N2，而 N2 则只会发给自己。 随着逐步的迭代，N1 的权值越来越小，N2 的权值越来越大。我们用 Aggregator
+跟踪每个节点上权值变化绝对值的最大值 delta，这个最大值会随着迭代的进程而越变越小。 如果我们设定 delta 小于 0.05 时算法结束，则我们将在接下来的步骤中看到如下过程:
+
+<img src="https://user-images.githubusercontent.com/16873751/95392747-2e5b5000-08ae-11eb-9353-8e8b1648f73a.png" alt="hortest_path_3" width="600"/>  <br/>
+
+在最后 Aggregator 得到 delta 满足终止条件之后，Master 就可以觉得结束算法了
 
 
 ## More Info
