@@ -51,6 +51,7 @@ You do not want to push the final producer of a MapReduce job to a database via 
 In practice, there are a lot of sneaky ways in which non-determinism may sneak into your processing.
 
 ### Graph processing
+- [My notes on Pregel paper](../../papers/pregel.md)
 - When look at graphs in batch processing context, the goal is to perform some kind of offline processing or analysis on an entire graph. This need often arises in machine learning applications such as recommendation engines, or in ranking systems.  "repeating until done" cannot be expressed in plain MapReduce as it runs in a single pass over the data and some extra trickery is necessary.
 - An optimization for batch processing graphs, the bulk synchronous parallel (BSP) has become popular.
     + One vertex can "send a message" to another vertex, and typically those messages are sent along the edges in a graph.  The difference from MapReduce is that a vertex remembers its state in memory from one iteration to the next.  The fact that vertices can only communicate by message passing helps improve the performance of Pregel jobs, since messages can be batched.
