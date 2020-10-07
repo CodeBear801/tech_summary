@@ -1,5 +1,7 @@
 # Calculate connected component by Pregel
 
+My notes about pregel paper is [here](./pregel.md)
+
 ## Problem description
 
 - Vertexes are recorded in different machine, they have global unique ID be assigned
