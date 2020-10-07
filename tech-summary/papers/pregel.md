@@ -58,10 +58,36 @@ Message，之后以 Batch 的形式批量发送。 这一优化可以减少网�
 
 
 ### Find connected component 2
-https://user-images.githubusercontent.com/16873751/95391641-4205b700-08ac-11eb-9d18-667e9f4aca22.png
+
+<img src="https://user-images.githubusercontent.com/16873751/95391641-4205b700-08ac-11eb-9d18-667e9f4aca22.png" alt="pregel_paper_pic3" width="600"/>  <br/>
+
+1. 为每个节点初始化一个唯一的 Message 值作为初始值
+2. 在每一个步骤当中，一个 Vertex 将其本身和接收到的 Message 聚合为它们之中的最大值(最小值)
+3. 如果 Attach 在某一个 Vertex 上的 Message 在上一步当中变大(变小)了， 它就会把新的值发送给所有相邻的节点，否则它会执行 Vote to halt 来
+Inactivate 自己
+4. 算法一直执行直到所有节点都 Inactive 为止
+
+上述连通分量的算法假定边都是双向的(可以通过两条相反的边实现)。可以想像， 由于同一连通分量当中的节点都可以互相传播消息，因此最终在同一个 连通分量里的 Vertex， 必定都会拥有这一连通分量内 Message 的最大值(最小值)。这个最后的值就可以作为这一连通分量的 Identifier。
+
+### Single source shortest path
+
+bellman-ford
+
+<img src="https://user-images.githubusercontent.com/16873751/95392311-62824100-08ad-11eb-854a-5bedf4de9e9b.png" alt="shortest_path_1" width="600"/>  <br/>
+N2、N3 接收到 N1 发送的消息， 从而更新了自己的消息为更小的值。执行结束后，N1因为没有变化而 Inactive
+
+<img src="https://user-images.githubusercontent.com/16873751/95392327-6ca43f80-08ad-11eb-9848-356d90bbfe8b.png" alt="hortest_path_2" width="600"/>  <br/>
+N2 和 N3 户想发送消息，由于 N1 -> N3 -> N2 的路径更短，N2 的 Message 被更新， N3 则变为 Inactive。
+
+<img src="https://user-images.githubusercontent.com/16873751/95392343-72018a00-08ad-11eb-8b8c-bc14db42c906.png" alt="hortest_path_3" width="600"/>  <br/>
+N2 在上一步仍然是 Active 的状态，它将会向 N3 发送最后一次消息。 由于 N3 没有更新自己的值，此时图中三个节点都变味 Inactive，算法结束。
+
+
+
 
 ## More Info
 - Paper [EN](https://kowshik.github.io/JPregel/pregel_paper.pdf) [CN](https://developer.aliyun.com/article/4761)
+- Optimization on large scale graph [Connected Components in MapReduce and Beyond](https://research.google/pubs/pub43122/)
 - [Pregel In Graphs - Models and Instances](https://www.slideshare.net/ChaseZhang3/pregel-in-graphs-models-and-instances)
 - [Pregel（图计算）技术原理](https://cshihong.github.io/2018/05/30/Pregel%EF%BC%88%E5%9B%BE%E8%AE%A1%E7%AE%97%EF%BC%89%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/)
 - [Google's hama](https://github.com/apache/hama)
