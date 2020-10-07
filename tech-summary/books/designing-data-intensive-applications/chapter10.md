@@ -6,6 +6,7 @@
     - [MapReduce](#mapreduce)
     - [Dataflow](#dataflow)
     - [Graph processing](#graph-processing)
+  - [More Info](#more-info)
 
 # Batch processing
 
@@ -60,4 +61,9 @@ In practice, there are a lot of sneaky ways in which non-determinism may sneak i
 - It is possible to parallelize this algorithm across multiple partitions. Ideally you want to partition on the neighborhoods you are going to be within during the walks, but this is hard to do, so most schemes just partition the graph arbitrarily.
 - This creates unavoidable message overhead, when nodes of interest are on different machines.
 Ongoing area of research.
+
+## More Info
+- [My notes on MapReduce paper](../../papers/mapreduce.md)
+- [My notes on Apache Spark](../../tools/spark_index.md)
+- [My notes on Pregel paper](../../papers/pregel_connected_component_example.md)
 
