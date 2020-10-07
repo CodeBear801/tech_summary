@@ -83,6 +83,26 @@ N2 和 N3 户想发送消息，由于 N1 -> N3 -> N2 的路径更短，N2 的 Me
 N2 在上一步仍然是 Active 的状态，它将会向 N3 发送最后一次消息。 由于 N3 没有更新自己的值，此时图中三个节点都变味 Inactive，算法结束。
 
 
+```java
+class ShortestPathVertex
+	: public Vertex<int, int, int> {
+	 void Compute(MessageIterator* msgs) {
+	    int mindist = IsSource(vertex_id()) ? 0 : INF;
+	    for (; !msgs->Done(); msgs->Next())
+	 	    mindist = min(mindist, msgs->Value());
+             
+	    if (mindist < GetValue()) {
+		     *MutableValue() = mindist;
+	 	    OutEdgeIterator iter = 	GetOutEdgeIterator();
+ 		    for (; !iter.Done(); iter.Next())SendMessageTo(iter.Target(),
+ 		        mindist + iter.GetValue());
+ 	    }
+	    VoteToHalt();
+	}
+};
+```
+
+
 ### Page range
 
 PageRank 不能简单的以 Vertex 的状态作为算法终止的条件。 除了设定固定的迭代次数之外，另一个方法就是利用 Pregel 的 Aggregator 来跟踪计算过程。
