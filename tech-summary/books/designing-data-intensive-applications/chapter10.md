@@ -51,19 +51,16 @@ You do not want to push the final producer of a MapReduce job to a database via 
 In practice, there are a lot of sneaky ways in which non-determinism may sneak into your processing.
 
 ### Graph processing
-- What about graph processing, e.g. processing data using graph algorithms?
-- Dataflow engines have implemented this feature using the bulk sychronous parallel model of computation. This was populated by Google Pregel (Google again...).
-- Pregel has 3 components: master, worker, aggregator
-- The insight is that most of these algorithms can be implemented by processing one node at a time and "walking" the graph.
-- This algorithm archetype is known as a transitive closure.
-- In BSP nodes are processed in stages. At each stage you process the nodes that match some condition, and evaluate what nodes to step to next.
-- When you run out of node to jump to you stop.
-- It is possible to parallelize this algorithm across multiple partitions. Ideally you want to partition on the neighborhoods you are going to be within during the walks, but this is hard to do, so most schemes just partition the graph arbitrarily.
-- This creates unavoidable message overhead, when nodes of interest are on different machines.
-Ongoing area of research.
+- When look at graphs in batch processing context, the goal is to perform some kind of offline processing or analysis on an entire graph. This need often arises in machine learning applications such as recommendation engines, or in ranking systems.  "repeating until done" cannot be expressed in plain MapReduce as it runs in a single pass over the data and some extra trickery is necessary.
+- An optimization for batch processing graphs, the bulk synchronous parallel (BSP) has become popular.
+    + One vertex can "send a message" to another vertex, and typically those messages are sent along the edges in a graph.  The difference from MapReduce is that a vertex remembers its state in memory from one iteration to the next.  The fact that vertices can only communicate by message passing helps improve the performance of Pregel jobs, since messages can be batched.
+    + Fault tolerance is achieved by periodically checkpointing the state of all vertices at the end of an interation.
+    + The framework may partition the graph in arbitrary ways.
+- If your graph can fit into memory on a single computer, it's quite likely that a single-machine algorithm will outperform a distributed batch process. If the graph is too big to fit on a single machine, a distributed approach such as Pregel is unavoidable.
+
 
 ## More Info
 - [My notes on MapReduce paper](../../papers/mapreduce.md)
 - [My notes on Apache Spark](../../tools/spark_index.md)
-- [My notes on Pregel paper](../../papers/pregel_connected_component_example.md)
+- [My notes on Pregel paper](../../papers/pregel.md)
 
