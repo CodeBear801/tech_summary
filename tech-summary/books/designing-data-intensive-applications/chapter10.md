@@ -66,7 +66,7 @@ Say you have to join two tables A and B on A.id=B.id. Lets assume that table A h
 ```
 
 - Approach 2:
-  - randomize the join key by appending extra column
+  - randomize the join key by appending extra column.  Like adding salt, dividing the data into 100 bins for large df and replicating the small df 100 times.
   - Add a column in the larger table (A), say skewLeft and populate it with random numbers between 0 to N-1 for all the rows.
   - Add a column in the smaller table (B), say skewRight. Replicate the smaller table N times. So values in new skewRight column will vary from 0 to N-1 for each copy of original data. For this, you can use the explode sql/dataset operator.
   - join the 2 datasets/tables with join condition.  Reference: https://datarus.wordpress.com/2015/05/04/fighting-the-skew-in-spark/
