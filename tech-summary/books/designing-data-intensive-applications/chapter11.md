@@ -5,6 +5,7 @@
 ## Questions
 - How streaming system handle joins?  
 - How streaming system tolerant fault?  
+- Watermark
 - Exactly-Once Semantics
 
 ## Notes
@@ -111,3 +112,6 @@ Making Sense of Stream Processing  Martin Kleppmann — Event Sourcing and Strea
 - Another is to rely on (or force) idempotent operations. E.g. only allow operations that, when applied multiple times, work the same as if they were applied once.  
 If your stream processors are idempotent fault tolerance becomes much less of an issue!  
 
+
+## More info
+- [The Power of Kafka Partitions : How to Get the Most out of Your Kafka Cluster](https://www.instaclustr.com/the-power-of-kafka-partitions-how-to-get-the-most-out-of-your-kafka-cluster/)
