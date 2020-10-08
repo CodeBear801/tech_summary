@@ -38,7 +38,7 @@
 
 type | description | Example
 ---|:---|:---
-time-of-day clock | Its what you intuitively expect of a clock: it returns the current date and time according to some calendar (also known as wall-clock time). <br/> Can move backwards or stop in time| 
+time-of-day clock | Its what you intuitively expect of a clock: it returns the current date and time according to some calendar (also known as wall-clock time). <br/> Can move backwards or stop in time| Java: System.getCurrentTime
 monotonic clock | Its suitable for measuring a duration (time interval) | Java: System.nanoTime
 
 #### Problems
