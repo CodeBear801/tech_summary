@@ -50,6 +50,8 @@ How to handle hot keys?
 - The `skewed join` method in Pig first runs a sampling job to determine which keys are hot and then records related to the hot key need to be replicated to all reducers handling that key.
 - Handling the hot key over several reducers is called `shared join method`. In Crunch is similar but requires the hot keys to be specified explicitly.
 - Hive's skewed join optimization requires hot keys to be specified explicitly and it uses `map-side join`. If you can make certain assumptions about your input data, it is possible to make joins faster. A MapReducer job with no reducers and no sorting, each mapper simply reads one input file and writes one output file
+- The default utilization is to perform joins on the reducer side. It's also possible to perform a mapper-side join.
+You do not want to push the final producer of a MapReduce job to a database via insert operations as this is slow. It's better to just build a new database in place. A number of databases designed with batch processing in mind provide this feature (see e.g. LevelDB).
 
 How to handle skew join in spark?
 An example in spark from https://stackoverflow.com/questions/40373577/skewed-dataset-join-in-spark  
@@ -81,19 +83,6 @@ Say you have to join two tables A and B on A.id=B.id. Lets assume that table A h
 How to build index for full-text search?
 If you need to perform a full-text search, a batch process is very effective way of building indexes: the mappers partition the set of documents as needed, each reducer builds the index for its partition, and the index files are written to the distributed filesystem. It parallelisms very well.   
 Google's original use of MapReduce was to build indexes for its search engine. Hadoop MapReduce remains a good way of building indexes for Lucene/Solr.  
-
-
-- We can place the nearness data processing systems on a continuum, between online systems on one end and batch processing systems on the other end (with stream processing as an intermediate; another chapter).
-- Batch processing systems process data on a scheduled or as-needed basis, instead of immediate basis of an online systme.
-- Thus the concerns are very different. Latency doesn't matter. We design for total application success or total failure. 
-- Throughput is the most important measurement.
-Batch processing is really the original programming use case, harkening back to the US Census counting card machine days!
-
-- A significant issue in MapReduce is skew. If keys are partitioned amongst reducers naively, hot keys, as typical in a Zipf-distributed system (e.g. celebrities on Twitter), will result in very bad tail-reducer performance.
-- Some on-top-of-Hadoop systems, like Apache Pig, provide a skew join facility for working with such keys.
-- These keys get randomly sub-partitioned amongst the reducers to distribute the load.
-- The default utilization is to perform joins on the reducer side. It's also possible to perform a mapper-side join.
-You do not want to push the final producer of a MapReduce job to a database via insert operations as this is slow. It's better to just build a new database in place. A number of databases designed with batch processing in mind provide this feature (see e.g. LevelDB).
 
 
 ### Dataflow
@@ -129,5 +118,5 @@ In practice, there are a lot of sneaky ways in which non-determinism may sneak i
 - [My notes on Pregel paper](../../papers/pregel.md)
 - My notes on [flumejava](../../papers/flumejava.md) [rdd](../../papers/rdd.md)
 - [My notes on gfs paper](../../papers/gfs.md)
-
+- [Fighting the skew in Spark](https://datarus.wordpress.com/2015/05/04/fighting-the-skew-in-spark/)
 
