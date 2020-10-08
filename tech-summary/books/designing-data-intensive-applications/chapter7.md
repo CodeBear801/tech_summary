@@ -42,6 +42,11 @@
 <img src="resources/pictures/ddia_c7_acid.png" alt="ddia_c7_acid" width="600"/>  
 <br/>
 
+BASE: [Explanation of BASE terminology](https://stackoverflow.com/questions/3342497/explanation-of-base-terminology)  
+Basically available indicates that the system does guarantee availability, in terms of the CAP theorem.  
+Soft state indicates that the state of the system may change over time, even without input. This is because of the eventual consistency model.  
+Eventual consistency indicates that the system will become consistent over time, given that the system doesn't receive input during that time.  
+
 #### Consistent
 - Consistent in replication means evantural consistent and read your own write consistent
 - Consistent in CAP means linearizability, when there is one client successfully write, after that, other client's read must see the value just be writtern
