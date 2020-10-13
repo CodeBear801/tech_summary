@@ -28,6 +28,11 @@
 
 ## Questions
 
+- Why need replication?  How
+- How to sync between leader and follower
+- What is replication log?  How to implement them?  pros & cons
+- Read your own writes?  How about from different devices?
+
 ## Notes
 
 Replication is one of the strategies for distributing data processes across multiple nodes (the other is partitioning, the subject of a later chapter).
