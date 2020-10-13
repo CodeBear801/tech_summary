@@ -34,7 +34,8 @@
 - What is replication log?  How to implement them?  pros & cons
 - Read your own writes?  How about from different devices?
 - How Monotonic Reads helps on "moving time backwards"
-- 
+- How to guarantee sequence of reading and writing
+- Why Dynamo?  Pros and Cons?
 
 ## Notes
 
@@ -145,7 +146,7 @@ Replication lag anomalies concerns violation of causality.
 <img src="resources/pictures/ddia_c5_replication_consistent_prefix_reads.png" alt="c5_replication_consistent_prefix_reads" width="600"/>  <br/>
 
 Consistent Prefix Reads(一致前缀读) guarantee says that if a sequence of writes happens in a certain order, then anyone reading those writes will see them appear in the same order.  
-In Kafka, if you want to gurantee the sequence of two message, you need to make sure they are in the same partition.  
+In Kafka, if you want to guarantee the sequence of two message, you need to make sure they are in the same partition.  
 
 ## Multi-leader replication
 
@@ -166,6 +167,8 @@ Converging toward a consistent state
 - Record the conflict in an explicit data structure that preserves all information, and write application code that resolves the conflict at some later time.
 
 ## Leader less Client-driven replication
+
+[My notes on Dynamo paper](../../papers/dynamo.md)
 
 ### Dynamo style
 Clients read using **quorums** of certain sizes, taking the most recently updated data point from amongst the nodes that respond to a request. Quorums offer a tunable consistency-speed tradeoff. Larger quorums are slower, as they are tied down by the speed of the slowest respondent, but more consistent. Smaller quorums are faster, requiring fewer node responses, but less consistent. <br/> 
