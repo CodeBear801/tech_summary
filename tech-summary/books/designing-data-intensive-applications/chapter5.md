@@ -114,6 +114,11 @@ Reasons for replication is 1) tolerate node failures 2)scalability 3) Latency
 If an application reads from an asynchronous follower, it may see outdated information if the follower has fallen behind.  This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as **eventual consistency**.
 
 #### Reading your own writes
+
+
+<img src="https://user-images.githubusercontent.com/16873751/95925001-95c14600-0d6d-11eb-8727-44ad97328548.png" alt="read_your_own_writes" width="600"/>  
+<br/>
+
 This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as **eventual consistency**.  
 - **When reading something that the user may have modified, read it from the leader**; otherwise, read it from a follower. This requires that you have some way of knowing whether something might have been modified, without actually querying it.  
 - If most things in the application are potentially editable by the user, that approach won’t be effective, as most things would have to be read from the leader.  
