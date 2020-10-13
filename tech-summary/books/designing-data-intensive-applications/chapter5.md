@@ -151,12 +151,19 @@ Services using client-driven replication do so using two processes: read-repair(
 (datastores have a background process that constantly looks for differences in the data between replicas and copies any missing data from one replica to another. Unlike the replication log in leader-based replication, this anti-entropy process does not copy writes in any particular order, and there may be a significant delay before data is copied.)
 
 ### Limitation
-However, even with w + r > n, there are likely to be edge cases where stale values are returned. These depend on the implementation, but possible scenarios include:
+
+The fundamental new problem that multi-leader architectures introduce is the fact that concurrent authoritative writes may occur on multiple leaders.  
+Thus your application has to implement some kind of **conflict resolution**. This can occur on the backend side, or it may be implemented on the application side. It may even require user intervention or prompting.  
+Interestingly, applications which sync data between clients but whose clients are intended to work offline are technically multi-leader, where each leader is the individual application. E.g. calendar applications.
+
+Limitation for **Dynamo style**, even with w + r > n, there are likely to be edge cases where stale values are returned. These depend on the implementation, but possible scenarios include:
 - If a sloppy quorum is used, the w writes may end up on different nodes than the r reads, so there is no longer a guaranteed overlap between the r nodes and the w nodes.
 - If two writes occur concurrently, it is not clear which one happened first. In this case, the only safe solution is to merge the concurrent writes. If a winner is picked based on a timestamp (last write wins), writes can be lost due to clock skew.
 - If a write happens concurrently with a read, the write may be reflected on only some of the replicas. In this case, it’s undetermined whether the read returns the old or the new value.
 - If a node carrying a new value fails, and its data is restored from a replica carry‐ ing an old value, the number of replicas storing the new value may fall below w, breaking the quorum condition.
 - Even if everything is working correctly, there are edge cases in which you can get unlucky with the timing. See “Linearizability and quorums”
+
+
 
 ### Happens-before
 
