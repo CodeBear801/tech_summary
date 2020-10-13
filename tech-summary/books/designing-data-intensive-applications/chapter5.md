@@ -110,12 +110,11 @@ If an application reads from an asynchronous follower, it may see outdated infor
 
 #### Reading your own writes
 This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as **eventual consistency**.  
-- When reading something that the user may have modified, read it from the leader; otherwise, read it from a follower. This requires that you have some way of knowing whether something might have been modified, without actually querying it.  
+- **When reading something that the user may have modified, read it from the leader**; otherwise, read it from a follower. This requires that you have some way of knowing whether something might have been modified, without actually querying it.  
 - If most things in the application are potentially editable by the user, that approach won’t be effective, as most things would have to be read from the leader.  
-- The client can remember the timestamp of its most recent write—then the system can ensure that the replica serving any reads for that user reflects updates at least until that timestamp.  
-**Multiple devices will make things harder**  
-- Approaches that require remembering the timestamp of the user’s last update become more difficult, because the code running on one device doesn’t know what updates have happened on the other device. This metadata will need to be centralized.
-- If your replicas are distributed across different datacenters, there is no guarantee that connections from different devices will be routed to the same datacenter. If your approach requires reading from the leader, you may first need to route requests from all of a user’s devices to the same datacenter.
+- **The client can remember the timestamp of its most recent write then the system can ensure that the replica serving any reads for that user reflects updates at least until that timestamp**.  **Multiple devices will make things harder**    
+   + Approaches that require remembering the timestamp of the user’s last update become more difficult, because the code running on one device doesn’t know what updates have happened on the other device. This metadata will need to be centralized.
+   +  If your replicas are distributed across different datacenters, there is no guarantee that connections from different devices will be routed to the same datacenter. If your approach requires reading from the leader, you may first need to route requests from all of a user’s devices to the same datacenter.
 
 #### Monotonic Reads
 When reading from asynchronous followers it’s possible for a user to see things **moving backward in time**.  
