@@ -103,12 +103,11 @@ Reasons for replication is 1) tolerate node failures 2)scalability 3) Latency
 If an application reads from an asynchronous follower, it may see outdated information if the follower has fallen behind.  This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as **eventual consistency**.
 
 #### Reading your own writes
-This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as eventual consistency.  
+This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader. For that reason, this effect is known as **eventual consistency**.  
 - When reading something that the user may have modified, read it from the leader; otherwise, read it from a follower. This requires that you have some way of knowing whether something might have been modified, without actually querying it.  
 - If most things in the application are potentially editable by the user, that approach won’t be effective, as most things would have to be read from the leader.  
-- The client can remember the timestamp of its most recent write—then the system can ensure that the replica serving any reads for that user reflects updates at least until that timestamp.
-<br/>
-**Multiple devices will make things harder**
+- The client can remember the timestamp of its most recent write—then the system can ensure that the replica serving any reads for that user reflects updates at least until that timestamp.  
+**Multiple devices will make things harder**  
 - Approaches that require remembering the timestamp of the user’s last update become more difficult, because the code running on one device doesn’t know what updates have happened on the other device. This metadata will need to be centralized.
 - If your replicas are distributed across different datacenters, there is no guarantee that connections from different devices will be routed to the same datacenter. If your approach requires reading from the leader, you may first need to route requests from all of a user’s devices to the same datacenter.
 
@@ -160,10 +159,13 @@ However, even with w + r > n, there are likely to be edge cases where stale valu
 - Even if everything is working correctly, there are edge cases in which you can get unlucky with the timing. See “Linearizability and quorums”
 
 ### Happens-before
+
+[Java - Understanding Happens-before relationship](https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/happens-before.html)
+
 <img src="resources/pictures/ddia_c5_replication_capturing_the_happens_before_relation.png" alt="c5_replication_capturing_the_happens_before_relation" width="600"/> <br/> 
 数据库为每个key创建版本号，每次变更都会增加版本号，把写入的值和新版本号一起存储<br/>
 客户端读取时，服务端返回key最新的版本号以及所有的值。客户端在写入前必须先读取<br/>
 客户端写入时，要带上之前读取的版本号，并且把之前读到的值与新的值做一个merge操作<br/>
-服务端收到写请求后，可以覆盖比这个版本号小的所有的值，但是必须保留比这个版本号大的所有的值。（因为它们是并发操作<br/>
+服务端收到写请求后，可以覆盖比这个版本号小的所有的值，但是必须保留比这个版本号大的所有的值。（因为它们是并发操作)<br/>
 
 
