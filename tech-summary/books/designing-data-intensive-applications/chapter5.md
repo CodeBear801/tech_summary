@@ -21,6 +21,7 @@
     - [Dynamo style](#dynamo-style)
     - [Limitation](#limitation)
     - [Happens-before](#happens-before)
+  - [More info](#more-info)
 
 # Replication
 
@@ -32,6 +33,8 @@
 - How to sync between leader and follower
 - What is replication log?  How to implement them?  pros & cons
 - Read your own writes?  How about from different devices?
+- How Monotonic Reads helps on "moving time backwards"
+- 
 
 ## Notes
 
@@ -127,9 +130,14 @@ This inconsistency is just a temporary state—if you stop writing to the databa
    +  If your replicas are distributed across different datacenters, there is no guarantee that connections from different devices will be routed to the same datacenter. If your approach requires reading from the leader, you may first need to route requests from all of a user’s devices to the same datacenter.
 
 #### Monotonic Reads
+
+<img src="https://user-images.githubusercontent.com/16873751/95925176-fa7ca080-0d6d-11eb-9af1-5b51bff1c5d4.png" alt="monotonic_reads" width="600"/>  
+<br/>
+
+
 When reading from asynchronous followers it’s possible for a user to see things **moving backward in time**.  
 Monotonic reads(单调读) is a guarantee that this kind of anomaly does not happen. It’s a lesser guarantee than strong consistency, but a stronger guarantee than eventual consistency. When you read data, you may see an old value; monotonic reads only means that if one user makes several reads in sequence, they will not see time go backward.  
-One way of achieving monotonic reads is to make sure that each user always makes their reads from the same replica. However, if that replica fails, the user’s queries will need to be rerouted to another replica.
+One way of achieving monotonic reads is to **make sure that each user always makes their reads from the same replica**. However, if that replica fails, the user’s queries will need to be rerouted to another replica.
 
 #### Consistent Prefix Reads
 Replication lag anomalies concerns violation of causality.  
@@ -191,3 +199,6 @@ Limitation for **Dynamo style**, even with w + r > n, there are likely to be edg
 服务端收到写请求后，可以覆盖比这个版本号小的所有的值，但是必须保留比这个版本号大的所有的值。（因为它们是并发操作)<br/>
 
 
+
+## More info
+- [Notes on eventual consistency](https://blog.romanvlasenko.com/?p=283)
