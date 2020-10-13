@@ -2,6 +2,8 @@
   - [Keywords](#keywords)
   - [Questions](#questions)
   - [Notes](#notes)
+    - [Why Replication](#why-replication)
+    - [How to Replicate  <br/>](#how-to-replicate-br)
   - [Single-leader replication](#single-leader-replication)
     - [Implement replication logs](#implement-replication-logs)
       - [Statement-based replication](#statement-based-replication)
@@ -30,7 +32,7 @@
 
 Replication is one of the strategies for distributing data processes across multiple nodes (the other is partitioning, the subject of a later chapter).
 
-- Why Replication 
+### Why Replication 
 
 <dl>
 	<dt>Scalability</dt>
@@ -44,13 +46,17 @@ Replication is one of the strategies for distributing data processes across mul
         If you have users around the world, you might want to have servers at various locations worldwide so that each user can be served from a datacenter that is geographically close to them. That avoids the users having to wait for network packets to travel halfway around the world.  </dd>
 </dl>
 
-- How to Replicate  <br/>
+
+
+### How to Replicate  <br/>
+
+The difficulty in replication lies in handling changes to replicated data.
 
 Type |Pros |Cons |Comments 
 ---|:---|:---|:---
 Single-leader |Easy to understand, no conflict resolution |Less robust | 
 Multi-leader |robust against faulty, network interupptions and latency spikes |complex and harder to maintain | 
-Leaderless |robust against faulty, network interupptions and latency spikes |omplext (especially the quorum) | 
+Leaderless |robust against faulty, network interupptions and latency spikes |complex (especially the quorum) | 
 
 - When to Replicate <br/>
 
