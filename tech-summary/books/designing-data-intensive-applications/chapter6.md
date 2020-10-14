@@ -18,6 +18,7 @@
 - When new machine are added, how to rebalance partition effectively?
 - Why need service discovering?  How etcd works?
 - How to address **Hot Spot** in your partitioning scheme?
+- How to re-balance partition?  What's the challenge?
 - What is service discovery?  What's the common strategy to handle that?
 
 ## Notes
