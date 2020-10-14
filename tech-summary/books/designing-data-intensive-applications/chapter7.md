@@ -1,10 +1,10 @@
 
 <!-- TOC -->
-- [Transections](#transections)
+- [Transactions](#transactions)
 	- [Keywords](#keywords)
 	- [Questions](#questions)
 	- [Notes](#notes)
-		- [Transactions](#transactions)
+		- [Transactions](#transactions-1)
 			- [Consistent](#consistent)
 			- [Isolated](#isolated)
 				- [Terms](#terms)
@@ -13,9 +13,9 @@
 			- [Multi-Object Operations](#multi-object-operations)
 		- [Weak isolation levels](#weak-isolation-levels)
 			- [Read committed](#read-committed)
-				- [Implemetation](#implemetation)
+				- [Implementation](#implementation)
 			- [Snapshot isolation](#snapshot-isolation)
-				- [Implemetation](#implemetation-1)
+				- [Implemetation](#implemetation)
 				- [lost updates](#lost-updates)
 				- [write skew](#write-skew)
 				- [hantom write skew.](#hantom-write-skew)
@@ -26,7 +26,7 @@
 
 
 
-# Transections
+# Transactions
 
 ## Keywords
 
@@ -35,6 +35,7 @@
 ## Notes
 
 ### Transactions
+**A transaction is a mechanism for grouping multiple operations on multiple objects into one unit of execution**.
 - Transactions provide guarantees about the behavior of data that are fundamental to the old SQL style of operation.
 - Transactions were the initial casualty of the NoSQL movement, though they are starting to make a bit of a comeback.
 - **Not all applications need transactions. Not all applications want transactions. And not all transactions are the same.**
