@@ -1,3 +1,19 @@
+
+- [streaming processing](#streaming-processing)
+	- [Keywords](#keywords)
+	- [Questions](#questions)
+	- [Notes](#notes)
+		- [Streams](#streams)
+		- [Messaging systems](#messaging-systems)
+		- [AMQP/JMS-style message broker](#amqpjms-style-message-broker)
+		- [Log-based message brokers](#log-based-message-brokers)
+		- [Syncing across systems](#syncing-across-systems)
+		- [Event sourcing](#event-sourcing)
+		- [3 types of joins](#3-types-of-joins)
+		- [Fault tolerance](#fault-tolerance)
+	- [More info](#more-info)
+
+
 # streaming processing
 
 ## Keywords
