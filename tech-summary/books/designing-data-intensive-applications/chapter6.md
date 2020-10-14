@@ -18,6 +18,7 @@
 - When new machine are added, how to rebalance partition effectively?
 - Why need service discovering?  How etcd works?
 - How to address **Hot Spot** in your partitioning scheme?
+- What is service discovery?  What's the common strategy to handle that?
 
 ## Notes
 
@@ -74,10 +75,16 @@ The process of moving load from one node in the cluster to another is called reb
 
 
 ### Service discovery
-The client can connect to any node, which can forward the request through the network to the node that has the requested data.  A routing tier can connect to the necessary node.  The client can maintain information on the right node, and connect to it directly.  
 
-- Many distributed data systems rely on a separate coordinate service such as Zoo-Keeper, a hierarchical key-value store to keep track of this cluster metadata.  
+This chapter briefly mentions the service discovery problem, posing three possible solutions:
+- The client can connect to any node, which can forward the request through the network to the node that has the requested data.
+- A routing tier can connect to the necessary node.
+- T he client can maintain information on the right node, and connect to it directly.
+
+In many cases the problem is: *how does the component making the routing decision learn about changes in the assignment of partitions to nodes*?  
+
+Many distributed data systems rely on a separate coordinate service such as Zoo-Keeper, a hierarchical key-value store to keep track of this cluster metadata.  Each node registers itself in ZooKeeper, and ZooKeeper maintains the authoritative mapping of partitions to nodes. The routing tier or the partitioning-aware client, can subscribe to this information in ZooKeeper.  
 - LinkedIn's Espresso use Helix (which in turn relies on ZooKeeper), HBase, SolrCloud and Kafka also use ZooKeeper  
 - Cassandra and Riak use a gossip protocol among the nodes to disseminate any changes in cluster state  
 
-
+more info: [Service Discovery in a Microservices Architecture](https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/)
