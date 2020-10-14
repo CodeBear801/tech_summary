@@ -119,4 +119,4 @@ In practice, there are a lot of sneaky ways in which non-determinism may sneak i
 - My notes on [flumejava](../../papers/flumejava.md) [rdd](../../papers/rdd.md)
 - [My notes on gfs paper](../../papers/gfs.md)
 - [Fighting the skew in Spark](https://datarus.wordpress.com/2015/05/04/fighting-the-skew-in-spark/)
-
+- [mapreduce example to find the inverted index of a sample](https://timepasstechies.com/map-reduce-inverted-index-sample/)
