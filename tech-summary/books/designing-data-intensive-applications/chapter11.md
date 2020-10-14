@@ -115,3 +115,4 @@ If your stream processors are idempotent fault tolerance becomes much less of 
 
 ## More info
 - [The Power of Kafka Partitions : How to Get the Most out of Your Kafka Cluster](https://www.instaclustr.com/the-power-of-kafka-partitions-how-to-get-the-most-out-of-your-kafka-cluster/)
+- [kafka工作原理](http://xstarcd.github.io/wiki/Cloud/kafka_Working_Principles.html)
