@@ -17,6 +17,7 @@
 - What is partition, what's the difference & relation with replication?
 - When new machine are added, how to rebalance partition effectively?
 - Why need service discovering?  How etcd works?
+- How to address **Hot Spot** in your partitioning scheme?
 
 ## Notes
 
