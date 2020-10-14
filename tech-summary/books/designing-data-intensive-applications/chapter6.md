@@ -49,12 +49,20 @@ A secondary index usually doesn’t identify a record uniquely but rather is a w
 <br/>
 
 - Example of Partitioning Secondary Indexes by Document  
-(A website for selling used cars. Each listing has a unique ID—call it the document ID—and you partition the database by the document ID.  We allow user to filter by color and by make, so need to build secondary index for them)  
+  - You need to send the query to all partitions, and combine all the results you get back (scatter/gather). This is prone to tail latency amplification and is widely used in MongoDB, Riak, Cassandra, Elasticsearch, SolrCloud and VoltDB.
+  - (A website for selling used cars. Each listing has a unique ID—call it the document ID—and you partition the database by the document ID.  We allow user to filter by color and by make, so need to build secondary index for them)  
 <img src="resources/pictures/ddia_c6_Partitioning_Secondary_Indexes_by_Document.png" alt="c6_Partitioning_Secondary_Indexes_by_Document" width="600"/>  
 
 
+
+
+
 - Example of Partitioning Secondary Indexes by Term  
+  - Partitioning by term can be useful for **range scans**, whereas partitioning on a hash of the term gives a more even distribution load.
+  - The advantage is that it can **make reads more efficient**: rather than doing scatter/gather over all partitions, a client only needs to make a request to the partition containing the term that it wants. The downside of a global index is that writes are slower and complicated.
 <img src="resources/pictures/ddia_c6_Partitioning_Secondary_Indexes_by_Term.png" alt="c6_Partitioning_Secondary_Indexes_by_Term" width="600"/>
+
+
 
 
 ### Rebalancing
