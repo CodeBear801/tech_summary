@@ -66,8 +66,8 @@ Eventual consistency indicates that the system will become consistent over time,
 ##### Terms
 脏写: 写入和提交之间，又别写入了别的数据.  
 脏读：一个事务还未提交，另外一个事务访问此事务修改的数据，并使用，读取了事务中间状态数据。  
-幻读：一个事务读取2次，得到的记录条数不一致，由于2次读取之间另外一个事务对数据进行了增删。 (insert & delete)
-不可重复读：一个事务读取同一条记录2次，得到的结果不一致，由于在2次读取之间另外一个事务对此行数据进行了修改。(update)  
+幻读：一个事务读取2次，得到的记录条数不一致，由于2次读取之间另外一个事务对数据进行了增删。 (insert & delete)  
+不可重复读：一个事务读取同一条记录2次，得到的结果不一致，由于在2次读取之间另外一个事务对此行数据进行了修改。(update)    
 更新丢失: 其含义为T1要更新x的数据，其首先读取x的值，然后再该值上加1再写回数据库。但是在读取x后，T2写入了新的x并成功提交，而T1还是在老的x值的基础上加1。这样，T2的更新对于T1而言就像被丢弃了一样  
 
 ### Single-Object and Multi-Object Operations
@@ -95,6 +95,7 @@ The strongest possible isolation guarantee is serializable isolation: transacti
 
 <img src="resources/pictures/ddia_c7_read_commited_example.png" alt="ddia_c7_read_commited_example" width="600"/>  
 <br/>
+
 ##### Implementation
 
   **Hold a row-level lock** on the record you are writing to.  You could do the same with a read lock. However, there is a lower-impact way. Hold the old value in memory, and issue that value in response to reads, until the transaction is finalized.  If a user performs a multi-object write transaction that they believe to be atomic (say, transferring money between two accounts), then performs a read in between the transaction, what they see may seem anomalous (say, one account was deducted but the other wasn't credited).
