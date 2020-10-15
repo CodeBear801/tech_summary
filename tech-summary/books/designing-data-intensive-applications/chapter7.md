@@ -17,8 +17,8 @@
 			- [Snapshot isolation](#snapshot-isolation)
 				- [Implemetation](#implemetation)
 				- [lost updates](#lost-updates)
-				- [write skew](#write-skew)
-				- [hantom write skew.](#hantom-write-skew)
+				- [Write skew](#write-skew)
+				- [phantoms write skew](#phantoms-write-skew)
 		- [Serialization](#serialization)
 			- [Actual Serial Execution](#actual-serial-execution)
 			- [Pessimistic Lock/Optimistic Lock](#pessimistic-lockoptimistic-lock)
@@ -134,21 +134,67 @@ Concurrent transactions that encapsulate read-modify-write operations will behav
   - Atomic compare-and-set (e.g. UPDATE ... SET ... WHERE foo = 'expected_old_value').
   - Delayed application-based conflict resolution. Last resort, and only truly necessary for multi-master architectures.
 
-##### write skew    
+##### Write skew    
 
   <img src="resources/pictures/ddia_c7_writeskew_example.png" alt="ddia_c7_writeskew_example" width="600"/>   
 
-  - As with lost updates, two transactions perform a read-modify-write, but now they modify two different objects based on the value they read.  
-  - Example in the book: two doctors concurrently withdraw from being on-call, when business logic dictates that at least one must always be on call.  This occurs across multiple objects, so atomic operations do not help.  <br/>
+As with lost updates, two transactions perform a read-modify-write, but now they modify two different objects based on the value they read.  
+
+Example in the book: two doctors concurrently withdraw from being on-call, when business logic dictates that at least one must always be on call.  This occurs across multiple objects, so atomic operations do not help.  <br/>
+```
+ALICE                                   BOB
+
+┌─ BEGIN TRANSACTION                    ┌─ BEGIN TRANSACTION
+│                                       │
+├─ currently_on_call = (                ├─ currently_on_call = (
+│   select count(*) from doctors        │    select count(*) from doctors
+│   where on_call = true                │    where on_call = true
+│   and shift_id = 1234                 │    and shift_id = 1234
+│  )                                    │  )
+│  // now currently_on_call = 2         │  // now currently_on_call = 2
+│                                       │
+├─ if (currently_on_call  2) {          │
+│    update doctors                     │
+│    set on_call = false                │
+│    where name = 'Alice'               │
+│    and shift_id = 1234                ├─ if (currently_on_call >= 2) {
+│  }                                    │    update doctors
+│                                       │    set on_call = false
+└─ COMMIT TRANSACTION                   │    where name = 'Bob'  
+                                        │    and shift_id = 1234
+                                        │  }
+                                        │
+                                        └─ COMMIT TRANSACTION
+```
+Since database is using snapshot isolation, both checks return 2. Both transactions commit, and now no doctor is on call. The requirement of having at least one doctor has been violated.  
+
+Write skew can occur if two transactions read the same objects, and then update some of those objects. You get a dirty write or lost update anomaly.  
+
+Ways to prevent write skew are a bit more restricted:
+
+
   - Automatic detection at the snapshot isolation level and without serializability would require making consistency checks on every write, where is the number of concurrent write-carrying transactions in flight. This is way too high a performance penalty.<br/>
   - Only transaction-wide record locking works. So you have to make this transaction explicitly serialized, using e.g. a FOR UPDATE keyword.<br/>
 
 
-##### hantom write skew.
+##### phantoms write skew
   - Materializing conflicts
   - You can theoretically insert a lock on a phantom record, and then stop the second transaction by noting the presence of the lock. This is known as materializing conflicts.  This is ugly because it messes with the application data model, however. Has limited support.  If this issue cannot be mitigated some other way, just give up and go serialized.
 
+```sql
+BEGIN TRANSACTION;
 
+SELECT * FROM doctors
+WHERE on_call = true
+AND shift_id = 1234 FOR UPDATE;
+
+UPDATE doctors
+SET on_call = false
+WHERE name = 'Alice'
+AND shift_id = 1234;
+
+COMMIT;
+```
 
 
 ### Serialization
