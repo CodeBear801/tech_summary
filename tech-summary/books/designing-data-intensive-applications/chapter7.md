@@ -76,13 +76,13 @@ Eventual consistency indicates that the system will become consistent over time,
 Atomicity can be implemented using a log for crash recovery and isolation can be implemented using a lock on each object (allowing only one thread to access an object at any one time).  
 
 #### Multi-Object Operations
-Foreign key referernce update/Second level index  
+Foreign key reference update/Second level index  
 Nosql update several document togehter  
 
 
 ### Weak isolation levels
 
-The strongest possible isolation guarantee is serializable isolation: transactions that run concurrently on the same data are guaranteed to perform the same as they would were they to run serially.  However serializable isolation is costly. Systems skimp on it by offering weaker forms of isolation.  As a result, race conditions and failure modes abound. Concurrent failures are really, really hard to debug, because they require lucky timings in your system to occur.
+The strongest possible isolation guarantee is **serializable isolation**: transactions that run concurrently on the same data are guaranteed to perform the same as they would were they to run serially.  However serializable isolation is costly. Systems skimp on it by offering weaker forms of isolation.  As a result, race conditions and failure modes abound. Concurrent failures are really, really hard to debug, because they require lucky timings in your system to occur.
 
 #### Read committed
 - The weakest isolation guarantee is read committed.   
@@ -105,6 +105,7 @@ The strongest possible isolation guarantee is serializable isolation: transacti
 
 <img src="resources/pictures/ddia_c7_snapshot_example.png" alt="ddia_c7_snapshot_example" width="600"/>  
 <br/>
+
 Snapshot isolation could address issue of read committed.  Reads that occur in the middle of a transaction read their data from the version of the data (the snapshot) that preceded the start of the transaction.  This makes it so that multi-object operations look atomic to the end user (assuming they succeed).
 
 
@@ -125,7 +126,7 @@ Snapshot isolation could address issue of read committed.  Reads that occur in t
 
 ##### lost updates
 
-Concurrent transactions that encapsulate read-modify-write operations will behave poorly on collision. A simple example is a counter that gets updated twice, but only goes up by one. The earlier write operation is said to be lost.  
+Concurrent transactions that encapsulate read-modify-write operations will behave poorly on collision.  A simple example is a counter that gets updated twice, but only goes up by one. The earlier write operation is said to be lost.  
   Ways to address this problem that live in the wild:
   - Atomic update operation (e.g. UPDATE keyword).
   - Transaction-wide write locking. Expensive!
