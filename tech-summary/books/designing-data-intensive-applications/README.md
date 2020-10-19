@@ -2,6 +2,8 @@
 
 - [Chapter 5: Replication](./chapter5.md)
 - [Chapter 6: Partitioning](./chapter6.md)
-- [Chatper 7: Transections](./chapter7.md)
+- [Chapter 7: Transactions](./chapter7.md)
 - [Chapter 8: The Trouble with Distributed Systems](./chapter8.md)
 - [Chapter 9: Consistency and Consensus](./chapter9.md)  
+- [Chapter 10: Batch processing](./chapter10.md)
+- [Chapter 11: Streaming Processing](./chapter11.md)
