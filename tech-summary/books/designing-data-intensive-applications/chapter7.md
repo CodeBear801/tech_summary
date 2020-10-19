@@ -125,6 +125,7 @@ Snapshot isolation could address issue of read committed.  Reads that occur in t
 			* When you delete the data, you find visible row that should be deleted, and set its xmax to the current transaction id  
 			* When you update the data, for each updated row you first perform “delete” and then “insert”.  
 
+[example in rocksdb](https://github.com/facebook/rocksdb/blob/ed90e2a45043a107a594d72df5a0ecbed7b0ebb7/examples/transaction_example.cc#L92)  
 
 ##### lost updates
 
