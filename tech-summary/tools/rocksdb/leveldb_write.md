@@ -28,6 +28,9 @@ s = db->Put(WriteOptions(), "key1", "value");
 
 ### Notes for rocksdb
 
+<img src="https://user-images.githubusercontent.com/16873751/96521492-4922b280-1226-11eb-9803-a1d0768713f4.png" alt="rocksdb_read" width="600"/>
+
+
 ### Code 
 
 
