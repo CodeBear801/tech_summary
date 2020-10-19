@@ -47,7 +47,7 @@ Beam’s default windowing configuration tries to determine when all data has ar
 
 ## Watermark - When in processing time
 
-[watermarks](https://beam.apache.org/documentation/programming-guide/#watermarks-and-late-data): there is a certain amount of lag between the time a data event occurs and the time the actual data element gets processed at any stage in your pipeline.  Data isn’t always guaranteed to arrive in a pipeline in time order, or to always arrive at predictable intervals. Beam tracks a watermark, which is the system’s notion of when all data in a certain window can be expected to have arrived in the pipeline. Once the watermark progresses past the end of a window, any further element that arrives with a timestamp in that window is considered late data.
+[watermarks](https://beam.apache.org/documentation/programming-guide/#watermarks-and-late-data): there is a certain amount of lag between the time a data event occurs and the time the actual data element gets processed at any stage in your pipeline.  Data isn’t always guaranteed to arrive in a pipeline in time order, or to always arrive at predictable intervals. Beam tracks a watermark, **which is the system’s notion of when all data in a certain window can be expected to have arrived in the pipeline**. Once the watermark progresses past the end of a window, any further element that arrives with a timestamp in that window is considered late data.
 
 
 ```java
