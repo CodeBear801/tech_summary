@@ -98,7 +98,9 @@ The strongest possible isolation guarantee is **serializable isolation**: trans
 
 ##### Implementation
 
-  **Hold a row-level lock** on the record you are writing to.  You could do the same with a read lock. However, there is a lower-impact way. Hold the old value in memory, and issue that value in response to reads, until the transaction is finalized.  If a user performs a multi-object write transaction that they believe to be atomic (say, transferring money between two accounts), then performs a read in between the transaction, what they see may seem anomalous (say, one account was deducted but the other wasn't credited).
+  **Hold a row-level lock** on the record you are writing to.  You could do the same with a read lock. However, there is a lower-impact way. Hold the old value in memory, and issue that value in response to reads, until the transaction is finalized.  If a user performs a multi-object write transaction that they believe to be atomic (say, transferring money between two accounts), then performs a read in between the transaction, what they see may seem anomalous (say, one account was deducted but the other wasn't credited).  
+
+[example in rocksdb](https://github.com/facebook/rocksdb/blob/ed90e2a45043a107a594d72df5a0ecbed7b0ebb7/examples/transaction_example.cc#L39)  
 
 
 #### Snapshot isolation
