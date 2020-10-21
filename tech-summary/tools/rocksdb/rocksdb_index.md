@@ -28,6 +28,7 @@ Very good in write-heavy workload as well as low-latency read workload
 - [get()](./leveldb_read.md)
 - [put()](./leveldb_write.md)
 - [skiplist](./skiplist.md)
-- [WAL](./write_ahead_log.md)
+- [wal](./write_ahead_log.md)
 - [sstable](./sstable.md)
 - [compaction](./compaction.md)
+- [bloomfilter](./bloomfilter.md)
