@@ -30,7 +30,8 @@ s = db->Put(WriteOptions(), "key1", "value");
 
 <img src="https://user-images.githubusercontent.com/16873751/96521492-4922b280-1226-11eb-9803-a1d0768713f4.png" alt="rocksdb_read" width="600"/>
 
+<br/><br/><br/>
 
 ### Code 
-
+[DBImpl::Write in db/db_impl.cc](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L1196)
 
