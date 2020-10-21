@@ -36,7 +36,7 @@ minimize random writes
 - [get()](./leveldb_read.md)
 - [put()](./leveldb_write.md)
 - [skiplist](./skiplist.md)
-- [wal](./write_ahead_log.md)
 - [sstable](./sstable.md)
 - [compaction](./compaction.md)
+- [wal](./write_ahead_log.md)
 - [bloomfilter](./bloomfilter.md)
