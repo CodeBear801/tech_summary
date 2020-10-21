@@ -15,5 +15,6 @@ Bloom filter's performance is related with manage "false positive".  If the big 
 <img src="https://user-images.githubusercontent.com/16873751/96754331-ffe97480-1385-11eb-80dc-36f066638556.png" alt="bloomfilter" width="600"/>
 
 More info:
-
+- [Bloom Filters - the math](http://pages.cs.wisc.edu/~cao/papers/summary-cache/node8.html)
+- [Less Hashing, Same Performance: Building a Better Bloom Filter](https://www.eecs.harvard.edu/~michaelm/postscripts/rsa2008.pdf) 
 
