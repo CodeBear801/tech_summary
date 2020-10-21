@@ -16,8 +16,7 @@ How about write: update and delete?
 
 ## SSTables and Log Structured Merge Trees
 
-<img src="https://user-images.githubusercontent.com/16873751/96522374-1da0c780-1228-11eb-9157-7ee4c569cf65.png
-" alt="sstable" width="600"/>  
+<img src="https://user-images.githubusercontent.com/16873751/96522374-1da0c780-1228-11eb-9157-7ee4c569cf65.png" alt="sstable" width="600"/>  
 
 ### Write & Read
 writes are always fast regardless of the size of dataset (append-only), and random reads are either served from memory or require a quick disk seek.  
@@ -27,8 +26,7 @@ Once the SSTable is on disk, it is immutable, hence updates and deletes can't to
 
 ## SSTable format
 
-<img src="https://user-images.githubusercontent.com/16873751/96522495-5476dd80-1228-11eb-8498-7fd74248433c.png
-" alt="sstable" width="600"/>  
+<img src="https://user-images.githubusercontent.com/16873751/96522495-5476dd80-1228-11eb-8498-7fd74248433c.png" alt="sstable" width="600"/>  
 (image from [internet](https://www.cnblogs.com/cobbliu/p/6194072.html))
 
 
@@ -43,8 +41,7 @@ Once the SSTable is on disk, it is immutable, hence updates and deletes can't to
   - record group, each record <key, value>
   - pre-fix
 
-<img src="https://user-images.githubusercontent.com/16873751/96659380-a89ec200-12fb-11eb-9ede-e854f49fa0ca.png
-" alt="datablock" width="600"/>  
+<img src="https://user-images.githubusercontent.com/16873751/96659380-a89ec200-12fb-11eb-9ede-e854f49fa0ca.png" alt="datablock" width="600"/>  
 
 - data index block
   - support binary search of key
