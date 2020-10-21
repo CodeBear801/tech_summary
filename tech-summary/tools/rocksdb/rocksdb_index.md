@@ -1,9 +1,11 @@
 # RocksDB
 
 ## Why
-`LSM + Compaction + BloomFilter + WAL` vs `B+ tree` + `LOG`
+`LSM + Compaction + BloomFilter + WAL` **vs** `B+ tree + LOG`
 ```
 Very good in write-heavy workload as well as low-latency read workload
+
+minimize random writes
 ```
 
 `Embedded`
@@ -16,6 +18,12 @@ Very good in write-heavy workload as well as low-latency read workload
 - Point/Range lookup
 - Optimized for flash
 - Embedded storage of application, storage engine of database
+
+## Arch
+
+
+<img src="https://user-images.githubusercontent.com/16873751/96756920-979c9200-1389-11eb-984c-34957c8248a5.png" alt="arch1" width="600"/>  
+
 
 ## Interface
 - Keys and Values are byte arrays
