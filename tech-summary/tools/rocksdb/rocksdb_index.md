@@ -1,14 +1,14 @@
 # RocksDB
 
 ## Why
-`LSM + Compaction + BloomFilter + WAL` **vs** `B+ tree + LOG`
+1. `LSM + Compaction + BloomFilter + WAL` **vs** `B+ tree + LOG`
 ```
 Very good in write-heavy workload as well as low-latency read workload
 
 minimize random writes
 ```
 
-`Embedded`
+2. `Embedded`
 
 <img src="https://user-images.githubusercontent.com/16873751/96497419-80ca3400-11ff-11eb-9a79-62ca5212d408.png" alt="embedded_engine" width="600"/>
 
