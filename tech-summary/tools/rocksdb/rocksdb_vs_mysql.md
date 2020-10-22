@@ -62,8 +62,7 @@ Those data will first write into WAL, and then into memory table, which is in su
 When in-memory table reach pre-defined sized limit, it will change current memory table as immutable memory table    
 
 Compaction engine will try to merge immutable memory table with `sstable` in level 0.  Level 0 table always record all range of keys.  
-<img src="https://user-images.githubusercontent.com/16873751/96912453-44911080-1457-11eb-9786-
-312880c54beb.png" alt="rocksdb_write" width="300"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/96912453-44911080-1457-11eb-9786-312880c54beb.png" alt="rocksdb_write" width="300"/><br/>
 
 When level 0 reach its size limit, compaction engine will be triggered to merge with level 1.  Let's say Level 1 record <lily, 4> in previous record, after compaction, only latest data be recorded.  
 <img src="https://user-images.githubusercontent.com/16873751/96912482-4fe43c00-1457-11eb-873b-3344897c5369.png" alt="rocksdb_write" width="300"/><br/>
