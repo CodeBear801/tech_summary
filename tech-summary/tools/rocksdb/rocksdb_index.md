@@ -6,6 +6,8 @@
 Very good in write-heavy workload as well as low-latency read workload
 
 minimize random writes
+
+an alternative space and write-optimized database technology.
 ```
 
 2. `Embedded`
