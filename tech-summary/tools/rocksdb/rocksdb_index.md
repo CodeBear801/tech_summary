@@ -10,11 +10,13 @@ minimize random writes
 an alternative space and write-optimized database technology.
 ```
 <br/>
+
 2. `Embedded`
 <br/>
 <img src="https://user-images.githubusercontent.com/16873751/96497419-80ca3400-11ff-11eb-9a79-62ca5212d408.png" alt="embedded_engine" width="600"/>
 
 <br/>
+
 3. [MySQL vs RocksDB](./rocksdb_vs_mysql.md)
 
 ## What
