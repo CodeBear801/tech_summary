@@ -122,4 +122,5 @@ Shift once & incrementing exponent
 - [https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1](https://medium.com/@elliotchance/comparing-floating-point-numbers-in-c-c-f7aa483d7ae1)
 - [binary fractions](https://www.electronics-tutorials.ws/binary/binary-fractions.html)
 - [\<\<Computer Systems\>\> float point](http://www.cs.cmu.edu/afs/cs/academic/class/15213-s16/www/lectures/04-float.pdf) <span>&#9733;</span>
-
+- [Signed Binary Numbers](https://www.electronics-tutorials.ws/binary/signed-binary-numbers.html)
+- [How does bit shifting work in C for negative and positive numbers?](https://www.quora.com/How-does-bit-shifting-work-in-C-for-negative-and-positive-numbers#:~:text=So%20shifting%2011111101%2C%202%20times,of%20negative%20number%2C%20it's%201.)

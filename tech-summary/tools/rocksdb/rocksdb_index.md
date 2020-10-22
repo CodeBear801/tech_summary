@@ -32,7 +32,7 @@ minimize random writes
 - Queries : Get/Iterator
 - Consistency: atomic multi-put, multi-get, iterator, snapshot read, transactions
 
-## Key Techniques 
+## Internal  
 - [get()](./leveldb_read.md)
 - [put()](./leveldb_write.md)
 - [skiplist](./skiplist.md)
