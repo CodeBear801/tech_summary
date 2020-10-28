@@ -5,8 +5,8 @@
     - [Data storage](#data-storage)
     - [Basic case](#basic-case)
     - [Enumeration Constants](#enumeration-constants)
-    - [unary &](#unary)
-    - [unary *](#unary)
+    - [unary &](#unary-)
+    - [unary *](#unary--1)
     - [const](#const)
       - [Const type](#const-type)
       - [Const object](#const-object)
@@ -53,8 +53,8 @@ Lvalue & rvalue are <span style="color:red">**sematic properties of expressions*
 ### In C
 
 - Every expression in C either a lvalue or a rvalue
-- An lvalue is an expression referring to an object.  An object is a region of storage.
-- An rvalue is simply an expression that's not an lvalue
+- An `lvalue` is an expression referring to an object.  An object is a region of storage.
+- An `rvalue` is simply an expression that's not an lvalue
 - Caveat: although this is true for none-class type in C++, its not true for class types
 - Java: build-in type-> pass by value, none build-in -> pass by reference
 
