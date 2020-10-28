@@ -307,6 +307,20 @@ C++14 add function return types, lambda init capture
 
 ### Template type deduction
 
+```C++
+template<typename T>
+void f(ParamType param);
+
+f(expr);
+
+// type deduced for T is the same as the type of the argument passed to the function,
+// i.e., that T is the type of expr
+// but it doesn't always works that way
+// The type deduced for T is dependent not just on the type of expr, but on the form of ParamType
+// 1. ParamType is a pointer or reference type, but not URef(forward reference)
+// 2. ParamType is URef
+// 3. ParamType is neither a pointer nor a reference
+```
 
 
 <img src="resource/pictures/c++_lvalue_rvalue_template_type_deduction.png" alt="c++_lvalue_rvalue_template_type_deduction" width="500"/>
