@@ -348,12 +348,21 @@ pointer
 
 #### Universal reference
 
-<img src="resource/pictures/c++_lvalue_rvalue_universal_reference.png" alt="c++_lvalue_rvalue_universal_reference" width="500"/>  
-
 from [stackoverflow](https://stackoverflow.com/questions/39552272/is-there-a-difference-between-universal-references-and-forwarding-references)  
 ```
-A forwarding reference is an rvalue reference to a cv-unqualified template parameter. If P is a forwarding reference and the argument is an lvalue, the type “lvalue reference to A” is used in place of A for type deduction.
+A forwarding reference is an rvalue reference to a cv-unqualified template parameter. 
+If P is a forwarding reference and the argument is an lvalue, the type “lvalue reference to A” is used in place of A for type deduction.
 ```
+from [stackoverflow](https://stackoverflow.com/questions/15413037/what-does-cv-unqualified-mean-in-c)
+```
+A cv-unqualified type is any of fundamental types and compound types.
+Fundamental types are the arithmetic types, void, and std::nullptr_t. 
+Compound types are arrays, functions, pointers, references, classes, unions, enumerations, and pointers to non-static members.
+```
+
+<img src="resource/pictures/c++_lvalue_rvalue_universal_reference.png" alt="c++_lvalue_rvalue_universal_reference" width="500"/>  
+
+
 
 f(22)  
 22 is a rvalue, universal references be initial as rvalue value, became rvalue references 
