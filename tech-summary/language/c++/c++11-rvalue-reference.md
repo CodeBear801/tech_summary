@@ -465,7 +465,7 @@ Deduce return type should be used carefully, most time you just directly return 
 
 <img src="resource/pictures/c++_lvalue_rvalue_function_return_type_deduction5.png" alt="c++_lvalue_rvalue_function_return_type_deduction5" width="500"/>
 
-When you declare an object, you should prefer to use auto: readability
+When you declare an object, you should prefer to use auto: for readability
 
 ***
 
