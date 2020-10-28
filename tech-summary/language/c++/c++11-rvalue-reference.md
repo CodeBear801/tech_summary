@@ -355,6 +355,7 @@ If P is a forwarding reference and the argument is an lvalue, the type “lvalue
 ```
 from [stackoverflow](https://stackoverflow.com/questions/15413037/what-does-cv-unqualified-mean-in-c)
 ```
+A type is "cv-unqualified" if it doesn't have any cv-qualifiers. A cv-qualifer is either const or volatile.
 A cv-unqualified type is any of fundamental types and compound types.
 Fundamental types are the arithmetic types, void, and std::nullptr_t. 
 Compound types are arrays, functions, pointers, references, classes, unions, enumerations, and pointers to non-static members.
