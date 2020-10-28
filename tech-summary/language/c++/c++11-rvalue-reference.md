@@ -87,6 +87,9 @@ Number 1 exists in code section.
 <br/>
 <span style="color:red">rvalue give compiler the permission for optimization and validation.</span>
 
+More info:   
+
+
 ### Data storage
 
 <img src="resource/pictures/c++_lvalue_rvalue_data_storage.png" alt="c++_lvalue_rvalue_data_storage" width="500"/>
@@ -331,10 +334,15 @@ pointer
 
 #### Universal reference
 
-<img src="resource/pictures/c++_lvalue_rvalue_universal_reference.png" alt="c++_lvalue_rvalue_universal_reference" width="500"/>
+<img src="resource/pictures/c++_lvalue_rvalue_universal_reference.png" alt="c++_lvalue_rvalue_universal_reference" width="500"/>  
 
+from [stackoverflow](https://stackoverflow.com/questions/39552272/is-there-a-difference-between-universal-references-and-forwarding-references)  
+```
+A forwarding reference is an rvalue reference to a cv-unqualified template parameter. If P is a forwarding reference and the argument is an lvalue, the type “lvalue reference to A” is used in place of A for type deduction.
+```
 
-f(22)  22 is a rvalue, universal references be initial as rvalue value, became rvalue references 
+f(22)  
+22 is a rvalue, universal references be initial as rvalue value, became rvalue references 
 
 Summary: when you have a universal reference
     if you init it with lvalue, the type be deduced as lvalue reference(E&).  
