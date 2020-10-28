@@ -52,7 +52,7 @@ Lvalue & rvalue are <span style="color:red">**sematic properties of expressions*
 
 ### In C
 
-- Every expression in C either a lvalue or a rvalue
+- Every expression in C either a `lvalue` or a `rvalue`
 - An `lvalue` is an expression referring to an object.  An object is a region of storage.
 - An `rvalue` is simply an expression that's not an lvalue
 - Caveat: although this is true for none-class type in C++, its not true for class types
@@ -85,7 +85,7 @@ Number 1 exists in code section.
 <br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_4.png" alt="c++_lvalue_rvalue_why_4" width="500"/>
 <br/>
-<span style="color:red">rvalue give compiler the permission for optimization.</span>
+<span style="color:red">rvalue give compiler the permission for optimization and validation.</span>
 
 ### Data storage
 
