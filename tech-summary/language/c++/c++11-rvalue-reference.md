@@ -254,7 +254,7 @@ R f(T const &t)    // by reference to const, f's parameter is declared to be non
 ### references and temporaries
 
 
-<span style="color:red">A "pointer to T" can point only to an lvalue of type T</span>
+<span style="color:red">A "pointer to T" can point only to an lvalue of type T</span>  
 <span style="color:red">A "reference to T" binds only to an lvalue of type T</span>
 ```
 int *pi = &3;  // wrong, can't apply & to 3
