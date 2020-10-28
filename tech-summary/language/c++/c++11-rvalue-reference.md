@@ -80,6 +80,7 @@ Function return value: no name, you can't take it address, candidate for moving
 <br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_2.png" alt="c++_lvalue_rvalue_why_2" width="500"/>
 <br/>
+Number 1 exists in code section.  
 <img src="resource/pictures/c++_lvalue_rvalue_why_3.png" alt="c++_lvalue_rvalue_why_3" width="500"/>
 <br/>
 <img src="resource/pictures/c++_lvalue_rvalue_why_4.png" alt="c++_lvalue_rvalue_why_4" width="500"/>
@@ -235,10 +236,13 @@ int &ri = a;  // ri is an alias for a
 Lvalue properties we need, such as implement ++ operator
 
 ```C++
+
 Month & operator++(month& x)
 {
    return x = static_cast<month>(x + 1);
 }
+
+// Month & operator++(month x) will only increase a copy of x but not x itself
 ```
 
 ### pass parameter by value or reference
