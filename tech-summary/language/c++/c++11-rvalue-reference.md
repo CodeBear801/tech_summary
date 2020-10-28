@@ -395,7 +395,8 @@ Auto&& is not that common,  but in C++14 you could use it in lambda(forward)
 
 <img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction3.png" alt="c++_lvalue_rvalue_auto_type_deduction3" width="500"/>
 
-<span style="color:red">A brace initializer don't has type</span>
+<span style="color:red">A brace initializer don't has type</span>  
+The only real difference between auto and template type deduction is that auto assumes that a braced initializer(i.e. `{}`) represents a std::initializer_list, but template type deduction doesn't.  [More info](https://github.com/wangyoucao577/modern-cpp/tree/master/effective-modern-cpp/item-2-understand-auto-type-deduction#different-part)  
 
 <img src="resource/pictures/c++_lvalue_rvalue_auto_type_deduction4.png" alt="c++_lvalue_rvalue_auto_type_deduction4" width="500"/>
 
