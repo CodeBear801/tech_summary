@@ -194,7 +194,7 @@ In contrast to unary &, unary * yields an lvalue
 Int *p = a;
 *p = 3;
 
-Char *s = Null
+char *s = Null
 *s = '\0'.  // undefined behavior
 
 *(p + 1) = 4   // p+1 is an rvalue, but *(p+1) is an lvalue, we store 4 into the object referenced by *(p + 1)
@@ -224,7 +224,7 @@ Name[0] = 'x'.     // wrong, name[0] is lvalue, but can not change
 
 ### references
 ```C++
-Int &ri = a;  // ri is an alias for a
+int &ri = a;  // ri is an alias for a
 ```
 
 <img src="resource/pictures/c++_lvalue_rvalue_ref_examples.png" alt="c++_lvalue_rvalue_ref_examples" width="500"/>
