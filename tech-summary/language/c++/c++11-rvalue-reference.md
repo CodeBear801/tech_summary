@@ -368,9 +368,11 @@ Compound types are arrays, functions, pointers, references, classes, unions, enu
 f(22)  
 22 is a rvalue, universal references be initial as rvalue value, became rvalue references 
 
-Summary: when you have a universal reference
-    if you init it with lvalue, the type be deduced as lvalue reference(E&).  
-    <span style="color:red">Type T will be deduced to reference only when you deal with universal reference</span>
+Summary:   
+when you have a universal reference  
+if you init it with lvalue, the type be deduced as lvalue reference(E&).  
+<span style="color:red">Type T will be deduced to reference only when you deal with universal reference</span>  
+That is to say, type deduction distinguishes between lvalue arguments and rvalue arguments.  
     
 
 #### By value parameters
