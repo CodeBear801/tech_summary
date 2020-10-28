@@ -26,6 +26,7 @@ Image from: https://time.geekbang.org/column/article/68633
 - `InnoDB` write amplification
    + index values are stored in leaf nodes and sorted by keys, the database working set doesn’t fit in memory and keys are updated in a random pattern.  Updating one row requires a number of page reads, makes several pages dirty, and forces many dirty pages to be written back to storage. 
    + In addition, `InnoDB` writes dirty pages to storage twice to support recovery from partial page writes on unplanned machine failure. 
+   + [storage/innobase/handler/ha_innodb.cc->write_row()](https://github.com/mysql/mysql-server/blob/ee4455a33b10f1b1886044322e4893f587b319ed/storage/innobase/handler/ha_innodb.cc#L8498)
 
 <img src="https://user-images.githubusercontent.com/16873751/96910616-9c7a4800-1454-11eb-8574-df16883033bc.png" alt="embedded_engine" width="400"/><br/>
 Image from: https://engineering.fb.com/core-data/myrocks-a-space-and-write-optimized-mysql-database/
