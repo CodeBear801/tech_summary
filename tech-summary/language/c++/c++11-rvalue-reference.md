@@ -706,9 +706,9 @@ Why need std::forward & std::move.  That's one important point for C++11
 
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_move.png" alt="c++_lvalue_rvalue_return_type_move" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_forward.png" alt="c++_lvalue_rvalue_return_type_forward" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_forward2.png" alt="c++_lvalue_rvalue_return_type_forward2" width="500"/>
 
 vName == ** is due to the implementation of string(stirng&& s) will probably assgin nullptr for original string
@@ -719,7 +719,7 @@ If pass in as lvalue, setText take text as std::move,  then later its gone
 So the first line should take it as copied, only last sentence applied std::forward
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule2.png" alt="c++_lvalue_rvalue_return_type_refine_rule2" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule3.png" alt="c++_lvalue_rvalue_return_type_refine_rule3" width="500"/>
 
 Temp is rvalue ref, it is safe to change
