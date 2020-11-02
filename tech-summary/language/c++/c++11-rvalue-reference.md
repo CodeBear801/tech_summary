@@ -568,7 +568,7 @@ Universal reference, wrap by std::forward
 
 
 <img src="resource/pictures/c++_lvalue_rvalue_distinguish_uref_rref.png" alt="c++_lvalue_rvalue_distinguish_uref_rref" width="500"/>
-
+<br/>
 
 <img src="resource/pictures/c++_lvalue_rvalue_double_life_of_dref.png" alt="c++_lvalue_rvalue_double_life_of_dref" width="500"/>
 
@@ -601,15 +601,15 @@ If the expression initializing the universal reference is an rvalue, the univers
 
 <br/>
 <span style="color:red">Parameters are lvalues, its type could be lvalue or rvalue</span>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_param_are_lvalue.png" alt="c++_lvalue_rvalue_param_are_lvalue" width="500"/>
 
 
 
 Rhs is lvalue, while its type is rvalue reference  
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_uref_example1.png" alt="c++_lvalue_rvalue_uref_example1" width="500"/>
-
+<br/>
 
 <img src="resource/pictures/c++_lvalue_rvalue_uref_example2.png" alt="c++_lvalue_rvalue_uref_example2" width="500"/>
 
@@ -650,9 +650,9 @@ Push_back(int&& x)    There is no type deduced here
 Look from the user code, when you call push_back, vi's type already be decided.  
 
 <img src="resource/pictures/c++_lvalue_rvalue_uref_pushback_emplace_back.png" alt="c++_lvalue_rvalue_uref_pushback_emplace_back" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_uref_pushback_emplace_back2.png" alt="c++_lvalue_rvalue_uref_pushback_emplace_back2" width="500"/>
-
+<br/>
 <span style="color:blue">Why need std::move? </span> take the vector as an example, there are two overload, with rvalue referece you could get additional efficiency with std::move.  Preserve rvalueness, pass value into several deep who really do the work.  
 
 
@@ -672,7 +672,7 @@ Rvalue reference to const is very very very **uncommon**
 You will overload rvalue reference functions, but you won't for uref version
 
 <img src="resource/pictures/c++_lvalue_rvalue_uref_overloading.png" alt="c++_lvalue_rvalue_uref_overloading" width="500"/>
-
+<br/>
 <img src="resource/pictures/c++_lvalue_rvalue_uref_overloading2.png" alt="c++_lvalue_rvalue_uref_overloading2" width="500"/>
 
 
