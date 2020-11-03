@@ -737,7 +737,7 @@ Without forward it will be copied into return value, otherwise it could be moved
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule6.png" alt="c++_lvalue_rvalue_return_type_refine_rule6" width="500"/>
 
 C++ compiler rule: if you have local variable and the type is the same with return value and you return that local variable, then compiler will directly construct it at return value's location.  There is no move or copy  
-For the second situation, std::move is a function call, compiler don't know what happened.
+For the second situation, `std::move` is a function call, compiler don't know what happened.
 
 <img src="resource/pictures/c++_lvalue_rvalue_return_type_refine_rule7.png" alt="c++_lvalue_rvalue_return_type_refine_rule7" width="500"/>
 
