@@ -579,14 +579,14 @@ Universal reference, wrap by std::forward
 <img src="resource/pictures/c++_lvalue_rvalue_double_life_of_dref2.png" alt="c++_lvalue_rvalue_double_life_of_dref2" width="500"/>
 
 
-The purpose of `rvalue reference` is used to identify **whether the object can be moved from**  
+<span>&#9673;</span>The purpose of `rvalue reference` is used to identify **whether the object can be moved from**  
 `Universal reference` also has name `forward reference`
 
 <img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell.png" alt="c++_lvalue_rvalue_in_a_nutshell" width="500"/>
 
 
 
-<span style="color:red">If a variable or parameter is declared to have type T&& for some deduced type T, that variable or parameter is a universal reference.</span>
+<span>&#9673;</span><span style="color:red">If a variable or parameter is declared to have type T&& for some deduced type T, that variable or parameter is a universal reference.</span>
 
 <img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell2.png" alt="c++_lvalue_rvalue_in_a_nutshell2" width="500"/>
 
