@@ -793,6 +793,7 @@ d'tor
 ```
 Return rule optimization is C++'s default behavior.  The following code also tiggers which
 ```
+
 // Named RVO is when an object with a name is returned but is nevertheless not copied. 
 Snitch ExampleNRVO() {
   Snitch snitch;
