@@ -662,8 +662,8 @@ Look from the user code, when you call push_back, vi's type already be decided.
 <img src="resource/pictures/c++_lvalue_rvalue_uref_sntax_matters.png" alt="c++_lvalue_rvalue_uref_sntax_matters" width="500"/>
 
 Const will not be deduced for f(const T&& param)  
-Rvalue reference means candidate for moving, const means can't be modified  
-Rvalue reference to const is very very very **uncommon**  
+`Rvalue reference` means candidate for moving, const means can't be modified  
+`Rvalue reference` to const is very very very **uncommon**  
 
 <img src="resource/pictures/c++_lvalue_rvalue_uref_sntax_matters2.png" alt="c++_lvalue_rvalue_uref_sntax_matters2" width="500"/>
 
@@ -678,12 +678,12 @@ You will overload rvalue reference functions, but you won't for uref version
 
 
 
-<span style="color:blue">Why not always use std::forward, since it could automatically be translated to rvalueref/lvalue ref:</span> Yes you can, but, when I wrote std::move I want clearly represent the idea of: this is an rvalue and I want to keep the rvalueness in the following function call, when I wrote std::forward I want to represent the idea of universal reference, might be a rvalue reference or might be a lvalue reference, they make different statement, I want the reader have a clear idea of this.
+<span style="color:blue">Why not always use `std::forward`, since it could automatically be translated to rvalueref/lvalue ref:</span> Yes you can, but, when I wrote `std::move` I want clearly represent the idea of: this is an rvalue and I want to keep the rvalueness in the following function call, when I wrote `std::forward` I want to represent the idea of universal reference, might be a rvalue reference or might be a lvalue reference, they make different statement, I want the reader have a clear idea of this.
 
 <img src="resource/pictures/c++_lvalue_rvalue_uref_overloading3.png" alt="c++_lvalue_rvalue_uref_overloading3" width="500"/>
 
-Push_back, we know exactly what the type is, there is no type deduction   
-Emplace_back, we don't know what we passed, emplace_back is not overloaded   
+`Push_back`, we know exactly what the type is, there is no type deduction   
+`Emplace_back`, we don't know what we passed, emplace_back is not overloaded   
 <span style="color:blue">Why have move and forward, not directly use const &:</span> that depend on your purpose, if you don't want to modify anything, then you could use const &.  When write function like upper one, it means I either want to a copy, or want to have a move operation if which could bring me additional flexibility.  
 <br/>
 
