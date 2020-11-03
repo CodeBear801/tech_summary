@@ -296,6 +296,7 @@ string *p = &(s + t);   // wrong
 
 ***
 
+
 ## Type deduction
 
 C98 is simple, only template, pass by value, pass by &/*  
@@ -578,8 +579,8 @@ Universal reference, wrap by std::forward
 <img src="resource/pictures/c++_lvalue_rvalue_double_life_of_dref2.png" alt="c++_lvalue_rvalue_double_life_of_dref2" width="500"/>
 
 
-The purpose of rvalue reference is used to identify whether the object can be moved from  
-Universal reference also has name forward reference
+The purpose of `rvalue reference` is used to identify **whether the object can be moved from**  
+`Universal reference` also has name `forward reference`
 
 <img src="resource/pictures/c++_lvalue_rvalue_in_a_nutshell.png" alt="c++_lvalue_rvalue_in_a_nutshell" width="500"/>
 
