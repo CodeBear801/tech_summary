@@ -1,4 +1,13 @@
 
+- [Example](#example)
+- [db](#db)
+- [Transaction](#transaction)
+- [Bucket](#bucket)
+	- [Cursor](#cursor)
+- [Put](#put)
+- [commit](#commit)
+- [More info](#more-info)
+
 ## Example
 
 Start by an example of how to use boltdb to write
@@ -104,6 +113,10 @@ When create a db file, will write 4 pages by default:
 - 2 meta page, which records where is freelist page and data page
 - 1 freelist page
 - 1 data page
+
+
+<img src="https://user-images.githubusercontent.com/16873751/98424592-f844f380-2046-11eb-99f4-021003288f93.png" alt="botdb_bucket" width="400"/>
+<br/>
 
 ```go
 	db.meta0 = db.page(0).meta()
