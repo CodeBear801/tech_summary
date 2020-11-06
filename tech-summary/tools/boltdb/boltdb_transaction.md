@@ -109,3 +109,4 @@ When a transaction start before t1 and last after t3, which version of data shou
 - https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/tx.go#L144
 - https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/tx_test.go#L15
 - https://github.com/ZhengHe-MD/learn-bolt/blob/master/TX.md
+- https://github.com/boltdb/bolt/issues/392
