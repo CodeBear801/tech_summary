@@ -183,6 +183,16 @@ type bucket struct {
 
 <img src="https://user-images.githubusercontent.com/16873751/98407817-244f7d00-2025-11eb-800f-ad0356149725.png" alt="botdb_bucket" width="400"/>
 <br/>
+more info:
+- [boltdb transaction](./boltdb_transaction.md)
+
+### Cursor
+
+
+
+
+## Put
+
 
 
 ## More info
