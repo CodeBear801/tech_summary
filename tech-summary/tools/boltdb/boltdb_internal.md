@@ -189,6 +189,23 @@ type bucket struct {
 
 <img src="https://user-images.githubusercontent.com/16873751/98407817-244f7d00-2025-11eb-800f-ad0356149725.png" alt="botdb_bucket" width="400"/>
 <br/>
+
+The implementation of bucket CreateBucket is [here](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/bucket.go#L158)
+
+```go
+// CreateBucket creates a new bucket at the given key and returns the new bucket.Ben Johnson, 7 years ago: • Return bucket from CreateBucket() functions.
+// Returns an error if the key already exists, if the bucket name is blank, or if the bucket name is too long.
+// The bucket instance is only valid for the lifetime of the transaction.
+func (b *Bucket) CreateBucket(key []byte) (*Bucket, error) {
+
+	// Move cursor to correct position.
+	c := b.Cursor()
+	k, _, flags := c.seek(key)
+
+
+```
+
+
 more info:
 - [boltdb transaction](./boltdb_transaction.md)
 
