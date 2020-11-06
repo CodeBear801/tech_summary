@@ -258,3 +258,4 @@ You can evade phantom skew by using predicate locks. These lock on all data in 
 - [InnoDB存储引擎MVCC实现原理](https://liuzhengyang.github.io/2017/04/18/innodb-mvcc/)
 - [SQL Server Isolation Levels : A Series](https://sqlperformance.com/2014/07/t-sql-queries/isolation-levels)
 - [mysql的可重复读隔离级别实现](https://www.jianshu.com/p/69fd2ca17cfd)
+- [浅入深出MySQL 中事务的实现](https://draveness.me/mysql-transaction/)
