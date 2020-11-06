@@ -58,17 +58,24 @@ Eventual consistency indicates that the system will become consistent over time,
 **Isolation Level**  
 <img src="resources/pictures/ansi-sql-isolation-levels.png" alt="ansi-sql-isolation-levels" width="600"/>  
 <br/>
+(image from: https://blog.acolyer.org/2016/02/24/a-critique-of-ansi-sql-isolation-levels/)
 
 **Isolation levels table**  
 <img src="resources/pictures/isolation-levels-table.png" alt="isolation-levels-table" width="600"/>  
 <br/>
+(image from: https://blog.acolyer.org/2016/02/24/a-critique-of-ansi-sql-isolation-levels/)
 
 ##### Terms
-脏写: 写入和提交之间，又别写入了别的数据.  
-脏读：一个事务还未提交，另外一个事务访问此事务修改的数据，并使用，读取了事务中间状态数据。  
-幻读：一个事务读取2次，得到的记录条数不一致，由于2次读取之间另外一个事务对数据进行了增删。 (insert & delete)  
-不可重复读：一个事务读取同一条记录2次，得到的结果不一致，由于在2次读取之间另外一个事务对此行数据进行了修改。(update)    
-更新丢失: 其含义为T1要更新x的数据，其首先读取x的值，然后再该值上加1再写回数据库。但是在读取x后，T2写入了新的x并成功提交，而T1还是在老的x值的基础上加1。这样，T2的更新对于T1而言就像被丢弃了一样  
+`RAED UNCOMMITED`：使用查询语句不会加锁，可能会读到未提交的行（`Dirty Read`）  
+`READ COMMITED`：只对记录加记录锁，而不会在记录之间加间隙锁，所以允许新的记录插入到被锁定记录的附近，所以再多次使用查询语句时，可能得到不同的结果（`Non-Repeatable Read`）  
+`REPEATABLE READ` ：多次读取同一范围的数据会返回第一次查询的快照，不会返回不同的数据行，但是可能发生幻读（`Phantom Read`）  
+`SERIALIZABLE`：InnoDB 隐式地将全部的查询语句加上共享锁，解决了幻读的问题  
+
+`脏写`: 写入和提交之间，又别写入了别的数据.  
+`脏读`：一个事务还未提交，另外一个事务访问此事务修改的数据，并使用，读取了事务中间状态数据。  
+`幻读`：一个事务读取2次，得到的记录条数不一致，由于2次读取之间另外一个事务对数据进行了增删。 (insert & delete)  
+`不可重复读`：一个事务读取同一条记录2次，得到的结果不一致，由于在2次读取之间另外一个事务对此行数据进行了修改。(update)    
+`更新丢失`: 其含义为T1要更新x的数据，其首先读取x的值，然后再该值上加1再写回数据库。但是在读取x后，T2写入了新的x并成功提交，而T1还是在老的x值的基础上加1。这样，T2的更新对于T1而言就像被丢弃了一样  
 
 ### Single-Object and Multi-Object Operations
 
