@@ -194,12 +194,77 @@ more info:
 
 ### Cursor
 
+```go
+// Cursor creates a cursor associated with the bucket.
+// The cursor is only valid as long as the transaction is open.
+// Do not use a cursor after the transaction is closed.
+func (b *Bucket) Cursor() *Cursor {
+	// Update transaction statistics.
+	b.tx.stats.CursorCount++
 
+	// Allocate and return a cursor.
+	return &Cursor{
+		bucket: b,
+		stack:  make([]elemRef, 0),
+	}
+}
+type Cursor struct {
+	bucket *Bucket
+	stack  []elemRef
+}
+type elemRef struct {
+	page  *page
+    node  *node
+    // [Perry] An elemRef is either page or node, only one of them have value
+	index int
+}
+```
 
 
 ## Put
+[`bucket.Put()`](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/bucket.go#L285)
+
+```go
+// Put sets the value for a key in the bucket.
+// If the key exist then its previous value will be overwritten.
+// Supplied value must remain valid for the life of the transaction.
+// Returns an error if the bucket was created from a read-only transaction, if the key is blank, if the key is too large, or if the value is too large.
+func (b *Bucket) Put(key []byte, value []byte) error {
+
+    // Move cursor to correct position.
+	c := b.Cursor()
+	k, _, flags := c.seek(key)
+
+	// Return an error if there is an existing key with a bucket value.
+	if bytes.Equal(key, k) && (flags&bucketLeafFlag) != 0 {
+		return ErrIncompatibleValue
+	}
+
+	// Insert into node.
+	key = cloneBytes(key)
+	c.node().put(key, key, value, 0, 0)
+
+```
+
+Calling [node's put()](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/node.go#L116)
+```go
+// put inserts a key/value.
+func (n *node) put(oldKey, newKey, value []byte, pgid pgid, flags uint32) {
+    // Find insertion index.
+	index := sort.Search(len(n.inodes), func(i int) bool { return bytes.Compare(n.inodes[i].key, oldKey) != -1 })
+
+	// Add capacity and shift nodes if we don't have an exact match and need to insert.
+	exact := (len(n.inodes) > 0 && index < len(n.inodes) && bytes.Equal(n.inodes[index].key, oldKey))
+	if !exact {
+		n.inodes = append(n.inodes, inode{})
+		copy(n.inodes[index+1:], n.inodes[index:])
+	}
+
+```
 
 
+
+## commit
 
 ## More info
 - [How BoltDB Write its Data?](https://medium.com/@abserari/how-boltdb-write-its-data-61f64a3c0e06)
