@@ -151,17 +151,23 @@ func (db *DB) Begin(writable bool) (*Tx, error) {
 
 
 ## Bucket
-`tx.CreateBucket()` try to create a [`Bucket`](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/bucket.go#L36) object, you can think which as logic operator on DB's B+ tree
+`tx.CreateBucket()` try to create a [`Bucket`](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/bucket.go#L36) object, you can think which as logic operator on DB's B+ tree, and its a `namespace` which is similar as `table` in database
 
 ```go
 // Bucket represents a collection of key/value pairs inside the database.
 type Bucket struct {
 	*bucket
 	tx       *Tx                // the associated transaction
-	buckets  map[string]*Bucket // subbucket cache
+    buckets  map[string]*Bucket // subbucket cache
+    // [Perry] during transactions' exploration, cache all buckets visited
+
 	page     *page              // inline page reference
-	rootNode *node              // materialized node for the root page.
-	nodes    map[pgid]*node     // node cache
+    rootNode *node              // materialized node for the root page.
+    // [Perry] this is the key 
+    // rootNode is the one to index all KV inside bucket
+
+    nodes    map[pgid]*node     // node cache
+    // [Perry] during transactions' exploration, cache all nodes visited
 
 	// Sets the threshold for filling nodes when they split. By default,
 	// the bucket will fill to 50% but it can be useful to increase this
