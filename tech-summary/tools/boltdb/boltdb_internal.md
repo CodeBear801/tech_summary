@@ -201,8 +201,21 @@ func (b *Bucket) CreateBucket(key []byte) (*Bucket, error) {
 	// Move cursor to correct position.
 	c := b.Cursor()
 	k, _, flags := c.seek(key)
+	
+	// Return an error if there is an existing key.
+	if bytes.Equal(key, k) {
+		if (flags & bucketLeafFlag) != 0 {
+			return nil, ErrBucketExists
+		}
+		return nil, ErrIncompatibleValue
+	}
 
+	// Insert into node.
+	key = cloneBytes(key)
+	c.node().put(key, key, value, 0, bucketLeafFlag)
 
+// [perry] CreateBucket's logic is very similar to Bucket->Put()
+// Because both of them is maintaining the B+ tree
 ```
 
 
