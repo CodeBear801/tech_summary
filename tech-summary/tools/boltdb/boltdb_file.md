@@ -94,11 +94,18 @@ func (db *DB) page(id pgid) *page {
 
 [branch page operations](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/page.go#L71)
 ```go
+// branchPageElement represents a node on a branch page.
+type branchPageElement struct {
+	pos   uint32
+	ksize uint32
+	pgid  pgid
+}
 
 // branchPageElement retrieves the branch node by index
 func (p *page) branchPageElement(index uint16) *branchPageElement {
 	return &((*[0x7FFFFFF]branchPageElement)(unsafe.Pointer(&p.ptr)))[index]
 }
+// [Perry] page.ptr points to an array of branchPageElement
 
 // branchPageElements retrieves a list of branch nodes.
 func (p *page) branchPageElements() []branchPageElement {
@@ -107,5 +114,79 @@ func (p *page) branchPageElements() []branchPageElement {
 	}
 	return ((*[0x7FFFFFF]branchPageElement)(unsafe.Pointer(&p.ptr)))[:]
 }
+
+
+// key returns a byte slice of the node key.
+func (n *branchPageElement) key() []byte {
+	buf := (*[maxAllocSize]byte)(unsafe.Pointer(n))
+	return (*[maxAllocSize]byte)(unsafe.Pointer(&buf[n.pos]))[:n.ksize]
+}
+
+```
+[Code to load](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/node.go#L161)
+
+
+```go
+// read initializes the node from a page.
+func (n *node) read(p *page) {
+        n.isLeaf = ((p.flags & leafPageFlag) != 0)
+	    n.inodes = make(inodes, int(p.count))
+
+    	for i := 0; i < int(p.count); i++ {
+		inode := &n.inodes[i]
+		if n.isLeaf {
+			elem := p.leafPageElement(uint16(i))
+			inode.flags = elem.flags
+			inode.key = elem.key()
+			inode.value = elem.value()
+		} else {
+			elem := p.branchPageElement(uint16(i))
+			inode.pgid = elem.pgid
+			inode.key = elem.key()
+		}
+		_assert(len(inode.key) > 0, "read: zero-length inode key")
+	}
 ```
 
+<img src="https://user-images.githubusercontent.com/16873751/98427578-a86c2980-2052-11eb-8a4a-055109acd6f8.png" alt="botdb_bucket" width="600"/>
+<br/>
+
+## Leafpage
+
+
+```go
+// leafPageElement represents a node on a leaf page.
+type leafPageElement struct {
+    flags uint32   // [perry]0 means normal leaf node, 1 means sub-bucket
+                   // 0 means page record content of B+tree's data, key and value
+                   // 1 means the structure of bucket
+	pos   uint32
+	ksize uint32
+	vsize uint32   // size of data
+}
+```
+<img src="https://user-images.githubusercontent.com/16873751/98427596-b3bf5500-2052-11eb-8798-30ab95a3e7a6.png" alt="botdb_bucket" width="600"/>
+<br/>
+
+```go
+
+func (b *Bucket) openBucket(value []byte) *Bucket {
+	
+	var child = newBucket(b.tx)
+	// If this is a writable transaction then we need to copy the bucket entry.
+	// Read-only transactions can point directly at the mmap entry.
+	if b.tx.writable {
+		child.bucket = &bucket{}
+		*child.bucket = *(*bucket)(unsafe.Pointer(&value[0]))
+	} else {
+		child.bucket = (*bucket)(unsafe.Pointer(&value[0]))
+	}
+	// Save a reference to the inline page if the bucket is inline.
+	// inline bucket
+	if child.root == 0 {
+		// bucket的page
+		child.page = (*page)(unsafe.Pointer(&value[bucketHeaderSize]))
+	}
+	return &child
+}
+```
