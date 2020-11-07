@@ -309,5 +309,58 @@ func (n *node) put(oldKey, newKey, value []byte, pgid pgid, flags uint32) {
 
 ## commit
 
+[`Tx->Commit`](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/tx.go#L144) will commit changes back to db
+
+```go
+// Commit writes all changes to disk and updates the meta page.
+// Returns an error if a disk write error occurs, or if Commit is
+// called on a read-only transaction.
+func (tx *Tx) Commit() error {
+
+	// Rebalance nodes which have had deletions
+	//...
+
+	// spill data onto dirty pages.
+	//...
+
+	// Free the old root bucket.
+	tx.meta.root.root = tx.root.root
+
+	// Free the freelist and allocate new pages for it. This will overestimate
+	// the size of the freelist but not underestimate the size (which would be bad).
+
+	// Write dirty pages to disk.
+
+	// Write meta to disk.
+	if err := tx.writeMeta(); err != nil {
+
+	// Finalize the transaction.
+	tx.close()
+```
+
+Write metadata is the last step
+
+
+```go
+// write writes the meta onto a page.
+func (m *meta) write(p *page) {
+  if m.root.root >= m.pgid {
+      panic(fmt.Sprintf("root bucket pgid (%d) above high water mark (%d)", m.root.root, m.pgid))
+  } else if m.freelist >= m.pgid {
+      panic(fmt.Sprintf("freelist pgid (%d) above high water mark (%d)", m.freelist, m.pgid))
+  }
+
+  // Page id is either going to be 0 or 1 which we can determine by the transaction ID.
+  p.id = pgid(m.txid % 2)
+  p.flags |= metaPageFlag
+
+  // Calculate the checksum.
+  m.checksum = m.sum64()
+
+  m.copy(p.meta())
+}
+```
+
+
 ## More info
 - [How BoltDB Write its Data?](https://medium.com/@abserari/how-boltdb-write-its-data-61f64a3c0e06)
