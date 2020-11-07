@@ -340,6 +340,9 @@ func (tx *Tx) Commit() error {
 
 Write metadata is the last step
 
+<img src="https://user-images.githubusercontent.com/16873751/98428328-dacb5600-2055-11eb-99be-90d02dd3d0c8.png" alt="botdb_bucket" width="400"/>
+<br/>
+
 
 ```go
 // write writes the meta onto a page.
