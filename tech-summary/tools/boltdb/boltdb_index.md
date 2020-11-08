@@ -20,7 +20,8 @@ BoltDB started out as a port of LMDB to Go but has somewhat diverged since then.
   - MVCC is target for append B+ tree, nt directly change memory representation of specific page but use new free page
   - Thus read transaction is isolate with write transaction, and before commit of write transaction read will still get old data
   - copy on write
-  - 
+  - two meta data: A/B switch
+- Support ACID
 
 ## SubPages
 - [overview of lmdb](./lmdb.md)
