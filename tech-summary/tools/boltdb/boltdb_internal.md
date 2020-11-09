@@ -10,7 +10,7 @@
 
 ## Example
 
-Start by an example of how to use boltdb to write
+Start with an example of how to use boltdb to write
 
 ```go
 db, err := bolt.Open("test.db", 0600, nil)
