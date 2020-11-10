@@ -1,7 +1,7 @@
 # LevelDB write
 
 ## Key Points
-- 一次写入操作只涉及一次磁盘顺序写和一次内存写入
+- a single put operation just result one disk write and one memory write(一次写入操作只涉及一次磁盘顺序写和一次内存写入)
 
 ## Big picture
 ```
