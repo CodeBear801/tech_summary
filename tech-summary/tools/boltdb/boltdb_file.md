@@ -75,9 +75,27 @@ func (db *DB) page(id pgid) *page {
 
 ## meta page
 
+[definition of type page](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/page.go#L30)  
+
+[definition of type meta](https://github.com/boltdb/bolt/blob/fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5/db.go#L970)  
+
 <img src="https://user-images.githubusercontent.com/16873751/98425887-b23e5e80-204b-11eb-97e6-f4298e7c6e2c.png" alt="botdb_bucket" width="600"/>
 <br/>
 
+```
+                               │      │      │              │                                                     
+ ─────────8 bytes──────────────┼──2───├─ 2───├─────4────────┼─────────────8─────────────────                      
+                               │      │      │              │                                                     
+┌──────────────────────────────┬──────┬──────┬──────────────┬ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─                       
+│                              │      │      │              │                              │                      
+│           page id            │ flag │count │   overflow   │             ptr                                     
+│                              │      │      │              │                              │                      
+└──────────────────────────────┴──────┴──────┴──────────────┼────────────────────────────────────────────────────┐
+                                                            │                                                    │
+                                                            │                    meta 64bytes                    │
+                                                            │                                                    │
+                                                            └────────────────────────────────────────────────────┘
+```
 
 ## freelist
 
