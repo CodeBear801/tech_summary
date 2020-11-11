@@ -35,3 +35,28 @@ s = db->Put(WriteOptions(), "key1", "value");
 ### Code 
 [DBImpl::Write in db/db_impl.cc](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L1196)
 
+- `Put` operation is wrapped with WriteBatch([code](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L1464))
+
+```C++
+Status DB::Put(const WriteOptions& opt, const Slice& key, const Slice& value) {
+  WriteBatch batch;
+  batch.Put(key, value);
+  return Write(opt, &batch);
+}
+```
+
+- Here is the definition of [`WriteBatch`](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/write_batch.cc#L5)
+
+```C++
+// WriteBatch::rep_ :=
+//    sequence: fixed64
+//    count: fixed32
+//    data: record[count]
+// record :=
+//    kTypeValue varstring varstring         |
+//    kTypeDeletion varstring
+// varstring :=
+//    len: varint32
+//    data: uint8[len]
+```
+
