@@ -364,6 +364,16 @@ func (m *meta) write(p *page) {
 }
 ```
 
+Actual write
+```go
+// tx.go
+func (tx *Tx) Commit() {
+
+	tx.db.ops.writeAt
+}
+```
+
+
 
 ## More info
 - [How BoltDB Write its Data?](https://medium.com/@abserari/how-boltdb-write-its-data-61f64a3c0e06)

@@ -28,6 +28,10 @@ interested in how databases work.”
   - copy on write
   - two meta data: A/B switch
 - Support ACID
+- BoltDB is good for
+  - memory > db
+  - read > write
+  - stable > performance
 
 ## SubPages
 - [overview of lmdb](./lmdb.md)
