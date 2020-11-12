@@ -1,5 +1,99 @@
 # Compaction
 
+
+## Code
+[DBImpl::MaybeScheduleCompaction() in db/db_impl.cc](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L658)
+```C++
+void DBImpl::MaybeScheduleCompaction() 
+```
+When to call this function  
+- Each write, if `memtable` is full, will convert which to `immutable-memtable`, then will call this function
+- Each time re-start db, after cover from WAL
+- Each read
+
+### Minor compaction
+Main logic:  
+- dump from `immutable-memtable` to `sstable` on disk
+- if level-0's key range have no overlap with current level when try to do more compaction until `config::kMaxMemCompactLevel`(default=2)
+
+Here is an example from when will trigger [`MinorCompaction`](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/db_test.cc#L1031)  
+
+
+### Major compaction
+Main logic:
+- compact level-n sstable with level-(n+1) with overlapped keyrange, multi-path compaction, and generate new level-(n+1) sstable
+- if compact from level-0, due to sstables in level 0 have overlapped key range, so there might be more than one sstable join the compaction
+
+When to trigger:  
+- size([code](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/version_set.cc#L650))  
+- seek
+- By user(operations on leveldb)
+
+[code](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L697)
+```C++
+// The trigger of compaction
+void DBImpl::BackgroundCompaction() {
+    if (is_manual) {
+        ManualCompaction* m = manual_compaction_;
+        // [Perry]
+        // VersionSet* const versions_ GUARDED_BY(mutex_);
+        // VersionSet is a double-linked-list which manages current version and all versions which are servicing
+        c = versions_->CompactRange(m->level, m->begin, m->end);
+    }else {
+    c = versions_->PickCompaction();
+    }
+
+    if (c == nullptr) {
+      // Nothing to do
+    } else if (!is_manual && c->IsTrivialMove()) {
+         status = versions_->LogAndApply(c->edit(), &mutex_);
+    } else {
+        CompactionState* compact = new CompactionState(c);
+        status = DoCompactionWork(compact);
+         CleanupCompaction(compact);
+        c->ReleaseInputs();
+        RemoveObsoleteFiles();
+  }
+```
+
+[`VersionSet::CompactRange`](https://github.com/google/leveldb/blob/9bd23c767601a2420478eec158927882b879bada/db/version_set.cc#L1464)
+```C++
+
+```
+
+
+
+```C++
+  // Apply all of the edits in *edit to the current state.
+  void Apply(VersionEdit* edit) {
+
+      // We arrange to automatically compact this file after
+      // a certain number of seeks.  Let's assume:
+      //   (1) One seek costs 10ms
+      //   (2) Writing or reading 1MB costs 10ms (100MB/s)
+      //   (3) A compaction of 1MB does 25MB of IO:
+      //         1MB read from this level
+      //         10-12MB read from next level (boundaries may be misaligned)
+      //         10-12MB written to next level
+      // This implies that 25 seeks cost the same as the compaction
+      // of 1MB of data.  I.e., one seek costs approximately the
+      // same as the compaction of 40KB of data.  We are a little
+      // conservative and allow approximately one seek for every 16KB
+      // of data before triggering a compaction.
+      f->allowed_seeks = static_cast<int>((f->file_size / 16384U));
+      if (f->allowed_seeks < 100) f->allowed_seeks = 100;
+
+
+  }
+```
+
+
+
+
+
+
+## Example
+
 The following example comes from RocksDB, but LevelDB should be very similar.  
 RocksDB guarantees efficient disk usage, the size of persistent store is similar to user data size, only 10% is used for extra data.
 <img src="https://user-images.githubusercontent.com/16873751/96749219-63bc6f00-137f-11eb-9198-ffbe7854e21c.png" alt="rocksdb_write" width="600"/>
@@ -27,34 +121,4 @@ levelDb在选定某个level进行compaction后，还要选择是具体哪个文�
 
 Major compaction的过程如下：对多个文件采用多路归并排序的方式，依次找出其中最小的Key记录，也就是对多个文件中的所有记录重新进行排序。之后采取一定的标准判断这个Key是否还需要保存，如果判断没有保存价值，那么直接抛掉，如果觉得还需要继续保存，那么就将其写入level L+1层中新生成的一个SSTable文件中。就这样对KV数据一一处理，形成了一系列新的L+1层数据文件，之前的L层文件和L+1层参与compaction 的文件数据此时已经没有意义了，所以全部删除。这样就完成了L层和L+1层文件记录的合并过程。
 那么在major compaction过程中，判断一个KV记录是否抛弃的标准是什么呢？其中一个标准是:对于某个key来说，如果在小于L层中存在这个Key，那么这个KV在major compaction过程中可以抛掉。因为我们前面分析过，对于层级低于L的文件中如果存在同一Key的记录，那么说明对于Key来说，有更新鲜的Value存在，那么过去的Value就等于没有意义了，所以可以删除。
-
-## Code
-[DBImpl::MaybeScheduleCompaction() in db/db_impl.cc](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L658)
-```C++
-void DBImpl::MaybeScheduleCompaction() 
-```
-When to call this function  
-- Each time before write, if `memtable` is full, will convert which to `immutable-memtable`, then will call this function
-- Each time re-start db, after cover from WAL
-- Each read
-
-### Minor compaction
-Main logic:  
-- dump from `immutable-memtable` to `sstable` on disk
-- if level-0's key range have no overlap with current level when try to do more compaction until `config::kMaxMemCompactLevel`(default=2)
-
-
-### Major compaction
-Main logic:
-- compact level-n sstable with level-(n+1) with overlapped keyrange, multi-path compaction, and generate new level-(n+1) sstable
-- if compact from level-0, due to sstables in level 0 have overlapped key range, so there might be more than one sstable join the compaction
-
-When to trigger:  
-- size([code](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/version_set.cc#L650))  
-
-```C++
-```
-
-
-
 
