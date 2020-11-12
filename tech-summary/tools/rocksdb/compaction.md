@@ -1,5 +1,6 @@
 # Compaction
 
+The following example comes from RocksDB, but LevelDB should be very similar.  
 RocksDB guarantees efficient disk usage, the size of persistent store is similar to user data size, only 10% is used for extra data.
 <img src="https://user-images.githubusercontent.com/16873751/96749219-63bc6f00-137f-11eb-9198-ffbe7854e21c.png" alt="rocksdb_write" width="600"/>
 
@@ -29,4 +30,31 @@ Major compaction的过程如下：对多个文件采用多路归并排序的方�
 
 ## Code
 [DBImpl::MaybeScheduleCompaction() in db/db_impl.cc](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L658)
+```C++
+void DBImpl::MaybeScheduleCompaction() 
+```
+When to call this function  
+- Each time before write, if `memtable` is full, will convert which to `immutable-memtable`, then will call this function
+- Each time re-start db, after cover from WAL
+- Each read
+
+### Minor compaction
+Main logic:  
+- dump from `immutable-memtable` to `sstable` on disk
+- if level-0's key range have no overlap with current level when try to do more compaction until `config::kMaxMemCompactLevel`(default=2)
+
+
+### Major compaction
+Main logic:
+- compact level-n sstable with level-(n+1) with overlapped keyrange, multi-path compaction, and generate new level-(n+1) sstable
+- if compact from level-0, due to sstables in level 0 have overlapped key range, so there might be more than one sstable join the compaction
+
+When to trigger:  
+- size([code](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/version_set.cc#L650))  
+
+```C++
+```
+
+
+
 
