@@ -16,7 +16,7 @@ s = db->Get(ReadOptions(), "key1", &value);
 ### Flow
 
 Steps of Get()(based on leveldb, which is simpler)
-<img src="https://user-images.githubusercontent.com/16873751/96516475-18d61680-121c-11eb-9eeb-c8e38e2ef13f.png" alt="rocksdb_get" width="1000"/>
+<img src="https://user-images.githubusercontent.com/16873751/98894315-6596c100-2459-11eb-82c5-ff3af15d40de.png" alt="rocksdb_get" width="1000"/>
 
 1. check memtable
 2. if not find, check immutable-memtable

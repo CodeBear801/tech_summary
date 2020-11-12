@@ -85,3 +85,4 @@ void MemTable::Add(SequenceNumber s, ValueType type, const Slice& key,
 }
 
 ```
+For more information about skiplist, please go to [here](./leveldb_skiplist.md)
