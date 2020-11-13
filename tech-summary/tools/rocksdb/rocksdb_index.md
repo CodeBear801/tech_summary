@@ -46,4 +46,4 @@ an alternative space and write-optimized database technology
 - [compaction](./leveldb_compaction.md)
 - [wal](./leveldb_write_ahead_log.md)
 - [bloomfilter](./leveldb_bloomfilter.md)
-- [arena]()./leveldb_arena.md)
+- [arena](./leveldb_arena.md)
