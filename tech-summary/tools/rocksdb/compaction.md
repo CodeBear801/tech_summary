@@ -58,6 +58,25 @@ void DBImpl::BackgroundCompaction() {
 
 [`VersionSet::CompactRange`](https://github.com/google/leveldb/blob/9bd23c767601a2420478eec158927882b879bada/db/version_set.cc#L1464)
 ```C++
+// 1. acquire sstables in level-n which are inside key-range[startkey, endkey]
+Version::GetOverlappingInputs()
+
+// 2. avoid to compact too many sstable in single round
+
+// 3. collect other sstable needed
+VersionSet::SetupOtherInputs
+//     for key range from level n, find overlap sstable from level n+1
+//     add level-n's sstable if they won't enlarge current key-range
+//     get  grandparents_
+//     update compact_pointer_ for next round
+
+```
+
+
+DBImpl::DoCompactionWork()
+```C++
+// merge sstable which is in sorted order, drop same key and deleted key
+DBImpl::DoCompactionWork()
 
 ```
 
