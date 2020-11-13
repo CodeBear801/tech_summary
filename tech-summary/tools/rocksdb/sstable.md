@@ -41,7 +41,7 @@ Once the SSTable is on disk, it is immutable, hence updates and deletes can't to
   - record group, each record <key, value>
   - pre-fix
 
-<img src="https://user-images.githubusercontent.com/16873751/96659380-a89ec200-12fb-11eb-9ede-e854f49fa0ca.png" alt="datablock" width="600"/>  
+<img src="https://user-images.githubusercontent.com/16873751/99017820-8ddff780-250d-11eb-9fd6-62f94bdc3f1f.png" alt="datablock" width="600"/>  
 
 - data index block
   - support binary search of key
@@ -65,3 +65,55 @@ The structure of `block` is the same, just a list of records of <key, value>
 |value   | actual value   | block handle of datablock i  | block handle  |
 
 
+## Code
+
+[`TableBuilder::Add()`](https://github.com/google/leveldb/blob/3f934e3705444a3df80b128ddefc4cf440441ffe/table/table_builder.cc#L94)
+```C++
+void TableBuilder::Add(const Slice& key, const Slice& value) {
+
+  r->index_block.Add(r->last_key, Slice(handle_encoding));
+
+  r->filter_block->AddKey(key); 
+
+  r->data_block.Add(key, value);
+
+  const size_t estimated_block_size = r->data_block.CurrentSizeEstimate();
+  if (estimated_block_size >= r->options.block_size) {  // [perry] default is 4KB
+    Flush();
+  }
+
+```
+
+### Datablock
+
+[`BlockBuilder::Add`](https://github.com/google/leveldb/blob/3f934e3705444a3df80b128ddefc4cf440441ffe/table/block_builder.cc#L71:20)
+
+```C++
+  // [Perry] Here is the code for how to write a block record
+
+  // Add "<shared><non_shared><value_size>" to buffer_
+  PutVarint32(&buffer_, shared);
+  PutVarint32(&buffer_, non_shared);
+  PutVarint32(&buffer_, value.size());
+
+  // Add string delta to buffer_ followed by value
+  buffer_.append(key.data() + shared, non_shared);
+  buffer_.append(value.data(), value.size());
+```
+
+
+### IndexBlock
+
+The general format of IndexBlock is similar as Datablock, the difference is content.  Data block records <key, value>, Index block records index of key.  
+IndexBlock is used for binary search.  Key inside each block is sorted, let's say the last key of previous block is "helloleveldb", and the first key of current block is "helloword", leveldb will calculate a divider between two blocks, say, "hellom", then it could represent such idea: for any key smaller than "hellom" will be recorded in previous block, for any key larger than "hellom" will be recorded in current block, thus the information inside index record would be
+```
+key = divider key
+value = previous data block(offset, size)
+```
+
+### Query
+
+Query inside block is represented by `Block::Iter`.  In the function of Seek()
+- the collection of restarts set recors all blocks offset and key, sorted by key
+- during seek, its uses the key to do binary search, find the prefix range it belonging to
+- `SeekToRestartPoint()` then continue to `ParseNextKey` until find an entry which is not smaller than query key
