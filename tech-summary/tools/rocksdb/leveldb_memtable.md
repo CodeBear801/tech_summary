@@ -54,7 +54,7 @@ Another part is add <key,value> pair into memory table([code](https://github.com
 ```
 [`WriteBatchInternal::InsertInto`](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/write_batch.cc#L132:1)
 ```C++
-Status WriteBatchInternal::InsertInto(const WriteBatch* b, MemTable* memtable) {Chris Mumford, 2 years ago: • Format all files IAW the Google C++ Style Gui…
+Status WriteBatchInternal::InsertInto(const WriteBatch* b, MemTable* memtable) {
   MemTableInserter inserter;
   inserter.sequence_ = WriteBatchInternal::Sequence(b);
   inserter.mem_ = memtable;
