@@ -42,6 +42,7 @@ an alternative space and write-optimized database technology
 - [get()](./leveldb_read.md)
 - [put()](./leveldb_write.md)
 - [skiplist](./leveldb_skiplist.md)
+- [memtable](./leveldb_memtable.md)
 - [sstable](./leveldb_sstable.md)
 - [compaction](./leveldb_compaction.md)
 - [wal](./leveldb_write_ahead_log.md)
