@@ -34,7 +34,7 @@ Let's say we want to write `<key= TestKey, Value=TestValue>`, here is the sample
 
 It will be wrapped as a [`Writer`](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.cc#L1196) and then insert into a [`deque`](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/db_impl.h#L186) 
 ```C++
-  Writer w(&mutex_);Sanjay Ghemawat, 9 years ago: • added group commit; drastically speeds up mul…
+  Writer w(&mutex_);
   w.batch = updates;
   w.sync = options.sync;
   w.done = false;
