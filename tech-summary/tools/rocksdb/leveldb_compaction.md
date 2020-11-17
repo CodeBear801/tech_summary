@@ -54,7 +54,12 @@ void DBImpl::BackgroundCompaction() {
         c->ReleaseInputs();
         RemoveObsoleteFiles();
   }
+
+
 ```
+Why there is an abstraction of [`version`](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/version_set.h#L60)?  
+`Version` is db's state after each compaction, it contains meta data of db and a collection of sstable which contains latest state in each level.  When compaction happening, there is sstable addition and deletion, why if they are be read?  To handle such race situation, there is ref count for each version, to represent the situation of read and unread.  So there are multiple version exists for current db, when a version's ref count is 0 and not the latest version, it can be removed from list.  
+
 
 [`VersionSet::CompactRange`](https://github.com/google/leveldb/blob/9bd23c767601a2420478eec158927882b879bada/db/version_set.cc#L1464)
 ```C++
@@ -73,7 +78,7 @@ VersionSet::SetupOtherInputs
 ```
 
 
-DBImpl::DoCompactionWork()
+[`DBImpl::DoCompactionWork()`](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/db_impl.cc#L887)
 ```C++
 // merge sstable which is in sorted order, drop same key and deleted key
 DBImpl::DoCompactionWork()
@@ -83,6 +88,7 @@ DBImpl::DoCompactionWork()
 
 
 ```C++
+  // https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/version_set.cc#L650
   // Apply all of the edits in *edit to the current state.
   void Apply(VersionEdit* edit) {
 
@@ -101,8 +107,6 @@ DBImpl::DoCompactionWork()
       // of data before triggering a compaction.
       f->allowed_seeks = static_cast<int>((f->file_size / 16384U));
       if (f->allowed_seeks < 100) f->allowed_seeks = 100;
-
-
   }
 ```
 
