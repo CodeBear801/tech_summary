@@ -85,4 +85,6 @@ void MemTable::Add(SequenceNumber s, ValueType type, const Slice& key,
 }
 
 ```
-For more information about skiplist, please go to [here](./leveldb_skiplist.md)
+For more information about skiplist, please go to [here](./leveldb_skiplist.md), a great example about how to test current reading for skiplist can be found [here](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/skiplist_test.cc#L342)
+
+
