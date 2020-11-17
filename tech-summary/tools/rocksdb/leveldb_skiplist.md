@@ -11,5 +11,8 @@ But if we want also to provide a quick search, we'd better to make the list in s
 <br/>
 <img src="https://user-images.githubusercontent.com/16873751/96521884-23e27400-1227-11eb-9359-4bb0c1472fc9.png" alt="skiplist" width="600"/>
 
+- [code of skiplist.h](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/skiplist.h#L42)
+- [code of skiplist testing](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/skiplist_test.cc#L151)
+
 ## More info
 - [跳表SkipList](https://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html)
