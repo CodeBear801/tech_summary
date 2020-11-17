@@ -85,45 +85,70 @@ DBImpl::DoCompactionWork() {
    // pick sstable from Compaction and construct MergingIterator
    Iterator* input = versions_->MakeInputIterator(compact->compaction);
 
-   
+   input->SeekToFirst();
+   // ...
+   while (input->Valid() && !shutting_down_.load(std::memory_order_acquire)) {
+    // [Perry] if there is immutable-memtable exsits first try to compact them
+    if (imm_ != nullptr) {
+        CompactMemTable();
+    }
+
+    // [Perry] ShouldStopBefore compares the overlap with grandparent level
+    if (compact->compaction->ShouldStopBefore(key) &&
+        compact->builder != nullptr) {
+         status = FinishCompactionOutputFile(compact, input);
+    }
+
+
+    // Handle key/value, add to state, etc.
+    bool drop = false;
+    if (!ParseInternalKey(key, &ikey)) {
+      // Do not hide error keys
+      current_user_key.clear();
+    } else {
+      if (!has_current_user_key ||
+          user_comparator()->Compare(ikey.user_key, Slice(current_user_key)) !=
+              0) {
+        // First occurrence of this user key
+        current_user_key.assign(ikey.user_key.data(), ikey.user_key.size());
+        has_current_user_key = true;
+        last_sequence_for_key = kMaxSequenceNumber;
+      }
+
+      if (last_sequence_for_key <= compact->smallest_snapshot) {
+        // Hidden by an newer entry for same user key
+        drop = true;  // (A)
+      } else if (ikey.type == kTypeDeletion &&
+                 ikey.sequence <= compact->smallest_snapshot &&
+                 compact->compaction->IsBaseLevelForKey(ikey.user_key)) {
+        // For this user key:
+        // (1) there is no data in higher levels
+        // (2) data in lower levels will have larger sequence numbers
+        // (3) data in layers that are being compacted here and have
+        //     smaller sequence numbers will be dropped in the next
+        //     few iterations of this loop (by rule (A) above).
+        // Therefore this deletion marker is obsolete and can be dropped.
+        drop = true;
+      }
+
+      last_sequence_for_key = ikey.sequence;
+    }
+
+
+    if (compact->builder == nullptr) {
+        status = OpenCompactionOutputFile(compact);
+    }
+
+    // Close output file if it is big enough
+    if (compact->builder->FileSize() >=
+          compact->compaction->MaxOutputFileSize()) {
+        status = FinishCompactionOutputFile(compact, input);
+    }
+
+    input->Next();
+   }
 }
 
-/*
-DBImpl::DoCompactionWork() (db/db_impl.cc)
-实际的 compact 过程就是对多个已经排序的 sstable 做一次 merge 排序，丢弃掉相同 key 以及删
-除的数据。
-a． 将选出的 Compaction 中的 sstable，构造成
-MergingIterator(VersionSet::MakeInputIterator())
-a) 对 level-0 的每个 sstable，构造出对应的 iterator：TwoLevelIterator
-（TableCache::NewIterator()）。
-b) 对非 level-0 的 sstable 构造出 sstable 集合的 iterator：TwoLevelIterator
-(NewTwoLevelIterator())
-c) 将这些 iterator 作为 children iterator 构造出 MergingIterator
-（NewMergingIterator()）。
-b． iterator->SeekToFirst()
-c． 遍历 Next()
-d． 检查并优先 compact 存在的 immutable memtable。
-e． 如果当前与 grandparent 层产生 overlap 的 size 超过阈值
-29
-（Compaction::ShouldStopBefore()），立即结束当前写入的 sstable
-（DBImpl::FinishCompactionOutputFile（）），停止遍历。
-f. 确定当前 key 的数据是否丢弃。
-a) key 是与前面的 key 重复，丢弃。
-b) key 是 删 除 （ 检 查 ValueType ） 并且该 key 不 位 于 指 定 的 Snapshot 内（检查
-SequnceNumber）并且 key 在 level-n+1 以上的的 level 中不存在（Compaction：：
-IsBaseLevelForKey（）），则丢弃。
-g. 如 果 当 前 要 写 入 的 sstable 未生成，生成新的 sstable （ DBImpl::
-OpenCompactionOutputFile（））。将不丢弃的 key 数据写入（TableBulider::add()）。
-h. 如果当前输出的 sstable size 达到阈值（ Compaction::MaxOutputFileSize() 即
-MaxFileSizeForLevel（）,当前统一为 kTargeFileSize）,结束输出的 sstable（DBImpl：：
-FinishCompactionOutputFile（））。
-i. 循环 c-h，直至遍历完成或主动停止。
-j. 结束最后一个输出的 sstable（ DBImpl::FinishCompactionOutputFile（）。
-k. 更新 compact 的统计信息。
-l. 生效 compact 之后的状态。(DBImpl:: InstallCompactionResults())。
-
-
-*/
 
 
 ```
