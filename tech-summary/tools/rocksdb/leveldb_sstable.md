@@ -104,16 +104,16 @@ void TableBuilder::Add(const Slice& key, const Slice& value) {
 
 ### IndexBlock
 
-The general format of IndexBlock is similar as Datablock, the difference is content.  Data block records <key, value>, Index block records index of key.  
+The general format of IndexBlock is similar as `Datablock`, the difference is content.  Data block records <key, value>, Index block records index of key.  
 IndexBlock is used for binary search.  Key inside each block is sorted, let's say the last key of previous block is "helloleveldb", and the first key of current block is "helloword", leveldb will calculate a divider between two blocks, say, "hellom", then it could represent such idea: for any key smaller than "hellom" will be recorded in previous block, for any key larger than "hellom" will be recorded in current block, thus the information inside index record would be
-```
+```C++
 key = divider key
 value = previous data block(offset, size)
 ```
 
 ### Query
 
-Query inside block is represented by `Block::Iter`.  In the function of Seek()
+Query inside block is represented by `Block::Iter`.  In the function of [`Seek()`](https://github.com/google/leveldb/blob/863f185970eff21e826e5fe1164a6215a515c23b/table/block.cc#L164)
 - the collection of restarts set recors all blocks offset and key, sorted by key
 - during seek, its uses the key to do binary search, find the prefix range it belonging to
 - `SeekToRestartPoint()` then continue to `ParseNextKey` until find an entry which is not smaller than query key
