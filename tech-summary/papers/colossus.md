@@ -35,16 +35,18 @@ The idea of **Use colossus to store Colossus's meta data**
 - If we host a Colossus on Colossus, 100PB data -> 10TB meta data, 10TB meta data -> 1GB metadata, 1GB metadata -> 100KB data
 - The data is smaller enough to put into Chubby
 
-Metadata in `bigtable`
+Metadata in `bigtable`  
+
 <img src="https://user-images.githubusercontent.com/16873751/99617107-70120700-29d3-11eb-8bbc-e4e2ceaffb0e.png" alt="colossus_arch" width="600"/>
 <br/>
 
-GFS master -> `CFS`
+GFS master -> `CFS`  
 
 <img src="https://user-images.githubusercontent.com/16873751/99617132-7e602300-29d3-11eb-9d46-1fecec29133c.png" alt="colossus_arch" width="600"/>
 <br/>
 
 `Colossus` cluster example  
+ 
 <img src="https://user-images.githubusercontent.com/16873751/99616691-853a6600-29d2-11eb-8990-e718ae5d9654.png" alt="colossus_arch" width="600"/>
 <br/>
 
