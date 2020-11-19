@@ -64,3 +64,4 @@ GFS master -> `CFS`
 - [Storage Architecture and Challenges](https://cloud.google.com/files/storage_architecture_and_challenges.pdf)
 - [Google File System及其继任者Colossus](https://levy.at/blog/22)
 - [谷歌Colossus文件系统的设计经验](https://www.sohu.com/a/413895492_673711)
+- [Google and evolution of big-data](https://usefulstuff.io/2013/05/google-and-evolution-of-big-data/)
