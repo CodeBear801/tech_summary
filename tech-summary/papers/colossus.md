@@ -34,6 +34,12 @@ The idea of **Use colossus to store Colossus's meta data**
 - metadata is ~ 1/10000 the size of data
 - If we host a Colossus on Colossus, 100PB data -> 10TB meta data, 10TB meta data -> 1GB metadata, 1GB metadata -> 100KB data
 - The data is smaller enough to put into Chubby
+- LSM tree minimize random write by LSM tree.  For GFS/Colossus, it will trigger communicate with Master/CFS only when creating new data block, most of other time just communication with ChunkServer/D Server.  Meanwhile, the compaction/merge also decrease the frequency of creating new data blocks. 
+
+Here is a picture represent this:  
+<img src="https://user-images.githubusercontent.com/16873751/99704210-eacb3880-2a4c-11eb-929d-7e333df6a1b4.png" alt="colossus_arch" width="600"/>
+<br/>
+(picture from: https://levy.at/blog/22)
 
 Metadata in `bigtable`  
 
