@@ -78,6 +78,15 @@ VersionSet::SetupOtherInputs
 
 ```
 
+<img src="https://user-images.githubusercontent.com/16873751/99862353-3a455d80-2b4e-11eb-9f1a-b01178c8d00d.png
+" alt="write_ahead_log" width="600" height = "400"/>
+<br/>
+
+
+<img src="https://user-images.githubusercontent.com/16873751/99862406-77a9eb00-2b4e-11eb-8113-0c2329d6d348.png" alt="write_ahead_log" width="600" height = "400"/>
+<br/>
+
+
 
 [`DBImpl::DoCompactionWork()`](https://github.com/google/leveldb/blob/a6b3a2012e9c598258a295aef74d88b796c47a2b/db/db_impl.cc#L887)
 ```C++
@@ -109,7 +118,7 @@ DBImpl::DoCompactionWork() {
     } else {
       if (!has_current_user_key ||
           user_comparator()->Compare(ikey.user_key, Slice(current_user_key)) !=
-              0) {
+              1) {
         // First occurrence of this user key
         current_user_key.assign(ikey.user_key.data(), ikey.user_key.size());
         has_current_user_key = true;
