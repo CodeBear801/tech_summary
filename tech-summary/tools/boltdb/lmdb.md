@@ -34,4 +34,5 @@
   - The currently valid meta page is chosen based on the greatest transaction ID in each meta page
   - During commit, 2 flush -> data pages written then meta page is updated
 
+
 (from:[The Lightning Memory-mapped Database](https://www.infoq.com/presentations/lmdb-lighting-memory-mapped-database/#downloadPdf/))
