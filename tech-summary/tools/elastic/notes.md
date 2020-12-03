@@ -206,3 +206,43 @@ ElasticSearch需要定义analyzer, 也就是如何分词 https://www.elastic.co/
 <img src="https://user-images.githubusercontent.com/16873751/100805546-b314a700-33e3-11eb-85dd-d2ba12cf12bb.png" alt="replicas" width="400"/>
 <br/>
 bucket -> group, metric -> count
+
+
+
+Elasticsearch Notes (12012020):
+
+## Elasticsearch write optimization
+
+- target is: maximize Events Per Second
+- Client side: multiple thread, batch writing
+   + performance test to check best sharding num
+   + whether there is HTTP 429 -> implement retry or adjust thread based on that
+- Server side: explain where is the bottle neck
+   + CPU/IO
+   + Thread switch/stack
+
+### Server side optimization
+- Decrease IO -> refresh interval
+- 降低 CPU 和存储开销 -> 减少不必要分词 / 避免不需要的 doc_values /文档的字段尽量保证相同的顺序，可以提高文档的压缩率
+- 尽可能做到写入和分片的均衡负载，实现水平扩展 -> Shard Filtering / Write Load Balancer
+- 调整 Bulk 线程池和队列
+- **一切优化，都要基于高质量的数据建模**
+- 针对性能的取舍
+  + 牺牲可靠性:将副本分片设置为 0，写入完毕再调整回去
+  + 牺牲搜索实时性:增加 Refresh Interval 的时间
+  + 牺牲可靠性:修改 Translog 的配置
+
+
+<img src="https://user-images.githubusercontent.com/16873751/100946038-5c789d00-34b7-11eb-9555-7adb00ad053c.png" alt="replicas" width="400"/>
+<br/>
+
+## Elasticsearch read optimization
+- Elasticsearch != 关系型数据库
+  - 尽可能 Denormalize 数据，从而获取最佳的性能
+     + 使用 Nested 类型的数据。查询速度会慢几倍
+     + 使用 Parent / Child 关系。查询速度会慢几百倍
+- 数据建模
+  - 尽量将数据先行计算，然后保存到 Elasticsearch 中。尽量避免查询时的 Script 计算
+  - 尽量使用 Filter Context，利用缓存机制，减少不必要的算分
+  - 结合 profile，explain API 分析慢查询的问题，持续优化数据模型
+    + 严禁使用 * 开头通配符 Terms 查询
