@@ -44,6 +44,8 @@ func WithStore(store Store) Option {
 		registry.store = store
 	}
 }
+
+// WithDebug, WithObservers, WithSerializer
 ```
 
 
