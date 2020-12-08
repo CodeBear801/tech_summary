@@ -228,6 +228,74 @@ For here, `partition` is not dynamoDB's partition, its a logic to **truck** diff
 <img src="https://user-images.githubusercontent.com/16873751/85053046-cb9f4680-b14e-11ea-8a1b-85457d1e9574.png" alt="dynamodb1" width="400"/><br/>
 <img src="https://user-images.githubusercontent.com/16873751/85053064-d22dbe00-b14e-11ea-9b25-274feedb4a1d.png" alt="dynamodb2" width="400"/><br/>
 
+## Temp notes
+
+
+
+CommandHandler
+
+```go
+// Command encapsulates the data to mutate an aggregate
+type Command interface {
+	// AggregateID represents the id of the aggregate to apply to
+	AggregateID() string
+}
+
+// CommandHandler consumes a command and emits Events
+type CommandHandler interface {savaki, 4 years ago: • initial project commit
+	// Apply applies a command to an aggregate to generate a new set of events
+	Apply(ctx context.Context, command Command) ([]Event, error)
+}
+```
+
+Aggregate
+
+```go
+
+// Aggregate represents the aggregate root in the domain driven design sense.
+// It represents the current state of the domain object and can be thought of
+// as a left fold over events.
+type Aggregate interface {savaki, 4 years ago: • initial project commit
+	// On will be called for each event; returns err if the event could not be
+	// applied
+	On(event Event) error
+}
+
+```
+
+Store
+
+```go
+
+// Store provides an abstraction for the Repository to save data
+type Store interface {
+	// Save the provided serialized records to the store
+	Save(ctx context.Context, aggregateID string, records ...Record) error
+
+	// Load the history of events up to the version specified.
+	// When toVersion is 0, all events will be loaded.
+	// To start at the beginning, fromVersion should be set to 0
+	Load(ctx context.Context, aggregateID string, fromVersion, toVersion int) (History, error)
+}
+
+```
+
+Serializer
+
+```go
+
+// Serializer converts between Events and Records
+type Serializer interface {
+	// MarshalEvent converts an Event to a Record
+	MarshalEvent(event Event) (Record, error)
+
+	// UnmarshalEvent converts an Event backed into a Record
+	UnmarshalEvent(record Record) (Event, error)
+}
+
+```
+
+
 
 ## keyword
 DDD, Event Sourcing, Golang
