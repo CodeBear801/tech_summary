@@ -1,0 +1,1 @@
+`unicode` defines the mapping, `utf-8` and `utf-16` defines how to encoding data.
