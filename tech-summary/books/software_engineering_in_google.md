@@ -516,6 +516,7 @@ public String readFile(String fileName) {
 }
 
 ```
+
 Stubbing is a poor choice if the system under test depends on the real implementation's contract because you will be forced to duplicate the details of the contract.
 
 ```java
@@ -538,7 +539,9 @@ Stubbing is a poor choice if the system under test depends on the real implement
 
 }
 ```
+
 A better way, avoid stubbing
+
 ```java
 @Test public void creditCardIsChanged() {
     paymentProcessor = new PaymentProcessor(creditCardServer, transactionProcessor);
@@ -562,6 +565,7 @@ A better way, avoid stubbing
 - Prefer to test code through [state testing](http://xunitpatterns.com/State%20Verification.html) over interaction testing.  
 - Tests overuse interaction testing as [change detector tests](https://testing.googleblog.com/2015/01/testing-on-toilet-change-detector-tests.html), which is less useful
 - Prefer to perform interaction testing only for state changing functions, like sendEmail(), saveRecord(), logAccess(), not like getUser(), findResults(), readFile()
+
 ```java
 @Test public void grantUserPermission() {
     UserAuthorizer userAuthorizer = new UserAuthorizer(mockUserService, mockPermissionDatabase);

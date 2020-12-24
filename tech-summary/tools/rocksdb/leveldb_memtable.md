@@ -65,7 +65,7 @@ Status WriteBatchInternal::InsertInto(const WriteBatch* b, MemTable* memtable) {
 Status WriteBatch::Iterate(Handler* handler) const {
 }
 
-// Calling memtable's add
+// Calling memtable's add 
 class MemTableInserter : public WriteBatch::Handler {
   void Put(const Slice& key, const Slice& value) override {
     mem_->Add(sequence_, kTypeValue, key, value);
