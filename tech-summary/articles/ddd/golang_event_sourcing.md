@@ -222,11 +222,34 @@ func makeUpdateItemInput(tableName, hashKey, rangeKey string, eventsPerItem int,
         
 
 // dynamodb updateitem: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html
+/*
+partition key 分区键的意义就是将数据进行分区 another name is hash key, PK
+官方推荐使用UUID作为分区键，使用UUID能最大限度地保证数据均匀分布在不同地分区中。
+
+sort key为排序key, 用来组织数据, another name is range key, SK
+
+Global Search Index(GSI) 是针对于特定查询而定制化的索引
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html#GSI.scenario
+
+from: https://zhuanlan.zhihu.com/p/101965292
+
+DynamoDB 的数据集合是一张表，表里的每一条数据就是一个文档，文档中可以存储基本类型的数据(BOOLEAN, NUMBER, STRING)
+或者一些复杂的数据(MAP, LIST, SET)，可以嵌套较为深的层级。在创建一张表的时候，需要指定一个基本类型的属性值作为 PK，
+可以再指定一个基本类型的属性值作为 SK。PK 的作用是将数据分散到不同的分区(Partition)里，构建无序的哈希索引，SK的作用
+是将同一个分区中的数据按照一定的顺序排列起来，便于查找。SK 中可以使用 ==, <, >=, <=, begins with, between, 
+contains, in 等函数来进行较为丰富的查询操作，PK 必须使用准备的值进行查询。
+from: https://www.jianshu.com/p/70ae83442584
+
+*/
+
 ```
 For here, `partition` is not dynamoDB's partition, its a logic to **truck** different version of same item together into dynamoDB's record.
 
-<img src="https://user-images.githubusercontent.com/16873751/85053046-cb9f4680-b14e-11ea-8a1b-85457d1e9574.png" alt="dynamodb1" width="400"/><br/>
-<img src="https://user-images.githubusercontent.com/16873751/85053064-d22dbe00-b14e-11ea-9b25-274feedb4a1d.png" alt="dynamodb2" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/85053046-cb9f4680-b14e-11ea-8a1b-85457d1e9574.png" alt="dynamodb1" width="600"/><br/>
+
+put a bounch of events into single dynamodb record.  
+
+<img src="https://user-images.githubusercontent.com/16873751/85053064-d22dbe00-b14e-11ea-9b25-274feedb4a1d.png" alt="dynamodb2" width="600"/><br/>
 
 ## Temp notes
 
