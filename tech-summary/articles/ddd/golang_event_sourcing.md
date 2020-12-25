@@ -5,6 +5,11 @@
 [git repo for demo](https://github.com/savaki/eventsource/blob/master/examples/dynamodb/main.go)   
 [git repo for reference](https://github.com/altairsix/eventsource)
 
+
+
+<img src="https://user-images.githubusercontent.com/16873751/103111386-529f1100-4601-11eb-84d4-06dc6bbccc62.png" alt="dynamodb2" width="600"/><br/>
+
+
 Below are some good code reference of programming with golang  
 ## Option
 
