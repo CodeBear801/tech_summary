@@ -36,3 +36,37 @@ By Camille Fournier
    + negative part, ways to improve, avoid sunrise
 
 - As an employee, remember that ultimately, we’re all adults and responsible for our own destiny. That means that you should spend some time thinking about what you want for yourself, and what you want for your career. When you know what you want, you can go out and find it more easily, and you can ask your manager for what you want if you aren’t getting it.
+
+## Chapter notes
+
+### Chapter 1 - Management 101
+- Your job as a manager is to get better outcomes from a group of people working together.
+- It’s the realization that you don’t have to do everything yourself, be the best at everything, or even know how to do everything
+- 3 things managers thing about every day: **people, purpose, and process**
+- Moving to a managerial role means more focus on your team than yourself, more time with people, being a stable force for emotionally challenging situations
+- You don’t need to be a manager to move up in organizations; “individual contributor” roles allow for specialized work without managerial tasks
+- “What makes a good leader is that they eschew the spotlight in favor of spending time and energy to do what they need to do to support and protect their people.” …”In return, we offer our blood and sweat and tears and do everything we can to see our leader’s vision come to life.” - Simon Sinek, Leaders Eat Last
+- Only when you have built trust with your reports will you have the credibility to help them achieve more together.
+
+### Chapter 2 - Mentoring
+
+- Some good questions for new hires:
+    - What was more challenging than you expected?
+    - What was easier than you expected?
+- As the manager of a growing team, a mistake that many people make is continuing individual contributor work past the point at which it is sustainable
+- Ways in which people become managers:
+    - The Apprentice – Your manager’s team is growing, so you’ve been asked to manage a part of it going forward.
+    - Pioneer – You are a founding member of a new group, and you’re now responsible for its growth
+    - New Boss – You’re coming in to manage an already-established team, either within your existing organization or at a new one
+    - Successor – Your manager has decided to leave, and you are taking his place
+- **Listening is a precursor to empathy.**
+
+
+### Chapter 3 - Leading a Small Team
+
+- Managing a small team is about mastering the following basic fundaments: developing a healthy manager-report relationship and creating an environment of support.
+Trust is the most important ingredient for successful managers
+Reports should feel able to:
+Bring their biggest challenges to managers
+Give feedback that isn’t taken personally (Radical Candor)
+Gladly work for you again
