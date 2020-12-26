@@ -65,8 +65,67 @@ By Camille Fournier
 ### Chapter 3 - Leading a Small Team
 
 - Managing a small team is about mastering the following basic fundaments: developing a healthy manager-report relationship and creating an environment of support.
-Trust is the most important ingredient for successful managers
-Reports should feel able to:
-Bring their biggest challenges to managers
-Give feedback that isn’t taken personally (Radical Candor)
-Gladly work for you again
+- **Trust** is the most important ingredient for successful managers
+- Reports should feel able to:
+    - Bring their biggest challenges to managers
+    - Give feedback that isn’t taken personally (Radical Candor)
+    - Gladly work for you again
+- 1:1s are extremely important and help to surface topics that don’t normally come up organically
+    - Both manager and report should bring topics to discuss to 1:1s
+- Be honest and transparent about your report’s performance
+    - Your report should have a clear sense at all times of what your expectations are and where he stands.
+- Admit your own mistakes and growth areas
+- “People will forget what you said, people will forget what you did, but people will never forget how you made them feel” - Maya Angelou
+- Help people play to their strengths
+- “Recognition for hard work, valuable skills, helpful advice, or good values can be hugely motivating if it feels genuine and specific.” - Julie
+- Discover what is unique about each person, and capitalize on it
+- Make people moves quickly
+
+### Chapter 4 - The Art of Feedback
+- For a leader, giving feedback - both when things are going well and when they aren’t - is one of the most fundamental aspects of the job
+- When expectations aren’t met, make it clear and don’t wait long to give feedback
+- How to ensure your feedback can be acted upon:
+    - Make feedback specific and actionable
+    - Clarify what success looks and feels like
+    - Suggest next steps
+        + Beware of overdoing this – empower your team to learn on their own. Think about asking, “So what do you think the net steps should be?” And letting them guide the discussion.
+- When delivering bad news about a decision, the decision should be the first thing you say. Own the decision and recognize and disagreement respectfully,
+
+### Chapter 5 -  Managing Yourself
+
+- Everyone feels like an imposter sometimes
+- Understand your strengths
+- Questions to ask yourself for better self-understanding:
+    - Strengths:
+        + How would the people who know and like me best (family, SO, friends) describe me? What qualities do I possess that I’m most proud of?
+        + When I look back on something I did that was successful, what personal traits do I give credit to?
+        + What are the most common pieces of positive feedback that I’ve received from my manager or peers?
+    - Weaknesses and triggers:
+        + Whenever my worst inner critic sits on my shoulder, what do they yell at me for?
+        + If a genie were to between three gifts on me that I don’t currently have, what would they be?
+        + What are three things that trigger me?
+- What are the top common pieces of feedback ofrom my manager or peers on how I could be more effective?
+- Questions to ask your own manager:
+    - What opportunities do you see for me to do more of what I do well? What do you think are the biggest things holding me back form having greater impact?
+    - What skills do you think a hypothetical perfect person in my role would have? For each skill, how would you rate me against that ideal on a scale of one to five?
+- Assume the best of intention from other people
+- Visualization is a powerful tool that can help your prepare and provide self-assurance
+- Celebrate the little wins
+- Take care of yourself – you can’t pour from an empty vessel
+- Ask for feedback, and treat your manager as a coach
+- Reflect on progress and set goals
+
+### Chapter 6 -  Amazing Meetings
+- Good meetings should leave you feeling like it was a good use of time, you learned something new, had clarity, and felt psychologically safe
+- Have an ideal meeting outcome, not just a purpose for the meeting
+- A good decision-making meeting should get a decision made (duh), include there right stakeholders, present options (and a recommendation if there is one), and give time for dissenting opinions
+- Avoid meetings that could be substituted by email
+- Meetings have advantages like interactivity (great for things like potentially controversial announcements where discussions would be helpful) and interesting (people pay more attention)
+- Great informational meetings enable the group to feel like they learned something, are communicated clearly, are engaging, and evoke emotion
+- Great feedback meetings get everyone on the same page, accurately represent the situation, and ends with next steps
+- Great idea-generating meetings should create many ideas from individuals that have time to brainstorm alone and then as a group, consider all ideas, not just the loudest ones, build on ideas through meaningful discussion, and end with clear next steps
+- Nurture team trust and empathy through shared activities that create better understanding between individuals, encourage openness, and make people feel cared for
+- “You’re more likely to have a great meeting if everyone necessary, and nobody extraneous is there.”
+- Allow people to prep for meetings by sending out slides and docs in advance - then follow up the meeting with a summary and next steps
+- Create a psychologically safe environment for meetings
+- Look for meetings you can strike off your calendar or decrease in frequency
