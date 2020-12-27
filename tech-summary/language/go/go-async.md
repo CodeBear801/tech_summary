@@ -337,3 +337,6 @@ Stop `startFerch` then based on limit condition to reopen it
 
 
 <img src="resource/rss_v9.png" alt="rss_v9" width="500"/> 
+
+## More info
+- [A tour of Go concurrency patterns via the new Heartbeat scheduler](https://www.elastic.co/blog/a-tour-of-go-concurrency-patterns-via-the-new-heartbeat-scheduler)
