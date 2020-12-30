@@ -129,3 +129,6 @@ and see what we can do to work through it
 - Allow people to prep for meetings by sending out slides and docs in advance - then follow up the meeting with a summary and next steps
 - Create a psychologically safe environment for meetings
 - Look for meetings you can strike off your calendar or decrease in frequency
+
+
+### Chapter 8 -  Making Things Happen
