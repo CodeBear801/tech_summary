@@ -152,4 +152,17 @@ and see what we can do to work through it
 - Improve process through retrospectives after projects
 - Your mistakes should make you stronger over time
 
+### Chapter 9 Leading a Growing Team
 
+- “One of the biggest challenges of managing at scale is finding the right balance between going deep on a problem and steeping back and trusting others to take cafe of it”
+- Know your team dynamic will change as you grow - create a culture of psychological safety to encourage honesty and transparency
+- Be prepared to context switch as your team’s number of projects increase by planning for your week and being organized
+- “At higher levels of management, the job starts to converge regardless of background” - its more about teams and communication
+- One of the hardest skills to learn is the art of delegation - knowing when to dive in yourself and when to step back and entrust others
+- Giving people hard problems is a sign that you trust them - empower your team to solve difficult challenges and support them
+- Having the same vision on a team is important to success - is your team aligned in how they think about people, purpose, and process?
+- “A great team is a prerequisite for great work” – People trump projects
+- Part of growing your team is looking for ways to replace your own role
+- We tend to get attached to what we’re doing and the control it gives us – but part of growing the team is foregoing your own ego in lieu of your team’s success
+- Don’t take everything on yourself – remember the adage of teaching someone to fish
+- When thinking about what not to delegate, consider your unique value that flows from your personal strengths – and communication, hiring, and resolving conflicts
