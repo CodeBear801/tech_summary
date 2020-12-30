@@ -132,3 +132,24 @@ and see what we can do to work through it
 
 
 ### Chapter 8 -  Making Things Happen
+
+- “Good process helps us execute at our best”
+- Define and share a concrete vision
+- When thinking about vision, consider:
+  - How things will be different in 2 years
+  - How you’d like someone from an adjacent team to describe your team
+  - How it would look if your team was 2 times as good as it is now - then 5 times as good
+- Good strategies are realistic and understand the problem they’re trying to solve
+- Create a strategy that suits your team’s strengths
+- Prioritize based on objectives - “Effort doesn’t count; results are what matter”
+- Without ownership and accountability, it’s easy for things to be discussed but never come to fruition
+- Break down goals into smaller, manageable pieces
+- Iterate quickly and focus on perfecting execution over strategy
+- Prioritize projects by importance and tackle them in that order
+- Know your vision and work backwards from there
+- Connect work back to purpose as often as you can
+- The best processes evolve over time
+- Improve process through retrospectives after projects
+- Your mistakes should make you stronger over time
+
+
