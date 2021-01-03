@@ -106,7 +106,7 @@ Multiplexing (fan-in): function that takes multiple channels and pipes to one ch
 
 - [go-osmium](https://github.com/Telenav/open-source-spec/blob/master/osmium/doc/pbf_golang.md) 
 - [OSRM speed table dumper](https://github.com/Telenav/osrm-backend/blob/037a545659cef519f976360ae5c90dffcbafc145/integration/cmd/osrm-traffic-updater/speed_table_dumper.go#L26)
-
+- [OASIS builder](https://github.com/Telenav/osrm-backend/pull/259)
 
 ## Great examples
 
