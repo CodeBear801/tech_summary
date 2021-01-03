@@ -74,7 +74,7 @@ func (s * sub) loop() {
 
 ```
 - The cases interact via local state in loop
-
+- [example](https://play.golang.org/p/FzONhs4-tae)
 
 ### Stop goroutine
 - A goroutine could be stopped by timer/notify by waitgroup/channel
