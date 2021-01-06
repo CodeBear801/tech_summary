@@ -43,7 +43,7 @@ kafka_design_guojun_segment
 <img src="../resources/kafka_design_guojun_partition_write.png" alt="kafka_design_guojun_partition_write.png" width="600"/>
 <br/>
 
-对于传统的 message queue 而言，一般会删除已经被消费的消息，而 Kafka 集群会保留所有的消息，无论其被消费与否。当然，因为磁盘限制，不可能永久保留所有数据（实际上也没必要），因此 Kafka 提供两种策略删除旧数据。一是基于时间，二是基于 Partition 文件大小
+对于传统的 message queue 而言，一般会删除已经被消费的消息，而 Kafka 集群会保留所有的消息，无论其被消费与否。当然，因为磁盘限制，不可能永久保留所有数据（实际上也没必要），因此 Kafka 提供两种策略删除旧数据:一是基于时间，二是基于 Partition 文件大小
 
 
 因为 offet 由 Consumer 控制，**所以 Kafka broker 是无状态的**，它不需要标记哪些消息被哪些消费过，也不需要通过 broker 去保证同一个 Consumer Group 只有一个 Consumer 能消费某一条消息，因此也就不需要锁机制
