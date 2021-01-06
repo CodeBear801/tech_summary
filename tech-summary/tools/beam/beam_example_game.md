@@ -120,19 +120,16 @@ mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.complete.game.Le
 
 ### Result
 
-<img src="
-https://user-images.githubusercontent.com/16873751/84213835-8d32c900-aa76-11ea-827a-f17062bb1b4e.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/84213835-8d32c900-aa76-11ea-827a-f17062bb1b4e.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
 
 
-<img src="
-https://user-images.githubusercontent.com/16873751/84213843-902db980-aa76-11ea-8794-a80d7224ff0c.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/84213843-902db980-aa76-11ea-8794-a80d7224ff0c.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
 
 
 ## Issue
 - Met following problem
 
-<img src="https://user-images.githubusercontent.com/16873751/84213810-79876280-aa76-11ea-981b-f34f59e03575.png
-" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
+<img src="https://user-images.githubusercontent.com/16873751/84213810-79876280-aa76-11ea-981b-f34f59e03575.png" alt="dataflow_frances_perry_mobile_game" width="400"/><br/>
 
 According to [here](https://stackoverflow.com/questions/1124788/java-unresolved-compilation-problem#:~:text=Again%20several%20possibilities%3A%20(a),Eclipse%20should%20surface%20the%20problem.)
 ```
