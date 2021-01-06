@@ -60,8 +60,8 @@ Why hubristic value for `watermark`
 
 <img src="https://user-images.githubusercontent.com/16873751/84205333-b9901a80-aa61-11ea-8e6c-d5b043d50fba.png" alt="dataflow_frances_perry_when" width="400"/><br/>
 - To balance `resource taken` for computation(whether a state can be dropped) and correctness of all data
-   + too slow
-   + too fast
+   + 1. **too slow**
+   + 2. **too fast**
 - Take `9` as an example, its generated around 12:01 ~ 12:02, but arrives for processing around 12:08 ~ 12:09, when calculating window of 12:00~12:02, if we want to taken `9` into consideration, the resource be used for calculating this window need to be hold for 7 more minutes(12:09 - 12:02) or more.
 
 
