@@ -11,3 +11,5 @@
 ## More Info
 - [Awesome Elasticsearch](https://github.com/dzharii/awesome-elasticsearch)
 
+## Todo
+- Summary How to sharding in ElasticSearch
