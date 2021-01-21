@@ -104,7 +104,7 @@ and see what we can do to work through it
         + Whenever my worst inner critic sits on my shoulder, what do they yell at me for?
         + If a genie were to between three gifts on me that I don’t currently have, what would they be?
         + What are three things that trigger me?
-- What are the top common pieces of feedback ofrom my manager or peers on how I could be more effective?
+- What are the top common pieces of feedback from my manager or peers on how I could be more effective?
 - Questions to ask your own manager:
     - What opportunities do you see for me to do more of what I do well? What do you think are the biggest things holding me back form having greater impact?
     - What skills do you think a hypothetical perfect person in my role would have? For each skill, how would you rate me against that ideal on a scale of one to five?
