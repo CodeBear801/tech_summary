@@ -20,7 +20,7 @@ GFS chunkserver replaced by `D`.  `D Server`, act as a GFS chunkserver running o
 Its the lowest level of storage layer, and is designed as the only app to direct read/write data on physical disk, all of physical disks have been connected to server running D.   
 
 ## Arch
-<img src="https://user-images.githubusercontent.com/16873751/105611815-7ffbed80-5d6c-11eb-820c-5ac31153f1e4.png" alt="colossus_arch" width="600"/>
+<img src="https://user-images.githubusercontent.com/16873751/105611815-7ffbed80-5d6c-11eb-820c-5ac31153f1e4.png" alt="colossus_arch" width="1000"/>
 <br/>
 
 - `Colossus client`: probably the most complex part of the system
