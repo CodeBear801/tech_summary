@@ -66,3 +66,4 @@ GFS master -> `CFS`
 - [谷歌Colossus文件系统的设计经验](https://www.sohu.com/a/413895492_673711)
 - [Google and evolution of big-data](https://usefulstuff.io/2013/05/google-and-evolution-of-big-data/)
 - [Evolution of Google FS Talk](http://sghose.me/talks/storage%20systems/2015/11/23/GFS-Talk/)
+- [A peek behind the VM at the Google Storage infrastructure](https://www.youtube.com/watch?v=q4WC_6SzBz4&feature=youtu.be)
