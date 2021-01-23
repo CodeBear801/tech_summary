@@ -23,6 +23,7 @@ Data & Distribute System
 - Papers
    + [map reduce](tech-summary/papers/mapreduce.md)
    + [gfs](tech-summary/papers/gfs.md)
+   + [colossus](tech-summary/papers/colossus.md)
    + [big table](tech-summary/papers/bigtable.md)
    + [dynamo](tech-summary/papers/dynamo.md)
    + [memcache](tech-summary/papers/memcache.md)
