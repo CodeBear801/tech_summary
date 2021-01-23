@@ -16,7 +16,8 @@
 - More predictable tail latency
 
 GFS master replaced by `Colossus`  
-GFS chunkserver replaced by `D`.  `D Server`, act as a GFS chunkserver running on Borg.  Its the lowest level of storage layer, and is designed as the only app to direct read/write data on physical disk, all of physical disks have been connected to server running D.   
+GFS chunkserver replaced by `D`.  `D Server`, act as a GFS chunkserver running on Borg.  
+Its the lowest level of storage layer, and is designed as the only app to direct read/write data on physical disk, all of physical disks have been connected to server running D.   
 
 ## Arch
 <img src="https://user-images.githubusercontent.com/16873751/105611815-7ffbed80-5d6c-11eb-820c-5ac31153f1e4.png" alt="colossus_arch" width="600"/>
@@ -27,25 +28,25 @@ GFS chunkserver replaced by `D`.  `D Server`, act as a GFS chunkserver running o
     + software RAID
     + application encoding chosen
 - `Curators`: foundation of Colossus, its scalable metadata service
-can scale out horizontally
-built on top of a NoSQL database like BigTable
-allow Colossus to scale up by over a 100x over the largest GFS
-D servers: simple network attached disks
-Custodians: background storage managers, handle such as disk space balancing, and RAID construction
-ensures the durability and availability
-ensures the system is working efficiently
-Data: there are hot data (e.g. newly written data) and cold data
-Mixing flash and spinning disks
-really efficient storage organization
-just enough flash to push the I/O density per gigabyte of data
-just enough disks to fill them all up
-use flash to serve really hot data, and lower latency
-regarding to disks
-equal amounts of hot data across disks
-each disk has roughly same bandwidth
-spreads new writes evenly across all the disks so disk spindles are busy
-rest of disks filled with cold data
-moves older cold data to bigger drives so disks are full
+  - can scale out horizontally
+  - built on top of a NoSQL database like `BigTable`
+  - allow Colossus to scale up by over a 100x over the largest GFS
+- `D servers`: simple network attached disks
+- `Custodians`: background storage managers, handle such as disk space balancing, and RAID construction
+  - ensures the durability and availability
+  - ensures the system is working efficiently
+- `Data`: there are hot data (e.g. newly written data) and cold data
+- Mixing flash and spinning disks
+  - really efficient storage organization
+    + just enough flash to push the I/O density per gigabyte of data
+    + just enough disks to fill them all up
+  - use flash to serve really hot data, and lower latency
+  - regarding to disks
+    + equal amounts of hot data across disks
+        * each disk has roughly same bandwidth
+        * spreads new writes evenly across all the disks so disk spindles are busy
+  - rest of disks filled with cold data
+    + moves older cold data to bigger drives so disks are full
 
 
 ## How
