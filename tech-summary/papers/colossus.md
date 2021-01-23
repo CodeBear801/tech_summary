@@ -99,7 +99,7 @@ GFS master -> `CFS`
 - [谷歌Colossus文件系统的设计经验](https://www.sohu.com/a/413895492_673711)
 - [Google and evolution of big-data](https://usefulstuff.io/2013/05/google-and-evolution-of-big-data/)
 - [Evolution of Google FS Talk](http://sghose.me/talks/storage%20systems/2015/11/23/GFS-Talk/)
-- [A peek behind the VM at the Google Storage infrastructure](https://www.youtube.com/watch?v=q4WC_6SzBz4&feature=youtu.be)
+- [A peek behind the VM at the Google Storage infrastructure](https://www.youtube.com/watch?v=q4WC_6SzBz4&feature=youtu.be) <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
   - [discussions](http://tab.d-thinker.org/showthread.php?tid=1&pid=332#pid332)
   - [A discussion between Kirk McKusick and Sean Quinlan about the origin and evolution of the Google File System.](https://queue.acm.org/detail.cfm?id=1594206)
 - [Storage Architecture and Challenges by Andrew Fikes](https://cloud.google.com/files/storage_architecture_and_challenges.pdf)
