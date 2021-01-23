@@ -20,6 +20,9 @@ GFS chunkserver replaced by `D`.  `D Server`, act as a GFS chunkserver running o
 
 ## How
 
+<img src="https://user-images.githubusercontent.com/16873751/105611815-7ffbed80-5d6c-11eb-820c-5ac31153f1e4.png" alt="colossus_arch" width="600"/>
+<br/>
+
 <img src="https://user-images.githubusercontent.com/16873751/99613036-a481c500-29cb-11eb-8ab9-6e3901faa825.png" alt="colossus_arch" width="600"/>
 <br/>
 
@@ -67,3 +70,5 @@ GFS master -> `CFS`
 - [Google and evolution of big-data](https://usefulstuff.io/2013/05/google-and-evolution-of-big-data/)
 - [Evolution of Google FS Talk](http://sghose.me/talks/storage%20systems/2015/11/23/GFS-Talk/)
 - [A peek behind the VM at the Google Storage infrastructure](https://www.youtube.com/watch?v=q4WC_6SzBz4&feature=youtu.be)
+- [Storage Architecture and Challenges by Andrew Fikes](https://cloud.google.com/files/storage_architecture_and_challenges.pdf)
+- [Colossus: Successor to the Google File System (GFS)](https://www.systutorials.com/colossus-successor-to-google-file-system-gfs/)
