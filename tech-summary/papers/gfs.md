@@ -123,5 +123,7 @@ Great | Less well
 ## More info
 - [The Google File System](https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf)
 - [Distributed computing seminar lecture 3 - distributed file systems - Aaron kimball 2007](https://www.youtube.com/watch?v=5Eib_H_zCEY&t=2394s) [slides](https://www.slideshare.net/tugrulh/distributed-computing-seminar-lecture-3-distributed-file-systems)
+- MIT 6.824
+  - [GFS FAQ](https://pdos.csail.mit.edu/6.824/papers/gfs-faq.txt)
 - [GFS the Google File System in 199 Lines of Python](http://clouddbs.blogspot.com/2010/11/gfs-google-file-system-in-199-lines-of.html)
 - [Colossus](./colossus.md)
