@@ -19,6 +19,7 @@ All or nothing!
 
 <img src="https://user-images.githubusercontent.com/16873751/105787881-3827c280-5f34-11eb-87fd-e9c43c975ff2.png" alt="kafka_streaming" width="600"/>
 <br/>
+
 Solution:  
 
 - Write to input topic
@@ -36,5 +37,15 @@ Key points
    + only read commited data
  
 - Exactly once processing
+
+
+<span style="font-size:500%;color:blue;">&starf;</span>How to avoid publish duplicate data into Kafka?    
+
+Broker side de-duplication via producer IDS and sequence numbers(persist in logs)  
+
+
+<img src="https://user-images.githubusercontent.com/16873751/105799650-e25e1500-5f49-11eb-8845-684d406e624d.png" alt="kafka_streaming" width="600"/>
+<br/>
+
 
 
