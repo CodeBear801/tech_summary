@@ -49,3 +49,6 @@ an alternative space and write-optimized database technology
 - [bloomfilter](./leveldb_bloomfilter.md)
 - [arena](./leveldb_arena.md)
 - [iterator](./leveldb_iterator.md)
+
+## More info
+- [Knowledge share on 11162020](https://www.slideshare.net/ssuser4c810e/rocksdb-vs-blotdb)
