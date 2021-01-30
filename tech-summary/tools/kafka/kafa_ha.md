@@ -13,7 +13,7 @@
 
 
 
-
+***
 
 ### Distribute replicas to different brokers
 
@@ -27,6 +27,8 @@ kafka 分配 Replica 的算法如下：
 ```
 <img src="../resources/kafka_design_guojun_kafka_partition.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
 <br/>
+
+***
 
 ### Leader switch
 
@@ -44,10 +46,20 @@ kafka 分配 Replica 的算法如下：
 <img src="https://user-images.githubusercontent.com/16873751/106364168-df647b00-62e1-11eb-82f3-e51159490523.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
 <br/>
 
+***
+
 ### Sync between Leader and Follower
 
+- pos1: Leader's LEO is updated when new message has been written into `WAL`
+- pos3: Follower's LEO is updated when following conditions have be met all
+  - send `FETCH` command to leader side
+  - leader side has new message be written and send in the response
+  - Follower side write data into its own `WAL`, LEO += 1
+- pos4: after `FETCH` from leader, follower's HW = min(Leader's HW, follower's LEO)
+- pos5: pos5 is updated after follower's `FETCH`, will use follower's old `LEO` before follower update any data from Leader
+- pos2: Leader's HW = min(Leader's LEO, all Follower's LEO(such as pos5 in the upper))
 
-
+***
 
 ### Important parameters in Producer
 
@@ -57,6 +69,7 @@ kafka 分配 Replica 的算法如下：
   - `ack=-1`, after producer send message, need to wait for all replicas in ISR to successfully write the message
 - retries and retry.backoff.ms
 
+***
 
 ### Disk sync speed
 Not recommend to set this, HA is reached by multiple replica.
