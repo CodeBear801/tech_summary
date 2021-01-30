@@ -20,6 +20,7 @@ Data & Distribute System
    + [alluxio](tech-summary/tools/alluxio/readme.md)
    + [leveldb/rocksdb](tech-summary/tools/rocksdb/rocksdb_index.md)
    + [boltdb](tech-summary/tools/boltdb/boltdb_index.md)
+   + [osmium](https://github.com/Telenav/open-source-spec/tree/master/osmium)
 - Papers
    + [map reduce](tech-summary/papers/mapreduce.md)
    + [gfs](tech-summary/papers/gfs.md)
