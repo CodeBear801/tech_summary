@@ -92,6 +92,12 @@ Solution: LeaderEpoch
 <img src="https://user-images.githubusercontent.com/16873751/106366261-7c79e080-62ef-11eb-9cc1-855889174b0a.png" alt="kafka_issue" width="600"/>
 <br/>
 
+#### why not consensus protocol
+
+
+
+<img src="https://user-images.githubusercontent.com/16873751/106366345-19d51480-62f0-11eb-937f-10f76eac417e.png" alt="kafka_issue" width="600"/>
+<br/>
 
 ***
 
