@@ -5,9 +5,14 @@
 - There could be multiple `replicas` for each `partition`, one of them is `leader`, others are `follower`
 - Only `leader` is responsible for handling request and response, `follower` just for backup
 - Terms
-  - `AR`
+  - `AR` assigned replicas
   - `ISR` in sync replica `OSR` out sync replica
   - `HW` high watermark
+
+<img src="https://user-images.githubusercontent.com/16873751/106363357-f3f24480-62dc-11eb-8d98-d45b14eff6ff.png" alt="kafka_HW.png" width="600"/>
+
+
+
 
 
 ### Distribute replicas to different brokers
@@ -23,5 +28,12 @@ kafka 分配 Replica 的算法如下：
 <img src="../resources/kafka_design_guojun_kafka_partition.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
 <br/>
 
+### Leader switch
 
-
+- When the broker contains leader is down, need to chose another `replica` as leader
+  - How to choose `follower`
+     + Due to previous algorithm, if we randomly choose a `broker`, its possible to make that `broker` has more than two `leaders`, which might increase load and cause instability
+     +  `preferred replica`, kafka makes sure the even distribution of `preferred replica` in Kafka cluster
+     +  `Demon` task to calculate each `broker`'s load
+  - `rebalanced` when new broker be added into cluster, how to move existing `leader` to here
+     + `kafka-reassign-partitions.sh`
