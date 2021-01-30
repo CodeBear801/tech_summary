@@ -87,6 +87,14 @@ Producer will guarantee to update consumer__offset and make them in the transact
 <br/>
 If something goes wrong, we will guarantee abort marker will be put everywhere.
 
+### Producer side's offset management
+
+
+### Consumer side's offset management
+
+
+
+
 ## More info
 - [Don’t Repeat Yourself Introducing Exactly Once Semantics in Apache Kafka - Kafka Summit 2018
 ](https://www.youtube.com/watch?v=zm5A7z95pdE&t=697s)
