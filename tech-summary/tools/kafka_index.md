@@ -2,6 +2,8 @@
 
 ## Notes
 - [Exactly once](./kafka/kafka_exactly_once.md)
+- [High availability](./kafka/kafka_ha.md)
+- [High performance](./kafka/kafka_high_performance.md)
 
 - [Streaming architecture presentation](https://www.slideshare.net/ssuser4c810e/20181026-streaming-architecture)
 
