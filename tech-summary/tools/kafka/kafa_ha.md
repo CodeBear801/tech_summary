@@ -43,3 +43,7 @@ kafka 分配 Replica 的算法如下：
 
 <img src="https://user-images.githubusercontent.com/16873751/106364168-df647b00-62e1-11eb-82f3-e51159490523.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
 <br/>
+
+### Sync between Leader and Follower
+
+
