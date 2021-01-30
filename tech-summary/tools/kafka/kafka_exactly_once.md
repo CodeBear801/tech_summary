@@ -8,10 +8,10 @@ Treat kafka as black box
 <br/>
 
 We want:
-    - message has been correctly be published into Kafka, 
-    - then all the status has been correctly be updated
-    - then result be subscribed by consumers
-    - then input be marked as consumed
+   - message has been correctly be published into Kafka, 
+   - then all the status has been correctly be updated
+   - then result be subscribed by consumers
+   - then input be marked as consumed
 
 All or nothing!
 
