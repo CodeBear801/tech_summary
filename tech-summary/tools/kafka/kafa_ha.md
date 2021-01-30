@@ -36,4 +36,10 @@ kafka 分配 Replica 的算法如下：
      +  `preferred replica`, kafka makes sure the even distribution of `preferred replica` in Kafka cluster
      +  `Demon` task to calculate each `broker`'s load
   - `rebalanced` when new broker be added into cluster, how to move existing `leader` to here
-     + `kafka-reassign-partitions.sh`
+     + [`kafka-reassign-partitions.sh`](https://docs.cloudera.com/runtime/7.2.1/kafka-managing/topics/kafka-manage-cli-reassign-overview.html)
+         + create a JSON file which contains topic list
+         + Generate a rebalance proposal based on topic list/broker nodes list
+         + Execute
+
+<img src="https://user-images.githubusercontent.com/16873751/106364168-df647b00-62e1-11eb-82f3-e51159490523.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
+<br/>
