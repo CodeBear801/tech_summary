@@ -2,8 +2,15 @@
 
 ## Replicas
 
+- There could be multiple `replicas` for each `partition`, one of them is `leader`, others are `follower`
+- Only `leader` is responsible for handling request and response, `follower` just for backup
+- Terms
+  - `AR`
+  - `ISR` in sync replica `OSR` out sync replica
+  - `HW` high watermark
 
-### Replicas and brokers
+
+### Distribute replicas to different brokers
 
 一个 Topic 的 Partition 数量大于 Broker 的数量。同时为了提高 Kafka 的容错能力，也需要将同一个 Partition 的 Replica 尽量分散到不同的机器。
 
