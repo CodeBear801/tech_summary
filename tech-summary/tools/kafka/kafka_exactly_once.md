@@ -92,6 +92,11 @@ If something goes wrong, we will guarantee abort marker will be put everywhere.
 ### Producer side's offset management
 
 
+<img src="https://user-images.githubusercontent.com/16873751/106366607-dd0a1d00-62f1-11eb-841d-6790991b16b0.png" alt="kafka_streaming" width="600"/>
+<br/>
+
+more info please go to [How kafka achieve HA](./kafa_ha.md)  
+
 *** 
 
 ### Consumer side's offset management
