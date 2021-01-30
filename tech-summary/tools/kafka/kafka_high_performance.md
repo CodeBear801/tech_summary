@@ -1,13 +1,10 @@
 # The secret behind Kafka's performance
 
-## Network optimization
-
-
-
-
 ## Write ahead long
 
 ## Keep sequence
+
+## Window and trigger
 
 ## Sendfile
 
@@ -25,6 +22,9 @@
 
 <img src="../resources/kafka_design_guojun_kafka_partition_write6.png" alt="kafka_design_guojun_kafka_partition_write6.png" width="600"/>
 <br/>
+
+## Network optimization
+
 
 
 
