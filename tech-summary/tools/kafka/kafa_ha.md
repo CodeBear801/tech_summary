@@ -50,6 +50,10 @@ kafka 分配 Replica 的算法如下：
 
 ### Sync between Leader and Follower
 
+
+<img src="https://user-images.githubusercontent.com/16873751/106366274-90bddd80-62ef-11eb-993f-0a256c444eff.png" alt="kafka_design_guojun_kafka_partition.png" width="600"/>
+<br/>
+
 - pos1: Leader's LEO is updated when new message has been written into `WAL`
 - pos3: Follower's LEO is updated when following conditions have be met all
   - send `FETCH` command to leader side
@@ -58,6 +62,36 @@ kafka 分配 Replica 的算法如下：
 - pos4: after `FETCH` from leader, follower's HW = min(Leader's HW, follower's LEO)
 - pos5: pos5 is updated after follower's `FETCH`, will use follower's old `LEO` before follower update any data from Leader
 - pos2: Leader's HW = min(Leader's LEO, all Follower's LEO(such as pos5 in the upper))
+
+Major problem:
+- Leader update HW based on next round's `FETCH`
+   + Let's say currently, every one is all synced with 1 message
+   + Leader get new message, update its LEO to 2
+   + Follower `FETCH` from server, Follower update its LEO to 2, currently, HW is 1 for all of them and LEO for follower on server side is 1
+   + For next `FETCH`, server update follower's LEO and then update server's HW to 2
+   + For next `FETCH`, follower update its HW to 2
+
+Data Loss  
+
+<img src="https://user-images.githubusercontent.com/16873751/106366239-62d89900-62ef-11eb-86bd-e1a76517e56c.png" alt="kafka_issue" width="600"/>
+<br/>
+
+Data unsync  
+
+<img src="https://user-images.githubusercontent.com/16873751/106366239-62d89900-62ef-11eb-86bd-e1a76517e56c.png" alt="kafka_issue" width="600"/>
+<br/>
+
+
+Solution: LeaderEpoch  
+- Leader epoch is a pair of value (epoch, offset), epoch is leader's version number, start from 0, each time when leader changes will +1, offset means offset of first message for this version of leader
+- Leader broker will keep such cache, and regularly writtern into checkpoint file(zookeeper??)
+
+<img src="https://user-images.githubusercontent.com/16873751/106366252-73890f00-62ef-11eb-9338-287ffe04cea7.png" alt="kafka_issue" width="600"/>
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/106366261-7c79e080-62ef-11eb-9cc1-855889174b0a.png" alt="kafka_issue" width="600"/>
+<br/>
+
 
 ***
 
@@ -68,6 +102,7 @@ kafka 分配 Replica 的算法如下：
   - `acks=0`, no need to wait for server side's response
   - `ack=-1`, after producer send message, need to wait for all replicas in ISR to successfully write the message
 - retries and retry.backoff.ms
+
 
 ***
 
