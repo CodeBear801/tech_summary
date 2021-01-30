@@ -47,3 +47,16 @@ kafka 分配 Replica 的算法如下：
 ### Sync between Leader and Follower
 
 
+
+
+### Important parameters in Producer
+
+- ACK
+  - `acks=1`, as long as leader replica successfully write the message
+  - `acks=0`, no need to wait for server side's response
+  - `ack=-1`, after producer send message, need to wait for all replicas in ISR to successfully write the message
+- retries and retry.backoff.ms
+
+
+### Disk sync speed
+Not recommend to set this, HA is reached by multiple replica.
