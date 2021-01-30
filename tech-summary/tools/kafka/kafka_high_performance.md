@@ -38,8 +38,19 @@
 
 <img src="https://user-images.githubusercontent.com/16873751/106366967-1479c900-62f4-11eb-95ef-2dfed79a135f.png" alt="kafka_design_guojun_kafka_partition_write6.png" width="600"/>
 <br/>
+image from: [Kafka 处理请求的全流程解析](https://xie.infoq.cn/article/51b8d97925e0a7303ff831a81)  
 
-image from: [Kafka 处理请求的全流程解析](https://xie.infoq.cn/article/51b8d97925e0a7303ff831a81)
+
+
+A simplified picture is Reactor model
+
+<img src="https://user-images.githubusercontent.com/16873751/106367019-8a7e3000-62f4-11eb-8eb6-04f0b020ed31.png" alt="kafka_design_guojun_kafka_partition_write6.png" width="600"/>
+<br/>
+image from: [高性能Server---Reactor模型](https://www.jianshu.com/p/2461535c38f3)  
+
+<br/>
+<br/>
+<br/>
 
 Kafka socket server  
 
