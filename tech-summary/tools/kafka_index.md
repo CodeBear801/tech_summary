@@ -2,6 +2,12 @@
 
 ## Notes
 - [Exactly once](./kafka/kafka_exactly_once.md)
+- [High availability](./kafka/kafka_ha.md)
+- [High performance](./kafka/kafka_high_performance.md)
+- [Streaming architecture presentation on 201](https://www.slideshare.net/ssuser4c810e/20181026-streaming-architecture)
+
+***
+
 - [Kafka Stream DSL notes](./kafka/kafka_stream_dsl_notes.md)
 - [Event-Driven Architecture from Jay Kraps 2018](../lectures/event_driven_architecture_jay_kraps.md)
 - [Experimentation Using Event-based Systems from Martin Fowler and Toby Clemson 2018](../lectures/experimentation_using_event_based_system.md)
