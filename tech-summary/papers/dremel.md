@@ -81,3 +81,31 @@ Explanation of `NULL`
 - In `Name.Url`, totally there are **4** names in data, r = 1 means a new entry in the Name at Level 1, d = 1 means Name is defined but not URL, so just create an empty URL
 - In `Links.Backward`, r = 0 means a new record and creates new list, d = 1 means `Links` is defined but not `Backward`
 - For `Code` and `Country`, there are **5** field has language due to that first name has **2** language.
+
+
+***
+
+01302021思考
+
+
+Repetition Level:
+- 記錄該列的值是在哪一個級別上重複的
+- Name.Language.Country as example
+  - 0 marks every new record and implies creating a new `Name` and `Language` List.  每个新纪录(r0, r1, r2)的第一个总是会赋0
+  - Name是1级，Langauage是2级，Country是3级
+  - 0-2-1-1-0的解释: 
+     + 0表示r1 record的开始，因为us出现在第一个Name的第一个Language的第一个Country里面。
+     + 第二个是NULL(另一个Name里面是没有Country的值),但它属于name中重复的language，所以设为2
+     + 第三个也是NULL(是下一个Name里面没有Language.Country), 只有Name是重复元素，所以设为1
+     + 第三个是1，`gb`出现在第三个名字里，它是属于这个Name的第一个值，只有Name是重复的，所以设为1
+
+
+demention level:
+- 只对非required以及非NULL值有意义。用来表示一个值是否是想象出来的
+- 比如在例子中, 诸如DocID的d一定是固定值
+- 对于Name.Language.Code, 非NULL值他们的d也是固定值， 比如en-us, en, en-gb都是2
+- 而对于第一个NULL, 我们需要知道**有意义的数据到哪一层**，比如第一个NULL，是从Name.Language中来的，是第二层数据， 而第二个NULL，它的上一层有意义的结构是Name，层级为1
+
+
+
+
