@@ -1,3 +1,13 @@
+- [Kafka how to reach HA](#kafka-how-to-reach-ha)
+  - [Replicas](#replicas)
+    - [Distribute replicas to different brokers](#distribute-replicas-to-different-brokers)
+    - [Leader switch](#leader-switch)
+    - [Sync between Leader and Follower](#sync-between-leader-and-follower)
+      - [why not consensus protocol](#why-not-consensus-protocol)
+    - [Important parameters in Producer](#important-parameters-in-producer)
+    - [Disk sync speed](#disk-sync-speed)
+  - [More info](#more-info)
+
 # Kafka how to reach HA
 
 ## Replicas
