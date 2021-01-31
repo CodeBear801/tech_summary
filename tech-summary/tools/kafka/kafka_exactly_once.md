@@ -1,3 +1,10 @@
+- [How Kafka achieve Exactly Once](#how-kafka-achieve-exactly-once)
+  - [Problem set](#problem-set)
+  - [Problems](#problems)
+    - [Producer side's offset management](#producer-sides-offset-management)
+    - [Consumer side's offset management](#consumer-sides-offset-management)
+  - [More info](#more-info)
+
 # How Kafka achieve Exactly Once
 
 ## Problem set
