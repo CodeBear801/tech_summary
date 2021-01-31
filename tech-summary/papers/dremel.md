@@ -1,3 +1,5 @@
+- [Why column data](#why-column-data)
+- [Understanding the case in paper](#understanding-the-case-in-paper)
 
 more info: https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/navigation/eta/team_discussion_for_06182020.md#why-parquet
 
