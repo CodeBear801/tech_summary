@@ -114,3 +114,6 @@ Solution: LeaderEpoch
 
 ### Disk sync speed
 Not recommend to set this, HA is reached by multiple replica.
+
+## More info
+- [Kafka水位(high watermark)与leader epoch的讨论](https://www.cnblogs.com/huxi2b/p/7453543.html)
