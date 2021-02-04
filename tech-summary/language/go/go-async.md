@@ -156,9 +156,9 @@ func (w *Worker) work(done chan *Worker) {
 ```
 
 Balancer
-- Most important task for balancer is picking who is next worker, by balance()
-- When there is a work(request), balancer will call `dispatch()` then pick a worker, put request in his queue
-- When there is a worker done his task(via done), balancer will call `complete()` to adjust status
+- Most important task for balancer is picking who is next worker, by [`balance()`](https://github.com/CodeBear801/tech_summary/blob/0f9b90fbad06d50baf44745aa18e873d2a4852bd/tech-summary/language/go/code/sync/balance.go#L125)
+- When there is a work(request), balancer will call [`dispatch()`](https://github.com/CodeBear801/tech_summary/blob/0f9b90fbad06d50baf44745aa18e873d2a4852bd/tech-summary/language/go/code/sync/balance.go#L151) then pick a worker, put request in his queue
+- When there is a worker done his task(via done), balancer will call [`complete()`](https://github.com/CodeBear801/tech_summary/blob/0f9b90fbad06d50baf44745aa18e873d2a4852bd/tech-summary/language/go/code/sync/balance.go#L177) to adjust status
 - Use `worker`'s pointer as trigger is interesting
 
 ```go
