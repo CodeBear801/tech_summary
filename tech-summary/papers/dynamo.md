@@ -95,7 +95,17 @@ We could divide the circle to Q parts, each part means one virtual node, and vir
      -  If there is just one copy of data.  User1 read key1 as 1 and get V1 from server, user2 read key1 as 1 and get V1 from server, user1 increase key1 with 1 to 2 and write back with V1, server check V1 is the same with him then increase value and also increase version to V2, then V2's write will be failed
   - If there are <span style="color:blue">multiple copies</span>, it will become more complex.  Dynamo will keep all versions and using vector clock to record version information, then use client side's business logic to deal with confliction.
 ```
-把这个vector clock想象成每个节点都记录自己的版本信息，而一个数据，包含所有这些版本信息。来看一个例子：假设一个写请求，第一次被节点A处理了。节点A会增加 一个版本信息(A，1)。我们把这个时候的数据记做D1(A，1)。 然后另外一个对同样key(这一段讨论都是针对同样的key的)的请求还是被A处理了于是有D2(A，2)。这个时候，D2是可以覆盖D1的，不会有冲突 产生。现在我们假设D2传播到了所有节点(B和C)，B和C收到的数据不是从客户产生的,而是别人复制给他们的,所以他们不产生新的版本信息,所以现在B 和C都持有数据D2(A，2)。好，继续，又一个请求，被B处理了，生成数据D3(A，2;B，1)，因为这是一个新版本的数据，被B处理，所以要增加B 的版本信息。假设D3没有传播到C的时候又一个请求被C处理记做D4(A，2;C，1)。假设在这些版本没有传播开来以前，有一个读取操作，我们要记得， 我们的W=1 那么R=N=3，所以R会从所有三个节点上读,在这个例子中将读到三个版本。A上的D2(A，2);B上的D3(A，2;B，1);C上的D4(A，2; C，1)这个时候可以判断出，D2已经是旧版本，可以舍弃，但是D3和D4都是新版本，需要应用自己去合并。如果需要高可写性,就要处理这种合并问题。好 假设应用完成了冲入解决，这里就是合并D3和D4版本，然后重新做了写入，假设是B处理这个请求，于是有D5(A,2;B,2;C,1);这个版本将可以 覆盖掉D1-D4那四个版本。
+把这个vector clock想象成每个节点都记录自己的版本信息，而一个数据，包含所有这些版本信息。来看一个例子：
+假设一个写请求，第一次被节点A处理了。节点A会增加 一个版本信息(A，1)。我们把这个时候的数据记做D1(A，1)。 
+然后另外一个对同样key(这一段讨论都是针对同样的key的)的请求还是被A处理了于是有D2(A，2)。这个时候，D2
+是可以覆盖D1的，不会有冲突 产生。现在我们假设D2传播到了所有节点(B和C)，B和C收到的数据不是从客户产生的,
+而是别人复制给他们的,所以他们不产生新的版本信息,所以现在B 和C都持有数据D2(A，2)。好，继续，又一个请求，
+被B处理了，生成数据D3(A，2;B，1)，因为这是一个新版本的数据，被B处理，所以要增加B 的版本信息。假设D3没
+有传播到C的时候又一个请求被C处理记做D4(A，2;C，1)。假设在这些版本没有传播开来以前，有一个读取操作，我们
+要记得， 我们的W=1 那么R=N=3，所以R会从所有三个节点上读,在这个例子中将读到三个版本。A上的D2(A，2);B上
+的D3(A，2;B，1);C上的D4(A，2; C，1)这个时候可以判断出，D2已经是旧版本，可以舍弃，但是D3和D4都是新版本，
+需要应用自己去合并。如果需要高可写性,就要处理这种合并问题。好 假设应用完成了冲入解决，这里就是合并D3和D4版本，
+然后重新做了写入，假设是B处理这个请求，于是有D5(A,2;B,2;C,1);这个版本将可以 覆盖掉D1-D4那四个版本。
 ```
 
 ### Single point of failure
