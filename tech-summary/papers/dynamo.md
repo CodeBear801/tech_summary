@@ -29,7 +29,7 @@ Which database to choose, mongo or Cassandra
 
 
 <img src="resources/pictures/dynamo_christopher_getting_2_dynamo.png" alt="dynamo_christopher_getting_2_dynamo" width="500"/>  <br/>
-Consistent hashing, tasks be divided much large than machine number
+Consistent hashing, **tasks be divided much large than machine number**  
 
 <img src="resources/pictures/dynamo_christopher_getting_2_dynamo2.png" alt="dynamo_christopher_getting_2_dynamo2" width="500"/>  <br/>
 
