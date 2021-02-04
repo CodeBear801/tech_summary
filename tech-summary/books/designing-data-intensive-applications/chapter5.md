@@ -210,7 +210,13 @@ From [Ryan Barrett Google I/O 2009 - Transactions Across Datacenters..](https://
 <img src="https://user-images.githubusercontent.com/16873751/106928513-1c58b500-66c8-11eb-97f8-1dd7c5d20445.png" alt="different_level_of_consistency" width="600"/> <br/> 
 
 `MM` means Master-Master  
-`M/S` means Master-Slave
+`M/S` means Master-Slave  
+
+At application level, mainly use `2PC`
+- Alibaba: TCC-Try-Confirm-Cancel
+- Amazon: Plan-Reserve-Confirm
+At data level need consensus protocal like `PAXOS`
+
 
 ## More info
 - [Notes on eventual consistency](https://blog.romanvlasenko.com/?p=283)
