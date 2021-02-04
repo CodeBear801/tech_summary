@@ -3,7 +3,7 @@
   - [Questions](#questions)
   - [Notes](#notes)
     - [Why Replication](#why-replication)
-    - [How to Replicate  <br/>](#how-to-replicate-br)
+    - [How to Replicate  <br/>](#how-to-replicate--)
   - [Single-leader replication](#single-leader-replication)
     - [Implement replication logs](#implement-replication-logs)
       - [Statement-based replication](#statement-based-replication)
@@ -21,6 +21,7 @@
     - [Dynamo style](#dynamo-style)
     - [Limitation](#limitation)
     - [Happens-before](#happens-before)
+  - [More about consistency between replicas](#more-about-consistency-between-replicas)
   - [More info](#more-info)
 
 # Replication
@@ -202,6 +203,14 @@ Limitation for **Dynamo style**, even with w + r > n, there are likely to be edg
 服务端收到写请求后，可以覆盖比这个版本号小的所有的值，但是必须保留比这个版本号大的所有的值。（因为它们是并发操作)<br/>
 
 
+## More about consistency between replicas
+
+From [Ryan Barrett Google I/O 2009 - Transactions Across Datacenters..](https://www.youtube.com/watch?v=srOgpXECblk)
+
+<img src="https://user-images.githubusercontent.com/16873751/106928513-1c58b500-66c8-11eb-97f8-1dd7c5d20445.png" alt="different_level_of_consistency" width="600"/> <br/> 
+
+`MM` means Master-Master  
+`M/S` means Master-Slave
 
 ## More info
 - [Notes on eventual consistency](https://blog.romanvlasenko.com/?p=283)
