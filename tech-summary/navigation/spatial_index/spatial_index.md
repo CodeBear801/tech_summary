@@ -37,3 +37,4 @@ Spatial index is build based on density of data
 - [Bing Map - Tile Coordinates and Quadkeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system#tile-coordinates-and-quadkeys)
 - [The google Tile Schema](https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
 - [RTree Impl in OSRM](https://github.com/Telenav/open-source-spec/blob/master/osrm/doc/od_in_osrm.md#rtree)
+- [R-Tree空间索引算法的研究历程和最新进展分析](https://blog.csdn.net/chenyq2008/article/details/2140477)
