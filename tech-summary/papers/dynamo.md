@@ -73,7 +73,6 @@ Say that you use a number(node count) to hash data.  The biggest challenge would
 <img src="resources/pictures/dynamo_christopher_consistenthashing.png" alt="dynamo_christopher_consistenthashing" width="500"/>  <br/>
 
 - Let each machine holds value between him and his previous node, when new machine added into system, then only nearby nodes will be affected
-
 - <span style="color:blue">What if different machine has different hardware? </span> We want the powerful machine could hold more data compare to normal machine.  This is why dynamo evolve **virtual node**.   As the number of virtual nodes increases, the distribution of keys becomes more balanced.  
 We could divide the circle to Q parts, each part means one virtual node, and virtual node's number could be much bigger than physical machine.(Q>>S, S is the number of machine or resource)  And physical machine only deal with virtual nodes.  
   When new machine be added or some machine be deleted from system, only data related with that specific server need to be moved. 
