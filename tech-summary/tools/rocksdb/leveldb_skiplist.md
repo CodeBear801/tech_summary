@@ -14,5 +14,11 @@ But if we want also to provide a quick search, we'd better to make the list in s
 - [code of skiplist.h](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/skiplist.h#L42)
 - [code of skiplist testing](https://github.com/google/leveldb/blob/b7d302326961fb809d92a95ce813e2d26fe2e16e/db/skiplist_test.cc#L151)
 
+### CAS
+<img src="https://user-images.githubusercontent.com/16873751/107069091-4bd5f300-6796-11eb-8087-fd1fbad82a28.png" alt="skiplist" width="600"/>
+<br/>
+from: http://ifeve.com/cas-skiplist/
+
+
 ## More info
 - [跳表SkipList](https://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html)
