@@ -22,3 +22,30 @@ running on YARN
 
 (from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
 <br/>
+
+***
+## Terms
+
+### Driver
+The life of a Spark application starts and finishes with the Spark Driver.    
+The Driver is the process that clients use to submit applications in Spark.   
+The Driver is also responsible for planning and coordinating the execution of the Spark program and returning status and/or results (data) to the client. The Driver can physically reside on a client or on a node in the cluster   
+
+#### SparkSession 
+
+The Spark Driver is responsible for creating the SparkSession. The SparkSession object represents a connection to a Spark cluster
+
+#### Application Planning
+
+One of the main functions of the Driver is to plan the application. The Driver takes the application processing input and plans the execution of the program. The Driver takes all the requested transformations (data manipulation operations) and actions (requests for output or prompts to execute programs) and creates a directed acyclic graph (DAG) of nodes, each representing a transformational or computational step.  
+
+A Spark application DAG consists of tasks and stages. A task is the smallest unit of schedulable work in a Spark program. A stage is a set of tasks that can be run together. Stages are dependent upon one another; in other words, there are stage dependencies.
+
+#### Application Orchestration
+
+- Keeping track of available resources to execute tasks
+- Scheduling tasks to run “close” to the data where possible
+
+
+
+
