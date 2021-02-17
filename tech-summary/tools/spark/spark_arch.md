@@ -5,6 +5,20 @@
 (from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
 <br/>
 
+## How an application is executed
+
+stand alone mode
+
+<img src="https://user-images.githubusercontent.com/16873751/108144216-1971a300-707e-11eb-95af-25bc04015d74.png" alt="spark_arch" width="400"/> 
+
+(from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
+<br/>
 
 
 
+
+<img src="https://user-images.githubusercontent.com/16873751/108144309-3efeac80-707e-11eb-9b4f-bce5fd2d8cf9.png
+" alt="spark_arch" width="400"/> 
+
+(from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
+<br/>
