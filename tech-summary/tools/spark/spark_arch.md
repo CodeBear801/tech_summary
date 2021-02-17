@@ -13,6 +13,7 @@
     - [Executor](#executor)
     - [Spark Master](#spark-master)
     - [Cluster Manager](#cluster-manager)
+  - [More details](#more-details)
 
 # Spark Architecture
 
@@ -21,6 +22,7 @@
 (from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
 <br/>
 
+***
 ## How an application is executed
 
 
@@ -53,7 +55,18 @@
 (from: https://www.youtube.com/watch?v=3EbTr79wLkU)
 <br/>
 
+<img src="https://user-images.githubusercontent.com/16873751/108259591-1cb86d80-7116-11eb-908a-d4f78c1e0df9.png" alt="spark_arch" width="600"/> 
 
+(from: https://www.youtube.com/watch?v=3EbTr79wLkU)
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108259598-1fb35e00-7116-11eb-9e03-20db25a9f79c.png" alt="spark_arch" width="600"/> 
+
+(from: https://www.youtube.com/watch?v=3EbTr79wLkU)
+<br/>
+
+- spark-submit: can't specify node-selector
+- spark-operator is an kubernetes' object, you could config which in yaml
 
 
 ***
@@ -94,4 +107,6 @@ The Spark Master is the process that requests resources in the cluster and makes
 ### Cluster Manager 
 
 The Cluster Manager is the process responsible for monitoring the Worker nodes and reserving resources on these nodes upon request by the Master. The Master then makes these cluster resources available to the Driver in the form of Executors.
+
+## More details
 
