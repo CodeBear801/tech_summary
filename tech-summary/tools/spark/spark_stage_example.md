@@ -13,9 +13,57 @@ Job由saveAsTextFile触发，该Job由RDD-3和saveAsTextFile方法组成，根�
 **一个Stage是否被提交，需要判断它的父Stage是否执行，只有在父Stage执行完毕才能提交当前Stage，如果一个Stage没有父Stage，那么从该Stage开始提交**。Stage提交时会将Task信息（分区信息以及方法等）序列化并被打包成TaskSet交给TaskScheduler，一个Partition对应一个Task，另一方面TaskScheduler会监控Stage的运行状态，只有Executor丢失或者Task由于Fetch失败才需要重新提交失败的Stage以调度运行失败的任务，其他类型的Task失败会在TaskScheduler的调度过程中重试。
 
 
-
-
 <img src="https://user-images.githubusercontent.com/16873751/108278236-9c9f0180-712f-11eb-9d4c-e6216a5434c5.png" alt="spark_arch" width="800"/>   
 
 (from: https://www.jianshu.com/p/162f82d93ff4)
 <br/>
+
+## Top N number
+
+Req: there are duplicate integers in a file, find top-10 integer which has most counts
+
+```java
+scala> val sourceRdd = sc.textFile("/tmp/hive/hive/result",10).repartition(5)
+sourceRdd: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[5] at repartition at <console>:27
+
+scala> val allTopNs = sourceRdd.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_+_).repartition(10).sortByKey(ascending = true, 100).map(tup => (tup._2, tup._1)).mapPartitions(
+| iter => {
+| iter.toList.sortBy(tup => tup._1).takeRight(100).iterator
+| }
+| ).collect()
+
+scala> val finalTopN = scala.collection.SortedMap.empty[Int, String].++(allTopNs)
+
+scala> finalTopN.takeRight(10).foreach(tup => {println(tup._2 + " occurs times : " + tup._1)})
+```
+
+result
+
+```shell
+53 occurs times : 1070
+147 occurs times : 1072
+567 occurs times : 1073
+931 occurs times : 1075
+267 occurs times : 1077
+768 occurs times : 1080
+612 occurs times : 1081
+877 occurs times : 1082
+459 occurs times : 1084
+514 occurs times : 1087
+```
+
+<img src="https://user-images.githubusercontent.com/16873751/108278647-2f3fa080-7130-11eb-90eb-c827fbe12c40.png" alt="spark_arch" width="800"/>   
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108278789-61e99900-7130-11eb-887b-6a12e533eaad.png" alt="spark_arch" width="800"/>   
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108278814-6e6df180-7130-11eb-9b39-46fa35f61c1b.png" alt="spark_arch" width="800"/>   
+<br/>
+
+
+
+
+
+
+([more info](https://www.cnblogs.com/johnny666888/p/11233982.html))
