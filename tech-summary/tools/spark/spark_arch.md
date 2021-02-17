@@ -14,6 +14,7 @@
     - [Spark Master](#spark-master)
     - [Cluster Manager](#cluster-manager)
   - [More details](#more-details)
+    - [Job, stage, task](#job-stage-task)
 
 # Spark Architecture
 
@@ -67,7 +68,7 @@
 
 - spark-submit: can't specify node-selector
 - spark-operator is an kubernetes' object, you could config which in yaml
-
+- more notes: https://my.oschina.net/u/4287583/blog/4443764
 
 ***
 ## Terms
@@ -108,5 +109,22 @@ The Spark Master is the process that requests resources in the cluster and makes
 
 The Cluster Manager is the process responsible for monitoring the Worker nodes and reserving resources on these nodes upon request by the Master. The Master then makes these cluster resources available to the Driver in the form of Executors.
 
+***
 ## More details
+
+### Job, stage, task
+
+<img src="https://user-images.githubusercontent.com/16873751/108260091-be3fbf00-7116-11eb-9387-75239b87cae1.png" alt="spark_arch" width="600"/> 
+
+(from: https://juejin.cn/post/6844904047011430407#heading-16)
+<br/>
+
+- Job是以Action方法为界，遇到一个Action方法则触发一个Job
+- Stage是Job的子集，以RDD宽依赖(即Shuffle)为界，遇到Shuffle做一次划分
+- Task是Stage的子集，以并行度(分区数)来衡量，分区数是多少，则有多少个task
+
+<img src="https://user-images.githubusercontent.com/16873751/108260293-0363f100-7117-11eb-945c-4d516cd412f5.png" alt="spark_arch" width="400"/> 
+
+(from: https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
+<br/>
 
