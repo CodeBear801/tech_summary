@@ -68,6 +68,15 @@ From stackover flow: https://stackoverflow.com/questions/29849413/spark-rdd-sort
 As Sean pointed out in https://www.mail-archive.com/user@spark.apache.org/msg27005.html, "[...]sortByKey actually runs a job to assess the distribution of the data (see JIRA https://issues.apache.org/jira/browse/SPARK-1021)". I hope that this help others when debugging the number of jobs and stages of an aplications.
 ```
 
+<img src="https://user-images.githubusercontent.com/16873751/108280394-f6ed9180-7132-11eb-981c-32559adb6912.png" alt="spark_arch" width="800"/>   
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108280432-066cda80-7133-11eb-9647-70a3de781a85.png" alt="spark_arch" width="800"/>   
+
+(from: TRANSFORMATIONS AND ACTIONS https://training.databricks.com/visualapi.pdf)
+<br/>
+
+
 
 
 ([more info](https://www.cnblogs.com/johnny666888/p/11233982.html))
