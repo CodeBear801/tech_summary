@@ -120,7 +120,7 @@ The Cluster Manager is the process responsible for monitoring the Worker nodes a
 <br/>
 
 - Job是以Action方法为界，遇到一个Action方法则触发一个Job
-- Stage是Job的子集，以RDD宽依赖(即Shuffle)为界，遇到Shuffle做一次划分
+- Stage是Job的子集，以RDD宽依赖(即Shuffle)为界，遇到Shuffle做一次划分(groupByKey,reduceByKey,countByKey)
 - Task是Stage的子集，以并行度(分区数)来衡量，分区数是多少，则有多少个task
 
 <img src="https://user-images.githubusercontent.com/16873751/108260293-0363f100-7117-11eb-945c-4d516cd412f5.png" alt="spark_arch" width="400"/> 
