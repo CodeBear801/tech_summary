@@ -7,6 +7,12 @@
 
 ## How an application is executed
 
+
+<img src="https://user-images.githubusercontent.com/16873751/108236879-3baa0600-70fc-11eb-8fc0-0870fa38c613.png" alt="spark_task_commit" width="600"/> 
+
+(from: 深入理解Spark核心思想与源码分析 Chapter 5)
+<br/>
+
 stand alone mode
 
 <img src="https://user-images.githubusercontent.com/16873751/108144216-1971a300-707e-11eb-95af-25bc04015d74.png" alt="spark_arch" width="400"/> 
