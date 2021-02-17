@@ -3,7 +3,7 @@
 
 For components in spark, please go to [Spark architecture page](./spark_arch.md)
 
-<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="400"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="600"/> 
 <br/>
 
 ## Driver crash
@@ -12,12 +12,12 @@ For components in spark, please go to [Spark architecture page](./spark_arch.md)
 - yarn-cluster 模式下会重启 driver，重跑所有 task.
 - 一般说来，尽量保留 driver 已完成的工作，driver 挂了，应该依赖持久化存储和与 executor 的通信，恢复 driver 的状态，重现建立对正在运行的 executor，task 等的管理。而 executor 与 driver 通信失败时应该有重试机制，并且当重试失败时不应该退出，而应该等待 driver 恢复后重连，并把自己的状态告诉 driver，只有在超过 driver 恢复时间时才自行退出
 
-<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="400"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="600"/> 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="400"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="600"/> 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="400"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108147035-17f6a980-7083-11eb-8288-612a2c506833.png" alt="spark_arch" width="600"/> 
 <br/>
 
