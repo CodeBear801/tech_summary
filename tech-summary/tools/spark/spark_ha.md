@@ -31,6 +31,12 @@ For components in spark, please go to [Spark architecture page](./spark_arch.md)
 (from: https://www.cnblogs.com/juncaoit/p/6542902.html)
 <br/>
 
+### Check Point
+
+- When to use
+   - DAG中的Lineage过长，如果重算，则开销太大
+   - 在宽依赖上做Checkpoint获得的收益更大
+
 
 ## Master crashed
 
@@ -42,4 +48,3 @@ For components in spark, please go to [Spark architecture page](./spark_arch.md)
 ## More info
 - [Spark 容错机制](https://liyichao.github.io/posts/spark-%E5%AE%B9%E9%94%99%E6%9C%BA%E5%88%B6.html)
 - [RDD之七：Spark容错机制](https://www.cnblogs.com/duanxz/p/6329675.html)
-- 
