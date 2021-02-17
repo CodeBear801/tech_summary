@@ -40,7 +40,9 @@ Important comments in [DAGScheduler.scala](https://github.com/apache/spark/blob/
  */
 ```
 
-org.apache.spark.SparkContext#runJob（dagScheduler.runJob） —>
-org.apache.spark.scheduler.DAGScheduler#runJob（submitJob） —>
-org.apache.spark.scheduler.JobSubmitted$#onReceive（JobSubmitted） —> 
-org.apache.spark.scheduler.DAGScheduler#[handleJobSubmitted](https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/DAGScheduler.scala#L1107)
+org.apache.spark.SparkContext#runJob（dagScheduler.runJob） —>  
+org.apache.spark.scheduler.DAGScheduler#runJob（submitJob） —>  
+org.apache.spark.scheduler.JobSubmitted$#onReceive（JobSubmitted） —>   
+org.apache.spark.scheduler.DAGScheduler#[handleJobSubmitted](https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/DAGScheduler.scala#L1107)   
+
+
