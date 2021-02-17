@@ -128,3 +128,5 @@ The Cluster Manager is the process responsible for monitoring the Worker nodes a
 (from: https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
 <br/>
 
+Spark RDD通过其Transactions操作，形成了RDD血缘关系图，即DAG，最后通过Action的调用，触发Job并调度执行。DAGScheduler负责Stage级的调度，主要是将job切分成若干Stages，并将每个Stage打包成TaskSet交给TaskScheduler调度。TaskScheduler负责Task级的调度，将DAGScheduler给过来的TaskSet按照指定的调度策略分发到Executor上执行，调度过程中SchedulerBackend负责提供可用资源，其中SchedulerBackend有多种实现，分别对接不同的资源管理系统
+
