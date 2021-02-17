@@ -1,5 +1,9 @@
 - [Spark Architecture](#spark-architecture)
   - [How an application is executed](#how-an-application-is-executed)
+  - [Mode](#mode)
+    - [stand alone mode](#stand-alone-mode)
+    - [running on YARN](#running-on-yarn)
+    - [running on K8S](#running-on-k8s)
   - [Terms](#terms)
     - [Driver](#driver)
       - [SparkSession](#sparksession)
@@ -25,7 +29,9 @@
 (from: 深入理解Spark核心思想与源码分析 Chapter 5)
 <br/>
 
-stand alone mode
+## Mode
+
+### stand alone mode
 
 <img src="https://user-images.githubusercontent.com/16873751/108144216-1971a300-707e-11eb-95af-25bc04015d74.png" alt="spark_arch" width="400"/> 
 
@@ -33,12 +39,22 @@ stand alone mode
 <br/>
 
 
-running on YARN
+### running on YARN
 
 <img src="https://user-images.githubusercontent.com/16873751/108144309-3efeac80-707e-11eb-9b4f-bce5fd2d8cf9.png" alt="spark_arch" width="400"/> 
 
 (from: https://docs.cloud.sdu.dk/Apps/spark-cluster.html)
 <br/>
+
+### running on K8S
+
+<img src="https://user-images.githubusercontent.com/16873751/108259552-14603280-7116-11eb-827e-480f05671987.png" alt="spark_arch" width="600"/> 
+
+(from: https://www.youtube.com/watch?v=3EbTr79wLkU)
+<br/>
+
+
+
 
 ***
 ## Terms
