@@ -15,7 +15,7 @@ stand alone mode
 <br/>
 
 
-
+running on YARN
 
 <img src="https://user-images.githubusercontent.com/16873751/108144309-3efeac80-707e-11eb-9b4f-bce5fd2d8cf9.png
 " alt="spark_arch" width="400"/> 
