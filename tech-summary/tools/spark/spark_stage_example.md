@@ -63,6 +63,10 @@ result
 
 
 
+From stackover flow: https://stackoverflow.com/questions/29849413/spark-rdd-sortbykey-triggering-a-new-job
+```
+As Sean pointed out in https://www.mail-archive.com/user@spark.apache.org/msg27005.html, "[...]sortByKey actually runs a job to assess the distribution of the data (see JIRA https://issues.apache.org/jira/browse/SPARK-1021)". I hope that this help others when debugging the number of jobs and stages of an aplications.
+```
 
 
 
