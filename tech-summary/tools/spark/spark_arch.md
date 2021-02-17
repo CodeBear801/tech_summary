@@ -1,3 +1,15 @@
+- [Spark Architecture](#spark-architecture)
+  - [How an application is executed](#how-an-application-is-executed)
+  - [Terms](#terms)
+    - [Driver](#driver)
+      - [SparkSession](#sparksession)
+      - [Application Planning](#application-planning)
+      - [Application Orchestration](#application-orchestration)
+    - [Worker](#worker)
+    - [Executor](#executor)
+    - [Spark Master](#spark-master)
+    - [Cluster Manager](#cluster-manager)
+
 # Spark Architecture
 
 <img src="https://user-images.githubusercontent.com/16873751/108144204-0bbc1d80-707e-11eb-8794-2b1cdadf3784.png" alt="spark_arch" width="600"/>   
