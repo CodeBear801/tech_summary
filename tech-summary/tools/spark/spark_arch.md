@@ -46,6 +46,13 @@ A Spark application DAG consists of tasks and stages. A task is the smallest uni
 - Keeping track of available resources to execute tasks
 - Scheduling tasks to run “close” to the data where possible
 
+### Worker
+
+A Worker node—which hosts the Executor process
+
+### Executor
+
+Spark Executors are the processes on which Spark DAG tasks run. Executors reserve CPU and memory resources on slave nodes, or Workers, in a Spark cluster. An Executor is dedicated to a specific Spark application and terminated when the application completes. A Spark program normally consists of many Executors, often working in parallel.  
 
 
 
