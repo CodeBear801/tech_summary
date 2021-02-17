@@ -13,15 +13,18 @@ For components in spark, please go to [Spark architecture page](./spark_arch.md)
 - 一般说来，尽量保留 driver 已完成的工作，driver 挂了，应该依赖持久化存储和与 executor 的通信，恢复 driver 的状态，重现建立对正在运行的 executor，task 等的管理。而 executor 与 driver 通信失败时应该有重试机制，并且当重试失败时不应该退出，而应该等待 driver 恢复后重连，并把自己的状态告诉 driver，只有在超过 driver 恢复时间时才自行退出
 
 <img src="https://user-images.githubusercontent.com/16873751/108147268-6a37ca80-7083-11eb-844f-4ca3b1e9f781.png" alt="spark_arch" width="600"/> 
-<br/>
 
+(from: https://www.cnblogs.com/juncaoit/p/6542902.html)
+<br/>
 ## Executor crash
 
 <img src="https://user-images.githubusercontent.com/16873751/108147316-76238c80-7083-11eb-83ef-5fba2d049d28.png" alt="spark_arch" width="600"/> 
-<br/>
 
+(from: https://www.cnblogs.com/juncaoit/p/6542902.html)
+<br/>
 ## Task crash
 
 <img src="https://user-images.githubusercontent.com/16873751/108147329-7cb20400-7083-11eb-97d1-a1352093be8a.png" alt="spark_arch" width="600"/> 
-<br/>
 
+(from: https://www.cnblogs.com/juncaoit/p/6542902.html)
+<br/>
