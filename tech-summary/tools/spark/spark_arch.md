@@ -54,5 +54,11 @@ A Worker node—which hosts the Executor process
 
 Spark Executors are the processes on which Spark DAG tasks run. Executors reserve CPU and memory resources on slave nodes, or Workers, in a Spark cluster. An Executor is dedicated to a specific Spark application and terminated when the application completes. A Spark program normally consists of many Executors, often working in parallel.  
 
+### Spark Master 
 
+The Spark Master is the process that requests resources in the cluster and makes them available to the Spark Driver.
+
+### Cluster Manager 
+
+The Cluster Manager is the process responsible for monitoring the Worker nodes and reserving resources on these nodes upon request by the Master. The Master then makes these cluster resources available to the Driver in the form of Executors.
 
