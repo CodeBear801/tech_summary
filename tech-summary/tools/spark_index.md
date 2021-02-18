@@ -1,6 +1,12 @@
 # Spark Main page
 
 ## Notes
+- [Spark Architecture](./spark/spark_arch.md)
+- 
+
+
+***
+
 - [Paper of Resilient Distributed Datasets](../papers/rdd.md)
 - [RDD, DataFrame, DataSet](../lectures/spark_rdd_dataframe_dataset.md) 
 - [Paper of SparkSQL](../papers/spark_sql.md) todo
