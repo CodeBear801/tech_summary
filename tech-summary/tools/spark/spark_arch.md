@@ -73,6 +73,12 @@
 ***
 ## Terms
 
+
+<img src="https://user-images.githubusercontent.com/16873751/108428027-d258ee80-71f2-11eb-9413-6a882443c9d8.png" alt="spark_arch" width="800"/> 
+
+(from: https://spark.apache.org/docs/1.1.0/cluster-overview.html)
+<br/>
+
 ### Driver
 The life of a Spark application starts and finishes with the Spark Driver.    
 The Driver is the process that clients use to submit applications in Spark.   
