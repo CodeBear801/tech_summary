@@ -310,3 +310,18 @@ private[scheduler] def handleJobSubmitted(
   }
 ```
 
+## Task Scheduler
+
+<img src="https://user-images.githubusercontent.com/16873751/108285957-1093d680-713d-11eb-96a2-16d9e4d0e43e.png" alt="spark_arch" width="600"/>   
+
+(from: https://juejin.cn/post/6844904047011430407#heading-16)
+<br/>
+
+org.apache.spark.scheduler.TaskSchedulerImpl#submitTasks ->  
+submitTasks ->backend.reviveOffers() ->   
+org.apache.spark.scheduler.cluster.CoarseGrainedClusterMessages.ReviveOffers ->  
+makeOffers()->  
+launchTasks()
+
+
+
