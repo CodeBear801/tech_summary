@@ -1,4 +1,4 @@
-# DAG scheduler and Task Execution
+# DAGScheduler and TaskScheduler
 
 For components in spark, please go to [Spark architecture page](./spark_arch.md) especially [here](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/tools/spark/spark_arch.md#job-stage-task)
 
