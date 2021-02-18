@@ -414,10 +414,79 @@ https://github.com/apache/spark/blob/5248ecb5ab0c9fdbd5f333e751d1f5fb3c514d14/co
 
 
 /**
+https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/TaskSchedulerImpl.scala#L492
+*/
+  /**
+   * Called by cluster manager to offer resources on workers. We respond by asking our active task
+   * sets for tasks in order of priority. We fill each node with tasks in a round-robin manner so
+   * that tasks are balanced across the cluster.
+   */
+  def resourceOffers(
+      offers: IndexedSeq[WorkerOffer],
+      isAllFreeResources: Boolean = true): Seq[Seq[TaskDescription]] = synchronized {
 
+
+    // Take each TaskSet in our scheduling order, and then offer it to each node in increasing order
+    // of locality levels so that it gets a chance to launch local tasks on all of them.
+    // NOTE: the preferredLocality order: PROCESS_LOCAL, NODE_LOCAL, NO_PREF, RACK_LOCAL, ANY
+    for (taskSet <- sortedTaskSets) {
+
+      // Skip the barrier taskSet if the available slots are less than the number of pending tasks.
+      if (taskSet.isBarrier && numBarrierSlotsAvailable < taskSet.numTasks) {
+        // Skip the launch process.
+
+      } else {
+        var launchedAnyTask = false
+        var noDelaySchedulingRejects = true
+        var globalMinLocality: Option[TaskLocality] = None
+        // Record all the executor IDs assigned barrier tasks on.
+        val addressesWithDescs = ArrayBuffer[(String, TaskDescription)]()
+        for (currentMaxLocality <- taskSet.myLocalityLevels) {
+          var launchedTaskAtCurrentMaxLocality = false
+          do {
+// [Perry] Most important part: 
+//         Try to launch task with CurrentMaxLocality
+//         if not, then try with next level
+            val (noDelayScheduleReject, minLocality) = resourceOfferSingleTaskSet(
+              taskSet, currentMaxLocality, shuffledOffers, availableCpus,
+              availableResources, tasks, addressesWithDescs)
+            launchedTaskAtCurrentMaxLocality = minLocality.isDefined
+            launchedAnyTask |= launchedTaskAtCurrentMaxLocality
+            noDelaySchedulingRejects &= noDelayScheduleReject
+            globalMinLocality = minTaskLocality(globalMinLocality, minLocality)
+          } while (launchedTaskAtCurrentMaxLocality)
+        }
+
+
+
+/**
+https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/TaskSchedulerImpl.scala#L370
 */
 
-
+  /**
+   * Offers resources to a single [[TaskSetManager]] at a given max allowed [[TaskLocality]].
+   *
+   * @param taskSet task set manager to offer resources to
+   * @param maxLocality max locality to allow when scheduling
+   * @param shuffledOffers shuffled resource offers to use for scheduling,
+   *                       remaining resources are tracked by below fields as tasks are scheduled
+   * @param availableCpus  remaining cpus per offer,
+   *                       value at index 'i' corresponds to shuffledOffers[i]
+   * @param availableResources remaining resources per offer,
+   *                           value at index 'i' corresponds to shuffledOffers[i]
+   * @param tasks tasks scheduled per offer, value at index 'i' corresponds to shuffledOffers[i]
+   * @param addressesWithDescs tasks scheduler per host:port, used for barrier tasks
+   * @return tuple of (no delay schedule rejects?, option of min locality of launched task)
+   */
+  private def resourceOfferSingleTaskSet(
+      taskSet: TaskSetManager,
+      maxLocality: TaskLocality,
+      shuffledOffers: Seq[WorkerOffer],
+      availableCpus: Array[Int],
+      availableResources: Array[Map[String, Buffer[String]]],
+      tasks: IndexedSeq[ArrayBuffer[TaskDescription]],
+      addressesWithDescs: ArrayBuffer[(String, TaskDescription)])
+    : (Boolean, Option[TaskLocality]) = {
 ```
 
 
