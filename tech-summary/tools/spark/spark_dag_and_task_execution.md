@@ -4,6 +4,13 @@ For components in spark, please go to [Spark architecture page](./spark_arch.md)
 
 For spark stage examples, please go to [Spark stage examples](./spark_stage_example.md)
 
+
+<img src="https://user-images.githubusercontent.com/16873751/108236879-3baa0600-70fc-11eb-8fc0-0870fa38c613.png" alt="spark_task_commit" width="600"/> 
+
+(from: 深入理解Spark核心思想与源码分析 Chapter 5)
+<br/>
+
+
 ## DAG scheduler
 
 

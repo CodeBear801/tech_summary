@@ -26,14 +26,18 @@
 ***
 ## How an application is executed
 
+<img src="https://user-images.githubusercontent.com/16873751/108428807-fe28a400-71f3-11eb-9a20-e354f8280caf.png" alt="spark_task_commit" width="800"/> 
+<br/>
+
 
 <img src="https://user-images.githubusercontent.com/16873751/108236879-3baa0600-70fc-11eb-8fc0-0870fa38c613.png" alt="spark_task_commit" width="600"/> 
 
 (from: 深入理解Spark核心思想与源码分析 Chapter 5)
 <br/><br/><br/>
 
+<img src="https://user-images.githubusercontent.com/16873751/108429045-59f32d00-71f4-11eb-90b1-657ed30ea806.png" alt="spark_task_commit" width="800"/> 
 
-<img src="https://user-images.githubusercontent.com/16873751/108428807-fe28a400-71f3-11eb-9a20-e354f8280caf.png" alt="spark_task_commit" width="800"/> 
+(from: https://data-flair.training/blogs/how-apache-spark-works/)
 <br/>
 
 ## Mode
