@@ -2,7 +2,8 @@
 
 ## Notes
 - [Spark Architecture](./spark/spark_arch.md)
-- 
+- [Spark HA](./spark/spark_ha.md)
+- [DAGScheduler and TaskScheduler](./spark/spark_dag_and_task_execution.md)
 
 
 ***
