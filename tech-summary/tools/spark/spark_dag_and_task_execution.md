@@ -233,3 +233,80 @@ Summary
     Nil
   }
 ```
+
+More important code for `stage`
+
+```java
+
+private[scheduler] def handleJobSubmitted(
+){
+    logInfo("Missing parents: " + getMissingParentStages(finalStage))
+}
+
+
+  private def getMissingParentStages(stage: Stage): List[Stage] = {
+    val missing = new HashSet[Stage]
+    val visited = new HashSet[RDD[_]]
+    // We are manually maintaining a stack here to prevent StackOverflowError
+    // caused by recursively visiting
+    val waitingForVisit = new ListBuffer[RDD[_]]
+    waitingForVisit += stage.rdd
+    def visit(rdd: RDD[_]): Unit = {
+      if (!visited(rdd)) {
+        visited += rdd
+        val rddHasUncachedPartitions = getCacheLocs(rdd).contains(Nil)
+        if (rddHasUncachedPartitions) {
+          for (dep <- rdd.dependencies) {
+            dep match {
+              case shufDep: ShuffleDependency[_, _, _] =>
+                val mapStage = getOrCreateShuffleMapStage(shufDep, stage.firstJobId)
+                if (!mapStage.isAvailable) {
+                  missing += mapStage
+                }
+              case narrowDep: NarrowDependency[_] =>
+                waitingForVisit.prepend(narrowDep.rdd)
+            }
+          }
+        }
+      }
+    }
+
+
+    while (waitingForVisit.nonEmpty) {
+      visit(waitingForVisit.remove(0))
+    }
+    missing.toList
+  }
+
+  /**
+   * Gets a shuffle map stage if one exists in shuffleIdToMapStage. Otherwise, if the
+   * shuffle map stage doesn't already exist, this method will create the shuffle map stage in
+   * addition to any missing ancestor shuffle map stages.
+[Perry] Whether there is no wide transform or shuffle stage, there is no new stage need to be created
+        otherwise, new stage need to be created
+   */
+  private def getOrCreateShuffleMapStage(
+      shuffleDep: ShuffleDependency[_, _, _],
+      firstJobId: Int): ShuffleMapStage = {
+    shuffleIdToMapStage.get(shuffleDep.shuffleId) match {
+      case Some(stage) =>
+        stage
+
+      case None =>
+        // Create stages for all missing ancestor shuffle dependencies.
+        getMissingAncestorShuffleDependencies(shuffleDep.rdd).foreach { dep =>
+          // Even though getMissingAncestorShuffleDependencies only returns shuffle dependencies
+          // that were not already in shuffleIdToMapStage, it's possible that by the time we
+          // get to a particular dependency in the foreach loop, it's been added to
+          // shuffleIdToMapStage by the stage creation process for an earlier dependency. See
+          // SPARK-13902 for more information.
+          if (!shuffleIdToMapStage.contains(dep.shuffleId)) {
+            createShuffleMapStage(dep, firstJobId)
+          }
+        }
+        // Finally, create a stage for the given shuffle dependency.
+        createShuffleMapStage(shuffleDep, firstJobId)
+    }
+  }
+```
+
