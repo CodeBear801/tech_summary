@@ -46,3 +46,190 @@ org.apache.spark.scheduler.JobSubmitted$#onReceive（JobSubmitted） —>
 org.apache.spark.scheduler.DAGScheduler#[handleJobSubmitted](https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/DAGScheduler.scala#L1107)   
 
 
+```java
+/**
+Summary
+- Go reversely from final stage
+- create stages based on shuffle stage
+- use recursion and submit parent stage with higher priority
+
+*/
+
+ private[scheduler] def handleJobSubmitted(jobId: Int,
+      finalRDD: RDD[_],
+      func: (TaskContext, Iterator[_]) => _,
+      partitions: Array[Int],
+      callSite: CallSite,
+      listener: JobListener,
+      properties: Properties): Unit = {
+        
+      // New stage creation may throw an exception if, for example, jobs are run on a
+      // HadoopRDD whose underlying HDFS files have been deleted.
+      // [Perry] Step 1. create finalStage based on finalRDD, add which into DAGScheduler's memory cache
+      finalStage = createResultStage(finalRDD, func, partitions, jobId, callSite)
+
+      // [Perry] Step 2. create a job based on final stage rdd
+      val job = new ActiveJob(jobId, finalStage, callSite, listener, properties)
+
+
+      val jobSubmissionTime = clock.getTimeMillis()
+      // [Perry] Step 3. add job into memory cache, submit final stage
+      //         which will trigger other stage be put into waitingStages queue
+      jobIdToActiveJob(jobId) = job
+      activeJobs += job
+      finalStage.setActiveJob(job)
+      val stageIds = jobIdToStageIds(jobId).toArray
+      val stageInfos = stageIds.flatMap(id => stageIdToStage.get(id).map(_.latestInfo))
+      listenerBus.post(
+      SparkListenerJobStart(job.jobId, jobSubmissionTime, stageInfos, properties))
+      submitStage(finalStage)
+
+      }
+
+
+  /** Submits stage, but first recursively submits any missing parents. */
+  private def submitStage(stage: Stage): Unit = {
+    val jobId = activeJobForStage(stage)
+    if (jobId.isDefined) {
+      logDebug(s"submitStage($stage (name=${stage.name};" +
+        s"jobs=${stage.jobIds.toSeq.sorted.mkString(",")}))")
+      if (!waitingStages(stage) && !runningStages(stage) && !failedStages(stage)) {
+        val missing = getMissingParentStages(stage).sortBy(_.id)
+        logDebug("missing: " + missing)
+        if (missing.isEmpty) {
+          logInfo("Submitting " + stage + " (" + stage.rdd + "), which has no missing parents")
+          submitMissingTasks(stage, jobId.get)
+        } else {
+          //[Perry] Key point is here: recursion, add all missing parent stages
+          //        stop condition is in the upper if: when missing.isEmpty, like stage0
+          //        submitMissingTasks
+          for (parent <- missing) {
+            submitStage(parent)
+          }
+          waitingStages += stage
+        }
+      }
+    } else {
+      abortStage(stage, "No active job for stage " + stage.id, None)
+    }
+  }
+
+  }
+
+
+  /** Called when stage's parents are available and we can now do its task. */
+  private def submitMissingTasks(stage: Stage, jobId: Int): Unit = {
+
+// [Perry] Partition amount is related with task amount
+    // Figure out the indexes of partition ids to compute.
+    val partitionsToCompute: Seq[Int] = stage.findMissingPartitions()
+
+// [Perry] find best location to apply a task, very important
+    val taskIdToLocations: Map[Int, Seq[TaskLocation]] = try {
+      stage match {
+        case s: ShuffleMapStage =>
+          partitionsToCompute.map { id => (id, getPreferredLocs(stage.rdd, id))}.toMap
+        case s: ResultStage =>
+          partitionsToCompute.map { id =>
+            val p = s.partitions(id)
+            (id, getPreferredLocs(stage.rdd, p))
+          }.toMap
+      }
+    } catch {
+    }
+  }
+
+  val tasks: Seq[Task[_]] = try {
+      val serializedTaskMetrics = closureSerializer.serialize(stage.latestInfo.taskMetrics).array()
+      stage match {
+        case stage: ShuffleMapStage =>
+          stage.pendingPartitions.clear()
+          partitionsToCompute.map { id =>
+            val locs = taskIdToLocations(id)
+            val part = partitions(id)
+            stage.pendingPartitions += id
+            new ShuffleMapTask(stage.id, stage.latestInfo.attemptNumber,
+              taskBinary, part, locs, properties, serializedTaskMetrics, Option(jobId),
+              Option(sc.applicationId), sc.applicationAttemptId, stage.rdd.isBarrier())
+          }
+
+        case stage: ResultStage =>
+          partitionsToCompute.map { id =>
+            val p: Int = stage.partitions(id)
+            val part = partitions(p)
+            val locs = taskIdToLocations(id)
+            new ResultTask(stage.id, stage.latestInfo.attemptNumber,
+              taskBinary, part, locs, id, properties, serializedTaskMetrics,
+              Option(jobId), Option(sc.applicationId), sc.applicationAttemptId,
+              stage.rdd.isBarrier())
+          }
+      }
+    }
+
+
+      if (tasks.nonEmpty) {
+      logInfo(s"Submitting ${tasks.size} missing tasks from $stage (${stage.rdd}) (first 15 " +
+        s"tasks are for partitions ${tasks.take(15).map(_.partitionId)})")
+//[Perry] Create TaskSet object, calling submitTasks() from TaskScheduler to submit taskSet
+      taskScheduler.submitTasks(new TaskSet(
+        tasks.toArray, stage.id, stage.latestInfo.attemptNumber, jobId, properties,
+        stage.resourceProfileId))
+    } 
+
+
+  /**
+   * Recursive implementation for getPreferredLocs.
+   *
+   * This method is thread-safe because it only accesses DAGScheduler state through thread-safe
+   * methods (getCacheLocs()); please be careful when modifying this method, because any new
+   * DAGScheduler state accessed by it may require additional synchronization.
+   */
+//[Perry] From last RDD of the stage to find rdd's partition, check whether its be cached or marked 
+//        with checkpoint
+//        If found, the best location for that task is the partition cached with checkpoint, because
+//        if we applied calculation there we don't need to recalculate previous rdd
+  private def getPreferredLocsInternal(
+      rdd: RDD[_],
+      partition: Int,
+      visited: HashSet[(RDD[_], Int)]): Seq[TaskLocation] = {
+    // If the partition has already been visited, no need to re-visit.
+    // This avoids exponential path exploration.  SPARK-695
+    if (!visited.add((rdd, partition))) {
+      // Nil has already been returned for previously visited partitions.
+      return Nil
+    }
+// [Perry] is cached
+    // If the partition is cached, return the cache locations
+    val cached = getCacheLocs(rdd)(partition)
+    if (cached.nonEmpty) {
+      return cached
+    }
+
+//[Perry] check wether current RDD's partition is checkpoint
+    // If the RDD has some placement preferences (as is the case for input RDDs), get those
+    val rddPrefs = rdd.preferredLocations(rdd.partitions(partition)).toList
+    if (rddPrefs.nonEmpty) {
+      return rddPrefs.map(TaskLocation(_))
+    }
+
+//[Perry] recursion: check parent rdd whether its cached or checkpoint
+    // If the RDD has narrow dependencies, pick the first partition of the first narrow dependency
+    // that has any placement preferences. Ideally we would choose based on transfer sizes,
+    // but this will do for now.
+    rdd.dependencies.foreach {
+      case n: NarrowDependency[_] =>
+        for (inPart <- n.getParents(partition)) {
+          val locs = getPreferredLocsInternal(n.rdd, inPart, visited)
+          if (locs != Nil) {
+            return locs
+          }
+        }
+
+      case _ =>
+    }
+
+//[Perry] for this stage, from last rdd to first rdd, there is no cache or checkpoint for this partition
+// then mark PreferredLocs with NIL
+    Nil
+  }
+```
