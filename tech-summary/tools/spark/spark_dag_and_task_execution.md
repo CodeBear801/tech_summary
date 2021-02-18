@@ -282,7 +282,7 @@ private[scheduler] def handleJobSubmitted(
    * Gets a shuffle map stage if one exists in shuffleIdToMapStage. Otherwise, if the
    * shuffle map stage doesn't already exist, this method will create the shuffle map stage in
    * addition to any missing ancestor shuffle map stages.
-[Perry] Whether there is no wide transform or shuffle stage, there is no new stage need to be created
+[Perry] When there is no wide transform or shuffle stage, there is no new stage need to be created
         otherwise, new stage need to be created
    */
   private def getOrCreateShuffleMapStage(
