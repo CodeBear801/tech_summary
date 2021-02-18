@@ -321,7 +321,104 @@ org.apache.spark.scheduler.TaskSchedulerImpl#submitTasks ->
 submitTasks ->backend.reviveOffers() ->   
 org.apache.spark.scheduler.cluster.CoarseGrainedClusterMessages.ReviveOffers ->  
 makeOffers()->  
-launchTasks()
+[launchTasks()](https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/TaskSchedulerImpl.scala#L234)
+
+
+```java
+// https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/TaskSchedulerImpl.scala#L234
+
+  override def submitTasks(taskSet: TaskSet): Unit = {
+    val tasks = taskSet.tasks
+    logInfo("Adding task set " + taskSet.id + " with " + tasks.length + " tasks "
+      + "resource profile " + taskSet.resourceProfileId)
+    this.synchronized {
+// [Perry] Each task has a manager
+//         when task fails will restart task until limits
+//         and will use delay-schedule to handle task's local scheduling
+      val manager = createTaskSetManager(taskSet, maxTaskFailures)
+      val stage = taskSet.stageId
+      val stageTaskSets =
+        taskSetsByStageIdAndAttempt.getOrElseUpdate(stage, new HashMap[Int, TaskSetManager])
+
+      stageTaskSets.foreach { case (_, ts) =>
+        ts.isZombie = true
+      }
+      stageTaskSets(taskSet.stageAttemptId) = manager
+      schedulableBuilder.addTaskSetManager(manager, manager.taskSet.properties)
+
+    backend.reviveOffers()
+  }
+
+
+
+  /**
+  https://github.com/apache/spark/blob/23d4f6b3935bb6ca3ecb8ce43bd53788d5e16e74/core/src/main/scala/org/apache/spark/scheduler/TaskSchedulerImpl.scala#L492
+[Perry] Distribute tasks to executors
+   * Called by cluster manager to offer resources on workers. We respond by asking our active task
+   * sets for tasks in order of priority. We fill each node with tasks in a round-robin manner so
+   * that tasks are balanced across the cluster.
+   */
+  def resourceOffers(
+      offers: IndexedSeq[WorkerOffer],
+      isAllFreeResources: Boolean = true): Seq[Seq[TaskDescription]] = synchronized {
+      }
+
+
+/**
+https://github.com/apache/spark/blob/5248ecb5ab0c9fdbd5f333e751d1f5fb3c514d14/core/src/main/scala/org/apache/spark/scheduler/cluster/CoarseGrainedSchedulerBackend.scala#L365
+
+
+*/
+
+    // Launch tasks returned by a set of resource offers
+    private def launchTasks(tasks: Seq[Seq[TaskDescription]]): Unit = {
+      for (task <- tasks.flatten) {
+// [Perry] Serialize the task
+        val serializedTask = TaskDescription.encode(task)
+        if (serializedTask.limit() >= maxRpcMessageSize) {
+          Option(scheduler.taskIdToTaskSetManager.get(task.taskId)).foreach { taskSetMgr =>
+            try {
+              var msg = "Serialized task %s:%d was %d bytes, which exceeds max allowed: " +
+                s"${RPC_MESSAGE_MAX_SIZE.key} (%d bytes). Consider increasing " +
+                s"${RPC_MESSAGE_MAX_SIZE.key} or using broadcast variables for large values."
+              msg = msg.format(task.taskId, task.index, serializedTask.limit(), maxRpcMessageSize)
+              taskSetMgr.abort(msg)
+            } catch {
+              case e: Exception => logError("Exception in error callback", e)
+            }
+          }
+        }
+        else {
+// [Perry] Find related executor
+          val executorData = executorDataMap(task.executorId)
+          // Do resources allocation here. The allocated resources will get released after the task
+          // finishes.
+          val rpId = executorData.resourceProfileId
+          val prof = scheduler.sc.resourceProfileManager.resourceProfileFromId(rpId)
+          val taskCpus = ResourceProfile.getTaskCpusOrDefaultForProfile(prof, conf)
+// [Perry] Adjust resources in executor
+          executorData.freeCores -= taskCpus
+          task.resources.foreach { case (rName, rInfo) =>
+            assert(executorData.resourcesInfo.contains(rName))
+            executorData.resourcesInfo(rName).acquire(rInfo.addresses)
+          }
+
+          logDebug(s"Launching task ${task.taskId} on executor id: ${task.executorId} hostname: " +
+            s"${executorData.executorHost}.")
+
+//[Perry] Send launchTask to executor
+          executorData.executorEndpoint.send(LaunchTask(new SerializableBuffer(serializedTask)))
+        }
+      }
+    }
+
+
+/**
+
+*/
+
+
+```
 
 
 
