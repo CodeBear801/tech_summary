@@ -170,13 +170,27 @@ During reading, reducers use index file to see where records they need are locat
 <img src="https://user-images.githubusercontent.com/16873751/108574045-19b2ae00-72cb-11eb-8aa5-67ab6ca875be.png" alt="cosco" width="600"/> 
 <br/>
 
+<img src="https://user-images.githubusercontent.com/16873751/108574097-3fd84e00-72cb-11eb-987b-b89787f8b91f.png" alt="cosco" width="600"/> 
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108574133-5ed6e000-72cb-11eb-82fd-eb801c63483c.png" alt="cosco" width="600"/> 
+<br/>
 
 
-https://user-images.githubusercontent.com/16873751/108574097-3fd84e00-72cb-11eb-987b-b89787f8b91f.png
+API  
 
-https://user-images.githubusercontent.com/16873751/108574157-6eeebf80-72cb-11eb-9ead-345353fe96ca.png
+<img src="https://user-images.githubusercontent.com/16873751/108574157-6eeebf80-72cb-11eb-9ead-345353fe96ca.png" alt="cosco" width="600"/> 
+<br/>
 
-https://user-images.githubusercontent.com/16873751/108574183-7ca44500-72cb-11eb-8e4a-120790e0f731.png
+<img src="https://user-images.githubusercontent.com/16873751/108574183-7ca44500-72cb-11eb-8e4a-120790e0f731.png" alt="cosco" width="600"/> 
+<br/>
 
 
-https://user-images.githubusercontent.com/16873751/108574133-5ed6e000-72cb-11eb-82fd-eb801c63483c.png
+
+
+
+
+
+
+
+
