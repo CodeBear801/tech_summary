@@ -186,6 +186,11 @@ API
 <br/>
 
 
+### Magnet  from LinkedIn
+
+https://engineering.linkedin.com/blog/2020/introducing-magnet
+
+[SFBigAnalytics_20200908: Magnet Shuffle Service: Push-based Shuffle at LinkedIn](https://www.youtube.com/watch?v=D6dzuoAldRw)
 
 
 
