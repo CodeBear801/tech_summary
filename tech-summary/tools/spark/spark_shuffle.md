@@ -2,8 +2,7 @@
 
 ## What is Shuffle
 
-<img src="
-https://user-images.githubusercontent.com/16873751/108574287-d278ed00-72cb-11eb-961e-f98f62030db7.png" alt="spark_arch" width="600"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108574287-d278ed00-72cb-11eb-961e-f98f62030db7.png" alt="spark_arch" width="600"/> 
 
 <br/>
 
