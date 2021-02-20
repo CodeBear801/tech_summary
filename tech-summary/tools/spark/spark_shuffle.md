@@ -74,13 +74,19 @@ Result generated from map stage:
 ```
 
 ```
-the DAGScheduler executes the ShuffledRDD holding the ShuffleDependency introduced in the previous section.
+the DAGScheduler executes the ShuffledRDD holding the ShuffleDependency introduced in 
+the previous section.
 
-the compute(split: Partition, context: TaskContext) method will return all records that should be returned for the Partition from the signature.
+the compute(split: Partition, context: TaskContext) method will return all records that 
+should be returned for the Partition from the signature.
 
-The compute method will create a ShuffleReader instance that will be responsible, through its read() method, to return an iterator storing all rows that are set for the specific reducer's
+The compute method will create a ShuffleReader instance that will be responsible, 
+through its read() method, to return an iterator storing all rows that are set for 
+the specific reducer's
 
-MapOutputTracker: will tell reader which file it should fetch, the tracker is called to retrieve all shuffle locations for the given shuffle id before creating the shuffle files reader
+MapOutputTracker: will tell reader which file it should fetch, the tracker is called 
+to retrieve all shuffle locations for the given shuffle id before creating the shuffle 
+files reader
 ```
 
 ```java
