@@ -55,3 +55,21 @@ val rddAndDep = ser.deserialize[(RDD[_], ShuffleDependency[_, _, _])]( // ...
 
 ```
 
+### How shuffle file is read
+
+Result generated from map stage:
+```
+|-- 09
+|-- 0a
+|-- 0b
+|-- 0c
+|   `-- shuffle_0_0_0.data
+|-- 0d
+|   `-- shuffle_0_3_0.index
+|-- 0e
+|-- 0f
+|   `-- shuffle_0_1_0.index
+|-- 11
+|-- 15
+|   `-- shuffle_0_1_0.data
+```
