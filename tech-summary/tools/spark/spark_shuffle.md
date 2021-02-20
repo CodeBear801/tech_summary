@@ -157,5 +157,8 @@ During reading, reducers use index file to see where records they need are locat
 <br/>
 
 
-
+## Chanllege
+- Small writes(spindle)
+- Connectivity issues between executors and shuffle service:number of connection will be the multiplication of the number of executors (E) by the number of shuffle services (S)
+- Scale down
 
