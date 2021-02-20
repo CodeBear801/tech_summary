@@ -121,5 +121,41 @@ override def getReader[K, C](
 	fetchUpToMaxBytes()
 	}
 
-
 ```
+
+
+
+### Shuffle Manager
+
+Old strategy: hash based shuffle manager  
+Too many random writes and intermidiate files: Each mapper was creating 1 file for each reducer. For example, for 5 mappers and 5 reducers, the hash-based manager was operating on 25 files   
+
+
+Sort based manager: Mapper puts all partition records to a single file.  
+At the beginning, mapper accumulates all records in memory within PartitionedAppendOnlyMap. The records are grouped together by partition. When there are no more space in the memory, records are saved to the disk. In Spark's nomenclature this action is often called spilling.  
+Once all records are treated, Spark saves them on disk. It generates 2 files: .data holding records and .index. Data file contains records ordered by their partition. The index file contains the beginning and the end of each stored partition in data file. It defines where given partition starts and ends.  
+During reading, reducers use index file to see where records they need are located. Once they know that, they fetch the data and iterate over it to construct expected output.  If files weren't merged during mapping phase, they're merged before iterating in the reading step.  
+
+
+
+<img src="https://user-images.githubusercontent.com/16873751/108574529-85e1e180-72cc-11eb-8c36-72114814d3b8.png" alt="spark_arch" width="600"/> 
+
+(from: https://www.waitingforcode.com/apache-spark/shuffle-apache-spark-back-basics/read#shuffle-writing_side)
+<br/>
+
+
+### External shuffle service
+
+<img src="https://user-images.githubusercontent.com/16873751/108574651-d2c5b800-72cc-11eb-94c0-216cffa61e93.png" alt="spark_arch" width="600"/> 
+
+(from: https://www.waitingforcode.com/apache-spark/shuffle-apache-spark-back-basics/read)
+<br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/108574657-d6593f00-72cc-11eb-90b7-fef6242db9ca.png" alt="spark_arch" width="600"/> 
+
+(from: https://www.waitingforcode.com/apache-spark/shuffle-apache-spark-back-basics/read)
+<br/>
+
+
+
+
