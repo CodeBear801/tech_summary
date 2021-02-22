@@ -200,7 +200,7 @@ https://engineering.linkedin.com/blog/2020/introducing-magnet
 
 Why
 
-<img src="https://user-images.githubusercontent.com/16873751/108574183-7ca44500-72cb-11eb-8e4a-120790e0f731.png" alt="cosco" width="600"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108653455-532a1b80-747b-11eb-9452-62abb5ef13d6.png" alt="magnet" width="600"/> 
 <br/>
 
 - Shuffle service could crash
@@ -208,4 +208,14 @@ Why
 - Scale shuffle service(scale up and scale down)
 
 
+Magnet Overview
 
+- Merge small random reads in shuffle to large sequential reads
+- 2 replicated shuffle data
+- Locality aware scheduling of reducers
+
+<img src="https://user-images.githubusercontent.com/16873751/108653474-62a96480-747b-11eb-9829-e2643d6a7b4f.png" alt="magnet" width="600"/> 
+<br/>
+
+- Shuffle service on mapper node will try to **push shuffle blocks** to remote shuffle services
+- Push service will also trigger a replica generation
