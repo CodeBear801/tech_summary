@@ -198,9 +198,14 @@ https://engineering.linkedin.com/blog/2020/introducing-magnet
 [SFBigAnalytics_20200908: Magnet Shuffle Service: Push-based Shuffle at LinkedIn](https://www.youtube.com/watch?v=D6dzuoAldRw)
 
 
+Why
 
+<img src="https://user-images.githubusercontent.com/16873751/108574183-7ca44500-72cb-11eb-8e4a-120790e0f731.png" alt="cosco" width="600"/> 
+<br/>
 
-
+- Shuffle service could crash
+- Shuffle service is impact by small Ios
+- Scale shuffle service(scale up and scale down)
 
 
 
