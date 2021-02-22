@@ -214,8 +214,11 @@ Magnet Overview
 - 2 replicated shuffle data
 - Locality aware scheduling of reducers
 
-<img src="https://user-images.githubusercontent.com/16873751/108653474-62a96480-747b-11eb-9829-e2643d6a7b4f.png" alt="magnet" width="600"/> 
+<img src="https://user-images.githubusercontent.com/16873751/108653467-5cb38380-747b-11eb-8e86-8fc67f38c7ce.png" alt="magnet" width="600"/> 
 <br/>
 
 - Shuffle service on mapper node will try to **push shuffle blocks** to remote shuffle services
 - Push service will also trigger a replica generation
+
+<img src="https://user-images.githubusercontent.com/16873751/108653474-62a96480-747b-11eb-9829-e2643d6a7b4f.png" alt="magnet" width="600"/> 
+<br/>
