@@ -222,3 +222,7 @@ Magnet Overview
 
 <img src="https://user-images.githubusercontent.com/16873751/108653474-62a96480-747b-11eb-9829-e2643d6a7b4f.png" alt="magnet" width="600"/> 
 <br/>
+
+
+- Reducer has possibility to load data from merged shuffle file
+- Reducer can still load unmerged block from original shuffle blocks
