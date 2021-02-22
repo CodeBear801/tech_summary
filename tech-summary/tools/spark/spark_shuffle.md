@@ -226,3 +226,11 @@ Magnet Overview
 
 - Reducer has possibility to load data from merged shuffle file
 - Reducer can still load unmerged block from original shuffle blocks
+
+<img src="https://user-images.githubusercontent.com/16873751/108653483-689f4580-747b-11eb-8ec7-97adc312b89a.png" alt="magnet" width="600"/> 
+<br/>
+
+Magnet benefits
+- Improve disk IO
+- Cut down RPC needs during shuffle
+- Improve shuffle reliability(merged shuffle file be sharded -> original shuffle blocks -> re-run)
