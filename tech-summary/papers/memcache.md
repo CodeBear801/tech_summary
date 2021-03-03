@@ -59,10 +59,19 @@ Similar to operating system's condition lock.  Delete will invalid lease id, ser
 
 <img src="resources/pictures/memcache_rajesh_look_aside_caching.png" alt="memcache_rajesh_look_aside_caching" width="500"/>  <br/>
 
+```
+Issues: A updates <K,V1>, invalid cache, set key in DB(t1), then set key in cache(t2)  
+        B updates same key with different value <K, V2>, invalid cache, set key in DB(t3), then set key in cache(t4)
 
+we could only make sure that t1<t2 and t3<t4
+let's sya t1 < t3, which means B set value after A, but t2 > t4, which means A set cache after B
+which means we use old stale data update fresh data
+
+```    
 
 Issues solved by lease
 - stale set, set out dated data
+  - old lease id cannot cover new lease id's result
 - Thundering Herd Problem
 
 
