@@ -76,7 +76,7 @@ Issues solved by lease
   - 当数据被删除 (write-invalidate) 时，之前发出的 lease id 失效；
   - 写入数据时，sdk 会将上次收到的 lease id 带上，memcached server 如果发现 lease id 失效，则拒绝执行；
 - Thundering Herd Problem
-
+  - 要么等待一小段时间后重试或者拿过期数据走人
 
 <img src="resources/pictures/memcache_rajesh_look_aside_caching_issue.png" alt="memcache_rajesh_look_aside_caching_issue" width="500"/>  <br/>
 
@@ -110,11 +110,17 @@ Challenge:
 - <span style="color:blue">how to manage over replication of data  (interesting, important, go to paper)</span>
 
 
-<img src="resources/pictures/memcache_rajesh_database_invalid_cache.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
+
+<img src="https://user-images.githubusercontent.com/16873751/109887984-99c80480-7c37-11eb-99d9-b83c734e859d.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
+
+
 
 
 Read log from mysql committed logs, detect memcache item need to be invalid, broadcast the invalid to memcache server  
 Cache data must be invalid after the database operation be committed, otherwise risk to see stale data.  <span style="color:blue">How to invalid data</span>: Cluster A change the data, how to let all replication invalided the data: mcrouter  
+
+<img src="resources/pictures/memcache_rajesh_database_invalid_cache.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
+
 
 
 
