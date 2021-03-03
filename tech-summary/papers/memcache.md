@@ -72,6 +72,9 @@ which means we use old stale data update fresh data
 Issues solved by lease
 - stale set, set out dated data
   - old lease id cannot cover new lease id's result
+  - 每次出现 cache miss 时返回一个 lease id，每个 lease id 都只针对单条数据；
+  - 当数据被删除 (write-invalidate) 时，之前发出的 lease id 失效；
+  - 写入数据时，sdk 会将上次收到的 lease id 带上，memcached server 如果发现 lease id 失效，则拒绝执行；
 - Thundering Herd Problem
 
 
