@@ -198,3 +198,4 @@ Similar like **write back** in linux Kernel, when updating data, only update cac
 - [Scaling Memcache at Facebook By Rajesh Nishtala](https://www.youtube.com/watch?v=6phA3IAcEJ8)
 - [Facebook architecture presentation: scalability challenge](https://www.slideshare.net/Mugar1988/facebook-architecture-presentation-scalability-challenge)
 - Scaling Memcache in Facebook 笔记 [一](https://zhuanlan.zhihu.com/p/20734038)[二](https://zhuanlan.zhihu.com/p/20761071)[三](https://zhuanlan.zhihu.com/p/20827183)
+- [Facebook 缓存技术演进：从单集群到多区域](https://xie.infoq.cn/article/fa26e97012185dfd07efa20f6)  :+1: 
