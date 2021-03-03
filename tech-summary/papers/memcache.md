@@ -121,8 +121,10 @@ Cache data must be invalid after the database operation be committed, otherwise 
 
 <img src="resources/pictures/memcache_rajesh_database_invalid_cache.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
 
+Avoid fanout issue: massive amount of communication via network
 
 
+<img src="https://user-images.githubusercontent.com/16873751/109888127-d7c52880-7c37-11eb-8bf4-4ee2fe417b34.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
 
 
 ## Step 4: Geographically distribute clusters
