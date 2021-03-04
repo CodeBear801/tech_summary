@@ -14,6 +14,7 @@
       - [Cache aside](#cache-aside)
       - [Read/Write Through update strategy](#readwrite-through-update-strategy)
       - [Write behind cache](#write-behind-cache)
+    - [Notes on 03032021](#notes-on-03032021)
   - [Links](#links)
 
 # [Scale Memcache at Facebook](https://www.youtube.com/watch?v=6phA3IAcEJ8)
@@ -192,6 +193,48 @@ The problem cache need to fight with is strong consistency.
 
 ### Deep dive
 
+![#1589F0](resources/pictures/0000FF.png)  
+- partition: divide keys over mc servers
+- replicate: divide clients over mc servers
+- partition:
+    + more memory-efficient (one copy of each k/v) +
+    + works well if no key is very popular + 
+    - each web server must talk to many mc servers (overhead) -
+- replication:
+    + good if a few keys are very popular + 
+    + fewer TCP connections + 
+    - less total data can be cached - 
+
+```
+Using memcache as a general-purpose caching layer requires 
+workloads to share infrastructure despite different access 
+patterns, memory footprints, and quality-of service 
+requirements. 
+Different applications’ workloads can produce negative 
+interference resulting in decreased hit rates.
+
+To accommodate these differences, we partition a
+cluster’s memcached servers into separate pools. We
+designate one pool (named wildcard) as the default and
+provision separate pools for keys whose residence in
+wildcard is problematic
+
+3.2.3
+
+Within some pools, we use replication to improve the 
+latency and efficiency of memcached servers. We choose
+to replicate a category of keys within a pool when 
+(1) the application routinely fetches many keys simultaneously, 
+(2) the entire data set fits in one or two memcached servers and 
+(3) the request rate is much higher than what
+a single server can manage.
+
+We favor replication in this instance over further dividing the key space. 
+
+// notes: replicate by group
+```
+
+
 
 ![#1589F0](resources/pictures/0000FF.png)  What if an mc server fails?
 - can't have DB servers handle the misses -- too much load
@@ -300,6 +343,10 @@ More info: [wiki cache computing](https://en.wikipedia.org/wiki/Cache_(computing
 #### Write behind cache
 Similar like **write back** in linux Kernel, when updating data, only update cache not database.  Cache layer will asynchronously update database with merged operations.(batch update)
 
+
+### Notes on 03032021
+
+- client -> cache SDK -> mc router(which is the proxy layer, has same interface with memcache) -> memcached
 
 
 ## Links
