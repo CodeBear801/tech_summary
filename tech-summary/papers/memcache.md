@@ -221,3 +221,4 @@ Similar like **write back** in linux Kernel, when updating data, only update cac
 - [Facebook 缓存技术演进：从单集群到多区域](https://xie.infoq.cn/article/fa26e97012185dfd07efa20f6)  :+1: 
 - [缓存与存储的一致性策略：从 CPU 到分布式系统](https://xie.infoq.cn/article/fa1f0f9ac1cfee7845f7b29fe)
 - [6.824's notes](https://pdos.csail.mit.edu/6.824/notes/l-memcached.txt) :+1:
+- [Cache coherency primer](https://fgiesen.wordpress.com/2014/07/07/cache-coherency/) [CN](https://www.infoq.cn/article/cache-coherency-primer)
