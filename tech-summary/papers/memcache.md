@@ -31,6 +31,8 @@
 
 Lots of duplicate small data + FB's app is a read dominant system   
 
+**Avoid Stale data!!!  Battle with performance!!!  Partition and Replication!!!**  
+
 ## What is memcached
 
 
