@@ -1,13 +1,14 @@
 - [Scale Memcache at Facebook](#scale-memcache-at-facebook)
   - [Problem to solve](#problem-to-solve)
   - [What is memcached](#what-is-memcached)
-  - [Step 1: A few mem cache](#step-1-a-few-mem-cache)
-    - [One web server, one memcache](#one-web-server-one-memcache)
-      - [Single Server Improvement](#single-server-improvement)
-    - [Scale to multiple web servers](#scale-to-multiple-web-servers)
-  - [Step 2: Many memcache server in one cluster](#step-2-many-memcache-server-in-one-cluster)
-  - [Step 3: Many memcache in multiple clusters](#step-3-many-memcache-in-multiple-clusters)
-  - [Step 4: Geographically distribute clusters](#step-4-geographically-distribute-clusters)
+    - [Step 1: A few mem cache](#step-1-a-few-mem-cache)
+      - [One web server, one memcache](#one-web-server-one-memcache)
+        - [Single Server Improvement](#single-server-improvement)
+      - [Scale to multiple web servers](#scale-to-multiple-web-servers)
+    - [Step 2: Many memcache server in one cluster](#step-2-many-memcache-server-in-one-cluster)
+    - [Step 3: Many memcache in multiple clusters](#step-3-many-memcache-in-multiple-clusters)
+    - [Step 4: Geographically distribute clusters](#step-4-geographically-distribute-clusters)
+    - [Deep dive](#deep-dive)
   - [More info](#more-info)
     - [Cache的几种模式(from 左耳朵耗子)](#cache的几种模式from-左耳朵耗子)
       - [Cache aside](#cache-aside)
@@ -52,9 +53,9 @@ Road map: single front end cluster -> multiple front end cluster -> multiple reg
 Maybe userID -> name; userID -> friend list; postID -> text; URL -> likes, data derived from DB related with Application usage.
 
 
-## Step 1: A few mem cache 
+### Step 1: A few mem cache 
 
-### One web server, one memcache
+#### One web server, one memcache
 
 
 
@@ -65,7 +66,7 @@ Maybe userID -> name; userID -> friend list; postID -> text; URL -> likes, data 
 
 
 
-#### Single Server Improvement
+##### Single Server Improvement
 - Allow hashtable scale automatically
 - multi-thread + lock(decrease scope)
 - Different thread use unique port to communication
@@ -74,7 +75,7 @@ Maybe userID -> name; userID -> friend list; postID -> text; URL -> likes, data 
 - Different strategy for different category of data
 
 
-### Scale to multiple web servers
+#### Scale to multiple web servers
 
 Similar to operating system's condition lock.  Delete will invalid lease id, server could not set value back to memcache
 
@@ -107,7 +108,7 @@ Solution: Client wait for a while, only one request go to DB fetch data and then
 
 Another useful optimization is **memory cache pool**, handles access pattern differences.  Some data's calculation is expensive, some is cheap; some data with high frequency and some with low. -> low-churn and high-churn
 
-## Step 2: Many memcache server in one cluster
+### Step 2: Many memcache server in one cluster
 
 
 <img src="resources/pictures/memcache_rajesh_many_memcache_server.png" alt="memcache_rajesh_many_memcache_server" width="500"/>  <br/>
@@ -122,7 +123,7 @@ All-to-all
 Sliding window to control traffic
 
 
-## Step 3: Many memcache in multiple clusters
+### Step 3: Many memcache in multiple clusters
 
 
 <img src="resources/pictures/memcache_rajesh_multiple_cluster.png" alt="memcache_rajesh_multiple_cluster" width="500"/>  <br/>
@@ -149,7 +150,7 @@ Avoid fanout issue: massive amount of communication via network
 <img src="https://user-images.githubusercontent.com/16873751/109888127-d7c52880-7c37-11eb-8bf4-4ee2fe417b34.png" alt="memcache_rajesh_database_invalid_cache" width="500"/>  <br/>
 
 
-## Step 4: Geographically distribute clusters
+### Step 4: Geographically distribute clusters
 
 Single master and multiple replica
 
@@ -188,6 +189,10 @@ Mysql update might come quite late, if using old data from mysql to replace loca
 
 <span style="color:red">When to use memcache: fan out, 10s of billion of read on small data.  </span>
 The problem cache need to fight with is strong consistency.
+
+### Deep dive
+
+![#1589F0](resources/pictures/0000FF.png)  What is memcache's consistency goal?
 
 
 ## More info
