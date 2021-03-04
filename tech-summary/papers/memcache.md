@@ -46,6 +46,9 @@ Road map: single front end cluster -> multiple front end cluster -> multiple reg
 <img src="resources/pictures/memcache_rajesh_why.png" alt="memcache_rajesh_why" width="500"/>  <br/>
 
 
+![#1589F0](resources/pictures/0000FF.png) what does FB store in mc?  
+Maybe userID -> name; userID -> friend list; postID -> text; URL -> likes, data derived from DB related with Application usage.
+
 
 ## Step 1: A few mem cache 
 
