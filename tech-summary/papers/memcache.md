@@ -199,12 +199,53 @@ The problem cache need to fight with is strong consistency.
     - writers see their own writes, achieve `read-your-own-writes` is a big goal
 
 
- ![#1589F0](resources/pictures/0000FF.png)  how are DB replicas kept consistent across regions?
+ ![#1589F0](resources/pictures/0000FF.png)  How are DB replicas kept consistent across regions?
 - one region is primary
 - primary DBs distribute log of updates to DBs in secondary regions
 - secondary DBs apply
 - secondary DBs are complete replicas (not caches)
 - DB replication delay can be considerable (many seconds)
+
+ ![#1589F0](resources/pictures/0000FF.png)  How to keep mc content consistent with DB content?
+- DBs send invalidates (delete()s) to all mc servers that might cache, you could tell from upper image related with `mcSqueal`
+- writing client also invalidates mc in local cluster for read-your-own-writes
+
+ ![#1589F0](resources/pictures/0000FF.png) Races and solutions
+
+```
+Race 1:
+  k not in cache
+  C1 get(k), misses
+  C1 v1 = read k from DB
+    C2 writes k = v2 in DB
+    C2 delete(k)
+  C1 set(k, v1)
+  now mc has stale data, delete(k) has already happened
+  will stay stale indefinitely, until k is next written
+  solved with leases -- C1 gets a lease from mc, C2's delete() invalidates lease,
+    so mc ignores C1's set
+    key still missing, so next reader will refresh it from DB
+```
+
+```
+Race 2:
+  during cold cluster warm-up
+  remember: on miss, clients try get() in warm cluster, copy to cold cluster
+  k starts with value v1
+  C1 updates k to v2 in DB
+  C1 delete(k) -- in cold cluster
+  C2 get(k), miss -- in cold cluster
+  C2 v1 = get(k) from warm cluster, hits
+  C2 set(k, v1) into cold cluster
+  C1 set(k, V2) in warm cluster
+  now mc has stale v1, but delete() has already happened
+    will stay stale indefinitely, until key is next written
+  solved with two-second hold-off, just used on cold clusters
+    after C1 delete(), cold mc ignores set()s for two seconds
+    by then, delete() will (probably) propagate via DB to warm cluster
+    see more in 4.3 Cold Cluster Warmup
+```
+
 
 ***
 
