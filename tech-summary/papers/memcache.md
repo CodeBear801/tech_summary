@@ -224,3 +224,4 @@ Similar like **write back** in linux Kernel, when updating data, only update cac
 - [缓存与存储的一致性策略：从 CPU 到分布式系统](https://xie.infoq.cn/article/fa1f0f9ac1cfee7845f7b29fe)
 - [6.824's notes](https://pdos.csail.mit.edu/6.824/notes/l-memcached.txt) :+1:
 - [Cache coherency primer](https://fgiesen.wordpress.com/2014/07/07/cache-coherency/) [CN](https://www.infoq.cn/article/cache-coherency-primer)
+- [Notes on Memcached by Ricky Ho on Pragmatic Programming Techniques](http://horicky.blogspot.com/2009/10/notes-on-memcached.html)
