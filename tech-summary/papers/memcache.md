@@ -193,7 +193,20 @@ The problem cache need to fight with is strong consistency.
 ### Deep dive
 
 ![#1589F0](resources/pictures/0000FF.png)  What is memcache's consistency goal?
+- writes go direct to primary DB, with transactions, so writes are consistent
+- reads do not always see the latest write(across clusters)
+    - eventual consistency
+    - writers see their own writes, achieve `read-your-own-writes` is a big goal
 
+
+ ![#1589F0](resources/pictures/0000FF.png)  how are DB replicas kept consistent across regions?
+- one region is primary
+- primary DBs distribute log of updates to DBs in secondary regions
+- secondary DBs apply
+- secondary DBs are complete replicas (not caches)
+- DB replication delay can be considerable (many seconds)
+
+***
 
 ## More info
 
