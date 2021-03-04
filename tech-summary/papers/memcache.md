@@ -213,7 +213,7 @@ The problem cache need to fight with is strong consistency.
  ![#1589F0](resources/pictures/0000FF.png) Races and solutions
 
 ```
-Race 1:
+Race 1: (single cluster)
   k not in cache
   C1 get(k), misses
   C1 v1 = read k from DB
@@ -228,7 +228,7 @@ Race 1:
 ```
 
 ```
-Race 2:
+Race 2: (multiple cluster)
   during cold cluster warm-up
   remember: on miss, clients try get() in warm cluster, copy to cold cluster
   k starts with value v1
@@ -243,9 +243,28 @@ Race 2:
   solved with two-second hold-off, just used on cold clusters
     after C1 delete(), cold mc ignores set()s for two seconds
     by then, delete() will (probably) propagate via DB to warm cluster
+    
+    
     see more in 4.3 Cold Cluster Warmup
 ```
 
+```
+Race 3: (Multiple region)
+  k starts with value v1
+  C1 is in a secondary region
+  C1 updates k=v2 in primary DB
+  C1 delete(k) -- local region
+  C1 get(k), miss
+  C1 read local DB  -- sees v1, not v2!
+  later, v2 arrives from primary DB
+  solved by "remote mark"
+    C1 delete() marks key "remote"
+    get() miss yields "remote"
+      tells C1 to read from *primary* region
+    "remote" cleared when new data arrives from primary region
+
+    see more in the upper image about remote marker
+```
 
 ***
 
