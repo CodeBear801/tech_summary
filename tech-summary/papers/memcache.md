@@ -192,6 +192,15 @@ The problem cache need to fight with is strong consistency.
 
 ### Deep dive
 
+
+![#1589F0](resources/pictures/0000FF.png)  What if an mc server fails?
+- can't have DB servers handle the misses -- too much load
+- can't shift load to one other mc server -- too much
+- can't re-partition all data -- time consuming
+- `Gutter` -- pool of idle mc servers, clients only use after mc server fails
+- after a while, failed mc server will be replaced
+
+
 ![#1589F0](resources/pictures/0000FF.png)  What is memcache's consistency goal?
 - writes go direct to primary DB, with transactions, so writes are consistent
 - reads do not always see the latest write(across clusters)
