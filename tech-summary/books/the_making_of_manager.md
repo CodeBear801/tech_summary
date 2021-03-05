@@ -13,7 +13,7 @@
 
 [How to Get Better at Giving and Receiving Feedback - Julie Zhuo](https://www.youtube.com/watch?v=W1yzMRBGGKU&t=1796s)
 
-Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  
+Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  focus too much on project!    
 give feedback must have a result -> result in behavior change-> changes your life positively  
 
 Great feedback is always contextual and built on a foundation of trust  
