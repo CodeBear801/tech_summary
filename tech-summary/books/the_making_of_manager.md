@@ -21,11 +21,11 @@ Different kind of feedback
 - Task specific feedback
   + emphasis good part immediately
   + help them find their strength
-- behaviour feedback
+- behavior feedback
   + feedback about career, probation, strength
 - 360 degree feedback
 
-Make your feedback practise
+Make your feedback practice
 - am I giving feedback often enough
 - is my feedback being heard
 - lead to positive action?
