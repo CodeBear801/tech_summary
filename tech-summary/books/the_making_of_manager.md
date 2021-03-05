@@ -11,6 +11,8 @@
 
 ## Giving and Receiving Feedback
 
+[How to Get Better at Giving and Receiving Feedback - Julie Zhuo](https://www.youtube.com/watch?v=W1yzMRBGGKU&t=1796s)
+
 Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  
 give feedback must have a result -> result in behavior change-> changes your life positively  
 
@@ -93,6 +95,13 @@ and see what we can do to work through it
 - Make people moves quickly
 
 ### Chapter 4 - The Art of Feedback
+
+
+
+<img src="https://user-images.githubusercontent.com/16873751/110064873-d02e7e00-7d22-11eb-991a-a5ba439cf372.png" alt="feedback" width="600"/>
+
+
+
 - For a leader, giving feedback - both when things are going well and when they aren’t - is one of the most fundamental aspects of the job
 - When expectations aren’t met, make it clear and don’t wait long to give feedback
 - How to ensure your feedback can be acted upon:
