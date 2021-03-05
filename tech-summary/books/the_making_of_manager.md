@@ -8,6 +8,7 @@
   - [Chapter 6 -  Amazing Meetings](#chapter-6----amazing-meetings)
   - [Chapter 8 -  Making Things Happen](#chapter-8----making-things-happen)
   - [Chapter 9 Leading a Growing Team](#chapter-9-leading-a-growing-team)
+- [More ref](#more-ref)
 
 ## Giving and Receiving Feedback
 
@@ -186,3 +187,7 @@ and see what we can do to work through it
 - We tend to get attached to what we’re doing and the control it gives us – but part of growing the team is foregoing your own ego in lieu of your team’s success
 - Don’t take everything on yourself – remember the adage of teaching someone to fish
 - When thinking about what not to delegate, consider your unique value that flows from your personal strengths – and communication, hiring, and resolving conflicts
+
+
+## More ref
+- [Top 10 Lessons from Julie Zhuo’s The Making of a Manager](https://fellow.app/blog/2019/julie-zhuo-the-making-of-a-manager/)
