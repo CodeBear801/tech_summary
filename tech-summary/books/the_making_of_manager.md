@@ -1,3 +1,14 @@
+- [Giving and Receiving Feedback](#giving-and-receiving-feedback)
+- [Chapter notes](#chapter-notes)
+  - [Chapter 1 - Management 101](#chapter-1---management-101)
+  - [Chapter 2 - Mentoring](#chapter-2---mentoring)
+  - [Chapter 3 - Leading a Small Team](#chapter-3---leading-a-small-team)
+  - [Chapter 4 - The Art of Feedback](#chapter-4---the-art-of-feedback)
+  - [Chapter 5 -  Managing Yourself](#chapter-5----managing-yourself)
+  - [Chapter 6 -  Amazing Meetings](#chapter-6----amazing-meetings)
+  - [Chapter 8 -  Making Things Happen](#chapter-8----making-things-happen)
+  - [Chapter 9 Leading a Growing Team](#chapter-9-leading-a-growing-team)
+
 ## Giving and Receiving Feedback
 
 Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  
