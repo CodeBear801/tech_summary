@@ -1,3 +1,6 @@
+- [The manager's path](#the-managers-path)
+  - [Highlights](#highlights)
+
 # The manager's path
 
 By Camille Fournier
