@@ -1,6 +1,20 @@
+- [Giving and Receiving Feedback](#giving-and-receiving-feedback)
+- [Chapter notes](#chapter-notes)
+  - [Chapter 1 - Management 101](#chapter-1---management-101)
+  - [Chapter 2 - Mentoring](#chapter-2---mentoring)
+  - [Chapter 3 - Leading a Small Team](#chapter-3---leading-a-small-team)
+  - [Chapter 4 - The Art of Feedback](#chapter-4---the-art-of-feedback)
+  - [Chapter 5 -  Managing Yourself](#chapter-5----managing-yourself)
+  - [Chapter 6 -  Amazing Meetings](#chapter-6----amazing-meetings)
+  - [Chapter 8 -  Making Things Happen](#chapter-8----making-things-happen)
+  - [Chapter 9 Leading a Growing Team](#chapter-9-leading-a-growing-team)
+- [More ref](#more-ref)
+
 ## Giving and Receiving Feedback
 
-Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  
+[How to Get Better at Giving and Receiving Feedback - Julie Zhuo](https://www.youtube.com/watch?v=W1yzMRBGGKU&t=1796s)
+
+Best feedback from her manager - "I have a sense you care more about things are going than you care about me"  focus too much on project!    
 give feedback must have a result -> result in behavior change-> changes your life positively  
 
 Great feedback is always contextual and built on a foundation of trust  
@@ -10,11 +24,11 @@ Different kind of feedback
 - Task specific feedback
   + emphasis good part immediately
   + help them find their strength
-- behaviour feedback
+- behavior feedback
   + feedback about career, probation, strength
 - 360 degree feedback
 
-Make your feedback practise
+Make your feedback practice
 - am I giving feedback often enough
 - is my feedback being heard
 - lead to positive action?
@@ -82,6 +96,13 @@ and see what we can do to work through it
 - Make people moves quickly
 
 ### Chapter 4 - The Art of Feedback
+
+
+
+<img src="https://user-images.githubusercontent.com/16873751/110064873-d02e7e00-7d22-11eb-991a-a5ba439cf372.png" alt="feedback" width="600"/>
+
+
+
 - For a leader, giving feedback - both when things are going well and when they aren’t - is one of the most fundamental aspects of the job
 - When expectations aren’t met, make it clear and don’t wait long to give feedback
 - How to ensure your feedback can be acted upon:
@@ -166,3 +187,7 @@ and see what we can do to work through it
 - We tend to get attached to what we’re doing and the control it gives us – but part of growing the team is foregoing your own ego in lieu of your team’s success
 - Don’t take everything on yourself – remember the adage of teaching someone to fish
 - When thinking about what not to delegate, consider your unique value that flows from your personal strengths – and communication, hiring, and resolving conflicts
+
+
+## More ref
+- [Top 10 Lessons from Julie Zhuo’s The Making of a Manager](https://fellow.app/blog/2019/julie-zhuo-the-making-of-a-manager/)
