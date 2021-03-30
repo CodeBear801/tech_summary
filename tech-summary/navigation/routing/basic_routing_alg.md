@@ -22,6 +22,7 @@ Summary about basic routing algorithms, based on questions [here](https://github
 - Difference between visited / settled
 
 - pseudo code
+
 ```C++
 do{
     Pop()
