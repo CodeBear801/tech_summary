@@ -31,10 +31,12 @@
 
 ### Partition types
 
+
 | Type                    |Comments                    | Pros                          | Cons                          |
 |-------------------------------|:------------------------------|:------------------------------|:------------------------------|
 |Key Range|push contiguous strips of data to the same partitions|support efficient range queries|available only when the key can be sorted<br/> hot spots risk|
 |Key Hash|A good hashing function will uniformly distribute skewed data, "smudging" your data evenly across your partitions.|may distribute load more evenly|cannot use range queries|
+
 <br/>
 
 
