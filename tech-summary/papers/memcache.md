@@ -359,3 +359,4 @@ Similar like **write back** in linux Kernel, when updating data, only update cac
 - [6.824's notes](https://pdos.csail.mit.edu/6.824/notes/l-memcached.txt) :+1:
 - [Cache coherency primer](https://fgiesen.wordpress.com/2014/07/07/cache-coherency/) [CN](https://www.infoq.cn/article/cache-coherency-primer)
 - [Notes on Memcached by Ricky Ho on Pragmatic Programming Techniques](http://horicky.blogspot.com/2009/10/notes-on-memcached.html)
+- [Scaling your Website with Memcached, discussion with Couchbase cofounder](https://www.youtube.com/watch?v=uMxZ4RI6sCQ)  :+1:   
