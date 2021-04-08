@@ -53,7 +53,7 @@ Soft Skills
 
 Date | Name | Links | Comments
 ---|:---|:---|:---
-11-14-2020|Write heavy DB vs Read heavy DB|[slides](https://www.slideshare.net/ssuser4c810e/rocksdb-vs-boltdb)<br/>  [slides(old)](https://www.slideshare.net/ssuser4c810e/rocksdb-vs-blotdb)|
+11-14-2020|Write heavy DB vs Read heavy DB|[slides](https://www.slideshare.net/ssuser4c810e/rocksdb-vs-blotdb-245741641)<br/>  [slides(old)](https://www.slideshare.net/ssuser4c810e/rocksdb-vs-blotdb)|
 12-20-2019|Optimal Charge Station Selection|[slides](https://github.com/CodeBear801/tech_summary/blob/master/tech-summary/slides/optimal_charging_station_select_strategy_12172019_reduced_size.pptx)|
 04-10-2019|Open Source Navigation Solution|[slides](https://github.com/Telenav/open-source-spec/blob/master/routing_basic/resource/presentations/20190410_open_source_solution_for_Navigation.pptx)|
 11-02-2018|Valhalla Map Matching|[slides](https://github.com/Telenav/open-source-spec/blob/master/valhalla/resource/presentations/valhalla_mm_11202018.pptx) |
