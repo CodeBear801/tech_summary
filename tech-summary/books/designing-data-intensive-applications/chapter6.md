@@ -31,10 +31,12 @@
 
 ### Partition types
 
+
 | Type                    |Comments                    | Pros                          | Cons                          |
 |-------------------------------|:------------------------------|:------------------------------|:------------------------------|
 |Key Range|push contiguous strips of data to the same partitions|support efficient range queries|available only when the key can be sorted<br/> hot spots risk|
 |Key Hash|A good hashing function will uniformly distribute skewed data, "smudging" your data evenly across your partitions.|may distribute load more evenly|cannot use range queries|
+
 <br/>
 
 
@@ -87,7 +89,7 @@ The process of moving load from one node in the cluster to another is called reb
 This chapter briefly mentions the service discovery problem, posing three possible solutions:
 - The client can connect to any node, which can forward the request through the network to the node that has the requested data.
 - A routing tier can connect to the necessary node.
-- T he client can maintain information on the right node, and connect to it directly.
+- The client can maintain information on the right node, and connect to it directly.
 
 In many cases the problem is: *how does the component making the routing decision learn about changes in the assignment of partitions to nodes*?  
 
