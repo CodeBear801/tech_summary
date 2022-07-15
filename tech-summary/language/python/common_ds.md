@@ -217,8 +217,68 @@ d = defaultdict(lambda : value)
 # When a non-existent key is taken, value is returned.
 ```
 
+[sort dict by value](https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value)
+
+```python
+x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+{k: v for k, v in sorted(x.items(), key=lambda item: item[1])} #{0: 0, 2: 1, 1: 2, 4: 3, 3: 4}
+```
+
+[sort dict for tuple](https://www.geeksforgeeks.org/python-sort-dictionary-by-tuple-key-product/)
+
+```python
+# method 1
+# Using dictionary comprehension + lambda + sorted()
+
+# initializing dictionary
+test_dict = {(5, 6) : 3, (2, 3) : 9, (8, 4): 10, (6, 4): 12}
+  
+# printing original dictionary
+print("The original dictionary is : " + str(test_dict))
+  
+# sorted() over lambda computed product 
+# dictionary comprehension reassigs dictionary by order 
+res = {key: test_dict[key] for key in sorted(test_dict.keys(), key = lambda ele: ele[1] * ele[0])}
+  
+# printing result 
+print("The sorted dictionary : " + str(res))   # The sorted dictionary : {(2, 3): 9, (6, 4): 12, (5, 6): 3, (8, 4): 10}
 
 
+# method 2
+# Method #2 : Using dict() + sorted() + lambda
+# initializing dictionary
+test_dict = {(5, 6) : 3, (2, 3) : 9, (8, 4): 10, (6, 4): 12}
+  
+# printing original dictionary
+print("The original dictionary is : " + str(test_dict))
+  
+# sorted() over lambda computed product 
+# dict() used instead of dictionary comprehension for rearrangement
+res = dict(sorted(test_dict.items(), key = lambda ele: ele[0][1] * ele[0][0]))
+  
+# printing result 
+print("The sorted dictionary : " + str(res)) 
+
+```
+
+Use `sortedcontainers `
+
+```python
+# https://www.geeksforgeeks.org/python-sorted-containers-an-introduction/
+from sortedcontainers import SortedList, SortedSet, SortedDict
+
+
+# declare a dictionary of tuple with student data
+data = {('bhanu', 10): 'student1', 
+        ('uma', 12): 'student4', 
+        ('suma', 11): 'student3', 
+        ('ravi', 11): 'student2',
+        ('gayatri', 9): 'student5'}
+  
+# sort student dictionary of tuple based 
+# on items using OrderedDict
+print(OrderedDict(sorted(data.items(), key = lambda elem : elem[1])))
+```
 
 
 ## Reference
