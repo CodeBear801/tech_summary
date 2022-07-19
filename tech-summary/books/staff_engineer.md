@@ -131,3 +131,14 @@ Strategy是一個工具 這個工具可以讓團隊前進的更快更有信心 �
   - 小組 大組 甚至公司都改變得太快 如果想得太遠的話 會讓人失去目標而憂心重重 但如果想得太近也不行 如果一個strategy六個月後就會失效 那也沒啥用 想想你們六個月內是能寫出幾個strategy? 試著把目標定在2-3年之後
 - 2.Ground in your business and your users
   - 一個好的vision應該不只跟business息息相關 跟使用者也應該息息相關
+- 3.Be optimistic rather than audacious
+  - vision應該要ambitious而不是audacious. 應該要考慮有限資源的情況下的best possible version
+- 4.Stay concrete and specific
+  - 越specific的vision越有用 generic的vision很容易被大家同意 但組織裡真正遇到問題的時候 很難幫忙得出有用結論
+- 5.Keep it one to two pages long
+  - 大家不喜歡讀冗長的文件 如果你光vision就寫了五六頁 那很容易大家都不會讀完
+  - Vision文件本身小一些 提供一些reference讓那些有興趣了解更多的人去dive deep
+  - 寫完之後呢 你也不要太爽的就急著分享給組織裡的所有人
+
+
+怎麼判斷vision文档的好坏： 找一個兩年前的design doc 再找一個你的vision推出來之後才被寫出的新design doc 如果感覺起來有明顯的進步 那麼你的vision就很好

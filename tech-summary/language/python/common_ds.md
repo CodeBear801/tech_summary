@@ -281,6 +281,94 @@ print(OrderedDict(sorted(data.items(), key = lambda elem : elem[1])))
 ```
 
 
+### heap
+
+Override `__it__` for user defined class ([more info](https://stackoverflow.com/questions/3954530/how-to-make-heapq-evaluate-the-heap-off-of-a-specific-attribute))
+
+```python
+# import required module
+import heapq as hq
+  
+# class definition
+class employee:
+  
+  # constructor
+    def __init__(self, n, d, yos, s):
+        self.name = n
+        self.des = d
+        self.yos = yos
+        self.sal = s
+  
+  # function for customized printing
+    def print_me(self):
+        print("Name :", self.name)
+        print("Designation :", self.des)
+        print("Years of service :", str(self.yos))
+        print("salary :", str(self.sal))
+  
+   # override the comparison operator
+    def __lt__(self, nxt):
+        return self.sal < nxt.sal
+  
+  
+# creating objects
+e1 = employee('Anish', 'manager', 3, 10000)
+e2 = employee('kathy', 'programmer', 2, 15000)
+e3 = employee('Rina', 'Analyst', 5, 30000)
+e4 = employee('Vinay', 'programmer', 1, 10000)
+e5 = employee('Bob', 'programmer', 1, 50000)
+  
+# list of employee objects
+emp = [e1, e2, e3, e4, e5]
+  
+# converting to min-heap
+# based on yos
+hq.heapify(emp)
+
+while len(emp) != 0:
+    tmp = hq.heappop(emp)
+    tmp.print_me()
+    print()
+
+```
+
+Use user defined function ([link](https://pythontic.com/algorithms/heapq/merge))
+
+```python
+import heapq
+
+# Circuit class definition
+class Circuit:
+    def __init__(self, name, distance):
+        self.name = name
+        self.distance = distance
+
+# Create sorted lists of circuit instances       
+c0 = Circuit("Circuit0", 10)
+c1 = Circuit("Circuit1", 30)
+c2 = Circuit("Circuit2", 40)
+i1 = [c0, c1, c2]
+
+c3 = Circuit("Circuit3", 15)
+c4 = Circuit("Circuit4", 25)
+c5 = Circuit("Circuit5", 35)
+i2 = [c3, c4, c5]
+
+# Key function used for comparison while sorting
+# sorting how to: https://docs.python.org/3/howto/sorting.html 
+def keyfunc(circuit):
+    return circuit.distance
+
+# Merge elements from two Python iterables whose elements are already in sorted order
+merged = heapq.merge(i1, i2, key=keyfunc)
+
+# Print the merged sequence
+print("Merged sequence:")
+for item in merged:
+    print(item.distance)
+```
+
+
 ## Reference
 + [The 10 most common list operations in Python](https://developpaper.com/the-10-most-common-list-operations-in-python/)
 + Effective python
